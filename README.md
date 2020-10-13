@@ -1,4 +1,5 @@
 # To-Be-Named PROJECT
+<<<<<<< HEAD
 ### To stay on track:
 Project ideation
 Project decided
@@ -95,3 +96,14 @@ Every group member should speak during the presentation.
 Your presentation should follow the Project Presentation Template (Links to an external site.).
  ### Collaboration 10%
 There are no major disparities in the number of GitHub contributions between group member
+=======
+
+### USER STORY
+AS A Scrabble enthusiast who would like to be a better Scrabble player
+I WANT to increase my language mastery to include more strategically helpful vocabulary
+SO THAT I am able to squash the competition.
+
+AS A lover of language who is curious about the etymology of words
+I WANT to explore fun avenues for expanding my vocabulary
+SO THAT I can satisfy my thirst for knowledge.
+>>>>>>> afc5d58d8e5fc0438a2866227323ac94bc353604
