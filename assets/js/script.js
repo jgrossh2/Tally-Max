@@ -6,7 +6,7 @@
 var totalLetters = 0;
 var dictionary = [];
  
-fetch('/assets/dict/dict.txt').then(response => response.text()).then(data => { console.log(data)});
+// fetch('/assets/dict/dict.txt').then(response => response.text()).then(data => { console.log(data)});
 // get user input
 // by drag and drop object
 
