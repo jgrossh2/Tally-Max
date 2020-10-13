@@ -10,3 +10,28 @@
     --primary: 'Oswald', sans-serif;
     --secondary: 'Merriweather', serif;
 }
+/* use dev tool to see changes */
+/* MEDIA QUERY FOR SMALLER DESKTOP SCREENS AND SMALLER */
+@media screen and (max-width: 980px) {
+    header h1 a {
+      /* this will be applied on any screen smaller than 980px */
+      color: ;
+    }
+  }
+  
+  /* MEDIA QUERY FOR TABLETS AND SMALLER */
+  @media screen and (max-width: 768px) {
+    header h1 {
+      /* this will be applied on any screen between 768px and 575px */
+      font-size: 80px;
+      /* This value is large, but it's just to show how these new values take hold at a certain width */
+    }
+  }
+  
+  /* MEDIA QUERY FOR MOBILE PHONES AND SMALLER */
+  @media screen and (max-width: 575px) {
+    header h1 {
+      /* this will be applied on any screen smaller than 575px */
+      font-size: 100px;
+    }
+  }

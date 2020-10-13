@@ -1,4 +1,12 @@
 # To-Be-Named PROJECT
+## Purpose
+## Screenshots
+## Technology used
+
+## Website
+## Contribution
+Made with ❤️ by 
+
 ### To stay on track:
 Project ideation
 Project decided
