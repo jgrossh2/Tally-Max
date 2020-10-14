@@ -10,3 +10,18 @@
     --primary: 'Oswald', sans-serif;
     --secondary: 'Merriweather', serif;
 }
+
+/* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */
+@media screen and (max-width: 980px) {
+
+}
+
+/* MEDIA QUERY FOR TABLETS */
+@media screen and (max-width: 768px) {
+ 
+}
+
+/* MEDIA QUERY FOR MOBILE PHONES */
+@media screen and (max-width: 575px) {
+
+}
