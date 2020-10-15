@@ -106,12 +106,18 @@ footer.page-footer {
         /* content: "1"; */
       /* } */ 
 .letter {
-    /* background-image: url("./assets/css/scrabble.jpg"); */
+    
     background: var(--keys3);
 }
-/* .tileColor {
+.tileColor {
     color: gray;
-} */
+}
+.dropZone {
+    background: lightgray;
+}
+.one {
+    background-image: url("./assets/css/scrabble.jpg");
+}
 .letter.ui-draggable-dragging {
     background: gray;
 }

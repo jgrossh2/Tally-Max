@@ -25,6 +25,10 @@ $(".letter").draggable({
     cursor: "move",
     snap: ".space",
     revert: true,
+    activate: function (event) {
+        $(".letter").addClass("tileColor");
+        console.log("color")
+    }
 });
 
 //make dropzone
@@ -35,11 +39,14 @@ $(".space").droppable({
         console.log("drop");
         var helper = ui.helper.clone();
         helper.appendTo(".space")
+        $(".space").removeClass("dropZone");
     },
     over: function(event, ui) {
+        $(".space").addClass("dropZone");
         console.log("over");
     },
     out: function(event, ui) {
+        $(".space").removeClass("dropZone");
         console.log("out");
     }
     // saveTiles();
