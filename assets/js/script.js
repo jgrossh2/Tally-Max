@@ -35,6 +35,7 @@ $(".letter").draggable({
 $(".space").droppable({
     accept: ".letter",
     tolerance: "touch",
+    revert: false,
     drop: function(event, ui) {
         console.log("drop");
         var helper = ui.helper.clone();

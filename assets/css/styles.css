@@ -43,7 +43,7 @@ footer.page-footer {
     height: 40px;
     line-height: 40px;
     text-align: center;
-    background-image: url("../assets/css/scrabble.jpg");
+    /* background-image: url("scrabble.jpg"); */
     /* background: var(--keys3); */
     border: 1px solid #f9f9f9;
     border-radius: 5px;
@@ -109,17 +109,15 @@ footer.page-footer {
     
     background: var(--keys3);
 }
-.tileColor {
-    color: gray;
-}
+
 .dropZone {
     background: lightgray;
 }
 .one {
-    background-image: url("./assets/css/scrabble.jpg");
+    background-image: url("scrabble.jpg"); 
 }
 .letter.ui-draggable-dragging {
-    background: gray;
+    background: var(--keys2);
 }
 
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */
