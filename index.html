@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
     <!-- Oswald Google Font -->
@@ -12,17 +11,22 @@
     <!-- Merriweather Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/styles.css" />
-    <title>Class Project</title>
+    <title>Scrabble-Word-Generator</title>
 </head>
 
 <body>
-    <header>
-        <h1>
-            SCRABBLE-WORD-GENERATOR
-        </h1>
-    </header>
-
+  
     <main>
+
+        <header>
+            <div>
+                <h1 class="m"> M</h1>
+                <h1 class="tally">TALLY</h1>
+                <h1 class="x"> X</h1>
+            </div>
+        </header>
+        <section>
+
         <!-- START KEYBOARD CONTAINER: includes keyboard and drop zone-->
         <div id='container'>
             <ul id="keyboard">
@@ -68,8 +72,6 @@
                 <li class="space lastitem"><textarea class="text" placeholder="Drag letters here!"></textarea> </li>
             </ul>
         </div>
-        </ul>
-
 
         </div>
         <!-- START SEARCH-BUTTONS CONTAINER minimum viable product to include 2-7 letter button, 2-letter button, 3-letter button -->
@@ -110,11 +112,6 @@
                 </ul>
             </div>
         </div>
-    
-
-        </div>
-        <!-- START RESULTS CONTAINER: words resulting from search are listed here -->
-        <div class='container'>
 
         </div>
         <!-- START DEFINITIONS CONTAINER: words selected from results list by user are listed here with definitions -->
