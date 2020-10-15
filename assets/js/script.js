@@ -30,7 +30,26 @@ $(".letter").draggable({
         console.log("color")
     }
 });
-
+// $(".letter").sortable({
+//     connectWith: $(".space .letter"),
+//     tolerance: "pointer",
+//     helper: "clone",
+//     activate: function(event) {
+//         $(".space").addClass("dropZone");
+//         console.log("activate", this);
+//       },
+//       deactivate: function(event) {
+//         // $(".bottom-trash").removeClass("dropover bottom-trash-drag");
+//         console.log("deactivate", this);
+//       },
+//       over: function(event) {
+//         // $(event.target).addClass("dropover-active");
+//       },
+//       out: function(event) {
+//         // $(event.target).removeClass("dropover-active");
+//         console.log("out", event.target);
+//       },
+// })
 //make dropzone
 $(".space").droppable({
     accept: ".letter",
@@ -49,12 +68,26 @@ $(".space").droppable({
     out: function(event, ui) {
         $(".space").removeClass("dropZone");
         console.log("out");
+    },
+    update: function(event) {
+        //array of to commit to
+        dropLetters;
+        $(this).each(function() {
+            //get letter value and point score
+            $(this).getVal()
+            dropLetters.push({
+
+            })
+        })
     }
+    //put dropped tiles in array
     // saveTiles();
 });
+//drop tiles in array
 // var saveTiles = function() {
 
 // }
+//only accept so many of each letter
 letterEl.addEventListener("click", dragLetters)
 
 // by user form
