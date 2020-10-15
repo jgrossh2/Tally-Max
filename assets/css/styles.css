@@ -10,3 +10,13 @@
     --primary: 'Oswald', sans-serif;
     --secondary: 'Merriweather', serif;
 }
+
+.results-list {
+    font-family: var(--secondary);
+    color: var(--dark);
+}
+
+.results-title {
+    font-family: var(--primary);
+    color: var(--dark);
+}
