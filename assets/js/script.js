@@ -4,9 +4,7 @@
 
 // page variables
 var totalLetters = 0;
-var dictionary = [];
- 
-// fetch('/assets/dict/dict.txt').then(response => response.text()).then(data => { console.log(data)});
+
 // get user input
 // by drag and drop object
 
@@ -42,7 +40,9 @@ var genWordlist = function(totalLetters, letters) {
         for (var i = 0; i < letters.length; i++) {
         possWord += letters[i];
         if (possWord.length === totalLetters) {
-            results.push(possWord);
+            if (dict.includes(possWord)) {
+                results.push(possWord);
+            }
         } else {
             generate(possWord);
         }

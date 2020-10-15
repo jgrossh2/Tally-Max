@@ -1,9 +1,9 @@
 :root {
     --dark: #00303f;
-    --lgrey:#bcbdbd;
+    --grey:#bcbdbd;
     --pink: #f5b4be;
-    --dBlue: #01627B;
-    --lBlue: #6A99A5;
+    --dblue: #01627B;
+    --lblue: #6A99A5;
     --keys3: #e1c596;
     --keys1: #eabe76;
     --keys2: #e1b268;
@@ -19,4 +19,31 @@
 .results-title {
     font-family: var(--primary);
     color: var(--dark);
+}
+
+header h1 {
+    background-color: var(--grey);
+    color: var(--dblue);
+    font-family: var(--primary);
+}
+
+footer.page-footer {
+    background-color: var(--pink);
+    color: var(--dblue);
+    font-family: var(--primary);
+}
+
+/* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */
+@media screen and (max-width: 980px) {
+
+}
+
+/* MEDIA QUERY FOR TABLETS */
+@media screen and (max-width: 768px) {
+ 
+}
+
+/* MEDIA QUERY FOR MOBILE PHONES */
+@media screen and (max-width: 575px) {
+  
 }
