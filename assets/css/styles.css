@@ -23,6 +23,10 @@ footer.page-footer {
     font-family: var(--primary);
 }
 
+.searchbtn {
+    background-color: var(--pink);
+}
+
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */
 @media screen and (max-width: 980px) {
 
