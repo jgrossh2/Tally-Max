@@ -7,8 +7,9 @@ var totalLetters = 0;
 var dropLetters = [];
 var letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 var letterEl = document.querySelector(".letter");
-
+var spaceEl = document.querySelector(".space");
 // get user input
+spaceEl.textContent = "Drag Letters Here! "
 //drag letters
 var dragLetters = function(event) {
     event.preventDefault();
@@ -17,14 +18,20 @@ var dragLetters = function(event) {
 
 // make letters drag
 $(".letter").draggable({ 
-    helper: "clone",
+    // letterEl.addClass("tileColor"),
+     helper: "clone",
+     appendTo: ".space",
+    //  containment: "#keyboard",
 });
+
 //make dropzone
-$(".text").droppable({
+$(".space").droppable({
     accept: ".letter",
     tolerance: "touch",
     drop: function(event, ui) {
         console.log("drop");
+        var helper = ui.helper.clone();
+        helper.appendTo(".space")
     },
     over: function(event, ui) {
         console.log("over");
@@ -32,8 +39,11 @@ $(".text").droppable({
     out: function(event, ui) {
         console.log("out");
     }
+    // saveTiles();
 });
+// var saveTiles = function() {
 
+// }
 letterEl.addEventListener("click", dragLetters)
 
 // by user form

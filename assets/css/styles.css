@@ -43,7 +43,8 @@ footer.page-footer {
     height: 40px;
     line-height: 40px;
     text-align: center;
-    background: var(--keys3);
+    background-image: url("../assets/css/scrabble.jpg");
+    /* background: var(--keys3); */
     border: 1px solid #f9f9f9;
     border-radius: 5px;
     }
@@ -74,6 +75,7 @@ footer.page-footer {
         #keyboard .space {
         clear: left;
         width: 638px;
+        border: dotted;
         }
         .on {
         display: none;
@@ -103,18 +105,16 @@ footer.page-footer {
         /* transform: translate(50%,50%); */
         /* content: "1"; */
       /* } */ 
-    .text {
-        width: 100%;
-        height: 100%;
-        text-align: center;
-        background: var(--keys3);
-    }
-    .button {
-        width: 100%;
-        height: 100%;
-        background: var(--keys3);
-    }
-
+.letter {
+    /* background-image: url("./assets/css/scrabble.jpg"); */
+    background: var(--keys3);
+}
+/* .tileColor {
+    color: gray;
+} */
+.letter.ui-draggable-dragging {
+    background: gray;
+}
 
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */
 @media screen and (max-width: 980px) {
