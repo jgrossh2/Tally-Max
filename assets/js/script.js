@@ -4,8 +4,16 @@
 
 // page variables
 var totalLetters = 0;
+var dropLetters = [];
+var letters = ["ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
+var letterEl = document.querySelector(".letter");
 
 // get user input
+//drag letters
+var dragLetters = function(event) {
+    event.preventDefault();
+    console.log("works")
+}
 // by drag and drop object
 
 // by user form
