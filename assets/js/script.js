@@ -24,7 +24,7 @@ $(".letter").draggable({
     //  containment: "#keyboard",
     cursor: "move",
     snap: ".space",
-    revert: true,
+    // revert: true,
     activate: function (event) {
         $(".letter").addClass("tileColor");
         console.log("color")

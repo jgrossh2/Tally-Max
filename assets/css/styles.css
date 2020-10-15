@@ -116,9 +116,9 @@ footer.page-footer {
 .one {
     background-image: url("scrabble.jpg"); 
 }
-.letter.ui-draggable-dragging {
+/* .letter.ui-draggable-dragging {
     background: var(--keys2);
-}
+} */
 
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */
 @media screen and (max-width: 980px) {
