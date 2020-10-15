@@ -2,13 +2,18 @@
     --dark: #00303f;
     --lgrey:#bcbdbd;
     --pink: #f5b4be;
-    --dBlue: #01627B;
-    --lBlue: #6A99A5;
+    --dblue: #01627B;
+    --lblue: #6A99A5;
     --keys3: #e1c596;
     --keys1: #eabe76;
     --keys2: #e1b268;
     --primary: 'Oswald', sans-serif;
     --secondary: 'Merriweather', serif;
+}
+
+header {
+    background-color: var(--dblue);
+    color: var(--keys3);
 }
 
 h1.m {
