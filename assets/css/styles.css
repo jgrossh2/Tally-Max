@@ -1,3 +1,7 @@
+* {
+    margin: 0;
+    padding: 0;
+}
 :root {
     --dark: #00303f;
     --grey:#bcbdbd;
