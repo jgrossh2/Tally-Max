@@ -22,6 +22,9 @@ $(".letter").draggable({
      helper: "clone",
      appendTo: ".space",
     //  containment: "#keyboard",
+    cursor: "move",
+    snap: ".space",
+    revert: true,
 });
 
 //make dropzone
