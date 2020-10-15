@@ -1,6 +1,6 @@
 :root {
     --dark: #00303f;
-    --lgrey:#bcbdbd;
+    --grey:#bcbdbd;
     --pink: #f5b4be;
     --dblue: #01627B;
     --lblue: #6A99A5;
@@ -29,4 +29,41 @@ h1.tally {
 h1.x {
     margin: 0;
     padding: 0 0 0 48px;
+}
+
+.results-list {
+    font-family: var(--secondary);
+    color: var(--dark);
+}
+
+.results-title {
+    font-family: var(--primary);
+    color: var(--dark);
+}
+
+header h1 {
+    background-color: var(--grey);
+    color: var(--dblue);
+    font-family: var(--primary);
+}
+
+footer.page-footer {
+    background-color: var(--pink);
+    color: var(--dblue);
+    font-family: var(--primary);
+}
+
+/* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */
+@media screen and (max-width: 980px) {
+
+}
+
+/* MEDIA QUERY FOR TABLETS */
+@media screen and (max-width: 768px) {
+ 
+}
+
+/* MEDIA QUERY FOR MOBILE PHONES */
+@media screen and (max-width: 575px) {
+  
 }
