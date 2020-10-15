@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="possible-letters" placeholder="letters">
+    <button type="button" onclick="getInputValue();">Generate</button>
+​
+    <script>
+        var n = 0;
+​
+        function getInputValue() {
+            var letters = document.getElementById('possible-letters').value;
+            console.log(letters);
+            letterCounter(letters);
+​
+            function letterCounter(letters) {
+                var alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                var ar = alphabet.split("");
+                for (var i=0; i<letters.length;i++) {
+                    if (ar.indexOf(letters[i]) > -1) {
+                        n = n + 1;
+                    }
+                }
+                return n;
+            }
+            console.log(n);
+            genWordlist(n, letters);
+        };
+​
+        var genWordlist = function(n, letters) {
+            var results = [];
+        
+            var helper = function(cache) {
+                for (var i = 0; i < letters.length; i++) {
+                cache += letters[i];
+                if (cache.length === n) {
+                    results.push(cache);
+                } else {
+                    helper(cache);
+                }
+                cache = cache.slice(0, -1);
+                }
+            }
+            helper("");
+            return console.log(results);
+        };
+    </script>
+</body>
+</html>
