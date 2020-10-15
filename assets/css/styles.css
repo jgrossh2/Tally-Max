@@ -11,6 +11,16 @@
     --secondary: 'Merriweather', serif;
 }
 
+.results-list {
+    font-family: var(--secondary);
+    color: var(--dark);
+}
+
+.results-title {
+    font-family: var(--primary);
+    color: var(--dark);
+}
+
 header h1 {
     background-color: var(--grey);
     color: var(--dblue);
@@ -35,5 +45,5 @@ footer.page-footer {
 
 /* MEDIA QUERY FOR MOBILE PHONES */
 @media screen and (max-width: 575px) {
-
+  
 }
