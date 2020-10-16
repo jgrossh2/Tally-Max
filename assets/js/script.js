@@ -170,8 +170,7 @@ var gallery = new PhotoGallery;
 // html div
 
 
-//API photo:https://api.pexels.com/v1
-//API video: https://api.pexels.com/videos
+/////////////
 //https://api.pexels.com/v1/search?query=cat563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf
 // var showImage = function (picture_array) {
 
