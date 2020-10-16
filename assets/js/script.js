@@ -19,12 +19,12 @@ var dragLetters = function(event) {
 // make letters drag
 $(".letter").draggable({ 
 
-    
+    tolerance: "pointer",
     helper: "clone",
     appendTo: ".space",
     containment: "#keyboard",
-    cursor: "move"
-
+    cursor: "move",
+    snap: ".space"
     // revert: true,
     // activate: function (event) {
     //     $(".letter").addClass("tileColor");
@@ -73,10 +73,13 @@ $(".space").droppable({
     drop: function(event, ui){
         //FIND ELEMENT DRAGGED AS TARGET
         console.log(ui);
-        var letterVal= $(".one").attr("data-letter");
-            dropLetters.push(letterVal);
+        var letterVal= $(ui.draggable).clone();
+        console.log(letterVal);
+        var now = letterVal.val();
+        console.log(now);
+            dropLetters.push(now);
             console.log(this);
-            console.log(letterVal);
+            // console.log(letterVal);
         console.log("drop");
         var helper = ui.helper.clone();
         helper.appendTo(".space");
