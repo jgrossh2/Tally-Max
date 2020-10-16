@@ -93,6 +93,7 @@ var displayResults = function (results) {
     wordFromDictionaryEl.classList.add("col-s6-m4-l3");
     var text = results;
     wordFromDictionaryEl.textContent = text;
+
     var listGroupEl = document.querySelector(".results-list");
     console.log(event.target)
 
