@@ -65,26 +65,7 @@ var displayResults = function (results) {
     //check if there are any results
     if (results === 0) {
         resultsEl.textContent = "No Results Found";
-        //////////////////////////////////// 
-        //shows results displayed in buttons:
 
-        // } else {
-        //     //totalLetters.textContent = document.getElementById("results").setAttribute("button", "onclick", results);
-        //     var just_five = [];
-        //     //create for loop to show 5 RANDOM words from the array
-        //     for (var i = 0; i < results.length; i++) {
-        //         just_five.push(results[i])
-        //         var wordDiv = document.createElement("button")
-        //         wordDiv.textContent = results[i]
-        //         resultsEl.appendChild(wordDiv)
-        //     }
-
-        //     showDescription(just_five);
-        //     //showImage();
-        //     //showImage(just_five);
-        //     //getImg();
-        // }
-        ///////////////////////////////////////
         return;
     }
 
@@ -107,14 +88,8 @@ var displayResults = function (results) {
     listGroupEl.appendChild(wordFromDictionaryEl);
 
 }
-// //loop over the results
-// for (var i = 0; i < results.length; i++) {
-//     //list of results
-//     var wordDiv = document.createElement("button");
-//     wordDiv.textContent = results[i];
+
 //     //create a container for each word
-
-
 //create a span el to hold results by word displayed
 
 
@@ -144,34 +119,6 @@ document.getElementById("images").addEventListener("click", showImage);
 var showImage = function () {
     document.getElementById("images").innerHTML = "Image";
 }
-
-// // DEVELOPER.MOZILLA:Example POST method implementation:
-// async function postData(url = '', data = {}) {
-//     // Default options are marked with *
-//     const response = await fetch(url, {
-//       method: 'POST', // *GET, POST, PUT, DELETE, etc.
-//       mode: 'cors', // no-cors, *cors, same-origin
-//       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-//       credentials: 'same-origin', // include, *same-origin, omit
-//       headers: {
-//         'Content-Type': 'application/json'
-//         // 'Content-Type': 'application/x-www-form-urlencoded',
-//       },
-//       redirect: 'follow', // manual, *follow, error
-//       referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-//       body: JSON.stringify(data) // body data type must match "Content-Type" header
-//     });
-//     return response.json(); // parses JSON response into native JavaScript objects
-//   }
-
-//   postData('https://example.com/answer', { answer: 42 })
-//     .then(data => {
-//       console.log(data); // JSON data parsed by `data.json()` call
-//     });
-
-// PEXEL key:563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf
-//API photo:https://api.pexels.com/v1
-//API video: https://api.pexels.com/videos
 
 class Images {
     //The constructor property returns a reference to the Object constructor function that created the instance object. Note that the value of this property is a reference to the function itself, not a string containing the function's name.
