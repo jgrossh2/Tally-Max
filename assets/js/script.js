@@ -64,6 +64,7 @@ $(".letter").draggable({
 //         console.log("out", event.target);
 //       },
 // })
+//pull tiles into dropzone if overlap
 //make dropzone
 $(".space").droppable({
     accept: ".letter",

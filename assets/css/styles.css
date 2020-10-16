@@ -57,7 +57,7 @@ footer.page-footer {
     font-family: var(--primary);
 }
 #container {
-    margin: 100px auto;
+    margin: 50px auto;
     width: 100%;
 }
 #keyboard {
@@ -147,13 +147,24 @@ footer.page-footer {
 /* .symbol { */
     /* background: var(--keys3); */
 /* } */
+
 .letter {
     background: var(--keys3);
     width: 100%;
     height: 100%;
-    
+    border: solid white;
 }
-
+.row .col.s1 {
+    width: 75px;
+}
+.row .col {
+    float: left;
+    /* -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box; */
+    box-sizing: border-box;
+    padding: 0 0.75rem;
+    height: 90px;
+}
 .dropZone {
     background: lightgray;
 }
