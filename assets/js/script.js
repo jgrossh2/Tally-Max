@@ -107,5 +107,151 @@ document.getElementById("images").addEventListener("click", showImage);
 var showImage = function () {
     document.getElementById("images").innerHTML = "Image";
 }
+// // DEVELOPER.MOZILLA:Example POST method implementation:
+// async function postData(url = '', data = {}) {
+//     // Default options are marked with *
+//     const response = await fetch(url, {
+//       method: 'POST', // *GET, POST, PUT, DELETE, etc.
+//       mode: 'cors', // no-cors, *cors, same-origin
+//       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+//       credentials: 'same-origin', // include, *same-origin, omit
+//       headers: {
+//         'Content-Type': 'application/json'
+//         // 'Content-Type': 'application/x-www-form-urlencoded',
+//       },
+//       redirect: 'follow', // manual, *follow, error
+//       referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+//       body: JSON.stringify(data) // body data type must match "Content-Type" header
+//     });
+//     return response.json(); // parses JSON response into native JavaScript objects
+//   }
+
+//   postData('https://example.com/answer', { answer: 42 })
+//     .then(data => {
+//       console.log(data); // JSON data parsed by `data.json()` call
+//     });
+
+class PhotoGallery {
+    constructor() {
+        this.API_key = "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
+        //property in the photoGallery
+        this.galleryDiv = document.querySelector(".gallery");
+        this.searchForm = document.querySelector(".header form");
+        this.load = document.querySelector(".load");
+        this.eventHandler(); //call in constructor
+    }
+    //add handler
+    eventHandler() {
+        //with function '() => ' inside the eventListener, so the images load
+        document.addEventListener("DOMContentLoaded", () => {
+            // get another function to get image
+            this.getImg();
+            //fetch image inside the Handge function:
+        });
+    }
+    async getImg() {
+        //link from PEXEL for search pic: "https://api.pexels.com/v1/search?query=nature&per_page=1"
+        var pexelURL = "https://api.pexels.com/v1/curated?per_page=1";
+        var response = await fetch(pexelURL, {
+            method: "GET", //there are 5 methods total to use if needed
+            headers: {
+                Accept: 'application/json',
+                Authorization: this.API_key
+            }
+        });
+        var data = await response.json();
+        console.log(data)//(response); //use 'awain in fetch function to wait for the results to load on page- get a response
+        //'await' goes together with 'async' -add to var
+    }
+
+}
+//initialize the class
+var gallery = new PhotoGallery;
+// html div
 
 
+//API photo:https://api.pexels.com/v1
+//API video: https://api.pexels.com/videos
+//https://api.pexels.com/v1/search?query=cat563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf
+// var showImage = function (picture_array) {
+
+//     picture_array.forEach(picture => {
+//         //posWord or word you get form the dictionary
+
+
+// var apiUrl = "https://api.pexels.com/v1/search?query=result";
+// //         //make a get request for url
+// fetch("https://api.pexels.com/v1/search?query=people", {
+//     headers: {
+//         Authorization: "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf"
+//     }
+//         .then(function (response) {
+//             //request was sucessful
+//             if (response.ok) {
+//                 response.json().then(function (data) {
+//                     console.log(data);
+//                 });
+
+//             } else {
+//                 return
+//             }
+//         })
+// })
+
+      //     .then(response => response.json())
+    //     .then(result => console.log(result))
+    //     .catch(err => console.log(err))
+
+
+//for each word create a corresponding BUTTON with a info-ICON -API
+//and with IMAGE corresponding to the meaning of that word -API
+//function for the meaning of the word?
+
+// PEXEL key:563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf
+//API photo:https://api.pexels.com/v1
+//API video: https://api.pexels.com/videos
+
+
+//wordEl.setAttribute("class-name")
+    //
+   // wordDefinition();
+    //placeholder
+//}
+////////////////////
+//words generating as a <li> w/ word on the left and on the right 2 clickable icons -1 to display the definition and 1 to display whatever else we choose
+
+//fetch => the display of the object word
+// var wordDefinition = function (word) {
+//     console.log("icon");
+
+//     var word = document.quesrySelector("#id").value;
+//     //fetch
+//     fetch(
+//         "http://api"
+//             .then(function (response) {
+//                 console.log(response);
+//                 return response.json();
+
+//             })
+//             .then(function (data) {
+//                 console.log(data);
+//                 el.setAttribute('src', "http:// " + data.list[i].el //'class-name');
+
+//         body.classList.add("card")// if created in JS
+//         body.appendChild(body);
+//                 //})
+//                 wordDefinition('');
+//             });
+//API token is: b215d9b947a47ebd06cee1f48819e44474eeff9f
+//curl--header "Authorization: Token b215d9b947a47ebd06cee1f48819e44474eeff9f" https://owlbot.info/api/v4/dictionary/owl -s | json_pp
+
+//to get random el by Id:
+/* <p id="demo"></p>
+
+<script>
+document.getElementById("demo").innerHTML =
+Math.floor(Math.random() * 11); */
+
+
+
+//unsplash: acess key: "epv9i5i5P0XQj0_SD3Ez8WxX88fh9d8ts18CgJKJ0Uw"; secret key: "u9UGbWywxfI-tsOZU-Lvfd-qebY5WDF47_8Nhqc2Zms" //50 requests per hour //application status 5-10 days
