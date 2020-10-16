@@ -66,7 +66,7 @@ footer.page-footer {
     list-style: none;
     /* background: var(--keys3); */
 }
-#keyboard li {
+/* #keyboard li {
     float: left;
     margin: 0 5px 5px 0;
     width: 40px;
@@ -75,42 +75,42 @@ footer.page-footer {
     text-align: center;
     /* background-image: url("scrabble.jpg"); */
     /* background: var(--keys3); */
-    border: 1px solid #f9f9f9;
+    /* border: 1px solid #f9f9f9;
     border-radius: 5px;
-    }
-        .capslock, .tab, .left-shift {
-        clear: left;
+    } */
+        /* .capslock, .tab, .left-shift {
+        clear: left; */
         /* background: var(--keys3); */
 
-        }
-            #keyboard .tab, #keyboard .delete {
+        /* } */
+            /* #keyboard .tab, #keyboard .delete {
             width: 70px;
             /* background: var(--keys3); */
-            }
+            /* }
             #keyboard .capslock {
-            width: 80px;
+            width: 80px; */
             /* background: var(--keys3); */
-            }
+            /* }
             #keyboard .return {
-            width: 77px;
+            width: 77px; */
             /* background: var(--keys3); */
-            }
+            /* }
             #keyboard .left-shift {
-            width: 95px;
+            width: 95px; */
             /* background: var(--keys3); */
-            }
-            #keyboard .right-shift {
+            /* } */
+            /* #keyboard .right-shift {
             width: 109px;
             /* background: var(--keys3); */
-            }
-        .lastitem {
-        margin-right: 0;
+            /* } */
+        /* .lastitem {
+        margin-right: 0;   */
         /* background: var(--keys3); */
-        }
-        .uppercase {
+        
+        /* .uppercase {
         text-transform: uppercase;
         /* background: var(--keys3); */
-        }
+        /* }
         #keyboard .space {
         clear: left;
         width: 638px;
@@ -118,7 +118,7 @@ footer.page-footer {
         }
         .on {
         display: none;
-        }
+        }  */
         /* #keyboard li:hover {
         position: relative;
         top: 1px;
@@ -144,9 +144,9 @@ footer.page-footer {
         /* transform: translate(50%,50%); */
         /* content: "1"; */
       /* } */ 
-/* .symbol {
-    background: var(--keys3);
-}
+/* .symbol { */
+    /* background: var(--keys3); */
+/* } */
 .letter {
     background: var(--keys3);
 }
@@ -156,10 +156,10 @@ footer.page-footer {
 }
 .one {
     background-image: url("scrabble.jpg"); 
-} */
-/* .letter.ui-draggable-dragging {
+} 
+.letter.ui-draggable-dragging {
     background: var(--keys2);
-} */
+}
 
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */
 @media screen and (max-width: 980px) {

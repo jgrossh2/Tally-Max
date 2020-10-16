@@ -55,11 +55,18 @@ $(".space").droppable({
     accept: ".letter",
     tolerance: "touch",
     revert: false,
-    drop: function(event, ui) {
+    drop: function(event, ui){
         console.log("drop");
         var helper = ui.helper.clone();
-        helper.appendTo(".space")
+        helper.appendTo(".space");
         $(".space").removeClass("dropZone");
+
+        $(this).each(function( ) {
+            // console.log(data);
+            var letterVal= $(this).val();
+            dropLetters.push(letterVal);
+            console.log(letterVal);
+        });
     },
  
     over: function(event, ui) {
@@ -73,14 +80,12 @@ $(".space").droppable({
     },
     update: function(event) {
         console.log(this)
-        $(this).each(function() {
+        // $(this).each(function() {
             //get letter value and point score
-            var letterVal= $(this).getVal();
-            dropLetters.push(letterVal);
-            console.log(letterVal)
-
-        })
-    },
+            // var letterVal= $(this).getVal();
+            // dropLetters.push(letterVal);
+            // console.log(letterVal)
+        },
     //put dropped tiles in array
     // saveTiles();
 });
