@@ -11,16 +11,47 @@
     --secondary: 'Merriweather', serif;
 }
 
-header h1 {
-    background-color: var(--grey);
-    color: var(--dblue);
+header, footer.page-footer {
+    background-color: var(--lblue);
+    color: var(--dark);
     font-family: var(--primary);
 }
 
-footer.page-footer {
-    background-color: var(--pink);
-    color: var(--dblue);
+h1.m {
+    margin: 0;
+    padding: 0 0 0 36px;
+}
+
+h1.tally {
+    margin: 0;
+    letter-spacing: 15px;
+}
+
+h1.x {
+    margin: 0;
+    padding: 0 0 0 42px;
+}
+
+div.search-type {
+    padding: 0;
+}
+
+.results-list {
+    font-family: var(--secondary);
+    color: var(--dark);
+}
+
+.subtitle {
     font-family: var(--primary);
+    color: var(--dark);
+}
+
+button.waves-effect.searchbtn {
+    background-color: var(--dblue);
+    font-family: var(--primary);
+    color: white;
+    padding: 12px;
+    margin: 3px
 }
 
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */
@@ -35,5 +66,5 @@ footer.page-footer {
 
 /* MEDIA QUERY FOR MOBILE PHONES */
 @media screen and (max-width: 575px) {
-
+  
 }
