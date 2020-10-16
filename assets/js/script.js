@@ -66,19 +66,39 @@ var displayResults = function (results) {
     if (results === 0) {
         resultsEl.textContent = "No Results Found";
 
+        //////////////////////////////////// 
+        //shows results displayed in buttons:
+
+        // } else {
+        //     //totalLetters.textContent = document.getElementById("results").setAttribute("button", "onclick", results);
+        //     var just_five = [];
+        //     //create for loop to show 5 RANDOM words from the array
+        //     for (var i = 0; i < results.length; i++) {
+        //         just_five.push(results[i])
+        //         var wordDiv = document.createElement("button")
+        //         wordDiv.textContent = results[i]
+        //         resultsEl.appendChild(wordDiv)
+        //     }
+
+        //     showDescription(just_five);
+        //     //showImage();
+        //     //showImage(just_five);
+        //     //getImg();
+        // }
+
         return;
     }
 
-    var wordFromDictionaryEl = document.createElement('li');
+    var wordFromDictionaryEl = document.createElement('div');
     wordFromDictionaryEl.classList.add("col-s6-m4-l3");
     var text = results;
     wordFromDictionaryEl.textContent = text;
-    var listGroupEl = document.querySelector(".list-group");
+    var listGroupEl = document.querySelector(".results-list");
     console.log(event.target)
 
     listGroupEl.onclick = function () {
         console.log(event.target.tagName)
-        if (event.target.tagName == "li") {
+        if (event.target.tagName == "div") {
             showDescription(event.target.textContent)
             //getImg();
             generateHTML(photos);
