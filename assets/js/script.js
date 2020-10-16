@@ -6,30 +6,30 @@ var threeLetterBtnEl = document.getElementById('threeLetterBtn');
 var randomLetterBtnEl = document.getElementById('randomLetterBtn');
 var letterContainerEl = document.getElementById('possible-letters');
 
-// page variables
-var totalLetters = 0;
+// global page variables
+var wordLength = 0;
 
 // event listeners to gather user input and start generator function
 twoLetterBtnEl.addEventListener('click', function() {
     // get possible letters from form
     var letters = letterContainerEl.value;
     // reset global variable
-    var totalLetters = 0;
+    var wordLength = 0;
     // set search criteria
-    var totalLetters = 2;
+    var wordLength = 2;
     // call word generator
-    genWordlist(totalLetters, letters);
+    genWordlist(wordLength, letters);
 });
 
 threeLetterBtnEl.addEventListener('click', function() {
     // get possible letters from form
     var letters = letterContainerEl.value;
     // reset global variable
-    var totalLetters = 0;
+    var wordLength = 0;
     // set search criteria
-    var totalLetters = 3;
+    var wordLength = 3;
     // call word generator
-    genWordlist(totalLetters, letters);
+    genWordlist(wordLength, letters);
 });
 
 randomLetterBtnEl.addEventListener('click', function() {
@@ -39,23 +39,23 @@ randomLetterBtnEl.addEventListener('click', function() {
     // get total letter count
     letterCounter(letters);
     function letterCounter(letters) {
-        // reset variable
-        totalLetters = 0;   
+        // reset global variable
+        wordLength = 0;   
         var alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
         var ar = alphabet.split("");
         for (var i = 0; i < letters.length; i++) {
             if (ar.indexOf(letters[i]) > -1) {
-                totalLetters = totalLetters + 1;
+                wordLength = wordLength + 1;
             }
         }
-        return totalLetters;
+        return wordLength;
     }
     // call word generator
-    genWordlist(totalLetters, letters);
+    genWordlist(wordLength, letters);
 });
 
 // generate all possible combinations of inputted letters
-var genWordlist = function(totalLetters, letters) {
+var genWordlist = function(wordLength, letters) {
     // reset form container
     letterContainerEl.value = '';
     var results = [];
@@ -63,7 +63,7 @@ var genWordlist = function(totalLetters, letters) {
     var generate = function(possWord) {
         for (var i = 0; i < letters.length; i++) {
         possWord += letters[i];
-        if (possWord.length === totalLetters) {
+        if (possWord.length === wordLength) {
             if (dict.includes(possWord)) {
                 results.push(possWord);
             }
@@ -77,6 +77,6 @@ var genWordlist = function(totalLetters, letters) {
 
     // store user search / results
     localStorage.setItem(letters, results);
-    
+
     return console.log(results);
 };
