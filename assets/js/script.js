@@ -9,7 +9,7 @@ var letterContainerEl = document.getElementById('possible-letters');
 // page variables
 var totalLetters = 0;
 
-// event listeners to gather user input and start function
+// event listeners to gather user input and start generator function
 twoLetterBtnEl.addEventListener('click', function() {
     // get possible letters from form
     var letters = letterContainerEl.value;
@@ -74,5 +74,9 @@ var genWordlist = function(totalLetters, letters) {
         }
     }
     generate("");
+
+    // store user search / results
+    localStorage.setItem(letters, results);
+    
     return console.log(results);
 };
