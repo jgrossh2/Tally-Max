@@ -86,4 +86,24 @@ var getDefData = function (arr) {
 }
 getDefData(wordList)
 
+// function takes word object data and prepares for DOM object display
+var formatDef = function (defObject) {
+    var defs = defObject.definition
+    for (var i=0; i<defs.length; i++) {
+        console.log(defs[i])
+    }
+}
 
+//function takes filename for audio playback from word object data and creates link for audio playback
+var soundBite = function (defObject) {
+
+    var audio = defObject.audio
+    for (var i=0; i<audio)
+
+// if audio begins with "bix", the subdirectory should be "bix",
+// if audio begins with "gg", the subdirectory should be "gg",
+// if audio begins with a number or punctuation (eg, "_"), the subdirectory should be "number",
+// otherwise, the subdirectory is equal to the first letter of audio.
+
+    audioLink = 'https://media.merriam-webster.com/audio/prons/en/us/ogg/' + [subdirectory] + '/' + defObject.audio + '.ogg;
+}
