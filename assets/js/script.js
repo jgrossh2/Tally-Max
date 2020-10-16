@@ -52,3 +52,22 @@ var genWordlist = function(totalLetters, letters) {
     generate("");
     return console.log(results);
 };
+
+var getDef = function(wordList) {
+    
+    var mwApiUrl = 'https://www.dictionaryapi.com/api/v3/references/collegiate/json/voluminous?key=';
+
+    fetch(mwApiUrl).then(function(response) {
+        if (response.ok) {
+            response.json().then(function(data) {
+                console.log(data)
+            })
+        } else {
+            alert("Error:" + response.statusText)
+        }
+    });
+    
+    // for (var w=0; w<wordList.length; w++) {
+
+    // }
+}
