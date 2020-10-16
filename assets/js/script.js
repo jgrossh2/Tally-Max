@@ -79,7 +79,7 @@ var displayResults = function (results) {
         showDescription(just_five);
         //showImage();
         //showImage(just_five);
-        getImg();
+        //getImg();
     }
 }
 
@@ -142,10 +142,10 @@ class Images {
     //The constructor property returns a reference to the Object constructor function that created the instance object. Note that the value of this property is a reference to the function itself, not a string containing the function's name.
     constructor() {
         this.API_key = "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
-        //property in the photoGallery
-        this.galleryDiv = document.querySelector(".listofpix");
-        this.searchForm = document.querySelector(".header form");
-        this.load = document.querySelector(".load");
+        //properties
+        this.imagesDiv = document.querySelector(".listofpix");
+        // this.searchForm = document.querySelector(".header form");
+        // this.load = document.querySelector(".load");
         this.eventHandler(); //call in constructor
     }
     //add handler
@@ -188,22 +188,18 @@ class Images {
             item.classList.add("item");
             //string 
             item.innerHTML = `
-            < a href="#">
+            <a href="#">
              <img src="${photo.src.medium}">
              <h4>${photo.photographer}</h4>
              </a>
              `;//from array of objects- change if needed a dif source displayed
             //append
-            //this.galleryDiv.appendChild(item);
-
+            this.imagesDiv.appendChild(item);
         })
     }
-
 }
 //initialize the class
 var gallery = new Images;
-    // html div
-
 
 //API token is: b215d9b947a47ebd06cee1f48819e44474eeff9f
 //curl--header "Authorization: Token b215d9b947a47ebd06cee1f48819e44474eeff9f" https://owlbot.info/api/v4/dictionary/owl -s | json_pp
