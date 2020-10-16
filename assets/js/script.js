@@ -104,7 +104,7 @@ var displayResults = function (results) {
 
         }
     }
-    listGroupEl.appendChild(resultEl);
+    listGroupEl.appendChild(wordFromDictionaryEl);
 
 }
 // //loop over the results
