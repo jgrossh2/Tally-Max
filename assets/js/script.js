@@ -10,7 +10,7 @@ var letterEl = document.querySelector(".letter");
 var spaceEl = document.querySelector(".space");
 // get user input
 spaceEl.textContent = "Drag Letters Here! "
-//drag letters
+// drag letters
 var dragLetters = function(event) {
     event.preventDefault();
     console.log("works")
@@ -18,26 +18,40 @@ var dragLetters = function(event) {
 
 // make letters drag
 $(".letter").draggable({ 
-    // letterEl.addClass("tileColor"),
-     helper: "clone",
-     appendTo: ".space",
-    //  containment: "#keyboard",
-    cursor: "move",
-    snap: ".space",
+
+    
+    helper: "clone",
+    appendTo: ".space",
+    containment: "#keyboard",
+    cursor: "move"
+
     // revert: true,
-    activate: function (event) {
-        $(".letter").addClass("tileColor");
-        console.log("color")
-    }
+    // activate: function (event) {
+    //     $(".letter").addClass("tileColor");
+    //     console.log("color");
+    // }
 });
+
+// $(document).on("click",".letter", function(){
+//     var letterVal= $(this).attr("data-letter");
+//             dropLetters.push(letterVal);
+//             console.log(letterVal);
+// });
+
+
+
+
 // $(".letter").sortable({
 //     connectWith: $(".space .letter"),
 //     tolerance: "pointer",
 //     helper: "clone",
 //     activate: function(event) {
-//         $(".space").addClass("dropZone");
-//         console.log("activate", this);
-//       },
+//         var letterVal= $(this).attr("data-letter");
+//             dropLetters.push(letterVal);
+//             console.log(letterVal);
+        // $(".space").addClass("dropZone");
+        // console.log("activate", this);
+    //   },
 //       deactivate: function(event) {
 //         // $(".bottom-trash").removeClass("dropover bottom-trash-drag");
 //         console.log("deactivate", this);
@@ -56,18 +70,23 @@ $(".space").droppable({
     tolerance: "touch",
     revert: false,
     drop: function(event, ui){
+        //FIND ELEMENT DRAGGED AS TARGET
+        console.log(ui);
+        var letterVal= $(".one").attr("data-letter");
+            dropLetters.push(letterVal);
+            console.log(this);
+            console.log(letterVal);
         console.log("drop");
         var helper = ui.helper.clone();
         helper.appendTo(".space");
         $(".space").removeClass("dropZone");
-
-        $(this).each(function( ) {
+        },
+        // $(this).each(function( ) {
             // console.log(data);
-            var letterVal= $(this).val();
-            dropLetters.push(letterVal);
-            console.log(letterVal);
-        });
-    },
+            // var letterVal= $(this).attr("data-letter");
+            // dropLetters.push(letterVal);
+            // console.log(letterVal);
+        // });
  
     over: function(event, ui) {
         $(".space").addClass("dropZone");
