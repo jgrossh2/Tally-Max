@@ -50,7 +50,7 @@ button.waves-effect.searchbtn {
     background-color: var(--dblue);
     font-family: var(--primary);
     color: white;
-    padding: 5px auto;
+    padding: 12px;
     margin: 3px
 }
 
