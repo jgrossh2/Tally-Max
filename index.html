@@ -16,16 +16,16 @@
     <title>Scrabble-Word-Generator</title>
 </head>
 
-<body>
-    <main>
-        <header>
-            <div>
-                <h1 class="m"> M</h1>
-                <h1 class="tally">TALLY</h1>
-                <h1 class="x"> X</h1>
-            </div>
-        </header>
+<body class='container'>
+    <header>
+        <div>
+            <h1 class="m"> M</h1>
+            <h1 class="tally">TALLY</h1>
+            <h1 class="x"> X</h1>
+        </div>
+    </header>
 
+    <main>
         <!-- START KEYBOARD CONTAINER: includes keyboard and drop zone-->
         <div class='container grey lighten-2' id='container'>
             <ul id="keyboard">
@@ -74,9 +74,22 @@
 
         <!-- START SEARCH-BUTTONS CONTAINER -->
         <div class='container'>
-            <div class='card-panel grey lighten-2'>
-                <h4>Select your search type!</h4>
-                <ul class="collapsible popout" data-collapsible="accordion">
+            <div class='search-type card-panel grey lighten-2 row'>
+                <h5 class='subtitle'>Select your search type!</h5>
+                <div class='search center-align col s12 m6 l3'>
+                    <button class="waves-effect searchbtn"><i class="material-icons left">grade</i>2-LETTER</button></td>
+                </div>
+                <div class='search center-align col s12 m6 l3'>
+                    <button class="waves-effect searchbtn"><i class="material-icons left">grade</i>3-LETTER</button></td>
+                </div>
+                <div class='search center-align col s12 m6 l3'>
+                    <button class="waves-effect searchbtn"><i class="material-icons left">grade</i>HIGH SCORE</button></td>
+                </div>
+                <div class='search center-align col s12 m6 l3'>
+                    <button class="waves-effect searchbtn"><i class="material-icons left">grade</i>RANDOM</button></td>
+                </div>
+
+                <ul class="collapsible popout row" data-collapsible="accordion">
                     <li>
                         <div class="collapsible-header">
                             <i class="material-icons">grade</i>2-letter</div>
@@ -118,7 +131,7 @@
         <div class='container'>
             <div class="row z-depth-2">
                 <div class='col valign-wrapper results-title'>
-                    <h5 class='valign'>Search results:</h5>
+                    <h5 class='valign subtitle'>Search results:</h5>
                 </div>
                 <ul class="col s12 m12 l12 results-list">
                     <div class='col s6 m4 l3' id='search-result1'>
@@ -149,35 +162,28 @@
             </div>
         </div>
 
-        </div>
         <!-- START DEFINITIONS CONTAINER: words selected from results list by user are listed here with definitions -->
         <div class='container'>
 
         </div>
-        
     </main>
     <footer class='page-footer'>
-        <div class='container'>
-
-        </div>
-        <div class='row'></div>
-        <div class='col'>
-            <h5>Footer Content</h5>
-            <h6>© 2020</h6>
-        </div>
-        <div class='col'>
-            <h5>API Support:</h5>
+        <div class='row'>
+            <div class='col s6 m6 l6'>
+                <h5>TALLY MAX</h5>
+                <h6>© 2020</h6>
+            </div>
+            <div class='col s6 m6 l6'>
+                <h5>API Support:</h5>
+            </div>
         </div>
     </footer>
-
-
 
     <input type="text" id="possible-letters" placeholder="letters">
     <button type="button" onclick="getInputValue();">Generate</button>
 
-    <!-- Materialize compiled and minified Javascript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
     <script src="assets/js/dict.js"></script>
     <script src="assets/js/script.js"></script>
 
