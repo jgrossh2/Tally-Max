@@ -54,10 +54,11 @@ var genWordlist = function (totalLetters, letters) {
 
 
 // When the user clicks on a button generate a list of words and then put them on the page
-// when i click on the generate button
-// call a function called generate
-// itterate through list of words to see if mine exists
+//for each word create a corresponding BUTTON with a info-ICON -API
+//and with IMAGE corresponding to the meaning of that word -API
 
+//placeholder in html possibly?
+//words generating as a <li> w/ word on the left and on the right 2 clickable icons -1 to display the definition and 1 to display img
 
 //create function to show words in the list
 var displayResults = function (results) {
@@ -78,6 +79,7 @@ var displayResults = function (results) {
         showDescription(just_five);
         //showImage();
         //showImage(just_five);
+        getImg();
     }
 }
 
@@ -107,6 +109,7 @@ document.getElementById("images").addEventListener("click", showImage);
 var showImage = function () {
     document.getElementById("images").innerHTML = "Image";
 }
+
 // // DEVELOPER.MOZILLA:Example POST method implementation:
 // async function postData(url = '', data = {}) {
 //     // Default options are marked with *
@@ -131,11 +134,16 @@ var showImage = function () {
 //       console.log(data); // JSON data parsed by `data.json()` call
 //     });
 
+// PEXEL key:563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf
+//API photo:https://api.pexels.com/v1
+//API video: https://api.pexels.com/videos
+
 class Images {
+    //The constructor property returns a reference to the Object constructor function that created the instance object. Note that the value of this property is a reference to the function itself, not a string containing the function's name.
     constructor() {
         this.API_key = "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
         //property in the photoGallery
-        this.galleryDiv = document.querySelector(".gallery");
+        this.galleryDiv = document.querySelector(".listofpix");
         this.searchForm = document.querySelector(".header form");
         this.load = document.querySelector(".load");
         this.eventHandler(); //call in constructor
@@ -146,18 +154,19 @@ class Images {
         document.addEventListener("DOMContentLoaded", () => {
             // get another function to get image
             this.getImg();
-            //fetch image inside the Handge function:
+            //fetch image inside the Handler function:
         });
     }
     async getImg() {
         //link from PEXEL for search pic: "https://api.pexels.com/v1/search?query=nature&per_page=1"
-        var pexelURL = "https://api.pexels.com/v1/curated?per_page=1";
-        var data = this.fetchImages(pexelURL);
+        var pexelURL = "https://api.pexels.com/v1/search?query=nature&per_page=1";
+        var data = await this.fetchImages(pexelURL); //await and async used together
+        this.generateHTML(data.photos) //photos is a data=an array from pexel in console log
         console.log(data)//(response); //use 'awain in fetch function to wait for the results to load on page- get a response
         //'await' goes together with 'async' -add to var
     }
     //add the function to fetch url, and call it above 
-    fetchImages(pexelURL) {
+    async fetchImages(pexelURL) {
         var response = await fetch(pexelURL, {
             method: "GET", //there are 5 methods total to use if needed
             headers: {
@@ -166,97 +175,37 @@ class Images {
             }
         });
         var data = await response.json();
+        // console.log(data); will display the array
         return data; //return data and store it in var data above
     }
-    generateHTML()
+    //per pexel documentation, include sources and give credit to photographers
+    //either hardcode? or use display below the added info through classList.add
+    generateHTML(photos) {
+        photos.forEach(photo => {//photos in here refers to data in array from console log, when using another object-make sure to change to that
+            //create var for instead of a div in html that <div class="item" for example
+            var item = document.createElement("div");
+            //add class
+            item.classList.add("item");
+            //string 
+            item.innerHTML = `
+            < a href="#">
+             <img src="${photo.src.medium}">
+             <h4>${photo.photographer}</h4>
+             </a>
+             `;//from array of objects- change if needed a dif source displayed
+            //append
+            //this.galleryDiv.appendChild(item);
+
+        })
+    }
 
 }
 //initialize the class
 var gallery = new Images;
-// html div
+    // html div
 
 
-/////////////
-//https://api.pexels.com/v1/search?query=cat563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf
-// var showImage = function (picture_array) {
-
-//     picture_array.forEach(picture => {
-//         //posWord or word you get form the dictionary
-
-
-// var apiUrl = "https://api.pexels.com/v1/search?query=result";
-// //         //make a get request for url
-// fetch("https://api.pexels.com/v1/search?query=people", {
-//     headers: {
-//         Authorization: "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf"
-//     }
-//         .then(function (response) {
-//             //request was sucessful
-//             if (response.ok) {
-//                 response.json().then(function (data) {
-//                     console.log(data);
-//                 });
-
-//             } else {
-//                 return
-//             }
-//         })
-// })
-
-      //     .then(response => response.json())
-    //     .then(result => console.log(result))
-    //     .catch(err => console.log(err))
-
-
-//for each word create a corresponding BUTTON with a info-ICON -API
-//and with IMAGE corresponding to the meaning of that word -API
-//function for the meaning of the word?
-
-// PEXEL key:563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf
-//API photo:https://api.pexels.com/v1
-//API video: https://api.pexels.com/videos
-
-
-//wordEl.setAttribute("class-name")
-    //
-   // wordDefinition();
-    //placeholder
-//}
-////////////////////
-//words generating as a <li> w/ word on the left and on the right 2 clickable icons -1 to display the definition and 1 to display whatever else we choose
-
-//fetch => the display of the object word
-// var wordDefinition = function (word) {
-//     console.log("icon");
-
-//     var word = document.quesrySelector("#id").value;
-//     //fetch
-//     fetch(
-//         "http://api"
-//             .then(function (response) {
-//                 console.log(response);
-//                 return response.json();
-
-//             })
-//             .then(function (data) {
-//                 console.log(data);
-//                 el.setAttribute('src', "http:// " + data.list[i].el //'class-name');
-
-//         body.classList.add("card")// if created in JS
-//         body.appendChild(body);
-//                 //})
-//                 wordDefinition('');
-//             });
 //API token is: b215d9b947a47ebd06cee1f48819e44474eeff9f
 //curl--header "Authorization: Token b215d9b947a47ebd06cee1f48819e44474eeff9f" https://owlbot.info/api/v4/dictionary/owl -s | json_pp
-
-//to get random el by Id:
-/* <p id="demo"></p>
-
-<script>
-document.getElementById("demo").innerHTML =
-Math.floor(Math.random() * 11); */
-
-
 
 //unsplash: acess key: "epv9i5i5P0XQj0_SD3Ez8WxX88fh9d8ts18CgJKJ0Uw"; secret key: "u9UGbWywxfI-tsOZU-Lvfd-qebY5WDF47_8Nhqc2Zms" //50 requests per hour //application status 5-10 days
