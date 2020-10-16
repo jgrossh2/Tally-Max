@@ -1,8 +1,16 @@
 // Scrabble Word Generator
+
 // page elements
 var resultsEl = document.getElementById("results-container");
 // page variables
 var totalLetters = 0;
+
+// page elements
+
+// page variables
+var totalLetters = 0;
+
+// 5999ff931eba1237552a409ca36542ff31caf0b6
 // get user input
 // by drag and drop object
 
@@ -48,8 +56,7 @@ var genWordlist = function (totalLetters, letters) {
         }
     }
     generate("");
-    displayResults(results)
-    return results
+    return console.log(results);
 };
 
 // When the user clicks on a button generate a list of worsa and then put them on the page
@@ -140,3 +147,4 @@ var description = function (word_array) {
 //             });
 //API token is: b215d9b947a47ebd06cee1f48819e44474eeff9f
 //curl--header "Authorization: Token b215d9b947a47ebd06cee1f48819e44474eeff9f" https://owlbot.info/api/v4/dictionary/owl -s | json_pp
+

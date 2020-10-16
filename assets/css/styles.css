@@ -11,6 +11,36 @@
     --secondary: 'Merriweather', serif;
 }
 
+header {
+    background-color: var(--dblue);
+    color: var(--keys3);
+}
+
+h1.m {
+    margin: 0;
+    padding: 0 0 0 42px;
+}
+
+h1.tally {
+    margin: 0;
+    letter-spacing: 15px;
+}
+
+h1.x {
+    margin: 0;
+    padding: 0 0 0 48px;
+}
+
+.results-list {
+    font-family: var(--secondary);
+    color: var(--dark);
+}
+
+.results-title {
+    font-family: var(--primary);
+    color: var(--dark);
+}
+
 header h1 {
     background-color: var(--grey);
     color: var(--dblue);
@@ -35,5 +65,5 @@ footer.page-footer {
 
 /* MEDIA QUERY FOR MOBILE PHONES */
 @media screen and (max-width: 575px) {
-
+  
 }
