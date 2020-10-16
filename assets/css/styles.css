@@ -64,7 +64,7 @@ footer.page-footer {
     margin: 0;
     padding: 0;
     list-style: none;
-    background: var(--keys3);
+    /* background: var(--keys3); */
 }
 #keyboard li {
     float: left;
@@ -80,36 +80,36 @@ footer.page-footer {
     }
         .capslock, .tab, .left-shift {
         clear: left;
-        background: var(--keys3);
+        /* background: var(--keys3); */
 
         }
             #keyboard .tab, #keyboard .delete {
             width: 70px;
-            background: var(--keys3);
+            /* background: var(--keys3); */
             }
             #keyboard .capslock {
             width: 80px;
-            background: var(--keys3);
+            /* background: var(--keys3); */
             }
             #keyboard .return {
             width: 77px;
-            background: var(--keys3);
+            /* background: var(--keys3); */
             }
             #keyboard .left-shift {
             width: 95px;
-            background: var(--keys3);
+            /* background: var(--keys3); */
             }
             #keyboard .right-shift {
             width: 109px;
-            background: var(--keys3);
+            /* background: var(--keys3); */
             }
         .lastitem {
         margin-right: 0;
-        background: var(--keys3);
+        /* background: var(--keys3); */
         }
         .uppercase {
         text-transform: uppercase;
-        background: var(--keys3);
+        /* background: var(--keys3); */
         }
         #keyboard .space {
         clear: left;
@@ -144,7 +144,7 @@ footer.page-footer {
         /* transform: translate(50%,50%); */
         /* content: "1"; */
       /* } */ 
-.symbol {
+/* .symbol {
     background: var(--keys3);
 }
 .letter {
@@ -156,7 +156,7 @@ footer.page-footer {
 }
 .one {
     background-image: url("scrabble.jpg"); 
-}
+} */
 /* .letter.ui-draggable-dragging {
     background: var(--keys2);
 } */
