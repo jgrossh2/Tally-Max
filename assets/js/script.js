@@ -58,23 +58,24 @@ var wordList = ['voluminous', 'aa', 'dab', 'play']
 
 // function fetches definition data for each in an array of words and returns subset of data packaged as an object
 var getDefData = function (arr) {
-    for (var w = 0; w < arr.length; w++) {
-        let word = arr[w];
+    for (var i = 0; i < arr.length; i++) {
+        var word = arr[i];
         var mwApiUrl = 'https://www.dictionaryapi.com/api/v3/references/collegiate/json/'
-            + arr[w] + '?key=' + smkmw;
+            + arr[i] + '?key=' + smkmw;
         fetch(mwApiUrl).then(function (response) {
             if (response.ok) {
                 response.json().then(function (data) {
-                    let def = (data[0])
-                    let wordDef = {
+                    var def = (data[0])
+                    var wordDef = {
                         word: word,
                         function: def.fl,
                         definition: def.shortdef,
-                        spoken: def.hwi.prs[0].sound,
+                        audio: def.hwi.prs[0].sound.audio,
                         offensive: def.meta.offensive,  
                     };
                     console.log(wordDef)
                     formatDef(wordDef)
+                    soundBite(wordDef)
                     return wordDef
                 })
             } else {
@@ -84,17 +85,5 @@ var getDefData = function (arr) {
     }
 }
 getDefData(wordList)
-
-// function takes word object data and prepares for display
-var formatDef = function (defObject) {
-    var defs = getDefData.definition
-    console.log(defs)
-    for (var d = 0; d < defs.length; d++) {
-        console.log(defs[0])
-        console.log(defs[-1])
-            }
-
-}
-formatDef(getDefData)
 
 
