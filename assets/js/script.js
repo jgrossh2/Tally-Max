@@ -53,58 +53,48 @@ var genarr = function (totalLetters, letters) {
     return console.log(results);
 };
 
+// added for the sake of demonstrating functionality; to be removed once functions for generating word array are added
 var wordList = ['voluminous', 'aa', 'dab', 'play']
 
+// function fetches definition data for each in an array of words and returns subset of data packaged as an object
 var getDefData = function (arr) {
-    
-    // var definition = [];
-
     for (var w = 0; w < arr.length; w++) {
-        var word = arr[w];
-        var mwApiUrl = 'https://www.dictionaryapi.com/api/v3/references/collegiate/json/' 
-                        + word + '?key=' + smkmw;
+        let word = arr[w];
+        var mwApiUrl = 'https://www.dictionaryapi.com/api/v3/references/collegiate/json/'
+            + arr[w] + '?key=' + smkmw;
         fetch(mwApiUrl).then(function (response) {
             if (response.ok) {
                 response.json().then(function (data) {
-                    // var definition = (data[0])
-                    // var wordDef = {
-                    //     word: word,
-                    //     definition: definition,
-                    // };
-                    // console.log(wordDef)
+                    let def = (data[0])
+                    let wordDef = {
+                        word: word,
+                        function: def.fl,
+                        definition: def.shortdef,
+                        spoken: def.hwi.prs[0].sound,
+                        offensive: def.meta.offensive,  
+                    };
+                    console.log(wordDef)
+                    formatDef(wordDef)
+                    return wordDef
                 })
             } else {
                 alert("Error:" + response.statusText)
             }
         });
-        var wordDef = {
-            word: word,
-            definition: definition,
-        };
-        console.log(wordDef);            
-
     }
-    // var wordDef = {
-    //     word: word,
-    //     definition: definition,
-    // };
-    // console.log(wordDef);
-
 }
 getDefData(wordList)
 
-var formatDef = function (definition) {
-    
-    // var defs = definition.shortdef
-    // for (var d=0; w<defs.length; d++) {
-
-    // }
+// function takes word object data and prepares for display
+var formatDef = function (defObject) {
+    var defs = getDefData.definition
+    console.log(defs)
+    for (var d = 0; d < defs.length; d++) {
+        console.log(defs[0])
+        console.log(defs[-1])
+            }
 
 }
-
-// var displayDef = function(arr) {
-
-
-// }
+formatDef(getDefData)
 
 
