@@ -131,7 +131,7 @@ var showImage = function () {
 //       console.log(data); // JSON data parsed by `data.json()` call
 //     });
 
-class PhotoGallery {
+class Images {
     constructor() {
         this.API_key = "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
         //property in the photoGallery
@@ -152,6 +152,12 @@ class PhotoGallery {
     async getImg() {
         //link from PEXEL for search pic: "https://api.pexels.com/v1/search?query=nature&per_page=1"
         var pexelURL = "https://api.pexels.com/v1/curated?per_page=1";
+        var data = this.fetchImages(pexelURL);
+        console.log(data)//(response); //use 'awain in fetch function to wait for the results to load on page- get a response
+        //'await' goes together with 'async' -add to var
+    }
+    //add the function to fetch url, and call it above 
+    fetchImages(pexelURL) {
         var response = await fetch(pexelURL, {
             method: "GET", //there are 5 methods total to use if needed
             headers: {
@@ -160,13 +166,13 @@ class PhotoGallery {
             }
         });
         var data = await response.json();
-        console.log(data)//(response); //use 'awain in fetch function to wait for the results to load on page- get a response
-        //'await' goes together with 'async' -add to var
+        return data; //return data and store it in var data above
     }
+    generateHTML()
 
 }
 //initialize the class
-var gallery = new PhotoGallery;
+var gallery = new Images;
 // html div
 
 
