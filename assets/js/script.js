@@ -97,7 +97,21 @@ var displayResults = function (results) {
     var listGroupEl = document.querySelector(".results-list");
     console.log(event.target)
 
+
     listGroupEl.onclick = function () {
+
+
+        //create a container for each word
+        var wordEl = document.createElement('div');
+        wordEl.classList = 'list-item flex-row justify-space-between align-center';
+
+        // create a span element to hold word name
+        var newNameEl = document.createElement('span');
+        newNameEl.textContent = results;
+
+        // append to container
+        wordEl.appendChild(titleEl);
+
         console.log(event.target.tagName)
         if (event.target.tagName == "div") {
             showDescription(event.target.textContent)
