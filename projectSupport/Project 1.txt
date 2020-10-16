@@ -18,10 +18,13 @@ https://www.pexels.com/api/documentation/#guidelines
 <200 requests per hour and 20,000 requests per month		
 f3+#yW8ROyL;
 
-dataMuse	Read-only service; no key needed	http://www.datamuse.com/api/								
+dataMuse	
+Read-only service; no key needed	
+http://www.datamuse.com/api/	
+							
 duckduckgo										
 
-	Joanna	Maryna	Ricky	Sara
+Joanna	Maryna	Ricky	Sara
 schedule	flexible		M-St 7a-3p; M-W after 7p; Sn morning	flexible
 role				
 phone no.	joannagrosshans2@gmail.com	pryadkamaryna@gmail.com	richard.pajewski@gmail.com	

@@ -29,45 +29,82 @@ function getInputValue() {
     }
     console.log(totalLetters);
     // call word generator
-    genWordlist(totalLetters, letters);
+    genarr(totalLetters, letters);
 };
 
 // generate all possible combinations of inputted letters
-var genWordlist = function(totalLetters, letters) {
+var genarr = function (totalLetters, letters) {
     var results = [];
 
-    var generate = function(possWord) {
+    var generate = function (possWord) {
         for (var i = 0; i < letters.length; i++) {
-        possWord += letters[i];
-        if (possWord.length === totalLetters) {
-            if (dict.includes(possWord)) {
-                results.push(possWord);
+            possWord += letters[i];
+            if (possWord.length === totalLetters) {
+                if (dict.includes(possWord)) {
+                    results.push(possWord);
+                }
+            } else {
+                generate(possWord);
             }
-        } else {
-            generate(possWord);
-        }
-        possWord = possWord.slice(0, -1);
+            possWord = possWord.slice(0, -1);
         }
     }
     generate("");
     return console.log(results);
 };
 
-var getDef = function(wordList) {
-    
-    var mwApiUrl = 'https://www.dictionaryapi.com/api/v3/references/collegiate/json/voluminous?key=';
+var wordList = ['voluminous', 'aa', 'dab', 'play']
 
-    fetch(mwApiUrl).then(function(response) {
-        if (response.ok) {
-            response.json().then(function(data) {
-                console.log(data)
-            })
-        } else {
-            alert("Error:" + response.statusText)
-        }
-    });
+var getDefData = function (arr) {
     
-    // for (var w=0; w<wordList.length; w++) {
+    // var definition = [];
+
+    for (var w = 0; w < arr.length; w++) {
+        var word = arr[w];
+        var mwApiUrl = 'https://www.dictionaryapi.com/api/v3/references/collegiate/json/' 
+                        + word + '?key=' + smkmw;
+        fetch(mwApiUrl).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (data) {
+                    // var definition = (data[0])
+                    // var wordDef = {
+                    //     word: word,
+                    //     definition: definition,
+                    // };
+                    // console.log(wordDef)
+                })
+            } else {
+                alert("Error:" + response.statusText)
+            }
+        });
+        var wordDef = {
+            word: word,
+            definition: definition,
+        };
+        console.log(wordDef);            
+
+    }
+    // var wordDef = {
+    //     word: word,
+    //     definition: definition,
+    // };
+    // console.log(wordDef);
+
+}
+getDefData(wordList)
+
+var formatDef = function (definition) {
+    
+    // var defs = definition.shortdef
+    // for (var d=0; w<defs.length; d++) {
 
     // }
+
 }
+
+// var displayDef = function(arr) {
+
+
+// }
+
+
