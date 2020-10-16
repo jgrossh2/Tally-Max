@@ -61,6 +61,7 @@ $(".space").droppable({
         helper.appendTo(".space")
         $(".space").removeClass("dropZone");
     },
+ 
     over: function(event, ui) {
         $(".space").addClass("dropZone");
         console.log("over");
@@ -68,23 +69,24 @@ $(".space").droppable({
     out: function(event, ui) {
         $(".space").removeClass("dropZone");
         console.log("out");
+
     },
     update: function(event) {
-        //array of to commit to
-        dropLetters;
+        console.log(this)
         $(this).each(function() {
             //get letter value and point score
-            $(this).getVal()
-            dropLetters.push({
+            var letterVal= $(this).getVal();
+            dropLetters.push(letterVal);
+            console.log(letterVal)
 
-            })
         })
-    }
+    },
     //put dropped tiles in array
     // saveTiles();
 });
 //drop tiles in array
 // var saveTiles = function() {
+//     var tileVal = $()
 
 // }
 //only accept so many of each letter
