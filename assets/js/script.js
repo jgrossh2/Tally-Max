@@ -65,141 +65,176 @@ var displayResults = function (results) {
     //check if there are any results
     if (results === 0) {
         resultsEl.textContent = "No Results Found";
-    } else {
-        //totalLetters.textContent = document.getElementById("results").setAttribute("button", "onclick", results);
-        var just_five = [];
-        //create for loop to show 5 RANDOM words from the array
-        for (var i = 0; i < results.length; i++) {
-            just_five.push(results[i])
-            var wordDiv = document.createElement("button")
-            wordDiv.textContent = results[i]
-            resultsEl.appendChild(wordDiv)
-        }
+        //////////////////////////////////// 
+        //shows results displayed in buttons:
 
-        showDescription(just_five);
-        //showImage();
-        //showImage(just_five);
-        //getImg();
+        // } else {
+        //     //totalLetters.textContent = document.getElementById("results").setAttribute("button", "onclick", results);
+        //     var just_five = [];
+        //     //create for loop to show 5 RANDOM words from the array
+        //     for (var i = 0; i < results.length; i++) {
+        //         just_five.push(results[i])
+        //         var wordDiv = document.createElement("button")
+        //         wordDiv.textContent = results[i]
+        //         resultsEl.appendChild(wordDiv)
+        //     }
+
+        //     showDescription(just_five);
+        //     //showImage();
+        //     //showImage(just_five);
+        //     //getImg();
+        // }
+        ///////////////////////////////////////
+        return;
     }
-}
 
-var showDescription = function (word_array) {
 
-    word_array.forEach(word => {
-        //posWord or word you get form the dictionary
-        var apiUrl = "https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=9197f1fd-982d-40cb-b0ef-a4e64d1afabb";
-        //make a get request for url
-        fetch(apiUrl)
-            .then(function (response) {
-                //request was sucessful
-                if (response.ok) {
-                    response.json().then(function (data) {
-                        console.log(data);
-                    });
+    var resultEl = document.createElement('li');
+    resultEl.classList.add("col s6 m4 l3");
+    var text = results;
+    resultEl.textContent = text;
+    var listGroupEl = document.querySelector(".list-group");
+    console.log(event.target)
 
-                } else {
-                    return
+    listGroupEl.onclick = function () {
+        console.log(event.target.tagName)
+        if (event.target.tagName == "li") {
+            showDescription(event.target.textContent)
+            getImg();
+
+        }
+    }
+    listGroupEl.appendChild(resultEl);
+
+
+    // //loop over the results
+    // for (var i = 0; i < results.length; i++) {
+    //     //list of results
+    //     var wordDiv = document.createElement("button");
+    //     wordDiv.textContent = results[i];
+    //     //create a container for each word
+
+
+    //create a span el to hold results by word displayed
+
+
+    var showDescription = function (word_array) {
+
+        word_array.forEach(word => {
+            //posWord or word you get form the dictionary
+            var apiUrl = "https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=9197f1fd-982d-40cb-b0ef-a4e64d1afabb";
+            //make a get request for url
+            fetch(apiUrl)
+                .then(function (response) {
+                    //request was sucessful
+                    if (response.ok) {
+                        response.json().then(function (data) {
+                            console.log(data);
+                        });
+
+                    } else {
+                        return
+                    }
+                });
+        })
+    }
+
+    //cleate button function for modal Picture display(next step will be :get picAPI to display inside)
+    document.getElementById("images").addEventListener("click", showImage);
+    var showImage = function () {
+        document.getElementById("images").innerHTML = "Image";
+    }
+
+    // // DEVELOPER.MOZILLA:Example POST method implementation:
+    // async function postData(url = '', data = {}) {
+    //     // Default options are marked with *
+    //     const response = await fetch(url, {
+    //       method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    //       mode: 'cors', // no-cors, *cors, same-origin
+    //       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    //       credentials: 'same-origin', // include, *same-origin, omit
+    //       headers: {
+    //         'Content-Type': 'application/json'
+    //         // 'Content-Type': 'application/x-www-form-urlencoded',
+    //       },
+    //       redirect: 'follow', // manual, *follow, error
+    //       referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    //       body: JSON.stringify(data) // body data type must match "Content-Type" header
+    //     });
+    //     return response.json(); // parses JSON response into native JavaScript objects
+    //   }
+
+    //   postData('https://example.com/answer', { answer: 42 })
+    //     .then(data => {
+    //       console.log(data); // JSON data parsed by `data.json()` call
+    //     });
+
+    // PEXEL key:563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf
+    //API photo:https://api.pexels.com/v1
+    //API video: https://api.pexels.com/videos
+
+    class Images {
+        //The constructor property returns a reference to the Object constructor function that created the instance object. Note that the value of this property is a reference to the function itself, not a string containing the function's name.
+        constructor() {
+            this.API_key = "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
+            //properties
+            this.imagesDiv = document.querySelector(".listofpix");
+            // this.searchForm = document.querySelector(".header form");
+            // this.load = document.querySelector(".load");
+            this.eventHandler(); //call in constructor
+        }
+        //add handler
+        eventHandler() {
+            //with function '() => ' inside the eventListener, so the images load
+            document.addEventListener("DOMContentLoaded", () => {
+                // get another function to get image
+                this.getImg();
+                //fetch image inside the Handler function:
+            });
+        }
+        async getImg() {
+            //link from PEXEL for search pic: "https://api.pexels.com/v1/search?query=nature&per_page=1"
+            var pexelURL = "https://api.pexels.com/v1/search?query=nature&per_page=1";
+            var data = await this.fetchImages(pexelURL); //await and async used together
+            this.generateHTML(data.photos) //photos is a data=an array from pexel in console log
+            console.log(data)//(response); //use 'awain in fetch function to wait for the results to load on page- get a response
+            //'await' goes together with 'async' -add to var
+        }
+        //add the function to fetch url, and call it above 
+        async fetchImages(pexelURL) {
+            var response = await fetch(pexelURL, {
+                method: "GET", //there are 5 methods total to use if needed
+                headers: {
+                    Accept: 'application/json',
+                    Authorization: this.API_key
                 }
             });
-    })
-}
-
-//cleate button function for modal Picture display(next step will be :get picAPI to display inside)
-document.getElementById("images").addEventListener("click", showImage);
-var showImage = function () {
-    document.getElementById("images").innerHTML = "Image";
-}
-
-// // DEVELOPER.MOZILLA:Example POST method implementation:
-// async function postData(url = '', data = {}) {
-//     // Default options are marked with *
-//     const response = await fetch(url, {
-//       method: 'POST', // *GET, POST, PUT, DELETE, etc.
-//       mode: 'cors', // no-cors, *cors, same-origin
-//       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-//       credentials: 'same-origin', // include, *same-origin, omit
-//       headers: {
-//         'Content-Type': 'application/json'
-//         // 'Content-Type': 'application/x-www-form-urlencoded',
-//       },
-//       redirect: 'follow', // manual, *follow, error
-//       referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-//       body: JSON.stringify(data) // body data type must match "Content-Type" header
-//     });
-//     return response.json(); // parses JSON response into native JavaScript objects
-//   }
-
-//   postData('https://example.com/answer', { answer: 42 })
-//     .then(data => {
-//       console.log(data); // JSON data parsed by `data.json()` call
-//     });
-
-// PEXEL key:563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf
-//API photo:https://api.pexels.com/v1
-//API video: https://api.pexels.com/videos
-
-class Images {
-    //The constructor property returns a reference to the Object constructor function that created the instance object. Note that the value of this property is a reference to the function itself, not a string containing the function's name.
-    constructor() {
-        this.API_key = "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
-        //properties
-        this.imagesDiv = document.querySelector(".listofpix");
-        // this.searchForm = document.querySelector(".header form");
-        // this.load = document.querySelector(".load");
-        this.eventHandler(); //call in constructor
-    }
-    //add handler
-    eventHandler() {
-        //with function '() => ' inside the eventListener, so the images load
-        document.addEventListener("DOMContentLoaded", () => {
-            // get another function to get image
-            this.getImg();
-            //fetch image inside the Handler function:
-        });
-    }
-    async getImg() {
-        //link from PEXEL for search pic: "https://api.pexels.com/v1/search?query=nature&per_page=1"
-        var pexelURL = "https://api.pexels.com/v1/search?query=nature&per_page=1";
-        var data = await this.fetchImages(pexelURL); //await and async used together
-        this.generateHTML(data.photos) //photos is a data=an array from pexel in console log
-        console.log(data)//(response); //use 'awain in fetch function to wait for the results to load on page- get a response
-        //'await' goes together with 'async' -add to var
-    }
-    //add the function to fetch url, and call it above 
-    async fetchImages(pexelURL) {
-        var response = await fetch(pexelURL, {
-            method: "GET", //there are 5 methods total to use if needed
-            headers: {
-                Accept: 'application/json',
-                Authorization: this.API_key
-            }
-        });
-        var data = await response.json();
-        // console.log(data); will display the array
-        return data; //return data and store it in var data above
-    }
-    //per pexel documentation, include sources and give credit to photographers
-    //either hardcode? or use display below the added info through classList.add
-    generateHTML(photos) {
-        photos.forEach(photo => {//photos in here refers to data in array from console log, when using another object-make sure to change to that
-            //create var for instead of a div in html that <div class="item" for example
-            var item = document.createElement("div");
-            //add class
-            item.classList.add("item");
-            //string 
-            item.innerHTML = `
+            var data = await response.json();
+            // console.log(data); will display the array
+            return data; //return data and store it in var data above
+        }
+        //per pexel documentation, include sources and give credit to photographers
+        //either hardcode? or use display below the added info through classList.add
+        generateHTML(photos) {
+            photos.forEach(photo => {//photos in here refers to data in array from console log, when using another object-make sure to change to that
+                //create var for instead of a div in html that <div class="item" for example
+                var item = document.createElement("div");
+                //add class
+                item.classList.add("item");
+                //string 
+                item.innerHTML = `
             <a href="#">
              <img src="${photo.src.medium}">
              <h4>${photo.photographer}</h4>
              </a>
              `;//from array of objects- change if needed a dif source displayed
-            //append
-            this.imagesDiv.appendChild(item);
-        })
+                //append
+                this.imagesDiv.appendChild(item);
+            })
+        }
     }
-}
-//initialize the class
-var gallery = new Images;
+    //initialize the class
+    var listofpix = new Images;
 
 //API token is: b215d9b947a47ebd06cee1f48819e44474eeff9f
 //curl--header "Authorization: Token b215d9b947a47ebd06cee1f48819e44474eeff9f" https://owlbot.info/api/v4/dictionary/owl -s | json_pp

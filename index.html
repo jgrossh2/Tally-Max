@@ -79,7 +79,11 @@
         <!-- START RESULTS CONTAINER: words resulting from search are listed here -->
         <div class='container'>
 
-            <div id="results-container"></div>
+
+
+            <input type="text" id="possible-letters" placeholder="letters">
+            <button type="button" onclick="getInputValue();">Generate</button>
+
 
 
 
@@ -87,8 +91,10 @@
                 <div class='col valign-wrapper results-title'>
                     <h5 class='valign'>Search results:</h5>
                 </div>
-                <ul class="col s12 m12 l12 results-list">
-                    <div class='col s6 m4 l3' id='search-result1'>
+                <div id="results-container" class="list-group"></div>
+
+                <!-- <ul class="col s12 m12 l12 results-list"> -->
+                <!-- <div class='col s6 m4 l3' id='search-result1'>
                     </div>
                     <div class='col s6 m4 l3' id='search-result2'>
                     </div>
@@ -112,14 +118,14 @@
                     </div>
                     <div class='col s6 m4 l3' id='search-result12'>
                     </div>
-                </ul>
+                </ul> -->
             </div>
         </div>
 
         </div>
         <!-- START DEFINITIONS CONTAINER: words selected from results list by user are listed here with definitions -->
         <div class='container'>
-            <!--  -->
+            <!--  START IMAGE CONTAINER: image selected from results list by user is displayed here-->
 
             <button onclick="showImage()">Show Image</button>
 
@@ -153,12 +159,6 @@
             <h5>API Support:</h5>
         </div>
     </footer>
-
-
-
-    <input type="text" id="possible-letters" placeholder="letters">
-    <button type="button" onclick="getInputValue();">Generate</button>
-
 
 
     <!--JavaScript at end of body for optimized loading-->
