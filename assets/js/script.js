@@ -1,23 +1,46 @@
 // Scrabble Word Generator
 
 // page elements
+var twoLetterBtnEl = document.getElementById('twoLetterBtn');
+var threeLetterBtnEl = document.getElementById('threeLetterBtn');
+var randomLetterBtnEl = document.getElementById('randomLetterBtn');
+var letterContainerEl = document.getElementById('possible-letters');
 
 // page variables
 var totalLetters = 0;
 
-// get user input
-// by drag and drop object
+// event listeners to gather user input and start function
+twoLetterBtnEl.addEventListener('click', function() {
+    // get possible letters from form
+    var letters = letterContainerEl.value;
+    // reset global variable
+    var totalLetters = 0;
+    // set search criteria
+    var totalLetters = 2;
+    // call word generator
+    genWordlist(totalLetters, letters);
+});
 
-// by user form
-function getInputValue() {
-    var letters = document.getElementById('possible-letters').value;
-    console.log(letters);
+threeLetterBtnEl.addEventListener('click', function() {
+    // get possible letters from form
+    var letters = letterContainerEl.value;
+    // reset global variable
+    var totalLetters = 0;
+    // set search criteria
+    var totalLetters = 3;
+    // call word generator
+    genWordlist(totalLetters, letters);
+});
+
+randomLetterBtnEl.addEventListener('click', function() {
+    // get possible letters from form
+    var letters = letterContainerEl.value;
+
     // get total letter count
     letterCounter(letters);
-
     function letterCounter(letters) {
         // reset variable
-        totalLetters = 0;
+        totalLetters = 0;   
         var alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
         var ar = alphabet.split("");
         for (var i = 0; i < letters.length; i++) {
@@ -27,13 +50,14 @@ function getInputValue() {
         }
         return totalLetters;
     }
-    console.log(totalLetters);
     // call word generator
     genWordlist(totalLetters, letters);
-};
+});
 
 // generate all possible combinations of inputted letters
 var genWordlist = function(totalLetters, letters) {
+    // reset form container
+    letterContainerEl.value = '';
     var results = [];
 
     var generate = function(possWord) {
