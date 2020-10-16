@@ -68,7 +68,7 @@
                 <li class="symbol"><span class="off"></span></li>
                 <!-- <li class="symbol"><span class="off"></span></li> -->
                 <li class="right-shift lastitem"></li>
-                <li class="space lastitem"><textarea class="text" placeholder="Drag letters here!"></textarea> </li>
+                <li class="space lastitem"><textarea id="possible-letters" class="text" placeholder="Drag letters here!"></textarea> </li>
             </ul>
         </div>
 
@@ -77,13 +77,13 @@
             <div class='search-type card-panel grey lighten-2 row'>
                 <h5 class='subtitle'>Select your search type!</h5>
                 <div class='search center-align col s6 m3 l3'>
-                    <button class="waves-effect searchbtn"><i class="material-icons left">grade</i>2-LETTER</button></td>
+                    <button id="twoLetterBtn" class="waves-effect searchbtn"><i class="material-icons left">grade</i>2-LETTER</button></td>
                 </div>
                 <div class='search center-align col s6 m3 l3'>
-                    <button class="waves-effect searchbtn"><i class="material-icons left">grade</i>3-LETTER</button></td>
+                    <button id="threeLetterBtn" class="waves-effect searchbtn"><i class="material-icons left">grade</i>3-LETTER</button></td>
                 </div>
                 <div class='search center-align col s6 m3 l3'>
-                    <button class="waves-effect searchbtn"><i class="material-icons left">grade</i>RANDOM</button></td>
+                    <button id="randomLetterBtn" class="waves-effect searchbtn"><i class="material-icons left">grade</i>RANDOM</button></td>
                 </div>
                 <div class='search center-align col s6 m3 l3'>
                     <button class="waves-effect searchbtn"><i class="material-icons left">grade</i>HIGH SCORE</button></td>
@@ -142,9 +142,6 @@
             </div>
         </div>
     </footer>
-
-    <input type="text" id="possible-letters" placeholder="letters">
-    <button type="button" onclick="getInputValue();">Generate</button>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
