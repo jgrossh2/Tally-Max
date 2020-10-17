@@ -63,9 +63,7 @@ var genWordList = function(wordLength, letters) {
 
     var generate = function(possWord) {
         for (var i = 0; i < letters.length; i++) {
-            if (arrayCounter === 10) {
-                break;
-            } else {
+            if (arrayCounter <= 9) {
                 possWord += letters[i];
                 if (possWord.length === wordLength) {
                     if (dict.includes(possWord)) {
@@ -76,19 +74,13 @@ var genWordList = function(wordLength, letters) {
                     generate(possWord);
                 }
                 possWord = possWord.slice(0, -1);
-                }
+            // break from loop to cut down on load time    
+            } else {
+                break;
             }
+        }
     }
     generate("");
-
-    // for (var j = 0; j < letters.length; j++) {
-    //     for (var k = 0; k < dict.length; k++) {
-    //         var possWord = letters.substring(0, j+1);
-    //         if (dict[k].includes(possWord)) {
-    //             results.push(dict[k]);
-    //         }
-    //     }
-    // }
 
     // store user search / results
     localStorage.setItem(letters, results);
