@@ -15,27 +15,45 @@ var dragLetters = function(event) {
     event.preventDefault();
     console.log("works")
 }
+
+$(".letter").sortable({
+    revert: true
+});
 // make letters drag
 $(".letter").draggable({ 
+    connectToSortable: ".space",
     tolerance: "pointer",
     helper: "clone",
     appendTo: ".space",
     containment: "#keyboard",
     cursor: "move",
     snap: ".space",
-    activate: function(event) {
-        $("#A").addClass(".dragging");
+    revert: "invalid",
+    start: function(event, ui) {
+        console.log(ui);
+        $(ui.helper).addClass("dragging");
+        console.log("test");
+    },
+    stop: function(event, ui) {
+        $(ui.helper).removeClass("dragging");
+        console.log("stop");
+        // var grid = document.createElement("div");
+        // grid.id = "grid";
+        // grid.className = "grid";
+        // for (i=0; i<7; i++) {
+        //     var row = grid.appendChild(document.createElement("div"));
+        //     row.className = "row";
+        //     row.id = "row" +i;
+        //     console.log("well?");
+        // };
     }
-    
-    
+    //remove class
+    // add grid item
 });
-// $(document).on("click",".letter", function(){
-//     var letterVal= $(this).attr("data-letter");
-//             dropLetters.push(letterVal);
-//             console.log(letterVal);
-// });
 
 // $(".letter").sortable({
+//     revert: true
+// });
 //     connectWith: $(".space .letter"),
 //     tolerance: "pointer",
 //     helper: "clone",
@@ -67,30 +85,18 @@ $(".space").droppable({
     drop: function(event, ui){
         //FIND ELEMENT DRAGGED AS TARGET
         console.log(ui);
-        // var letterVal= $(ui.draggable).clone();
-        // console.log(letterVal);
-        // var now = letterVal.val();
-        // console.log(now);
-            // dropLetters.push(now);
-            // console.log(this);
-            // console.log(letterVal);
         console.log("drop");
-        var helper = ui.helper.clone();
+        var helper = ui.helper.clone(true);
         helper.appendTo(".space");
+        $(ui.helper).removeClass("dragging");
         // finds object and then letter value of that object
-        
-        var valueLetter= $(".space").children;
-        console.log(valueLetter);
+
         var dragged= ui.draggable[0].dataset.letter;
         console.log(ui.draggable[0].dataset.letter);
         dropLetters.push(dragged);
         console.log(dropLetters);
         $(".space").removeClass("dropZone");
-        $(".letter").removeClass(".letter.ui-draggable-dragging");
         },
-        // $(this).each(function( ) {
-            // var letterVal= $(this).attr("data-letter");
-        // });
  
     over: function(event, ui) {
         $(".space").addClass("dropZone");
@@ -99,7 +105,6 @@ $(".space").droppable({
     out: function(event, ui) {
         $(".space").removeClass("dropZone");
         console.log("out");
-
     },
     update: function(event) {
         console.log(this)
@@ -107,6 +112,7 @@ $(".space").droppable({
     //put dropped tiles in array
     // saveTiles();
 });
+
 //drop tiles in array
 // var saveTiles = function() {
 //     var tileVal = $()

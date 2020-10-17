@@ -61,11 +61,10 @@ footer.page-footer {
     flex-wrap: wrap;
     /* margin: 50px 0 0 325px; */
     width: 100%;
-
 }
-/* .space {
-    margin-left: 75px;
-} */
+.space {
+    border: dotted black;
+}
 #keyboard {
     margin: 0;
     padding: 0;
@@ -175,13 +174,12 @@ footer.page-footer {
 .dropZone {
     background: lightgray;
 }
-#A {
+.one {
     background-image: url("scrabble1.jpg"); 
-} 
-.dragging {
-    border: solid black 10px;
 }
-
+.dragging {
+    border: solid black 3px;
+}
 
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */
 @media screen and (max-width: 980px) {
