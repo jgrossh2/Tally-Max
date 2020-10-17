@@ -62,16 +62,23 @@ $(".space").droppable({
     drop: function(event, ui){
         //FIND ELEMENT DRAGGED AS TARGET
         console.log(ui);
-        var letterVal= $(ui.draggable).clone();
-        console.log(letterVal);
-        var now = letterVal.val();
-        console.log(now);
-            dropLetters.push(now);
-            console.log(this);
+        // var letterVal= $(ui.draggable).clone();
+        // console.log(letterVal);
+        // var now = letterVal.val();
+        // console.log(now);
+            // dropLetters.push(now);
+            // console.log(this);
             // console.log(letterVal);
         console.log("drop");
         var helper = ui.helper.clone();
         helper.appendTo(".space");
+        // finds object and then letter value of that object
+        
+        var valueLetter= $(".space").children;
+        console.log(valueLetter);
+        var dragged= valueLetter.val();
+        console.log(dragged);
+        dropLetters.push(dragged);
         $(".space").removeClass("dropZone");
         },
         // $(this).each(function( ) {

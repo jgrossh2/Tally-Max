@@ -57,13 +57,15 @@ footer.page-footer {
     font-family: var(--primary);
 }
 #container {
-    margin: 50px 0 0 325px;
+    display: flex;
+    flex-wrap: wrap;
+    /* margin: 50px 0 0 325px; */
     width: 100%;
 
 }
-.space {
+/* .space {
     margin-left: 75px;
-}
+} */
 #keyboard {
     margin: 0;
     padding: 0;
@@ -176,9 +178,9 @@ footer.page-footer {
 #A {
     background-image: url("scrabble1.jpg"); 
 } 
-.letter.ui-draggable-dragging {
+/* .letter.ui-draggable-dragging {
     background: var(--keys2);
-}
+} */
 
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */
 @media screen and (max-width: 980px) {
