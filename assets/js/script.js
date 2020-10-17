@@ -1,12 +1,62 @@
 // Scrabble Word Generator
+
 // page elements
 var resultsEl = document.getElementById("results-container");
-// page variables
-var totalLetters = 0;
-// get user input
-// by drag and drop object
+//var twoLetterBtnEl = document.getElementById('twoLetterBtn');
+//var threeLetterBtnEl = document.getElementById('threeLetterBtn');
+//var randomLetterBtnEl = document.getElementById('randomLetterBtn');
+//var letterContainerEl = document.getElementById('possible-letters');
 
-// by user form
+// global page variables
+//var wordLength = 0;
+var totalLetters = 0;
+
+// // event listeners to gather user input and start generator function
+// twoLetterBtnEl.addEventListener('click', function () {
+//     // get possible letters from form
+//     var letters = letterContainerEl.value;
+//     // reset global variable
+//     var wordLength = 0;
+//     // set search criteria
+//     var wordLength = 2;
+//     // call word generator
+//     genWordlist(wordLength, letters);
+// });
+
+// threeLetterBtnEl.addEventListener('click', function () {
+//     // get possible letters from form
+//     var letters = letterContainerEl.value;
+//     // reset global variable
+//     var wordLength = 0;
+//     // set search criteria
+//     var wordLength = 3;
+//     // call word generator
+//     genWordlist(wordLength, letters);
+// });
+
+// randomLetterBtnEl.addEventListener('click', function () {
+//     // get possible letters from form
+//     var letters = letterContainerEl.value;
+
+//     // get total letter count
+//     letterCounter(letters);
+//     function letterCounter(letters) {
+//         // reset global variable
+//         wordLength = 0;
+//         var alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+//         var ar = alphabet.split("");
+//         for (var i = 0; i < letters.length; i++) {
+//             if (ar.indexOf(letters[i]) > -1) {
+//                 wordLength = wordLength + 1;
+//             }
+//         }
+//         return wordLength;
+//     }
+//     // call word generator
+//     genWordlist(wordLength, letters);
+// });
+
+//by user form
 function getInputValue() {
     var letters = document.getElementById('possible-letters').value;
     console.log(letters);
@@ -37,6 +87,8 @@ function getInputValue() {
 
 // generate all possible combinations of inputted letters
 var genWordlist = function (totalLetters, letters) {
+    // reset form container
+    //letterContainerEl.value = '';
     var results = [];
 
     var generate = function (possWord) {
@@ -56,7 +108,6 @@ var genWordlist = function (totalLetters, letters) {
     displayResults(results)
     return results
 };
-
 //create function to show words in the list
 //cleate button function for modal Picture display(next step will be :get picAPI to display inside)
 //document.getElementById("images").addEventListener("click", showImage);
@@ -110,7 +161,7 @@ var showDescription = function (word_array) {
 }
 
 var showImage = function () {
-    var pexelURL = `https://api.pexels.com/v1/curated?query=nature&per_page=10`;
+    var pexelURL = `https://api.pexels.com/v1/curated?query=${new_words[0]}&per_page=10`;
     var API_key = "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
     //add the function to fetch url, and call it above 
     fetch(pexelURL, {
@@ -138,7 +189,7 @@ var showImage = function () {
         })
 }
 document.getElementById("images").innerHTML = "Image";
-//}
+
 
 class Images {
     //The constructor property returns a reference to the Object constructor function that created the instance object. Note that the value of this property is a reference to the function itself, not a string containing the function's name.
@@ -161,7 +212,7 @@ class Images {
     }
     async getImg() {
         //link from PEXEL for search pic: "https://api.pexels.com/v1/search?query=nature&per_page=1"
-        var pexelURL = "https://api.pexels.com/v1/curated?query=${new-words}&per_page=10";
+        var pexelURL = "https://api.pexels.com/v1/curated?query=${new-words}&per_page=2";
         var data = await this.fetchImages(pexelURL); //await and async used together
         this.generateHTML(data.photos) //photos is a data=an array from pexel in console log
         console.log(data)//(response); //use 'awain in fetch function to wait for the results to load on page- get a response
@@ -206,3 +257,43 @@ var listofpix = new Images;
 //curl--header "Authorization: Token b215d9b947a47ebd06cee1f48819e44474eeff9f" https://owlbot.info/api/v4/dictionary/owl -s | json_pp
 
 ///unsplash: acess key: "epv9i5i5P0XQj0_SD3Ez8WxX88fh9d8ts18CgJKJ0Uw"; secret key: "u9UGbWywxfI-tsOZU-Lvfd-qebY5WDF47_8Nhqc2Zms" //50 requests per hour //application status 5-10 days
+
+//     // store user search / results
+//     localStorage.setItem(letters, results);
+
+//     return console.log(results);
+// };
+
+// // added for the sake of demonstrating functionality; to be removed once functions for generating word array are added
+// var wordList = ['voluminous', 'aa', 'dab', 'play']
+
+// // function fetches definition data for each in an array of words and returns subset of data packaged as an object
+// var getDefData = function (arr) {
+//     for (var i = 0; i < arr.length; i++) {
+//         var word = arr[i];
+//         var mwApiUrl = 'https://www.dictionaryapi.com/api/v3/references/collegiate/json/'
+//             + arr[i] + '?key=' + smkmw;
+//         fetch(mwApiUrl).then(function (response) {
+//             if (response.ok) {
+//                 response.json().then(function (data) {
+//                     var def = (data[0])
+//                     var wordDef = {
+//                         word: word,
+//                         function: def.fl,
+//                         definition: def.shortdef,
+//                         audio: def.hwi.prs[0].sound.audio,
+//                         offensive: def.meta.offensive,
+//                     };
+//                     console.log(wordDef)
+//                     formatDef(wordDef)
+//                     soundBite(wordDef)
+//                     return wordDef
+//                 })
+//             } else {
+//                 alert("Error:" + response.statusText)
+//             }
+//         });
+//     }
+// }
+// getDefData(wordList)
+
