@@ -110,7 +110,7 @@ var showDescription = function (word_array) {
 }
 
 var showImage = function () {
-    var pexelURL = `https://api.pexels.com/v1/search?query=nature&per_page=5`;
+    var pexelURL = `https://api.pexels.com/v1/curated?query=nature&per_page=10`;
     var API_key = "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
     //add the function to fetch url, and call it above 
     fetch(pexelURL, {
