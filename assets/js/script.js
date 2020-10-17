@@ -54,7 +54,7 @@ randomLetterBtnEl.addEventListener('click', function() {
     genWordlist(wordLength, letters);
 });
 
-// generate all possible combinations of inputted letters
+// generate all possible combinations of input letters
 var genWordlist = function(wordLength, letters) {
     // reset form container
     letterContainerEl.value = '';
@@ -119,6 +119,7 @@ var displayWordDefSound = function (defObject) {
     console.log(defObject)
     // accessing hard-coded ul element to which DOM elements will be appended
     var resultDivEl = document.querySelector('ul.results-list');
+    
 
     // check to see whether term is offensive
     if (!defObject.offensive) {
