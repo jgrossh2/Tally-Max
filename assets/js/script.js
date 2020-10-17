@@ -4,6 +4,7 @@
 var twoLetterBtnEl = document.getElementById('twoLetterBtn');
 var threeLetterBtnEl = document.getElementById('threeLetterBtn');
 var randomLetterBtnEl = document.getElementById('randomLetterBtn');
+var highScoreBtnEl = document.getElementById('highScoreBtn');
 var letterContainerEl = document.getElementById('possible-letters');
 
 // global page variables
@@ -50,6 +51,36 @@ randomLetterBtnEl.addEventListener('click', function() {
         }
         return wordLength;
     }
+    // call word generator
+    genWordList(wordLength, letters);
+});
+
+highScoreBtnEl.addEventListener('click', function() {
+    // get possible letters from form
+    var letters = letterContainerEl.value;
+
+    // get total letter count
+    letterCounter(letters);
+    function letterCounter(letters) {
+        // reset global variable
+        wordLength = 0;   
+        var alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        var ar = alphabet.split("");
+        for (var i = 0; i < letters.length; i++) {
+            if (ar.indexOf(letters[i]) > -1) {
+                wordLength = wordLength + 1;
+            }
+        }
+        return wordLength;
+    }
+
+    // sort letters based on value before sending to genWordList
+    var priorityLetters = ['z','q','x','j','k','w','y','v','f','h','o','m','c','b','g','d','u','s','l','t','r','n','o','i','a','e'];
+    var lettersArray = letters.split('');
+    lettersArray.sort(function(a) {
+        return priorityLetters.indexOf(a);
+    })
+    console.log(lettersArray);
     // call word generator
     genWordList(wordLength, letters);
 });
