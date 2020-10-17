@@ -62,7 +62,7 @@ footer.page-footer {
 
 }
 .space {
-    padding: 0 0 0 100px;
+    margin-left: 75px;
 }
 #keyboard {
     margin: 0;
@@ -173,8 +173,8 @@ footer.page-footer {
 .dropZone {
     background: lightgray;
 }
-.one {
-    background-image: url("scrabble.jpg"); 
+#A {
+    background-image: url("scrabble1.jpg"); 
 } 
 .letter.ui-draggable-dragging {
     background: var(--keys2);

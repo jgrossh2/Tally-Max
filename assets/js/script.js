@@ -8,38 +8,27 @@ var dropLetters = [];
 var letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 var letterEl = document.querySelector(".letter");
 var spaceEl = document.querySelector(".space");
-// get user input
+// get user input area
 spaceEl.textContent = "Drag Letters Here! "
 // drag letters
 var dragLetters = function(event) {
     event.preventDefault();
     console.log("works")
 }
-
 // make letters drag
 $(".letter").draggable({ 
-
     tolerance: "pointer",
     helper: "clone",
     appendTo: ".space",
     containment: "#keyboard",
     cursor: "move",
     snap: ".space"
-    // revert: true,
-    // activate: function (event) {
-    //     $(".letter").addClass("tileColor");
-    //     console.log("color");
-    // }
 });
-
 // $(document).on("click",".letter", function(){
 //     var letterVal= $(this).attr("data-letter");
 //             dropLetters.push(letterVal);
 //             console.log(letterVal);
 // });
-
-
-
 
 // $(".letter").sortable({
 //     connectWith: $(".space .letter"),
@@ -86,10 +75,7 @@ $(".space").droppable({
         $(".space").removeClass("dropZone");
         },
         // $(this).each(function( ) {
-            // console.log(data);
             // var letterVal= $(this).attr("data-letter");
-            // dropLetters.push(letterVal);
-            // console.log(letterVal);
         // });
  
     over: function(event, ui) {
@@ -103,12 +89,7 @@ $(".space").droppable({
     },
     update: function(event) {
         console.log(this)
-        // $(this).each(function() {
-            //get letter value and point score
-            // var letterVal= $(this).getVal();
-            // dropLetters.push(letterVal);
-            // console.log(letterVal)
-        },
+    }
     //put dropped tiles in array
     // saveTiles();
 });
