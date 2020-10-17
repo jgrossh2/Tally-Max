@@ -98,10 +98,6 @@ var displayResults = function (results) {
     }
 }
 
-
-//new function for each displayed element?
-
-
 //document.querySelector("?button").addEventListener("click");
 var showDescription = function (word_array) {
 
@@ -128,50 +124,32 @@ var showDescription = function (word_array) {
 
 var showImage = function () {
 
-    var pexelURL = `https://api.pexels.com/v1/curated?query=${value}&per_page=10`;
-    var data = fetchImages(pexelURL); //await and async used together
-    // this.generateHTML(data.photos) //photos is a data=an array from pexel in console log
-    console.log(data)//(response); //use 'awain in fetch function to wait for the results to load on page- get a response
-    //'await' goes together with 'async' -add to var
+    var pexelURL = `https://api.pexels.com/v1/search?query=nature&per_page=5`;
     var API_key = "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
     //add the function to fetch url, and call it above 
-    fetch(pexelURL,
-
-
-        // var response = fetch(pexelURL, //{
-        // method: "GET", //there are 5 methods total to use if needed
+    fetch(pexelURL, {
         headers: {
-        // Accept: 'application/json',
-        Authorization: API_key
+            // Accept: 'application/json',
+            Authorization: API_key
+        }
     })
         .then(function (response) {
+            console.log(response);
             return response.json();
         })
-        //console.log(data);// will display the array
-        .then(function (response) {//return data and store it in var data above
-            var responseContainerEl = document.querySelector('#images');
+        //console.log(response);// will display the array
+        .then(function (response) {
+            console.log(response.data);
+            // Use 'querySelector' to get the ID of where the GIF will be displayed
+            var responseContainerEl = document.querySelector('#containerimg');
+            // // // Create an '<img>' element
             var pexelImg = document.createElement('img');
-            pexelImg.setAttribute('src', response.data.image_url);
+            //responseContainerEl.innerHTML = "";
+            // // // Set that element's 'src' attribute to the 'image_url' from API response
+            pexelImg.setAttribute('src', response.data);
+            // // console.log(headers.url);
             responseContainerEl.appendChild(pexelImg);
-        }
-    //per pexel documentation, include sources and give credit to photographers
-    // either hardcode? or use display below the added info through classList.add
-    // generateHTML(photos) {
-    //     photos.forEach(photo => {//photos in here refers to data in array from console log, when using another object- change to that
-    //         //create var for instead of a div in html that <div class="item" for example
-    //         var item = document.createElement("div");
-    //         //add class
-    //         item.classList.add("item");
-    //         //string 
-    //         item.innerHTML = `
-    //         <a href="#">
-    //          <img src="${photo.src.large}">
-    //          <h4>${photo.photographer}</h4>
-    //          </a>
-    //          `;//from array of objects- change if needed a dif source displayed
-    //         //append
-    //         this.imagesDiv.appendChild(item);
-    //     })
+        })
 }
 document.getElementById("images").innerHTML = "Image";
 //}
