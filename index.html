@@ -122,25 +122,16 @@
         </div>
         <!-- START DEFINITIONS CONTAINER: words selected from results list by user are listed here with definitions -->
         <div class='container'>
-            <!--  START IMAGE CONTAINER: image selected from results list by user is displayed here-->
-
-            <button onclick="showImage()">Show Image</button>
+        </div>
+        <!--  START IMAGE CONTAINER: image selected from results list by user is displayed here-->
+        <div class="containerimg">
+            <button onclick="showImage(),showDescription()"></button>
 
             <p id="images"></p>
             <!-- created to get datat from pexel API -needs to be adjusted when merged-->
-            <div class="containerimg">
-                <div class="header">
-                    <!-- <h1 class="logo">Images</h1> -->
-                    <!-- <form> -->
-                    <!-- <input type="text" placeholder="search images"> -->
-                    <!-- </form> -->
-                </div>
-                <div class="listofpix">
-                    <!-- <div class="item"></div> -->
-                    <!-- <a class="load">load</a> -->
-                </div>
-            </div>
 
+            <div class="header"></div>
+            <div class="listofpix"></div>
         </div>
     </main>
     <footer class='page-footer'>
