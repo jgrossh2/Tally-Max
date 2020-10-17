@@ -50,6 +50,7 @@ var genarr = function (totalLetters, letters) {
         }
     }
     generate("");
+    // getDefData(results);
     return console.log(results);
 };
 
@@ -75,7 +76,7 @@ var getDefData = function (arr) {
                     };
                     // console.log(wordDef)
                     displayWordDefSound(wordDef)
-                    displaySoundBite(wordDef)
+                    // displaySoundBite(wordDef)
                     return wordDef
                 })
             } else {
@@ -98,54 +99,40 @@ var displayWordDefSound = function (defObject) {
         var resultDiv = document.createElement('div');
         resultDiv.setAttribute('class', 'col s6 m4 l3');
 
-        // loop through each definition
-        for (var i = 0; i < defObject.length; i++) {
-            n = i + 1
-            var defText = n + ') ' + defObject.definition[i];
-            console.log(defText)
-        }
+        // display word and class
         var resultItem = document.createElement('li');
-        resultItem.textContent = defObject.word + ' :' + defObject.class;
-        resultDiv.append(resultItem);
-        resultDivEl.append(resultDiv);
-    } else {
-        console.log("I'm sorry this word cannot be displayed.");
-    }
-}
+        resultItem.innerHTML = '<p><span>' + defObject.word + '</span><br />' + defObject.class + '</p>';
 
+        // loop through each homonym and display within element for that word
+        for (var i = 0; i < defObject.definition.length; i++) {
+            n = i + 1
+            var resultDef = document.createElement('p');
+            resultDef.textContent = n + ') ' + defObject.definition[i];
+            resultItem.append(resultDef);
+        }
 
-// function takes MS api object data and creates link for audio playback within DOM object
-var displaySoundBite = function (defObject) {
-    // 'subdir' is a necessary component of the href; this code determines what its value should be based on instructions from Merriam-Webster
-    var aud = defObject.audio.split('', 3)
-    var trial = '?fogh'
-    var regex = RegExp('[\\d\\W]')
-    var subdir = ''
-
-    if (aud[0] + aud[1] + aud[2] === 'bix') {
-        subdir = 'bix'
-    } else if (aud[0] + aud[1] === 'gg') {
-        subdir = 'gg'
-        console.log(aud[0])
-    } else if (console.log(regex.test(trial))) {
-        // (aud[0] === '_' || aud[0] === '.' || aud[0] === '?' || aud[0] === '!' || aud[0] === ',' || aud[0] === ':' ||
-        // aud[0] === ';' || aud[0] === '-' || aud[0] === '(' || aud[0] === ')' || aud[0] === '[' || aud[0] === ']' ||
-        // aud[0] === '{' || aud[0] === '}' || aud[0] === "'" || aud[0] === '"' || aud[0] === '0' || aud[0] === '1' ||
-        // aud[0] === '2' || aud[0] === '3' || aud[0] === '4' || aud[0] === '5' || aud[0] === '6' || aud[0] === '7' ||
-        // aud[0] === '8' || aud[0] === '9') 
-        subdir = 'number'
-    } else {
-        subdir = aud[0]
-    }
-
-    // check to see whether term is offensive
-    if (!defObject.offensive) {
+        // takes audio file and creates link for audio playback; 'subdir' uses conditions provided by MW api documentation to determine 'subdir' component of resulting href
+        var aud = defObject.audio.split('', 3)
+        var regex = RegExp('[\\d\\W]')
+        var subdir = ''
+        if (aud[0] + aud[1] + aud[2] === 'bix') {
+            subdir = 'bix'
+        } else if (aud[0] + aud[1] === 'gg') {
+            subdir = 'gg'
+        } else if (regex.test(aud[0])) {
+            subdir = 'number'
+        } else {
+            subdir = aud[0]
+        }
         var audioLink = 'https://media.merriam-webster.com/audio/prons/en/us/ogg/' + subdir + '/' + defObject.audio + '.ogg';
         console.log(audioLink)
-        return audioLink
+
+        // append content to page elements
+        resultDiv.append(resultItem);
+        resultDivEl.append(resultDiv);
+
     } else {
-        console.log("I'm sorry, this audio cannot be displayed.")
+        console.log("Sorry, this word cannot be displayed.");
     }
 
 }
-
