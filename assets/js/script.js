@@ -1,5 +1,8 @@
 // Scrabble Word Generator
 
+// DOM elements
+
+
 // page elements
 
 // page variables
@@ -73,7 +76,7 @@ var getDefData = function (arr) {
                         audio: def.hwi.prs[0].sound.audio,
                         offensive: def.meta.offensive,
                     };
-                    console.log(wordDef)
+                    // console.log(wordDef)
                     formatDef(wordDef)
                     soundBite(wordDef)
                     return wordDef
@@ -88,15 +91,25 @@ getDefData(wordList)
 
 // function takes word object data and prepares for DOM object display
 var formatDef = function (defObject) {
+    // if the word is NOT offensive according to Merriam-Webster, its definitions will be displayed
     var defs = defObject.definition
     for (var i = 0; i < defs.length; i++) {
-        console.log(defs[i])
+        if (!defObject.offensive) {
+            n = i+1
+            var defText = n + ': ' + defs[i];
+            console.log(defText)
+        } else {
+            console.log("I'm sorry this word cannot be displayed.")
+            break;
+        }
     }
+    
+
 }
 
 // function takes filename for audio playback from word object data and creates link for audio playback
 var soundBite = function (defObject) {
-
+    // 'subdir' is a necessary component of the href; this code determines what its value should be based on instructions from Merriam-Webster
     var aud = defObject.audio.split('', 3)
     var subdir = ''
 
@@ -104,17 +117,25 @@ var soundBite = function (defObject) {
         subdir = 'bix'
     } else if (aud[0] + aud[1] === 'gg') {
         subdir = 'gg'
-    } else if (aud[0] === '_' || aud[0] === '.' || aud[0] === '?' || aud[0] === '!' || aud[0] === ',' || aud[0] === ':' ||
-        aud[0] === ';' || aud[0] === '-' || aud[0] === '(' || aud[0] === ')' || aud[0] === '[' || aud[0] === ']' ||
-        aud[0] === '{' || aud[0] === '}' || aud[0] === "'" || aud[0] === '"' || aud[0] === '0' || aud[0] === '1' ||
-        aud[0] === '2' || aud[0] === '3' || aud[0] === '4' || aud[0] === '5' || aud[0] === '6' || aud[0] === '7' ||
-        aud[0] === '8' || aud[0] === '9') {
+        console.log(aud[0])
+    } else if (console.log(/3/.test(/\d\W/))) {
+        // (aud[0] === '_' || aud[0] === '.' || aud[0] === '?' || aud[0] === '!' || aud[0] === ',' || aud[0] === ':' ||
+        // aud[0] === ';' || aud[0] === '-' || aud[0] === '(' || aud[0] === ')' || aud[0] === '[' || aud[0] === ']' ||
+        // aud[0] === '{' || aud[0] === '}' || aud[0] === "'" || aud[0] === '"' || aud[0] === '0' || aud[0] === '1' ||
+        // aud[0] === '2' || aud[0] === '3' || aud[0] === '4' || aud[0] === '5' || aud[0] === '6' || aud[0] === '7' ||
+        // aud[0] === '8' || aud[0] === '9') 
         subdir = 'number'
     } else {
         subdir = aud[0]
     }
 
-    var audioLink = 'https://media.merriam-webster.com/audio/prons/en/us/ogg/' + subdir + '/' + defObject.audio + '.ogg';
-    console.log(audioLink)
-    return audioLink
+    if (!defObject.offensive) {
+        var audioLink = 'https://media.merriam-webster.com/audio/prons/en/us/ogg/' + subdir + '/' + defObject.audio + '.ogg';
+        console.log(audioLink)
+        return audioLink
+    } else {
+        console.log("I'm sorry, this audio cannot be displayed.")
+    }
+
 }
+
