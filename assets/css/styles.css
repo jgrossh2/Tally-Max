@@ -11,14 +11,15 @@
     --secondary: 'Merriweather', serif;
 }
 
-header {
-    background-color: var(--dblue);
-    color: var(--keys3);
+header, footer.page-footer {
+    background-color: var(--lblue);
+    color: var(--dark);
+    font-family: var(--primary);
 }
 
 h1.m {
     margin: 0;
-    padding: 0 0 0 42px;
+    padding: 0 0 0 36px;
 }
 
 h1.tally {
@@ -28,7 +29,11 @@ h1.tally {
 
 h1.x {
     margin: 0;
-    padding: 0 0 0 48px;
+    padding: 0 0 0 42px;
+}
+
+div.search-type {
+    padding: 0;
 }
 
 .results-list {
@@ -36,21 +41,17 @@ h1.x {
     color: var(--dark);
 }
 
-.results-title {
+.subtitle {
     font-family: var(--primary);
     color: var(--dark);
 }
 
-header h1 {
-    background-color: var(--grey);
-    color: var(--dblue);
+button.waves-effect.searchbtn {
+    background-color: var(--dblue);
     font-family: var(--primary);
-}
-
-footer.page-footer {
-    background-color: var(--pink);
-    color: var(--dblue);
-    font-family: var(--primary);
+    color: white;
+    padding: 12px;
+    margin: 3px
 }
 
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */

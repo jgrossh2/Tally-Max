@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Material Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Materialize v0.97.3 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
     <!-- Oswald Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400&display=swap" rel="stylesheet">
@@ -14,21 +16,18 @@
     <title>Scrabble-Word-Generator</title>
 </head>
 
-<body>
-  
+<body class='container'>
+    <header>
+        <div>
+            <h1 class="m"> M</h1>
+            <h1 class="tally">TALLY</h1>
+            <h1 class="x"> X</h1>
+        </div>
+    </header>
+
     <main>
-
-        <header>
-            <div>
-                <h1 class="m"> M</h1>
-                <h1 class="tally">TALLY</h1>
-                <h1 class="x"> X</h1>
-            </div>
-        </header>
-        <section>
-
         <!-- START KEYBOARD CONTAINER: includes keyboard and drop zone-->
-        <div id='container'>
+        <div class='container grey lighten-2' id='container'>
             <ul id="keyboard">
                 <li class="tab"></li>
                 <li class="letter one"><button class="button" type="button">A</button></li>
@@ -69,18 +68,34 @@
                 <li class="symbol"><span class="off"></span></li>
                 <!-- <li class="symbol"><span class="off"></span></li> -->
                 <li class="right-shift lastitem"></li>
-                <li class="space lastitem"><textarea class="text" placeholder="Drag letters here!"></textarea> </li>
+                <li class="space lastitem"><textarea id="possible-letters" class="text" placeholder="Drag letters here!"></textarea> </li>
             </ul>
         </div>
 
-        <!-- START SEARCH-BUTTONS CONTAINER minimum viable product to include 2-7 letter button, 2-letter button, 3-letter button -->
-        <div class='container'></div>
+        <!-- START SEARCH-BUTTONS CONTAINER -->
+        <div class='container'>
+            <div class='search-type card-panel grey lighten-2 row'>
+                <h5 class='subtitle'>Select your search type!</h5>
+                <div class='search center-align col s6 m3 l3'>
+                    <button id="twoLetterBtn" class="waves-effect searchbtn"><i class="material-icons left">grade</i>2-LETTER</button></td>
+                </div>
+                <div class='search center-align col s6 m3 l3'>
+                    <button id="threeLetterBtn" class="waves-effect searchbtn"><i class="material-icons left">grade</i>3-LETTER</button></td>
+                </div>
+                <div class='search center-align col s6 m3 l3'>
+                    <button id="randomLetterBtn" class="waves-effect searchbtn"><i class="material-icons left">grade</i>RANDOM</button></td>
+                </div>
+                <div class='search center-align col s6 m3 l3'>
+                    <button class="waves-effect searchbtn"><i class="material-icons left">grade</i>HIGH SCORE</button></td>
+                </div>
+            </div>
+        </div>
 
-        <!-- START RESULTS CONTAINER: words resulting from search are listed here -->       
+        <!-- START RESULTS CONTAINER: words resulting from search are listed here -->
         <div class='container'>
             <div class="row z-depth-2">
                 <div class='col valign-wrapper results-title'>
-                    <h5 class='valign'>Search results:</h5>
+                    <h5 class='valign subtitle'>Search results:</h5>
                 </div>
                 <ul class="col s12 m12 l12 results-list">
                     <div class='col s6 m4 l3' id='search-result1'>
@@ -111,30 +126,22 @@
             </div>
         </div>
 
-        </div>
         <!-- START DEFINITIONS CONTAINER: words selected from results list by user are listed here with definitions -->
         <div class='container'>
             
         </div>
     </main>
     <footer class='page-footer'>
-        <div class='container'>
-
-        </div>
-        <div class='row'></div>
-        <div class='col'>
-            <h5>Footer Content</h5>
-            <h6>© 2020</h6>
-        </div>
-        <div class='col'>
-            <h5>API Support:</h5>
+        <div class='row'>
+            <div class='col s6 m6 l6'>
+                <h5>TALLY MAX</h5>
+                <h6>© 2020</h6>
+            </div>
+            <div class='col s6 m6 l6'>
+                <h5>API Support:</h5>
+            </div>
         </div>
     </footer>
-
-
-
-    <input type="text" id="possible-letters" placeholder="letters">
-    <button type="button" onclick="getInputValue();">Generate</button>
 
     <!--JavaScript at end of body for optimized loading-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
