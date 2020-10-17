@@ -54,12 +54,12 @@ var genarr = function (totalLetters, letters) {
 };
 
 // added for the sake of demonstrating functionality; to be removed once functions for generating word array are added
-var wordList = ['voluminous', 'aa', 'dab', 'play']
+var wordList = ['voluminous', 'aa', 'run']
 
 // function fetches definition data for each in an array of words and returns subset of data packaged as an object
 var getDefData = function (arr) {
     for (var i = 0; i < arr.length; i++) {
-        var word = arr[i];
+        let word = arr[i];
         var mwApiUrl = 'https://www.dictionaryapi.com/api/v3/references/collegiate/json/'
             + arr[i] + '?key=' + smkmw;
         fetch(mwApiUrl).then(function (response) {
@@ -74,8 +74,7 @@ var getDefData = function (arr) {
                         offensive: def.meta.offensive,
                     };
                     // console.log(wordDef)
-                    displayWordAndClass(wordDef)
-                    displayWordDefinitions(wordDef)
+                    displayWordDefSound(wordDef)
                     displaySoundBite(wordDef)
                     return wordDef
                 })
@@ -88,34 +87,27 @@ var getDefData = function (arr) {
 getDefData(wordList)
 
 // function takes MW api object data and packages word & class (e.g. noun, verb adjective) for DOM object display
-var displayWordAndClass = function (defObject) {
-    // accessing hard-coded ul element
+var displayWordDefSound = function (defObject) {
+    console.log(defObject)
+    // accessing hard-coded ul element to which DOM elements will be appended
     var resultDivEl = document.querySelector('ul.results-list');
 
-    // loop through each word in results array
-    for (var i = 0; i < defs.length; i++) {
+    // check to see whether term is offensive
+    if (!defObject.offensive) {
         // create DOM elements
         var resultDiv = document.createElement('div');
-        var resultItem = document.createElement('li');  
-        
-        // check to see whether term is offensive
-        if (!defObject[i].offensive) {
-            
-            // set display class for containing div
-            resultDiv[i].setAttribute('class', 'col s6 m4 l3');
-            
-            // display word & class
-            resultItem[i].textContent = defObject[i].word + ' :' + defObject[i].class;    
-            
-            // display definitions
-            n = i+1
-            var defText = n + ') ' + defObject[i].definition;
+        resultDiv.setAttribute('class', 'col s6 m4 l3');
+
+        // loop through each definition
+        for (var i = 0; i < defObject.length; i++) {
+            n = i + 1
+            var defText = n + ') ' + defObject.definition[i];
             console.log(defText)
-            resultDiv.append(resultItem);
-            resultDivEl.append(resultDiv);
-            
-        
-    }
+        }
+        var resultItem = document.createElement('li');
+        resultItem.textContent = defObject.word + ' :' + defObject.class;
+        resultDiv.append(resultItem);
+        resultDivEl.append(resultDiv);
     } else {
         console.log("I'm sorry this word cannot be displayed.");
     }
@@ -126,6 +118,8 @@ var displayWordAndClass = function (defObject) {
 var displaySoundBite = function (defObject) {
     // 'subdir' is a necessary component of the href; this code determines what its value should be based on instructions from Merriam-Webster
     var aud = defObject.audio.split('', 3)
+    var trial = '?fogh'
+    var regex = RegExp('[\\d\\W]')
     var subdir = ''
 
     if (aud[0] + aud[1] + aud[2] === 'bix') {
@@ -133,7 +127,7 @@ var displaySoundBite = function (defObject) {
     } else if (aud[0] + aud[1] === 'gg') {
         subdir = 'gg'
         console.log(aud[0])
-    } else if (console.log(/3/.test(/\d\W/))) {
+    } else if (console.log(regex.test(trial))) {
         // (aud[0] === '_' || aud[0] === '.' || aud[0] === '?' || aud[0] === '!' || aud[0] === ',' || aud[0] === ':' ||
         // aud[0] === ';' || aud[0] === '-' || aud[0] === '(' || aud[0] === ')' || aud[0] === '[' || aud[0] === ']' ||
         // aud[0] === '{' || aud[0] === '}' || aud[0] === "'" || aud[0] === '"' || aud[0] === '0' || aud[0] === '1' ||
