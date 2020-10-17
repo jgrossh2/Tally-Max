@@ -57,24 +57,14 @@ var genWordlist = function (totalLetters, letters) {
     return results
 };
 
-//placeholder in html possibly?
-//words generating as a <li> w/ word on the left and on the right 2 clickable icons -1 to display the definition and 1 to display img
-
 //create function to show words in the list
-
 //cleate button function for modal Picture display(next step will be :get picAPI to display inside)
 //document.getElementById("images").addEventListener("click", showImage);
-
-
 
 var displayResults = function (results) {
     //check if there are any results
     if (results === 0) {
         resultsEl.textContent = "No Results Found";
-
-        //////////////////////////////////// 
-        //shows results displayed in buttons:
-
     } else {
         //totalLetters.textContent = document.getElementById("results").setAttribute("button", "onclick", results);
         var new_words = [];
@@ -85,9 +75,7 @@ var displayResults = function (results) {
             wordDiv.textContent = results[i]
             //console.log(results[i] + "test");
             resultsEl.appendChild(wordDiv)
-
             wordDiv.onclick = function () {
-
                 //console.log(test);
                 showDescription(new_words);
                 showImage();
@@ -100,7 +88,6 @@ var displayResults = function (results) {
 
 //document.querySelector("?button").addEventListener("click");
 var showDescription = function (word_array) {
-
     word_array.forEach(word => {
         //posWord or word you get form the dictionary
         var apiUrl = "https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=9197f1fd-982d-40cb-b0ef-a4e64d1afabb";
@@ -123,7 +110,6 @@ var showDescription = function (word_array) {
 }
 
 var showImage = function () {
-
     var pexelURL = `https://api.pexels.com/v1/search?query=nature&per_page=5`;
     var API_key = "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
     //add the function to fetch url, and call it above 
@@ -216,8 +202,6 @@ class Images {
 }
 //initialize the class
 var listofpix = new Images;
-
-
 //API token is: b215d9b947a47ebd06cee1f48819e44474eeff9f
 //curl--header "Authorization: Token b215d9b947a47ebd06cee1f48819e44474eeff9f" https://owlbot.info/api/v4/dictionary/owl -s | json_pp
 
