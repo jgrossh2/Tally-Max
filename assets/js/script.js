@@ -105,41 +105,35 @@ var getDefData = function (arr) {
                     displayWordDefSound(wordDef)
                     // displaySoundBite(wordDef)
                     return wordDef
-                })
+                })    
             } else {
                 alert("Error:" + response.statusText)
-            }
-        });
-    }
-}
+            }    
+        });    
+    }    
+}    
 getDefData(wordList)
 
 // function takes MW api object data and packages word & class (e.g. noun, verb adjective) for DOM object display
 var displayWordDefSound = function (defObject) {
     console.log(defObject)
     // accessing hard-coded ul element to which DOM elements will be appended
-    var resultDivEl = document.querySelector('ul.results-list');
+    var resultDivEl = document.querySelector('ul.collapsible.popout');
     
-
     // check to see whether term is offensive
     if (!defObject.offensive) {
         // create DOM elements
-        var resultDiv = document.createElement('div');
-        resultDiv.setAttribute('class', 'col s6 m4 l3');
+        var resultLI = document.createElement('li');
+        resultLI.setAttribute('class', 'col s12 m6 l3');
+        
+        // display word within result container header
+        var resultHeader = document.createElement('div');
+        resultHeader.setAttribute('class', 'collapsible-header');
+        resultHeader.innerHTML = '<p>' + defObject.word + '</p>';
+        
+        // display class, definitions and sound button within result container body
 
-        // display word and class
-        var resultItem = document.createElement('li');
-        resultItem.innerHTML = '<p><span>' + defObject.word + '</span><br />' + defObject.class + '</p>';
-
-        // loop through each homonym and display within element for that word
-        for (var i = 0; i < defObject.definition.length; i++) {
-            n = i + 1
-            var resultDef = document.createElement('p');
-            resultDef.textContent = n + ') ' + defObject.definition[i];
-            resultItem.append(resultDef);
-        }
-
-        // takes audio file and creates link for audio playback; 'subdir' uses conditions provided by MW api documentation to determine 'subdir' component of resulting href
+        // takes audio file reference and creates link for audio playback; 'subdir' uses conditions provided by MW api documentation to determine 'subdir' component of href
         var aud = defObject.audio.split('', 3)
         var regex = RegExp('[\\d\\W]')
         var subdir = ''
@@ -154,11 +148,31 @@ var displayWordDefSound = function (defObject) {
         }
         var audioLink = 'https://media.merriam-webster.com/audio/prons/en/us/ogg/' + subdir + '/' + defObject.audio + '.ogg';
         console.log(audioLink)
-
+        
+        // create button element to contain sound link
+        var audioBtn = document.createElement('a');
+        audioBtn.setAttribute('class', 'btn-floating waves-effect waves-light red')
+        audioBtn.setAttribute('href', audioLink);
+        audioBtn.innerHTML = '<span><img id="audio-icon" src="assets/iconfinder_speaker-high-sound-volume-voice_3643734.png"></span>'
+        
+        // create div body element for class, audio button, and definitions
+        var resultBody = document.createElement('div');
+        resultBody.setAttribute('class', 'collapsible-body');
+        resultBody.innerHTML = '<span>' + defObject.class + '</span>';
+        
+        // loop through each homonym and display within element for that word
+        for (var i = 0; i < defObject.definition.length; i++) {
+            n = i + 1
+            var resultDef = document.createElement('p');
+            resultDef.textContent = n + ') ' + defObject.definition[i];
+            resultBody.append(resultDef);
+        }    
+        
         // append content to page elements
-        resultDiv.append(resultItem);
-        resultDivEl.append(resultDiv);
-
+        resultDivEl.append(resultLI);
+        resultLI.append(resultHeader);
+        resultBody.append(audioBtn);
+        resultLI.append(resultBody);
     } else {
         console.log("Sorry, this word cannot be displayed.");
     }

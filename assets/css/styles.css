@@ -32,10 +32,6 @@ h1.x {
     padding: 0 0 0 42px;
 }
 
-div.search-type {
-    padding: 0;
-}
-
 .results-list {
     font-family: var(--secondary);
     color: var(--dark);
@@ -52,6 +48,15 @@ button.waves-effect.searchbtn {
     color: white;
     padding: 12px;
     margin: 3px
+}
+
+img#audio-icon {
+    width: 32px;
+    padding: 4px 0 0 4px;
+}
+
+img#mwlogo {
+    width: 100px;
 }
 
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */
