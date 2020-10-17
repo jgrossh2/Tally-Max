@@ -57,7 +57,7 @@ randomLetterBtnEl.addEventListener('click', function() {
 
 highScoreBtnEl.addEventListener('click', function() {
     // get possible letters from form
-    var letters = letterContainerEl.value;
+    var letters = 'zqx' + letterContainerEl.value;
 
     // get total letter count
     letterCounter(letters);
@@ -75,12 +75,12 @@ highScoreBtnEl.addEventListener('click', function() {
     }
 
     // sort letters based on value before sending to genWordList
-    var priorityLetters = ['z','q','x','j','k','w','y','v','f','h','o','m','c','b','g','d','u','s','l','t','r','n','o','i','a','e'];
-    var lettersArray = letters.split('');
-    lettersArray.sort(function(a) {
-        return priorityLetters.indexOf(a);
-    })
-    console.log(lettersArray);
+    // var priorityLetters = ['z','q','x','j','k','w','y','v','f','h','o','m','c','b','g','d','u','s','l','t','r','n','o','i','a','e'];
+    // var lettersArray = letters.split('');
+    // lettersArray.sort(function(a) {
+    //     return priorityLetters.indexOf(a);
+    // })
+    // console.log(lettersArray);
     // call word generator
     genWordList(wordLength, letters);
 });
@@ -94,7 +94,7 @@ var genWordList = function(wordLength, letters) {
 
     var generate = function(possWord) {
         for (var i = 0; i < letters.length; i++) {
-            if (arrayCounter <= 9) {
+            if (arrayCounter <= 11) {
                 possWord += letters[i];
                 if (possWord.length === wordLength) {
                     if (dict.includes(possWord)) {
