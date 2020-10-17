@@ -18,7 +18,7 @@ twoLetterBtnEl.addEventListener('click', function() {
     // set search criteria
     var wordLength = 2;
     // call word generator
-    genWordlist(wordLength, letters);
+    genWordList(wordLength, letters);
 });
 
 threeLetterBtnEl.addEventListener('click', function() {
@@ -29,7 +29,7 @@ threeLetterBtnEl.addEventListener('click', function() {
     // set search criteria
     var wordLength = 3;
     // call word generator
-    genWordlist(wordLength, letters);
+    genWordList(wordLength, letters);
 });
 
 randomLetterBtnEl.addEventListener('click', function() {
@@ -51,29 +51,44 @@ randomLetterBtnEl.addEventListener('click', function() {
         return wordLength;
     }
     // call word generator
-    genWordlist(wordLength, letters);
+    genWordList(wordLength, letters);
 });
 
 // generate all possible combinations of inputted letters
-var genWordlist = function(wordLength, letters) {
+var genWordList = function(wordLength, letters) {
     // reset form container
     letterContainerEl.value = '';
     var results = [];
+    var arrayCounter = 0;
 
     var generate = function(possWord) {
         for (var i = 0; i < letters.length; i++) {
-        possWord += letters[i];
-        if (possWord.length === wordLength) {
-            if (dict.includes(possWord)) {
-                results.push(possWord);
+            if (arrayCounter === 10) {
+                break;
+            } else {
+                possWord += letters[i];
+                if (possWord.length === wordLength) {
+                    if (dict.includes(possWord)) {
+                        results.push(possWord);
+                        arrayCounter++;
+                    }
+                } else {
+                    generate(possWord);
+                }
+                possWord = possWord.slice(0, -1);
+                }
             }
-        } else {
-            generate(possWord);
-        }
-        possWord = possWord.slice(0, -1);
-        }
     }
     generate("");
+
+    // for (var j = 0; j < letters.length; j++) {
+    //     for (var k = 0; k < dict.length; k++) {
+    //         var possWord = letters.substring(0, j+1);
+    //         if (dict[k].includes(possWord)) {
+    //             results.push(dict[k]);
+    //         }
+    //     }
+    // }
 
     // store user search / results
     localStorage.setItem(letters, results);
