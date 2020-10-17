@@ -22,7 +22,12 @@ $(".letter").draggable({
     appendTo: ".space",
     containment: "#keyboard",
     cursor: "move",
-    snap: ".space"
+    snap: ".space",
+    activate: function(event) {
+        $("#A").addClass(".dragging");
+    }
+    
+    
 });
 // $(document).on("click",".letter", function(){
 //     var letterVal= $(this).attr("data-letter");
@@ -76,10 +81,12 @@ $(".space").droppable({
         
         var valueLetter= $(".space").children;
         console.log(valueLetter);
-        var dragged= valueLetter.val();
-        console.log(dragged);
+        var dragged= ui.draggable[0].dataset.letter;
+        console.log(ui.draggable[0].dataset.letter);
         dropLetters.push(dragged);
+        console.log(dropLetters);
         $(".space").removeClass("dropZone");
+        $(".letter").removeClass(".letter.ui-draggable-dragging");
         },
         // $(this).each(function( ) {
             // var letterVal= $(this).attr("data-letter");
