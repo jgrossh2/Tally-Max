@@ -1,8 +1,5 @@
 // Scrabble Word Generator
 
-// DOM elements
-
-
 // page elements
 
 // page variables
@@ -71,14 +68,15 @@ var getDefData = function (arr) {
                     var def = (data[0])
                     var wordDef = {
                         word: word,
-                        function: def.fl,
+                        class: def.fl,
                         definition: def.shortdef,
                         audio: def.hwi.prs[0].sound.audio,
                         offensive: def.meta.offensive,
                     };
                     // console.log(wordDef)
-                    formatDef(wordDef)
-                    soundBite(wordDef)
+                    displayWordAndClass(wordDef)
+                    displayWordDefinitions(wordDef)
+                    displaySoundBite(wordDef)
                     return wordDef
                 })
             } else {
@@ -89,26 +87,43 @@ var getDefData = function (arr) {
 }
 getDefData(wordList)
 
-// function takes word object data and prepares for DOM object display
-var formatDef = function (defObject) {
-    // if the word is NOT offensive according to Merriam-Webster, its definitions will be displayed
-    var defs = defObject.definition
-    for (var i = 0; i < defs.length; i++) {
-        if (!defObject.offensive) {
-            n = i+1
-            var defText = n + ': ' + defs[i];
-            console.log(defText)
-        } else {
-            console.log("I'm sorry this word cannot be displayed.")
-            break;
-        }
-    }
-    
+// function takes MW api object data and packages word & class (e.g. noun, verb adjective) for DOM object display
+var displayWordAndClass = function (defObject) {
+    // accessing hard-coded ul element
+    var resultDivEl = document.querySelector('ul.results-list');
 
+    // loop through each word in results array
+    for (var i = 0; i < defs.length; i++) {
+        // create DOM elements
+        var resultDiv = document.createElement('div');
+        var resultItem = document.createElement('li');  
+        
+        // check to see whether term is offensive
+        if (!defObject[i].offensive) {
+            
+            // set display class for containing div
+            resultDiv[i].setAttribute('class', 'col s6 m4 l3');
+            
+            // display word & class
+            resultItem[i].textContent = defObject[i].word + ' :' + defObject[i].class;    
+            
+            // display definitions
+            n = i+1
+            var defText = n + ') ' + defObject[i].definition;
+            console.log(defText)
+            resultDiv.append(resultItem);
+            resultDivEl.append(resultDiv);
+            
+        
+    }
+    } else {
+        console.log("I'm sorry this word cannot be displayed.");
+    }
 }
 
-// function takes filename for audio playback from word object data and creates link for audio playback
-var soundBite = function (defObject) {
+
+// function takes MS api object data and creates link for audio playback within DOM object
+var displaySoundBite = function (defObject) {
     // 'subdir' is a necessary component of the href; this code determines what its value should be based on instructions from Merriam-Webster
     var aud = defObject.audio.split('', 3)
     var subdir = ''
@@ -129,6 +144,7 @@ var soundBite = function (defObject) {
         subdir = aud[0]
     }
 
+    // check to see whether term is offensive
     if (!defObject.offensive) {
         var audioLink = 'https://media.merriam-webster.com/audio/prons/en/us/ogg/' + subdir + '/' + defObject.audio + '.ogg';
         console.log(audioLink)
