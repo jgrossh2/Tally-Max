@@ -100,8 +100,8 @@
         <!-- START RESULTS CONTAINER: words resulting from search are listed here -->
         <div class='container'>
 
-            <input type="text" id='possible-letters' placeholder="letters">
-            <button type="button" onclick="getInputValue();">Generate</button>
+            <input type="text" id='possible-letters-test' placeholder="letters">
+            <button type="button" id="getinputbtn" onclick="getInputValue()">Generate</button>
 
             <div class="row z-depth-2">
                 <div class='col valign-wrapper results-title'>
@@ -132,21 +132,22 @@
                     <div class='col s6 m4 l3' id='search-result12'>
                     </div>-->
                 </ul>
+            </div>
 
+            <!-- START DEFINITIONS CONTAINER: words selected from results list by user are listed here with definitions -->
+            <div class='container'>
+            </div>
+            <!--  START IMAGE CONTAINER: image selected from results list by user is displayed here-->
+            <div class="container">
+                <button onclick="showImage(),showDescription()"></button>
 
-                <!-- START DEFINITIONS CONTAINER: words selected from results list by user are listed here with definitions -->
-                <div class='container'>
-                </div>
-                <!--  START IMAGE CONTAINER: image selected from results list by user is displayed here-->
-                <div id="containerimg">
-                    <button onclick="showImage(),showDescription()"></button>
+                <p id="images"></p>
+                <!-- created to get datat from pexel API -needs to be adjusted when merged-->
 
-                    <p id="images"></p>
-                    <!-- created to get datat from pexel API -needs to be adjusted when merged-->
-
-                    <div class="header"></div>
-                    <div class="listofpix"></div>
-                </div>
+                <div class="header"></div>
+                <div class="listofpix"></div>
+            </div>
+        </div>
     </main>
     <footer class='page-footer'>
         <div class='row'>

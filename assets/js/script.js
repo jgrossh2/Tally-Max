@@ -1,7 +1,7 @@
 // Scrabble Word Generator
 
 // page elements
-var resultsEl = document.getElementById("results-container");
+var resultsEl = document.getElementById('results-container');
 //var twoLetterBtnEl = document.getElementById('twoLetterBtn');
 //var threeLetterBtnEl = document.getElementById('threeLetterBtn');
 //var randomLetterBtnEl = document.getElementById('randomLetterBtn');
@@ -58,7 +58,8 @@ var totalLetters = 0;
 
 //by user form
 function getInputValue() {
-    var letters = document.getElementById('possible-letters').value;
+    //console.log(document.getElementById('possible-letters'));
+    var letters = document.getElementById('possible-letters-test').value;
     console.log(letters);
     // get total letter count
     letterCounter(letters);
@@ -79,6 +80,8 @@ function getInputValue() {
     // call word generator
     genWordlist(totalLetters, letters);
 };
+//document.getElementById("getinputbtn").addEventListener("click", getInputValue);
+
 
 
 // When the user clicks on a button generate a list of words and then put them on the page
@@ -111,14 +114,15 @@ var genWordlist = function (totalLetters, letters) {
 //create function to show words in the list
 //cleate button function for modal Picture display(next step will be :get picAPI to display inside)
 //document.getElementById("images").addEventListener("click", showImage);
-
+var new_words = [];
 var displayResults = function (results) {
+
     //check if there are any results
     if (results === 0) {
         resultsEl.textContent = "No Results Found";
     } else {
         //totalLetters.textContent = document.getElementById("results").setAttribute("button", "onclick", results);
-        var new_words = [];
+        new_words = [];
         //create for loop to show 5 RANDOM words from the array
         for (var i = 0; i < results.length; i++) {
             new_words.push(results[i])
@@ -126,6 +130,7 @@ var displayResults = function (results) {
             wordDiv.textContent = results[i]
             //console.log(results[i] + "test");
             resultsEl.appendChild(wordDiv)
+
             wordDiv.onclick = function () {
                 //console.log(test);
                 showDescription(new_words);
@@ -161,7 +166,7 @@ var showDescription = function (word_array) {
 }
 
 var showImage = function () {
-    var pexelURL = `https://api.pexels.com/v1/curated?query=${new_words[0]}&per_page=10`;
+    var pexelURL = `https://api.pexels.com/v1/search?query=${new_words[0]}&per_page=3`;// ${new_words[0]}
     var API_key = "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
     //add the function to fetch url, and call it above 
     fetch(pexelURL, {
@@ -176,14 +181,14 @@ var showImage = function () {
         })
         //console.log(response);// will display the array
         .then(function (response) {
-            console.log(response.data);
+            console.log(response.photos);
             // Use 'querySelector' to get the ID of where the GIF will be displayed
-            var responseContainerEl = document.querySelector('#containerimg');
+            var responseContainerEl = document.querySelector('#images');
             // // // Create an '<img>' element
             var pexelImg = document.createElement('img');
             //responseContainerEl.innerHTML = "";
             // // // Set that element's 'src' attribute to the 'image_url' from API response
-            pexelImg.setAttribute('src', response.data);
+            pexelImg.setAttribute('src', response.photos[0].src.original);
             // // console.log(headers.url);
             responseContainerEl.appendChild(pexelImg);
         })
