@@ -80,3 +80,38 @@ var genWordlist = function(wordLength, letters) {
 
     return console.log(results);
 };
+
+// added for the sake of demonstrating functionality; to be removed once functions for generating word array are added
+var wordList = ['voluminous', 'aa', 'dab', 'play']
+
+// function fetches definition data for each in an array of words and returns subset of data packaged as an object
+var getDefData = function (arr) {
+    for (var i = 0; i < arr.length; i++) {
+        var word = arr[i];
+        var mwApiUrl = 'https://www.dictionaryapi.com/api/v3/references/collegiate/json/'
+            + arr[i] + '?key=' + smkmw;
+        fetch(mwApiUrl).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (data) {
+                    var def = (data[0])
+                    var wordDef = {
+                        word: word,
+                        function: def.fl,
+                        definition: def.shortdef,
+                        audio: def.hwi.prs[0].sound.audio,
+                        offensive: def.meta.offensive,  
+                    };
+                    console.log(wordDef)
+                    formatDef(wordDef)
+                    soundBite(wordDef)
+                    return wordDef
+                })
+            } else {
+                alert("Error:" + response.statusText)
+            }
+        });
+    }
+}
+getDefData(wordList)
+
+
