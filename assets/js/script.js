@@ -96,14 +96,13 @@ var getDefData = function (arr) {
                     var def = (data[0])
                     var wordDef = {
                         word: word,
-                        function: def.fl,
+                        class: def.fl,
                         definition: def.shortdef,
                         audio: def.hwi.prs[0].sound.audio,
                         offensive: def.meta.offensive,  
                     };
                     console.log(wordDef)
-                    formatDef(wordDef)
-                    soundBite(wordDef)
+                    displayDef(wordDef)
                     return wordDef
                 })
             } else {
