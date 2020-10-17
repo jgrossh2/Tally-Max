@@ -71,7 +71,7 @@ var getDefData = function (arr) {
                         function: def.fl,
                         definition: def.shortdef,
                         audio: def.hwi.prs[0].sound.audio,
-                        offensive: def.meta.offensive,  
+                        offensive: def.meta.offensive,
                     };
                     console.log(wordDef)
                     formatDef(wordDef)
@@ -89,21 +89,32 @@ getDefData(wordList)
 // function takes word object data and prepares for DOM object display
 var formatDef = function (defObject) {
     var defs = defObject.definition
-    for (var i=0; i<defs.length; i++) {
+    for (var i = 0; i < defs.length; i++) {
         console.log(defs[i])
     }
 }
 
-//function takes filename for audio playback from word object data and creates link for audio playback
+// function takes filename for audio playback from word object data and creates link for audio playback
 var soundBite = function (defObject) {
 
-    var audio = defObject.audio
-    for (var i=0; i<audio)
+    var aud = defObject.audio.split('', 3)
+    var subdir = ''
 
-// if audio begins with "bix", the subdirectory should be "bix",
-// if audio begins with "gg", the subdirectory should be "gg",
-// if audio begins with a number or punctuation (eg, "_"), the subdirectory should be "number",
-// otherwise, the subdirectory is equal to the first letter of audio.
+    if (aud[0] + aud[1] + aud[2] === 'bix') {
+        subdir = 'bix'
+    } else if (aud[0] + aud[1] === 'gg') {
+        subdir = 'gg'
+    } else if (aud[0] === '_' || aud[0] === '.' || aud[0] === '?' || aud[0] === '!' || aud[0] === ',' || aud[0] === ':' ||
+        aud[0] === ';' || aud[0] === '-' || aud[0] === '(' || aud[0] === ')' || aud[0] === '[' || aud[0] === ']' ||
+        aud[0] === '{' || aud[0] === '}' || aud[0] === "'" || aud[0] === '"' || aud[0] === '0' || aud[0] === '1' ||
+        aud[0] === '2' || aud[0] === '3' || aud[0] === '4' || aud[0] === '5' || aud[0] === '6' || aud[0] === '7' ||
+        aud[0] === '8' || aud[0] === '9') {
+        subdir = 'number'
+    } else {
+        subdir = aud[0]
+    }
 
-    audioLink = 'https://media.merriam-webster.com/audio/prons/en/us/ogg/' + [subdirectory] + '/' + defObject.audio + '.ogg;
+    var audioLink = 'https://media.merriam-webster.com/audio/prons/en/us/ogg/' + subdir + '/' + defObject.audio + '.ogg';
+    console.log(audioLink)
+    return audioLink
 }
