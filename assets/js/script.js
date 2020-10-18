@@ -8,16 +8,16 @@ var highScoreBtnEl = document.getElementById('highScoreBtn');
 var letterContainerEl = document.getElementById('possible-letters');
 var searchContentEl = document.getElementById('search-content');
 var resultsContainerEl = document.getElementById('results-container');
+var letterEl = document.querySelector(".letter");
+var spaceEl = document.querySelector(".space");
 
 // global page variables
 var wordLength = 0;
-var totalLetters = 0;
 var dropLetters = [];
-// var letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
-var letterEl = document.querySelector(".letter");
-var spaceEl = document.querySelector(".space");
+
 // get user input area
 spaceEl.textContent = "Drag Letters Here! "
+
 // drag letters
 var dragLetters = function(event) {
     event.preventDefault();
@@ -27,6 +27,7 @@ var dragLetters = function(event) {
 $(".letter").sortable({
     revert: true
 });
+
 // make letters drag
 $(".letter").draggable({ 
     connectToSortable: ".space",
@@ -128,7 +129,7 @@ letterEl.addEventListener("click", dragLetters)
 // event listeners to gather user input and start generator function
 twoLetterBtnEl.addEventListener('click', function() {
     // get possible letters from form
-    var letters = letterContainerEl.value;
+    var letters = dropLetters.join('');
     // reset global variable
     var wordLength = 0;
     // set search criteria
@@ -139,7 +140,7 @@ twoLetterBtnEl.addEventListener('click', function() {
 
 threeLetterBtnEl.addEventListener('click', function() {
     // get possible letters from form
-    var letters = letterContainerEl.value;
+    var letters = dropLetters.join('');
     // reset global variable
     var wordLength = 0;
     // set search criteria
@@ -150,7 +151,7 @@ threeLetterBtnEl.addEventListener('click', function() {
 
 randomLetterBtnEl.addEventListener('click', function() {
     // get possible letters from form
-    var letters = letterContainerEl.value;
+    var letters = dropLetters.join('');
 
     // get total letter count
     letterCounter(letters);
@@ -172,7 +173,7 @@ randomLetterBtnEl.addEventListener('click', function() {
 
 highScoreBtnEl.addEventListener('click', function() {
     // get possible letters from form
-    var letters = letterContainerEl.value;
+    var letters = dropLetters.join('');
 
     // get total letter count
     letterCounter(letters);
@@ -203,7 +204,7 @@ highScoreBtnEl.addEventListener('click', function() {
 // generate all possible combinations of inputted letters
 var genWordList = function(wordLength, letters) {
     // reset form container
-    letterContainerEl.value = '';
+
     var results = [];
     var arrayCounter = 0;
 
