@@ -27,55 +27,60 @@
 
     <main>
         <!-- START KEYBOARD CONTAINER: includes keyboard and drop zone-->
-        <div class='container grey lighten-2' id='container'>
-            <ul id="keyboard">
-                <li class="tab"></li>
-                <li class="letter one"><button class="button" type="button">A</button></li>
-                <li class="letter">B</li>
-                <li class="letter">C</li>
-                <li class="letter">D</li>
-                <li class="letter ">E<span class="one"></span></li>
-                <li class="letter">F</li>
-                <li class="letter">G</li>
-                <li class="letter">H</li>
-                <li class="letter">I</li>
-                <li class="letter">J</li>
-                <!-- <li class="symbol"><span class="off"></span> -->
-                <li class="symbol"><span class="off"></span></li>
-                <li class="symbol lastitem"><span class="off"></span></li>
-                <li class="capslock"></li>
-                <li class="letter">K</li>
-                <li class="letter">L</li>
-                <li class="letter">M</li>
-                <li class="letter">N</li>
-                <li class="letter">O</li>
-                <li class="letter">P</li>
-                <li class="letter">Q</li>
-                <li class="letter">R</li>
-                <li class="letter">S</li>
-                <!-- <li class="symbol"><span class="off"></span></li> -->
-                <li class="symbol"><span class="off"></span></li>
-                <li class="return lastitem"></li>
-                <li class="left-shift"></li>
-                <li class="letter">T</li>
-                <li class="letter">U</li>
-                <li class="letter">V</li>
-                <li class="letter">W</li>
-                <li class="letter">X</li>
-                <li class="letter">Y</li>
-                <li class="letter">Z</li>
-                <li class="symbol"><span class="off"></span></li>
-                <li class="symbol"><span class="off"></span></li>
-                <!-- <li class="symbol"><span class="off"></span></li> -->
-                <li class="right-shift lastitem"></li>
-                <li class="space lastitem"><textarea id="possible-letters" class="text"
-                        placeholder="Drag letters here!"></textarea> </li>
-            </ul>
+
+        <div id='container'>
+            <div id="keyboard">
+                <div class="row">
+                    <div class="col s1 letter one" data-letter="a" data-value="1"></div>
+                    <div class="col s1 letter" id="b" data-letter="b" data-value="1">B</div>
+                    <div class="col s1 letter" id="c" data-letter="c" data-value="1">C</div>
+                    <div class="col s1 letter" id="d" data-letter="d" data-value="1">D</div>
+                    <div class="col s1 letter" id="e" data-letter="e" data-value="1">E</div>
+                    <div class="col s1 letter" id="f" data-letter="f" data-value="1">F</div>
+                    <div class="col s1 letter" id="g" data-letter="g" data-value="1">G</div>
+                    <div class="col s1 letter" id="h" data-letter="h" data-value="1">H</div>
+                    <div class="col s1 letter" id="i" data-letter="i" data-value="1">I</div>
+                    <!-- <div class="col s1 letter">10</div> -->
+                    <!-- <div class="col s1 letter">11</div> -->
+                    <!-- <div class="col s1 letter">12</div> -->
+                </div>
+                <div class="row">
+                    <div class="col s1 letter" id="j" data-letter="j" data-value="1">J</div>
+                    <div class="col s1 letter" id="k" data-letter="k" data-value="1">K</div>
+                    <div class="col s1 letter" id="l" data-letter="l" data-value="1">L</div>
+                    <div class="col s1 letter" id="m" data-letter="m" data-value="1">M</div>
+                    <div class="col s1 letter" id="n" data-letter="n" data-value="1">N</div>
+                    <div class="col s1 letter" id="o" data-letter="o" data-value="1">O</div>
+                    <div class="col s1 letter" id="p" data-letter="p" data-value="1">P</div>
+                    <div class="col s1 letter" id="q" data-letter="q" data-value="1">Q</div>
+                    <div class="col s1 letter" id="r" data-letter="r" data-value="1">R</div>
+                    <!-- <div class="col s1 letter">10</div> -->
+                    <!-- <div class="col s1 letter">11</div> -->
+                    <!-- <div class="col s1 letter">12</div> -->
+                </div>
+                <div class="row">
+                    <div class="col s1 letter" id="s" data-letter="s" data-value="1">S</div>
+                    <div class="col s1 letter" id="t" data-letter="t" data-value="1">T</div>
+                    <div class="col s1 letter" id="u" data-letter="u" data-value="1">U</div>
+                    <div class="col s1 letter" id="v" data-letter="v" data-value="1">V</div>
+                    <div class="col s1 letter" id="w" data-letter="w" data-value="1">W</div>
+                    <div class="col s1 letter" id="x" data-letter="x" data-value="1">X</div>
+                    <div class="col s1 letter" id="y" data-letter="y" data-value="1">Y</div>
+                    <div class="col s1 letter" id="z" data-letter="z" data-value="1">Z</div>
+                    <div class="col s1 letter" id="empty"></div>
+                    <!-- <div class="col s1 letter">10</div> -->
+                    <!-- <div class="col s1 letter">11</div> -->
+                    <!-- <div class="col s1 letter">12</div> -->
+                </div>
+                <div class="row">
+                    <div class=" col s9 space center" id="sortable"></div>
+                </div>
+            </div>
         </div>
 
         <!-- START SEARCH-BUTTONS CONTAINER -->
         <div class='container'>
-            <div class='search-type card-panel grey lighten-2 row'>
+            <div class='search-type card-panel row z-depth-2'>
                 <h5 class='subtitle'>Select your search type!</h5>
                 <div class='search center-align col s6 m3 l3'>
                     <button id="twoLetterBtn" class="waves-effect searchbtn"><i
@@ -90,8 +95,8 @@
                             class="material-icons left">grade</i>RANDOM</button></td>
                 </div>
                 <div class='search center-align col s6 m3 l3'>
-                    <button class="waves-effect searchbtn"><i class="material-icons left">grade</i>HIGH SCORE</button>
-                    </td>
+                    <button id="highScoreBtn" class="waves-effect searchbtn"><i
+                            class="material-icons left">grade</i>HIGH SCORE</button></td>
                 </div>
 
             </div>
@@ -105,6 +110,7 @@
 
             <div class="row z-depth-2">
                 <div class='col valign-wrapper results-title'>
+<<<<<<< HEAD
                     <h5 class='valign'>Search results:</h5>
                 </div>
                 <ul class="col s12 m12 l12 results-list" id="results-container">
@@ -131,6 +137,11 @@
                     </div>
                     <div class='col s6 m4 l3' id='search-result12'>
                     </div>-->
+=======
+                    <h5 class='valign subtitle'>Search results for: <span id="search-content"></span></h5>
+                </div>
+                <ul class="collapsible popout col s12 m12 l12" id="results-container" data-collapsible='accordion'>
+>>>>>>> develop
                 </ul>
             </div>
 
@@ -148,20 +159,27 @@
             </div>
         </div>
     </main>
+
     <footer class='page-footer'>
         <div class='row'>
-            <div class='col s6 m6 l6'>
+            <div class='col s3 m4 l6'>
                 <h5>TALLY MAX</h5>
                 <h6>© 2020</h6>
             </div>
-            <div class='col s6 m6 l6'>
+            <div class='col s9 m8 l6'>
                 <h5>API Support:</h5>
+                <a href="https://www.dictionaryapi.com/products/api-collegiate-dictionary">
+                    <img id='mwlogo' src="assets/MWLogo_LightBG_120X120_2x.png"><br />
+                    MERRIAM-WEBSTER'S COLLEGIATE® DICTIONARY WITH AUDIO</a>
             </div>
         </div>
     </footer>
 
     <!--JavaScript at end of body for optimized loading-->
+
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
     <script src='projectSupport/smkeys.js'></script>
     <script src="assets/js/dict.js"></script>

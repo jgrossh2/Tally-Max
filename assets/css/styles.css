@@ -1,3 +1,7 @@
+* {
+    margin: 0;
+    padding: 0;
+}
 :root {
     --dark: #00303f;
     --grey:#bcbdbd;
@@ -36,10 +40,6 @@ h1.x {
     padding: 0 0 0 42px;
 }
 
-div.search-type {
-    padding: 0;
-}
-
 .results-list {
     font-family: var(--secondary);
     color: var(--dark);
@@ -66,6 +66,133 @@ img#audio-icon {
 img#mwlogo {
     width: 100px;
 }
+<<<<<<< HEAD
+=======
+#container {
+    display: flex;
+    flex-wrap: wrap;
+    /* margin: 50px 0 0 325px; */
+    width: 100%;
+}
+.space {
+    border: dotted black;
+}
+#keyboard {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    /* background: var(--keys3); */
+}
+/* #keyboard li {
+    float: left;
+    margin: 0 5px 5px 0;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    /* background-image: url("scrabble.jpg"); */
+    /* background: var(--keys3); */
+    /* border: 1px solid #f9f9f9;
+    border-radius: 5px;
+    } */
+        /* .capslock, .tab, .left-shift {
+        clear: left; */
+        /* background: var(--keys3); */
+
+        /* } */
+            /* #keyboard .tab, #keyboard .delete {
+            width: 70px;
+            /* background: var(--keys3); */
+            /* }
+            #keyboard .capslock {
+            width: 80px; */
+            /* background: var(--keys3); */
+            /* }
+            #keyboard .return {
+            width: 77px; */
+            /* background: var(--keys3); */
+            /* }
+            #keyboard .left-shift {
+            width: 95px; */
+            /* background: var(--keys3); */
+            /* } */
+            /* #keyboard .right-shift {
+            width: 109px;
+            /* background: var(--keys3); */
+            /* } */
+        /* .lastitem {
+        margin-right: 0;   */
+        /* background: var(--keys3); */
+        
+        /* .uppercase {
+        text-transform: uppercase;
+        /* background: var(--keys3); */
+        /* }
+        #keyboard .space {
+        clear: left;
+        width: 638px;
+        border: dotted;
+        }
+        .on {
+        display: none;
+        }  */
+        /* #keyboard li:hover {
+        position: relative;
+        top: 1px;
+        left: 1px;
+        border-color: #e5e5e5;
+        } */
+    
+    /* .one::before {
+        text-transform: uppercase;
+        font-family: Oswald, sans-serif;
+        font-size: 70% ;
+        position: absolute;
+        top: 50%; left: 50%; 
+        transform: translate(-50%,-50%);
+    }  */
+    /* .one {
+        color: fadeout(black, 30%);
+        font-family: sans-serif;
+        /* font-size: 25%; */
+        /* position: absolute; */
+        /* right: 12.5%; */
+        /* bottom: 12.5%; */
+        /* transform: translate(50%,50%); */
+        /* content: "1"; */
+      /* } */ 
+/* .symbol { */
+    /* background: var(--keys3); */
+/* } */
+
+.letter {
+    background: var(--keys3);
+    width: 100%;
+    height: 100%;
+    border: solid white;
+    border-radius: 15px;
+}
+.row .col.s1 {
+    width: 75px;
+}
+.row .col {
+    float: left;
+    /* -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box; */
+    box-sizing: border-box;
+    padding: 0 0.75rem;
+    height: 90px;
+}
+.dropZone {
+    background: lightgray;
+}
+.one {
+    background-image: url("images/scrabble1.jpg"); 
+}
+.dragging {
+    border: solid black 3px;
+}
+>>>>>>> develop
 
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */
 @media screen and (max-width: 980px) {
