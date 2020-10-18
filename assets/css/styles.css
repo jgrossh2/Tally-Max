@@ -185,7 +185,7 @@ img#mwlogo {
     background: lightgray;
 }
 .one {
-    background-image: url("scrabble1.jpg"); 
+    background-image: url("images/scrabble1.jpg"); 
 }
 .dragging {
     border: solid black 3px;
