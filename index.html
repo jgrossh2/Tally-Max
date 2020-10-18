@@ -77,64 +77,6 @@
               </div>
             </div>
         </div>
-        
-        <!-- <div id="grid">
-            <div id="item1"></div>
-            <div id="item2"></div>
-            <div id="item3"></div>
-            <div id="item4"></div>
-            <div id="item5"></div>
-            <div id="item3"></div>
-            <div id="item3"></div>
-            <div id="item3"></div>
-            <div id="item3"></div>
-          </div> -->
-            <!-- <ul id="keyboard">
-        <div class='container' id='container'>
-            <ul id="keyboard">
-
-                <li class="tab"></li>
-                <li class="letter one" data-letter="A" data-value="1">A</li>
-                <li class="letter" data-letter="B">B</li>
-                <li class="letter" data-letter="C">C</li>
-                <li class="letter" data-letter="D">D</li>
-                <li class="letter"data-letter="E">E</li>
-                <li class="letter" data-letter="F">F</li>
-                <li class="letter" data-letter="G">G</li>
-                <li class="letter" data-letter="H">H</li>
-                <li class="letter" data-letter="I">I</li>
-                <li class="letter" data-letter="J">J</li>
-                <!-- <li class="symbol"><span class="off"></span> -->
-                <!-- <li class="symbol"><span class="off"></span></li>
-                <li class="symbol lastitem"><span class="off"></span></li>
-                <li class="capslock"></li>
-                <li class="letter" data-letter="K">K</li>
-                <li class="letter" data-letter="L">L</li>
-                <li class="letter" data-letter="M">M</li>
-                <li class="letter" data-letter="N">N</li>
-                <li class="letter" data-letter="O">O</li>
-                <li class="letter" data-letter="P">P</li>
-                <li class="letter" data-letter="Q">Q</li>
-                <li class="letter" data-letter="R">R</li>
-                <li class="letter" data-letter="S">S</li>
-                <!-- <li class="symbol"><span class="off"></span></li> -->
-                <!-- <li class="symbol"><span class="off"></span></li>
-                <li class="return lastitem"></li>
-                <li class="left-shift"></li>
-                <li class="letter" data-letter="T">T</li>
-                <li class="letter" data-letter="U">U</li>
-                <li class="letter" data-letter="V">V</li>
-                <li class="letter" data-letter="W">W</li>
-                <li class="letter" data-letter="X">X</li>
-                <li class="letter" data-letter="Y">Y</li>
-                <li class="letter" data-letter="Z">Z</li>
-                <li class="symbol"><span class="off"></span></li>
-                <li class="symbol"><span class="off"></span></li>
-                <li class="symbol"><span class="off"></span></li>
-                <li class="right-shift lastitem"></li>
-                <li class="space lastitem"><textarea id="possible-letters" class="text" placeholder="Drag letters here!"></textarea> </li>
-            </ul>
-        </div>
 
         <!-- START SEARCH-BUTTONS CONTAINER -->
         <div class='container'>
@@ -150,7 +92,7 @@
                     <button id="randomLetterBtn" class="waves-effect searchbtn"><i class="material-icons left">grade</i>RANDOM</button></td>
                 </div>
                 <div class='search center-align col s6 m3 l3'>
-                    <button class="waves-effect searchbtn"><i class="material-icons left">grade</i>HIGH SCORE</button></td>
+                    <button id="highScoreBtn" class="waves-effect searchbtn"><i class="material-icons left">grade</i>HIGH SCORE</button></td>
                 </div>
             </div>
         </div>
@@ -159,13 +101,9 @@
         <div class='container'>
             <div class="row z-depth-2">
                 <div class='col valign-wrapper results-title'>
-                    <h5 class='valign subtitle'>Search results:</h5>
+                    <h5 class='valign subtitle'>Search results for: <span id="search-content"></span></h5>
                 </div>
-                <ul class="collapsible popout col s12 m12 l12" data-collapsible='accordion'>
-                    <li class='col s12 m6 l3'>
-                        <div class='collapsible-header'>test</div>
-                        <div class='collapsible-body'>lorem</div>
-                    </li>
+                <ul class="collapsible popout col s12 m12 l12" id="results-container" data-collapsible='accordion'>
                 </ul>
             </div>
         </div>
