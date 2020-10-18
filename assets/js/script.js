@@ -185,28 +185,22 @@ var showImage = function () {
             console.log(response.photos);
             // Use 'querySelector' to get the ID of where the pic/ will be displayed
             var responseContainerEl = document.querySelector('#images');
-            // Pexel credit
             var pexelCreditEl = document.createElement('div')
-            pexelCreditEl.classList.add("card-body");
-            // Create an '<img>' element
-            var pexelImg = document.createElement('img');
-            //pexel credit <div> element
-            // var pexelInfoDiv = document.createElement('div');
-            // pexelInfoDiv.classList.add("card");
             var photographerEl = document.createElement("p");
+            var pexelImg = document.createElement('img');
+            var madeByPexelEl = document.createElement("p");
+            var logoLinkEl = document.createElement("p");
+            // var pexelInfoDiv = document.createElement('div');
+            pexelCreditEl.classList.add("card-body");
             photographerEl.textContent = "Photo by: ";
             photographerEl.classList.add("card-text");
-            var madeByPexelEl = document.createElement("p");
             madeByPexelEl.textContent = "Photos provided by Pexels";
             madeByPexelEl.classList.add("card-text");
-            var logoLinkEl = document.createElement("p");
             logoLinkEl.textContent = "";//''"<a href="https://www.pexels.com"><img src="https://images.pexels.com/lib/api/pexels.png"/></a>';
             logoLinkEl.classList.add("card-text");
             // Set that element's 'src' attribute to the 'image_url' from API response
             pexelImg.setAttribute('src', response.photos[0].src.small);
-            //
             //pexelInfoDiv.setAttribute('src', response.photographer);
-            // console.log(headers.url);
             //pexelInfoDiv.appendChild(pexelCreditEl);
             pexelCreditEl.appendChild(photographerEl);
             pexelCreditEl.appendChild(madeByPexelEl);
@@ -216,7 +210,6 @@ var showImage = function () {
         })
 }
 document.getElementById("images").innerHTML = "Image";
-
 
 // class Images {
 //     //The constructor property returns a reference to the Object constructor function that created the instance object. Note that the value of this property is a reference to the function itself, not a string containing the function's name.
