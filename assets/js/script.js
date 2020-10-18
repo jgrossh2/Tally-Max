@@ -247,82 +247,98 @@ var getDefData = function (letters, results) {
         searchContentEl.textContent = '';
         searchContentEl.textContent = letters;
     }
-    var wordDefArr = [];
-    var imgSrcInfoArr = [];
     
     // generate API data for each word
     for (var i = 0; i < results.length; i++) {
+        // api variables
         let word = results[i];
-        var mwApiUrl = 'https://www.dictionaryapi.com/api/v3/references/collegiate/json/'
-            + results[i] + '?key=' + smkmw;
-        fetch(mwApiUrl).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (data) {
-                    var def = (data[0])
-                    var wordDef = {
-                        word: word,
-                        class: def.fl,
-                        definition: def.shortdef,
-                        audio: def.hwi.prs[0].sound.audio,
-                        offensive: def.meta.offensive,
-                    };
-                    console.log(wordDef)
-                    // displayWordDefSound(wordDef)
-                    // displaySoundBite(wordDef
-                    wordDefArr.push(wordDef);
-                    // return wordDef
-                })
-            } else {
-                alert("Error:" + response.statusText)
-            }
-        });
-    }
-
-    for (var i = 0; i < results.length; i++) {
         var images = results[i];
-        var pexelURL = `https://api.pexels.com/v1/search?query=${images}&per_page=1`;// ${new_words[0]}
+        var pexelURL = `https://api.pexels.com/v1/search?query=${images}&per_page=1`;
         var API_key = "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
-        //add the function to fetch url, and call it above 
-        fetch(pexelURL, {
-            headers: {
-                // Accept: 'application/json',
-                Authorization: API_key
-                //credentials: 'include'
-            }
-        })
-            .then(function (response) {
-                // console.log(response);
+
+        // fetch both APIs
+        var apiUrls = [
+            fetch (`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${smkmw}`),
+            fetch (pexelURL, {
+                headers: {
+                    // Accept: 'application/json',
+                    Authorization: API_key
+                    //credentials: 'include'
+                }
+            }),
+        ];
+        // submit https request
+        Promise.all(apiUrls).then(function (responses) {
+            // using map() method to get a response array of json objects, 
+            return Promise.all(responses.map(function (response) {
                 return response.json();
-            })
-            //console.log(response);// will display the array
+            }))
+            // word definition
             .then(function (response) {
-                var imgSrcInfo = response.photos;
-                // console.log(response.photos);
-                // // Use 'querySelector' to get the ID of where the pic/ will be displayed
-                // var responseContainerEl = document.querySelector('#images');
-                // // // Create an '<img>' element
-                // var pexelImg = document.createElement('img');
-                // // Set that element's 'src' attribute to the 'image_url' from API response
-                // pexelImg.setAttribute('src', response.photos[0].src.small);
-                // responseContainerEl.appendChild(pexelImg);
-                imgSrcInfoArr.push(imgSrcInfo);
-                // console.log(imgSrcInfo);
-                // return imgSrcInfo;
+                console.log(response);
+                if (response.ok) {
+                    response.json().then(function (data) {
+                        var def = (data[0])
+                        var wordDefArr = {
+                            word: word,
+                            class: def.fl,
+                            definition: def.shortdef,
+                            audio: def.hwi.prs[0].sound.audio,
+                            offensive: def.meta.offensive,
+                        };
+                        console.log(wordDefArr)
+                        // displayWordDefSound(wordDef)
+                        // displaySoundBite(wordDef
+                        return wordDefArr
+                    })
+                } else {
+                    alert("Error:" + response.statusText)
+                }
             })
-    }
-    console.log(wordDefArr);
-    console.log(imgSrcInfoArr);
-    //displayWordDefSound(wordDef, imgSrcInfo);
-}
+        });
+    };
+
+    // for (var i = 0; i < results.length; i++) {
+    //     var images = results[i];
+    //     var pexelURL = `https://api.pexels.com/v1/search?query=${images}&per_page=1`;
+    //     var API_key = "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
+    //     //add the function to fetch url, and call it above 
+    //     fetch(pexelURL, {
+    //         headers: {
+    //             // Accept: 'application/json',
+    //             Authorization: API_key
+    //             //credentials: 'include'
+    //         }
+    //     })
+    //         .then(function (response) {
+    //             return response.json();
+    //         })
+    //         .then(function (response) {
+    //             var imgSrcInfo = response.photos;
+    //             // console.log(imgSrcInfo);
+    //             // console.log(response.photos);
+    //             // // Use 'querySelector' to get the ID of where the pic/ will be displayed
+    //             // var responseContainerEl = document.querySelector('#images');
+    //             // // // Create an '<img>' element
+    //             // var pexelImg = document.createElement('img');
+    //             // // Set that element's 'src' attribute to the 'image_url' from API response
+    //             // pexelImg.setAttribute('src', response.photos[0].src.small);
+    //             // responseContainerEl.appendChild(pexelImg);
+    //             imgSrcInfoArr.push(imgSrcInfo);
+    //             // console.log(imgSrcInfo);
+    //             // return imgSrcInfo;
+    //         })
+    // }
+};
 
 // function takes MW api object data and packages word & class (e.g. noun, verb adjective) for DOM object display
-var displayWordDefSound = function (defObject) {
+var displayWord = function (wordDefArr) {
     // console.log(defObject)
 
     // resultsContainerEl.textContent = '';
 
     // check to see whether term is offensive
-    if (!defObject.offensive) {
+    if (!wordDefArr.offensive) {
         // create DOM elements
         var resultLI = document.createElement('li');
         resultLI.setAttribute('class', 'col s12 m6 l3');
@@ -330,12 +346,12 @@ var displayWordDefSound = function (defObject) {
         // display word within result container header
         var resultHeader = document.createElement('div');
         resultHeader.setAttribute('class', 'collapsible-header');
-        resultHeader.innerHTML = '<p>' + defObject.word + '</p>';
+        resultHeader.innerHTML = '<p>' + wordDefArr.word + '</p>';
 
         // display class, definitions and sound button within result container body
 
         // takes audio file reference and creates link for audio playback; 'subdir' uses conditions provided by MW api documentation to determine 'subdir' component of href
-        var aud = defObject.audio.split('', 3)
+        var aud = wordDefArr.audio.split('', 3)
         var regex = RegExp('[\\d\\W]')
         var subdir = ''
         if (aud[0] + aud[1] + aud[2] === 'bix') {
@@ -347,7 +363,7 @@ var displayWordDefSound = function (defObject) {
         } else {
             subdir = aud[0]
         }
-        var audioLink = 'https://media.merriam-webster.com/audio/prons/en/us/ogg/' + subdir + '/' + defObject.audio + '.ogg';
+        var audioLink = 'https://media.merriam-webster.com/audio/prons/en/us/ogg/' + subdir + '/' + wordDefArr.audio + '.ogg';
         // console.log(audioLink)
 
         // create button element to contain sound link
@@ -359,13 +375,13 @@ var displayWordDefSound = function (defObject) {
         // create div body element for class, audio button, and definitions
         var resultBody = document.createElement('div');
         resultBody.setAttribute('class', 'collapsible-body');
-        resultBody.innerHTML = '<span>' + defObject.class + '</span>';
+        resultBody.innerHTML = '<span>' + wordDefArr.class + '</span>';
 
         // loop through each homonym and display within element for that word
-        for (var i = 0; i < defObject.definition.length; i++) {
+        for (var i = 0; i < wordDefArr.definition.length; i++) {
             n = i + 1
             var resultDef = document.createElement('p');
-            resultDef.textContent = n + ') ' + defObject.definition[i];
+            resultDef.textContent = n + ') ' + wordDefArr.definition[i];
             resultBody.append(resultDef);
         }
 
@@ -377,7 +393,6 @@ var displayWordDefSound = function (defObject) {
     } else {
         console.log("Sorry, this word cannot be displayed.");
     }
-
 };
 
     // var showImage = function () {
@@ -431,3 +446,32 @@ var displayWordDefSound = function (defObject) {
     //         })
     // }
     // document.getElementById("images").innerHTML = "Image";
+
+    // FETCH FUNCTION formats and sends api request
+var getWeather = function (userCity) {
+    // format api urls for both OpenWeather endpoints in order to make multiple api calls at once using promise.all() and array.map() methods learned from the following site: https://gomakethings.com/waiting-for-multiple-all-api-responses-to-complete-with-the-vanilla-js-promise.all-method/
+    var apiUrls = [
+        fetch("https://api.openweathermap.org/data/2.5/weather?q=" + userCity + "&units=imperial&appid=e4c79656912e2022efd4f848cf4c49dc"),
+        fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + userCity + "&units=imperial&appid=e4c79656912e2022efd4f848cf4c49dc"),
+    ];
+    // submit https request
+    Promise.all(apiUrls).then(function (responses) {
+        // using map() method to get a response array of json objects, 
+        return Promise.all(responses.map(function (response) {
+            return response.json();
+        }))
+            .then(function (data) {
+                console.log(data);
+                cityStats = data[0];
+                forecast = data[1];
+                console.log(cityStats);
+                console.log(forecast);
+                displayCityStats(cityStats)
+                displayForecast(forecast)
+            })
+            // catch alert to catch any network errors
+            .catch(function (error) {
+                console.log(error);
+            });
+    });
+};
