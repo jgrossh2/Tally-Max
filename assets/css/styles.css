@@ -17,6 +17,10 @@ header, footer.page-footer {
     font-family: var(--primary);
 }
 
+div.container {
+    max-width: 1170px;
+}
+
 h1.m {
     margin: 0;
     padding: 0 0 0 36px;
@@ -30,10 +34,6 @@ h1.tally {
 h1.x {
     margin: 0;
     padding: 0 0 0 42px;
-}
-
-div.search-type {
-    padding: 0;
 }
 
 .results-list {
@@ -52,6 +52,15 @@ button.waves-effect.searchbtn {
     color: white;
     padding: 12px;
     margin: 3px
+}
+
+img#audio-icon {
+    width: 32px;
+    padding: 4px 0 0 4px;
+}
+
+img#mwlogo {
+    width: 100px;
 }
 
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */

@@ -27,7 +27,7 @@
 
     <main>
         <!-- START KEYBOARD CONTAINER: includes keyboard and drop zone-->
-        <div class='container grey lighten-2' id='container'>
+        <div class='container' id='container'>
             <ul id="keyboard">
                 <li class="tab"></li>
                 <li class="letter one"><button class="button" type="button">A</button></li>
@@ -74,7 +74,7 @@
 
         <!-- START SEARCH-BUTTONS CONTAINER -->
         <div class='container'>
-            <div class='search-type card-panel grey lighten-2 row'>
+            <div class='search-type card-panel row z-depth-2'>
                 <h5 class='subtitle'>Select your search type!</h5>
                 <div class='search center-align col s6 m3 l3'>
                     <button id="twoLetterBtn" class="waves-effect searchbtn"><i class="material-icons left">grade</i>2-LETTER</button></td>
@@ -97,54 +97,35 @@
                 <div class='col valign-wrapper results-title'>
                     <h5 class='valign subtitle'>Search results:</h5>
                 </div>
-                <ul class="col s12 m12 l12 results-list">
-                    <div class='col s6 m4 l3' id='search-result1'>
-                    </div>
-                    <div class='col s6 m4 l3' id='search-result2'>
-                    </div>
-                    <div class='col s6 m4 l3' id='search-result3'>
-                    </div>
-                    <div class='col s6 m4 l3' id='search-result4'>
-                    </div>
-                    <div class='col s6 m4 l3' id='search-result5'>
-                    </div>
-                    <div class='col s6 m4 l3' id='search-result6'>
-                    </div>
-                    <div class='col s6 m4 l3' id='search-result7'>
-                    </div>
-                    <div class='col s6 m4 l3' id='search-result8'>
-                    </div>
-                    <div class='col s6 m4 l3' id='search-result9'>
-                    </div>
-                    <div class='col s6 m4 l3' id='search-result10'>
-                    </div>
-                    <div class='col s6 m4 l3' id='search-result11'>
-                    </div>
-                    <div class='col s6 m4 l3' id='search-result12'>
-                    </div>
+                <ul class="collapsible popout col s12 m12 l12" data-collapsible='accordion'>
+                    <li class='col s12 m6 l3'>
+                        <div class='collapsible-header'>test</div>
+                        <div class='collapsible-body'>lorem</div>
+                    </li>
                 </ul>
             </div>
         </div>
-
-        <!-- START DEFINITIONS CONTAINER: words selected from results list by user are listed here with definitions -->
-        <div class='container'>
-
-        </div>
     </main>
+
     <footer class='page-footer'>
         <div class='row'>
-            <div class='col s6 m6 l6'>
+            <div class='col s3 m4 l6'>
                 <h5>TALLY MAX</h5>
                 <h6>© 2020</h6>
             </div>
-            <div class='col s6 m6 l6'>
+            <div class='col s9 m8 l6'>
                 <h5>API Support:</h5>
+                <a href="https://www.dictionaryapi.com/products/api-collegiate-dictionary">
+                    <img id='mwlogo' src="assets/MWLogo_LightBG_120X120_2x.png"><br />
+                    MERRIAM-WEBSTER'S COLLEGIATE® DICTIONARY WITH AUDIO</a>
             </div>
         </div>
     </footer>
 
+    <!--JavaScript at end of body for optimized loading-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+    <script src='projectSupport/smkeys.js'></script>
     <script src="assets/js/dict.js"></script>
     <script src="assets/js/script.js"></script>
 
