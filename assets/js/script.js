@@ -277,7 +277,13 @@ var getDefData = function (letters, results) {
             .then(function (response) {
                 console.log(response);
                 if (response.ok) {
-                    response.json().then(function (data) {
+                        console.log(data);
+                        var wordDef = data[0];
+                        var imgSrc = data[1];
+                        
+                        console.log(wordDef);
+                        console.log(imgSrc);
+
                         var def = (data[0])
                         var wordDefArr = {
                             word: word,
@@ -290,7 +296,7 @@ var getDefData = function (letters, results) {
                         // displayWordDefSound(wordDef)
                         // displaySoundBite(wordDef
                         return wordDefArr
-                    })
+                    
                 } else {
                     alert("Error:" + response.statusText)
                 }
