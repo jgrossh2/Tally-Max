@@ -57,7 +57,7 @@ randomLetterBtnEl.addEventListener('click', function() {
 
 highScoreBtnEl.addEventListener('click', function() {
     // get possible letters from form
-    var letters = 'zqx' + letterContainerEl.value;
+    var letters = letterContainerEl.value;
 
     // get total letter count
     letterCounter(letters);
@@ -77,8 +77,8 @@ highScoreBtnEl.addEventListener('click', function() {
     // sort letters based on value before sending to genWordList
     // var priorityLetters = ['z','q','x','j','k','w','y','v','f','h','o','m','c','b','g','d','u','s','l','t','r','n','o','i','a','e'];
     // var lettersArray = letters.split('');
-    // lettersArray.sort(function(a) {
-    //     return priorityLetters.indexOf(a);
+    // lettersArray.sort(function(a, b) {
+    //     return priorityLetters[a] - priorityLetters[b];
     // })
     // console.log(lettersArray);
     // call word generator
