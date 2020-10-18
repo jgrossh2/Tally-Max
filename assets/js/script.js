@@ -208,7 +208,7 @@ highScoreBtnEl.addEventListener('click', function() {
 // generate all possible combinations of inputted letters
 var genWordList = function(wordLength, letters) {
     // reset form container
-
+    spaceEl.innerHTML = " ";
     var results = [];
     var arrayCounter = 0;
 
