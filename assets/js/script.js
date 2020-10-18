@@ -101,9 +101,11 @@ var getDefData = function (arr) {
                         audio: def.hwi.prs[0].sound.audio,
                         offensive: def.meta.offensive,
                     };
+                  
                     // console.log(wordDef)
                     displayWordDefSound(wordDef)
-                    // displaySoundBite(wordDef)
+                    // displaySoundBite(wordDef
+                   
                     return wordDef
                 })    
             } else {
