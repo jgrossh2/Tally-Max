@@ -279,7 +279,7 @@ var getDefData = function (letters, results) {
                 var imgSrc = response[1];
 
                 var def = (wordDef[0])
-                var wordDefArr = {
+                var wordData = {
                     word: word,
                     class: def.fl,
                     definition: def.shortdef,
@@ -287,9 +287,9 @@ var getDefData = function (letters, results) {
                     offensive: def.meta.offensive,
                     imageInfo: imgSrc.photos,
                 };
-                console.log(wordDefArr)
-                displayWord(wordDefArr);
-                return wordDefArr
+                console.log(wordData)
+                displayWord(wordData);
+                return wordData
             })
                 // } else {
                 //     alert("Error:" + response.statusText)
@@ -299,13 +299,13 @@ var getDefData = function (letters, results) {
 };
 
 // function takes MW api object data and packages word & class (e.g. noun, verb adjective) for DOM object display
-var displayWord = function (wordDefArr) {
+var displayWord = function (wordData) {
     // console.log(defObject)
 
     // resultsContainerEl.textContent = '';
 
     // check to see whether term is offensive
-    if (!wordDefArr.offensive) {
+    if (!wordData.offensive) {
         // create DOM elements
         var resultLI = document.createElement('li');
         resultLI.setAttribute('class', 'col s12 m6 l3');
@@ -313,12 +313,12 @@ var displayWord = function (wordDefArr) {
         // display word within result container header
         var resultHeader = document.createElement('div');
         resultHeader.setAttribute('class', 'collapsible-header');
-        resultHeader.innerHTML = '<p>' + wordDefArr.word + '</p>';
+        resultHeader.innerHTML = '<p>' + wordData.word + '</p>';
 
         // display class, definitions and sound button within result container body
 
         // takes audio file reference and creates link for audio playback; 'subdir' uses conditions provided by MW api documentation to determine 'subdir' component of href
-        var aud = wordDefArr.audio.split('', 3)
+        var aud = wordData.audio.split('', 3)
         var regex = RegExp('[\\d\\W]')
         var subdir = ''
         if (aud[0] + aud[1] + aud[2] === 'bix') {
@@ -330,7 +330,7 @@ var displayWord = function (wordDefArr) {
         } else {
             subdir = aud[0]
         }
-        var audioLink = 'https://media.merriam-webster.com/audio/prons/en/us/ogg/' + subdir + '/' + wordDefArr.audio + '.ogg';
+        var audioLink = 'https://media.merriam-webster.com/audio/prons/en/us/ogg/' + subdir + '/' + wordData.audio + '.ogg';
         // console.log(audioLink)
 
         // create button element to contain sound link
@@ -342,13 +342,13 @@ var displayWord = function (wordDefArr) {
         // create div body element for class, audio button, and definitions
         var resultBody = document.createElement('div');
         resultBody.setAttribute('class', 'collapsible-body');
-        resultBody.innerHTML = '<span>' + wordDefArr.class + '</span>';
+        resultBody.innerHTML = '<span>' + wordData.class + '</span>';
 
         // loop through each homonym and display within element for that word
-        for (var i = 0; i < wordDefArr.definition.length; i++) {
+        for (var i = 0; i < wordData.definition.length; i++) {
             n = i + 1
             var resultDef = document.createElement('p');
-            resultDef.textContent = n + ') ' + wordDefArr.definition[i];
+            resultDef.textContent = n + ') ' + wordData.definition[i];
             resultBody.append(resultDef);
         }
 
