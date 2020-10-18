@@ -247,6 +247,10 @@ var getDefData = function (letters, results) {
         searchContentEl.textContent = '';
         searchContentEl.textContent = letters;
     }
+
+    var wordDefArr = [];
+    var imgSrcInfoArr = [];
+
     // generate API data for each word
     for (var i = 0; i < results.length; i++) {
         let word = results[i];
@@ -263,10 +267,11 @@ var getDefData = function (letters, results) {
                         audio: def.hwi.prs[0].sound.audio,
                         offensive: def.meta.offensive,
                     };
-                    // console.log(wordDef)
-                    displayWordDefSound(wordDef)
+                    console.log(wordDef)
+                    // s displayWordDefSound(wordDef)
                     // displaySoundBite(wordDef
-                    return wordDef
+                    wordDefArr.push(wordDef)
+                    //return wordDef
                 })
             } else {
                 alert("Error:" + response.statusText)
@@ -287,21 +292,24 @@ var getDefData = function (letters, results) {
             }
         })
             .then(function (response) {
-                console.log(response);
+                //console.log(response);
                 return response.json();
             })
             //console.log(response);// will display the array
             .then(function (response) {
                 console.log(response.photos);
-                // Use 'querySelector' to get the ID of where the pic/ will be displayed
-                var responseContainerEl = document.querySelector('#images');
-                // // Create an '<img>' element
-                var pexelImg = document.createElement('img');
-                // Set that element's 'src' attribute to the 'image_url' from API response
-                pexelImg.setAttribute('src', response.photos[0].src.small);
-                responseContainerEl.appendChild(pexelImg);
+                // // Use 'querySelector' to get the ID of where the pic/ will be displayed
+                // var responseContainerEl = document.querySelector('#images');
+                // // // Create an '<img>' element
+                // var pexelImg = document.createElement('img');
+                // // Set that element's 'src' attribute to the 'image_url' from API response
+                // pexelImg.setAttribute('src', response.photos[0].src.small);
+                // responseContainerEl.appendChild(pexelImg);
+                imgSrcInfoArr.push(imgSrcInfo);
             })
     }
+    console.log(wordDefArr);
+    console.log(imgSrcInfoArr);
 }
 
 // function takes MW api object data and packages word & class (e.g. noun, verb adjective) for DOM object display
@@ -320,6 +328,10 @@ var displayWordDefSound = function (defObject) {
         var resultHeader = document.createElement('div');
         resultHeader.setAttribute('class', 'collapsible-header');
         resultHeader.innerHTML = '<p>' + defObject.word + '</p>';
+
+        //display image
+        var pexelImg = document.createElement('img');
+        pexelImg.setAttribute('src', response.photos[0].src.small);
 
         // display class, definitions and sound button within result container body
 
@@ -363,6 +375,7 @@ var displayWordDefSound = function (defObject) {
         resultLI.append(resultHeader);
         resultLI.append(resultBody);
         resultsContainerEl.append(resultLI);
+        resultBody.append(pexelImg);
     } else {
         console.log("Sorry, this word cannot be displayed.");
     }
