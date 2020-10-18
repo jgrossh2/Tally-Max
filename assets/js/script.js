@@ -6,8 +6,8 @@ var threeLetterBtnEl = document.getElementById('threeLetterBtn');
 var randomLetterBtnEl = document.getElementById('randomLetterBtn');
 var letterContainerEl = document.getElementById('possible-letters');
 
-<<<<<<< HEAD
-// page variables
+// global page variables
+var wordLength = 0;
 var totalLetters = 0;
 var dropLetters = [];
 var letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
@@ -36,6 +36,7 @@ $(".letter").draggable({
     revert: "invalid",
     start: function(event, ui) {
         console.log(ui);
+        //clone of tile
         $(ui.helper).addClass("dragging");
         console.log("test");
     },
@@ -89,7 +90,6 @@ $(".space").droppable({
     tolerance: "touch",
     revert: false,
     drop: function(event, ui){
-        //FIND ELEMENT DRAGGED AS TARGET
         console.log(ui);
         console.log("drop");
         var helper = ui.helper.clone(true);
@@ -121,9 +121,6 @@ $(".space").droppable({
 //only accept so many of each letter
 
 letterEl.addEventListener("click", dragLetters)
-=======
-// global page variables
-var wordLength = 0;
 
 // event listeners to gather user input and start generator function
 twoLetterBtnEl.addEventListener('click', function() {
@@ -151,7 +148,6 @@ threeLetterBtnEl.addEventListener('click', function() {
 randomLetterBtnEl.addEventListener('click', function() {
     // get possible letters from form
     var letters = letterContainerEl.value;
->>>>>>> develop
 
     // get total letter count
     letterCounter(letters);
