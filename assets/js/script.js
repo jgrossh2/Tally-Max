@@ -315,11 +315,11 @@ var displayWord = function (wordData) {
         resultHeader.setAttribute('class', 'collapsible-header');
         resultHeader.innerHTML = '<p>' + wordData.word + '</p>';
 
-        //display image
-        var pexelImg = document.createElement('img');
-        pexelImg.setAttribute('src', response.photos[0].src.small);
+        // //display image
+        // var pexelImg = document.createElement('img');
+        // pexelImg.setAttribute('src', response.photos[0].src.small);
 
-        // display class, definitions and sound button within result container body
+        // *******************display class, definitions and sound button within result container body
 
         // takes audio file reference and creates link for audio playback; 'subdir' uses conditions provided by MW api documentation to determine 'subdir' component of href
         var aud = wordData.audio.split('', 3)
@@ -338,15 +338,15 @@ var displayWord = function (wordData) {
         // console.log(audioLink)
 
         // create button element to contain sound link
-        var audioBtn = document.createElement('a');
+        var audioBtn = document.getElementById("#info-btn");
         audioBtn.setAttribute('class', 'btn-floating waves-effect waves-light red')
         audioBtn.setAttribute('href', audioLink);
         audioBtn.innerHTML = '<span><img id="audio-icon" src="assets/iconfinder_speaker-high-sound-volume-voice_3643734.png"></span>'
 
         //create button to contain 'more info"
-        var moreBtn = document.createElement('a');
-        moreBtn.setAttribute('class', "btn-floating btn-large waves-effect waves-light var(--lblue)");
-        moreBtn.innerHTML = '<span><img id="info-icon" src="iconfinder_Information_Circle_4781829.png"></span>'
+        var infoBtn = document.createElement('a');
+        infoBtn.setAttribute('class', 'btn-floating waves-effect waves-light red disabled')
+        infoBtn.innerHTML = '<span><img id="info-icon" src="assets/iconfinder_Information_Circle_4781829.png"></span>'
 
         // create div body element for class, audio button, and definitions
         var resultBody = document.createElement('div');
@@ -373,7 +373,7 @@ var displayWord = function (wordData) {
     }
 
 };
-
+//********pick up from modal work-left on this line */
 // Get the modal
 var modal = document.getElementById("myModal");
 // Get the button that opens the modal
@@ -381,7 +381,7 @@ var btn = document.getElementById("myBtn");
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 // When the user clicks the button, open the modal 
-btn.onclick = function () {
+function displayImg() {
     modal.style.display = "block";
 }
 // When the user clicks on <span> (x), close the modal
@@ -444,37 +444,4 @@ window.onclick = function (event) {
 //         })
 // }
 // document.getElementById("images").innerHTML = "Image";
-// }
-
-// for (var i = 0; i < results.length; i++) {
-//     var images = results[i];
-//     var pexelURL = `https://api.pexels.com/v1/search?query=${images}&per_page=1`;// ${new_words[0]}
-//     var API_key = "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
-//     //add the function to fetch url, and call it above 
-//     fetch(pexelURL, {
-//         headers: {
-//             // Accept: 'application/json',
-//             Authorization: API_key
-//             //credentials: 'include'
-//         }
-//     })
-//         .then(function (response) {
-//             //console.log(response);
-//             return response.json();
-//         })
-//         //console.log(response);// will display the array
-//         .then(function (response) {
-//             console.log(response.photos);
-//             // // Use 'querySelector' to get the ID of where the pic/ will be displayed
-//             // var responseContainerEl = document.querySelector('#images');
-//             // // // Create an '<img>' element
-//             // var pexelImg = document.createElement('img');
-//             // // Set that element's 'src' attribute to the 'image_url' from API response
-//             // pexelImg.setAttribute('src', response.photos[0].src.small);
-//             // responseContainerEl.appendChild(pexelImg);
-//             imgSrcInfoArr.push(imgSrcInfo);
-//         })
-// }
-// console.log(wordDefArr);
-// console.log(imgSrcInfoArr);
 // }
