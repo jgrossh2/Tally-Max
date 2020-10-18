@@ -4,17 +4,23 @@
 var twoLetterBtnEl = document.getElementById('twoLetterBtn');
 var threeLetterBtnEl = document.getElementById('threeLetterBtn');
 var randomLetterBtnEl = document.getElementById('randomLetterBtn');
+var highScoreBtnEl = document.getElementById('highScoreBtn');
 var letterContainerEl = document.getElementById('possible-letters');
+var searchContentEl = document.getElementById('search-content');
+var resultsContainerEl = document.getElementById('results-container');
+var letterEl = document.querySelector(".letter");
+var spaceEl = document.querySelector(".space");
 
 // global page variables
 var wordLength = 0;
-var totalLetters = 0;
 var dropLetters = [];
 // var letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 var letterEl = document.querySelector(".letter");
 var spaceEl = document.querySelector(".space");
+
 // get user input area
 spaceEl.textContent = "Drag Letters Here! "
+
 // drag letters
 var dragLetters = function(event) {
     event.preventDefault();
@@ -24,6 +30,7 @@ var dragLetters = function(event) {
 $(".letter").sortable({
     revert: true
 });
+
 // make letters drag
 $(".letter").draggable({ 
     connectToSortable: ".space",
@@ -125,29 +132,29 @@ letterEl.addEventListener("click", dragLetters)
 // event listeners to gather user input and start generator function
 twoLetterBtnEl.addEventListener('click', function() {
     // get possible letters from form
-    var letters = letterContainerEl.value;
+    var letters = dropLetters.join('');
     // reset global variable
     var wordLength = 0;
     // set search criteria
     var wordLength = 2;
     // call word generator
-    genWordlist(wordLength, letters);
+    genWordList(wordLength, letters);
 });
 
 threeLetterBtnEl.addEventListener('click', function() {
     // get possible letters from form
-    var letters = letterContainerEl.value;
+    var letters = dropLetters.join('');
     // reset global variable
     var wordLength = 0;
     // set search criteria
     var wordLength = 3;
     // call word generator
-    genWordlist(wordLength, letters);
+    genWordList(wordLength, letters);
 });
 
 randomLetterBtnEl.addEventListener('click', function() {
     // get possible letters from form
-    var letters = letterContainerEl.value;
+    var letters = dropLetters.join('');
 
     // get total letter count
     letterCounter(letters);
@@ -164,45 +171,90 @@ randomLetterBtnEl.addEventListener('click', function() {
         return wordLength;
     }
     // call word generator
-    genWordlist(wordLength, letters);
+    genWordList(wordLength, letters);
 });
 
-// generate all possible combinations of input letters
-var genWordlist = function(wordLength, letters) {
+highScoreBtnEl.addEventListener('click', function() {
+    // get possible letters from form
+    var letters = dropLetters.join('');
+
+    // get total letter count
+    letterCounter(letters);
+    function letterCounter(letters) {
+        // reset global variable
+        wordLength = 0;   
+        var alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        var ar = alphabet.split("");
+        for (var i = 0; i < letters.length; i++) {
+            if (ar.indexOf(letters[i]) > -1) {
+                wordLength = wordLength + 1;
+            }
+        }
+        return wordLength;
+    }
+
+    // sort letters based on value before sending to genWordList
+    // var priorityLetters = ['z','q','x','j','k','w','y','v','f','h','o','m','c','b','g','d','u','s','l','t','r','n','o','i','a','e'];
+    // var lettersArray = letters.split('');
+    // lettersArray.sort(function(a, b) {
+    //     return priorityLetters[a] - priorityLetters[b];
+    // })
+    // console.log(lettersArray);
+    // call word generator
+    genWordList(wordLength, letters);
+});
+
+// generate all possible combinations of inputted letters
+var genWordList = function(wordLength, letters) {
     // reset form container
-    letterContainerEl.value = '';
+
     var results = [];
+    var arrayCounter = 0;
 
     var generate = function(possWord) {
         for (var i = 0; i < letters.length; i++) {
-        possWord += letters[i];
-        if (possWord.length === wordLength) {
-            if (dict.includes(possWord)) {
-                results.push(possWord);
+            if (arrayCounter <= 11) {
+                possWord += letters[i];
+                if (possWord.length === wordLength) {
+                    if (dict.includes(possWord)) {
+                        results.push(possWord);
+                        arrayCounter++;
+                    }
+                } else {
+                    generate(possWord);
+                }
+                possWord = possWord.slice(0, -1);
+            // break from loop to cut down on load time    
+            } else {
+                break;
             }
-        } else {
-            generate(possWord);
-        }
-        possWord = possWord.slice(0, -1);
         }
     }
     generate("");
 
     // store user search / results
     localStorage.setItem(letters, results);
-
+    
+    // get data from API
+    getDefData(letters, results);
     return console.log(results);
 };
 
-// added for the sake of demonstrating functionality; to be removed once functions for generating word array are added
-var wordList = ['voluminous', 'aa', 'run']
-
 // function fetches definition data for each in an array of words and returns subset of data packaged as an object
-var getDefData = function (arr) {
-    for (var i = 0; i < arr.length; i++) {
-        let word = arr[i];
+var getDefData = function (letters, results) {
+    // display searched letters
+    if (results.length === 0) {
+        searchContentEl.textContent = '';
+        searchContentEl.textContent = 'No Words Found';
+    } else {
+        searchContentEl.textContent = '';
+        searchContentEl.textContent = letters;
+    }
+    // generate API data for each word
+    for (var i = 0; i < results.length; i++) {
+        let word = results[i];
         var mwApiUrl = 'https://www.dictionaryapi.com/api/v3/references/collegiate/json/'
-            + arr[i] + '?key=' + smkmw;
+            + results[i] + '?key=' + smkmw;
         fetch(mwApiUrl).then(function (response) {
             if (response.ok) {
                 response.json().then(function (data) {
@@ -227,14 +279,13 @@ var getDefData = function (arr) {
         });    
     }    
 }    
-getDefData(wordList)
 
 // function takes MW api object data and packages word & class (e.g. noun, verb adjective) for DOM object display
 var displayWordDefSound = function (defObject) {
     console.log(defObject)
-    // accessing hard-coded ul element to which DOM elements will be appended
-    var resultDivEl = document.querySelector('ul.collapsible.popout');
-    
+
+    // resultsContainerEl.textContent = '';
+
     // check to see whether term is offensive
     if (!defObject.offensive) {
         // create DOM elements
@@ -262,7 +313,7 @@ var displayWordDefSound = function (defObject) {
             subdir = aud[0]
         }
         var audioLink = 'https://media.merriam-webster.com/audio/prons/en/us/ogg/' + subdir + '/' + defObject.audio + '.ogg';
-        console.log(audioLink)
+        // console.log(audioLink)
         
         // create button element to contain sound link
         var audioBtn = document.createElement('a');
@@ -284,12 +335,12 @@ var displayWordDefSound = function (defObject) {
         }    
         
         // append content to page elements
-        resultDivEl.append(resultLI);
-        resultLI.append(resultHeader);
         resultBody.append(audioBtn);
+        resultLI.append(resultHeader);
         resultLI.append(resultBody);
+        resultsContainerEl.append(resultLI);
     } else {
         console.log("Sorry, this word cannot be displayed.");
     }
 
-}
+};
