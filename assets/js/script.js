@@ -6,6 +6,8 @@ var threeLetterBtnEl = document.getElementById('threeLetterBtn');
 var randomLetterBtnEl = document.getElementById('randomLetterBtn');
 var highScoreBtnEl = document.getElementById('highScoreBtn');
 var letterContainerEl = document.getElementById('possible-letters');
+var searchContentEl = document.getElementById('search-content');
+var resultsContainerEl = document.getElementById('results-container');
 
 // global page variables
 var wordLength = 0;
@@ -115,19 +117,27 @@ var genWordList = function(wordLength, letters) {
 
     // store user search / results
     localStorage.setItem(letters, results);
-
+    
+    // get data from API
+    getDefData(letters, results);
     return console.log(results);
 };
 
-// added for the sake of demonstrating functionality; to be removed once functions for generating word array are added
-var wordList = ['voluminous', 'aa', 'run']
-
 // function fetches definition data for each in an array of words and returns subset of data packaged as an object
-var getDefData = function (arr) {
-    for (var i = 0; i < arr.length; i++) {
-        let word = arr[i];
+var getDefData = function (letters, results) {
+    // display searched letters
+    if (results.length === 0) {
+        searchContentEl.textContent = '';
+        searchContentEl.textContent = 'No Words Found';
+    } else {
+        searchContentEl.textContent = '';
+        searchContentEl.textContent = letters;
+    }
+    // generate API data for each word
+    for (var i = 0; i < results.length; i++) {
+        let word = results[i];
         var mwApiUrl = 'https://www.dictionaryapi.com/api/v3/references/collegiate/json/'
-            + arr[i] + '?key=' + smkmw;
+            + results[i] + '?key=' + smkmw;
         fetch(mwApiUrl).then(function (response) {
             if (response.ok) {
                 response.json().then(function (data) {
@@ -152,14 +162,13 @@ var getDefData = function (arr) {
         });    
     }    
 }    
-getDefData(wordList)
 
 // function takes MW api object data and packages word & class (e.g. noun, verb adjective) for DOM object display
 var displayWordDefSound = function (defObject) {
     console.log(defObject)
-    // accessing hard-coded ul element to which DOM elements will be appended
-    var resultDivEl = document.querySelector('ul.collapsible.popout');
-    
+
+    // resultsContainerEl.textContent = '';
+
     // check to see whether term is offensive
     if (!defObject.offensive) {
         // create DOM elements
@@ -187,7 +196,7 @@ var displayWordDefSound = function (defObject) {
             subdir = aud[0]
         }
         var audioLink = 'https://media.merriam-webster.com/audio/prons/en/us/ogg/' + subdir + '/' + defObject.audio + '.ogg';
-        console.log(audioLink)
+        // console.log(audioLink)
         
         // create button element to contain sound link
         var audioBtn = document.createElement('a');
@@ -209,10 +218,10 @@ var displayWordDefSound = function (defObject) {
         }    
         
         // append content to page elements
-        resultDivEl.append(resultLI);
-        resultLI.append(resultHeader);
         resultBody.append(audioBtn);
+        resultLI.append(resultHeader);
         resultLI.append(resultBody);
+        resultsContainerEl.append(resultLI);
     } else {
         console.log("Sorry, this word cannot be displayed.");
     }
