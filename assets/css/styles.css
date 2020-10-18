@@ -195,12 +195,12 @@ img#mwlogo {
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 2; /* Sit on top */
     padding-top: 100px; /* Location of the box */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
+    width: 50%; /* Full width */
+    height: 50%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: lightgrey; /* Fallback color */
     background-color: white; /* Black w/ opacity */
@@ -212,8 +212,8 @@ img#mwlogo {
     background-color: white;
     margin: auto;
     padding: 0;
-    border: 1px solid #888;
-    width: 80%;
+    border: 3px solid var(--lblue);
+    width: 90%;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
@@ -234,31 +234,31 @@ img#mwlogo {
   
   /* The Close Button */
   .close {
-    color: white;
+    color: var(--lblue);
     float: right;
-    font-size: 28px;
+    font-size: 35px;
     font-weight: bold;
   }
   
   .close:hover,
   .close:focus {
     color: #000;
-    text-decoration: none;
+    text-decoration: black;
     cursor: pointer;
   }
   
   .modal-header {
-    padding: 2px 16px;
+    padding: 0.5px 2px;
     background-color: lightgrey;
-    color: white;
+    color: black;
   }
   
   .modal-body {padding: 2px 16px;}
   
   .modal-footer {
-    padding: 2px 16px;
+    padding: 0.05px 1px;
     background-color: lightgrey;
-    color: white;
+    color: black;
   }
 
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */
