@@ -341,3 +341,56 @@ var displayWordDefSound = function (defObject) {
     }
 
 };
+
+var showImage = function () {
+    var pexelURL = `https://api.pexels.com/v1/search?query=${new_words[0]}&per_page=1`;// ${new_words[0]}
+    var API_key = "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
+    //add the function to fetch url, and call it above 
+    fetch(pexelURL, {
+        headers: {
+            // Accept: 'application/json',
+            Authorization: API_key
+            //credentials: 'include'
+        }
+    })
+        .then(function (response) {
+            console.log(response);
+            return response.json();
+        })
+        //console.log(response);// will display the array
+        .then(function (response) {
+            console.log(response.photos);
+            // Use 'querySelector' to get the ID of where the pic/ will be displayed
+            var responseContainerEl = document.querySelector('#images');
+            // Pexel credit
+            var pexelCreditEl = document.createElement('div')
+            pexelCreditEl.classList.add("card-body");
+            // Create an '<img>' element
+            var pexelImg = document.createElement('img');
+            //pexel credit <div> element
+            // var pexelInfoDiv = document.createElement('div');
+            // pexelInfoDiv.classList.add("card");
+            var photographerEl = document.createElement("p");
+            photographerEl.textContent = "Photo by: ";
+            photographerEl.classList.add("card-text");
+            var madeByPexelEl = document.createElement("p");
+            madeByPexelEl.textContent = "Photos provided by Pexels";
+            madeByPexelEl.classList.add("card-text");
+            var logoLinkEl = document.createElement("p");
+            logoLinkEl.textContent = "";//''"<a href="https://www.pexels.com"><img src="https://images.pexels.com/lib/api/pexels.png"/></a>';
+            logoLinkEl.classList.add("card-text");
+            // Set that element's 'src' attribute to the 'image_url' from API response
+            pexelImg.setAttribute('src', response.photos[0].src.small);
+            //
+            //pexelInfoDiv.setAttribute('src', response.photographer);
+            // console.log(headers.url);
+            //pexelInfoDiv.appendChild(pexelCreditEl);
+            pexelCreditEl.appendChild(photographerEl);
+            pexelCreditEl.appendChild(madeByPexelEl);
+            pexelCreditEl.appendChild(logoLinkEl);
+            //pexelCreditEl.appendChild(pexelInfoDiv);
+            responseContainerEl.appendChild(pexelImg);
+        })
+}
+document.getElementById("images").innerHTML = "Image";
+
