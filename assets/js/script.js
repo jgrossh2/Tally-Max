@@ -248,86 +248,72 @@ var getDefData = function (letters, results) {
         searchContentEl.textContent = letters;
     }
 
-    var wordDefArr = [];
-    var imgSrcInfoArr = [];
-
     // generate API data for each word
     for (var i = 0; i < results.length; i++) {
+        // api variables
         let word = results[i];
-        var mwApiUrl = 'https://www.dictionaryapi.com/api/v3/references/collegiate/json/'
-            + results[i] + '?key=' + smkmw;
-        fetch(mwApiUrl).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (data) {
-                    var def = (data[0])
-                    var wordDef = {
+        var images = results[i];
+        var pexelURL = `https://api.pexels.com/v1/search?query=${images}&per_page=1`;
+        var API_key = "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
+
+        // fetch both APIs
+        var apiUrls = [
+            fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${smkmw}`),
+            fetch(pexelURL, {
+                headers: {
+                    // Accept: 'application/json',
+                    Authorization: API_key
+                    //credentials: 'include'
+                }
+            }),
+        ];
+        // submit https request
+        Promise.all(apiUrls).then(function (responses) {
+            // using map() method to get a response array of json objects, 
+            return Promise.all(responses.map(function (response) {
+                return response.json();
+            }))
+                // word definition
+                .then(function (response) {
+                    var wordDef = response[0];
+                    var imgSrc = response[1];
+
+                    var def = (wordDef[0])
+                    var wordData = {
                         word: word,
                         class: def.fl,
                         definition: def.shortdef,
                         audio: def.hwi.prs[0].sound.audio,
                         offensive: def.meta.offensive,
+                        imageInfo: imgSrc.photos,
                     };
-                    console.log(wordDef)
-                    // s displayWordDefSound(wordDef)
-                    // displaySoundBite(wordDef
-                    wordDefArr.push(wordDef)
-                    //return wordDef
+                    console.log(wordData)
+                    displayWord(wordData);
+                    return wordData
                 })
-            } else {
-                alert("Error:" + response.statusText)
-            }
+            // } else {
+            //     alert("Error:" + response.statusText)
+            // }
         });
-    }
-
-    for (var i = 0; i < results.length; i++) {
-        var images = results[i];
-        var pexelURL = `https://api.pexels.com/v1/search?query=${images}&per_page=1`;// ${new_words[0]}
-        var API_key = "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
-        //add the function to fetch url, and call it above 
-        fetch(pexelURL, {
-            headers: {
-                // Accept: 'application/json',
-                Authorization: API_key
-                //credentials: 'include'
-            }
-        })
-            .then(function (response) {
-                //console.log(response);
-                return response.json();
-            })
-            //console.log(response);// will display the array
-            .then(function (response) {
-                console.log(response.photos);
-                // // Use 'querySelector' to get the ID of where the pic/ will be displayed
-                // var responseContainerEl = document.querySelector('#images');
-                // // // Create an '<img>' element
-                // var pexelImg = document.createElement('img');
-                // // Set that element's 'src' attribute to the 'image_url' from API response
-                // pexelImg.setAttribute('src', response.photos[0].src.small);
-                // responseContainerEl.appendChild(pexelImg);
-                imgSrcInfoArr.push(imgSrcInfo);
-            })
-    }
-    console.log(wordDefArr);
-    console.log(imgSrcInfoArr);
-}
+    };
+};
 
 // function takes MW api object data and packages word & class (e.g. noun, verb adjective) for DOM object display
-var displayWordDefSound = function (defObject) {
-    console.log(defObject)
+var displayWord = function (wordData) {
+    // console.log(defObject)
 
     // resultsContainerEl.textContent = '';
 
     // check to see whether term is offensive
-    if (!defObject.offensive) {
+    if (!wordData.offensive) {
         // create DOM elements
         var resultLI = document.createElement('li');
-        resultLI.setAttribute('class', 'col s12 m6 l3');
+        resultLI.setAttribute('class', 'col-12');
 
         // display word within result container header
         var resultHeader = document.createElement('div');
         resultHeader.setAttribute('class', 'collapsible-header');
-        resultHeader.innerHTML = '<p>' + defObject.word + '</p>';
+        resultHeader.innerHTML = '<p>' + wordData.word + '</p>';
 
         //display image
         var pexelImg = document.createElement('img');
@@ -336,7 +322,7 @@ var displayWordDefSound = function (defObject) {
         // display class, definitions and sound button within result container body
 
         // takes audio file reference and creates link for audio playback; 'subdir' uses conditions provided by MW api documentation to determine 'subdir' component of href
-        var aud = defObject.audio.split('', 3)
+        var aud = wordData.audio.split('', 3)
         var regex = RegExp('[\\d\\W]')
         var subdir = ''
         if (aud[0] + aud[1] + aud[2] === 'bix') {
@@ -348,7 +334,7 @@ var displayWordDefSound = function (defObject) {
         } else {
             subdir = aud[0]
         }
-        var audioLink = 'https://media.merriam-webster.com/audio/prons/en/us/ogg/' + subdir + '/' + defObject.audio + '.ogg';
+        var audioLink = 'https://media.merriam-webster.com/audio/prons/en/us/ogg/' + subdir + '/' + wordData.audio + '.ogg';
         // console.log(audioLink)
 
         // create button element to contain sound link
@@ -365,13 +351,13 @@ var displayWordDefSound = function (defObject) {
         // create div body element for class, audio button, and definitions
         var resultBody = document.createElement('div');
         resultBody.setAttribute('class', 'collapsible-body');
-        resultBody.innerHTML = '<span>' + defObject.class + '</span>';
+        resultBody.innerHTML = '<span>' + wordData.class + '</span>';
 
         // loop through each homonym and display within element for that word
-        for (var i = 0; i < defObject.definition.length; i++) {
+        for (var i = 0; i < wordData.definition.length; i++) {
             n = i + 1
             var resultDef = document.createElement('p');
-            resultDef.textContent = n + ') ' + defObject.definition[i];
+            resultDef.textContent = n + ') ' + wordData.definition[i];
             resultBody.append(resultDef);
         }
 
@@ -458,3 +444,37 @@ window.onclick = function (event) {
 //         })
 // }
 // document.getElementById("images").innerHTML = "Image";
+// }
+
+// for (var i = 0; i < results.length; i++) {
+//     var images = results[i];
+//     var pexelURL = `https://api.pexels.com/v1/search?query=${images}&per_page=1`;// ${new_words[0]}
+//     var API_key = "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
+//     //add the function to fetch url, and call it above 
+//     fetch(pexelURL, {
+//         headers: {
+//             // Accept: 'application/json',
+//             Authorization: API_key
+//             //credentials: 'include'
+//         }
+//     })
+//         .then(function (response) {
+//             //console.log(response);
+//             return response.json();
+//         })
+//         //console.log(response);// will display the array
+//         .then(function (response) {
+//             console.log(response.photos);
+//             // // Use 'querySelector' to get the ID of where the pic/ will be displayed
+//             // var responseContainerEl = document.querySelector('#images');
+//             // // // Create an '<img>' element
+//             // var pexelImg = document.createElement('img');
+//             // // Set that element's 'src' attribute to the 'image_url' from API response
+//             // pexelImg.setAttribute('src', response.photos[0].src.small);
+//             // responseContainerEl.appendChild(pexelImg);
+//             imgSrcInfoArr.push(imgSrcInfo);
+//         })
+// }
+// console.log(wordDefArr);
+// console.log(imgSrcInfoArr);
+// }
