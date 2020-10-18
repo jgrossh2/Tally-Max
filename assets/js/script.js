@@ -77,6 +77,7 @@ $(".letter").draggable({
 //       },
 // })
 //pull tiles into dropzone if overlap
+
 //make dropzone
 $(".space").droppable({
     accept: ".letter",
@@ -93,6 +94,7 @@ $(".space").droppable({
 
         var dragged= ui.draggable[0].dataset.letter;
         console.log(ui.draggable[0].dataset.letter);
+        //add drop letters to array
         dropLetters.push(dragged);
         console.log(dropLetters);
         $(".space").removeClass("dropZone");
@@ -109,16 +111,10 @@ $(".space").droppable({
     update: function(event) {
         console.log(this)
     }
-    //put dropped tiles in array
-    // saveTiles();
 });
 
-//drop tiles in array
-// var saveTiles = function() {
-//     var tileVal = $()
-
-// }
 //only accept so many of each letter
+
 letterEl.addEventListener("click", dragLetters)
 
 // by user form
