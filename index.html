@@ -77,6 +77,7 @@
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
         <!-- <div id="grid">
             <div id="item1"></div>
             <div id="item2"></div>
@@ -89,6 +90,8 @@
             <div id="item3"></div>
           </div> -->
             <!-- <ul id="keyboard">
+=======
+>>>>>>> develop
 
         <!-- START SEARCH-BUTTONS CONTAINER -->
         <div class='container'>
@@ -104,7 +107,7 @@
                     <button id="randomLetterBtn" class="waves-effect searchbtn"><i class="material-icons left">grade</i>RANDOM</button></td>
                 </div>
                 <div class='search center-align col s6 m3 l3'>
-                    <button class="waves-effect searchbtn"><i class="material-icons left">grade</i>HIGH SCORE</button></td>
+                    <button id="highScoreBtn" class="waves-effect searchbtn"><i class="material-icons left">grade</i>HIGH SCORE</button></td>
                 </div>
             </div>
         </div>
@@ -113,14 +116,9 @@
         <div class='container'>
             <div class="row z-depth-2">
                 <div class='col valign-wrapper results-title'>
-                    <h5 class='valign subtitle'>Search results:</h5>
+                    <h5 class='valign subtitle'>Search results for: <span id="search-content"></span></h5>
                 </div>
-                <ul class="collapsible popout col s12 m12 l12" data-collapsible='accordion'>
-                    <li class='col s12 m6 l3'>
-                        <div class='collapsible-header'>test</div>
-                        <div class='collapsible-body'>lorem</div>
-                    </li>
-                </ul>
+                    <ul class="collapsible popout col s12 m12 l12" id="results-container" data-collapsible='accordion'></ul>
             </div>
         </div>
     </main>
