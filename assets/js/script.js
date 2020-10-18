@@ -185,12 +185,17 @@ var showImage = function () {
             console.log(response.photos);
             // Use 'querySelector' to get the ID of where the pic/ will be displayed
             var responseContainerEl = document.querySelector('#images');
+
+            // var pexelInfoDiv = document.createElement('div');
             var pexelCreditEl = document.createElement('div')
+            pexelCreditEl.innerHTML = `img src=$(photo.src.small)
+            <p>Photo : $(photo.photogrampher)</p>
+            <a href=$(photo.src.small)></a>`
             var photographerEl = document.createElement("p");
             var pexelImg = document.createElement('img');
             var madeByPexelEl = document.createElement("p");
             var logoLinkEl = document.createElement("p");
-            // var pexelInfoDiv = document.createElement('div');
+
             pexelCreditEl.classList.add("card-body");
             photographerEl.textContent = "Photo by: ";
             photographerEl.classList.add("card-text");
@@ -211,68 +216,40 @@ var showImage = function () {
 }
 document.getElementById("images").innerHTML = "Image";
 
-// class Images {
-//     //The constructor property returns a reference to the Object constructor function that created the instance object. Note that the value of this property is a reference to the function itself, not a string containing the function's name.
-//     constructor() {
-//         this.API_key = "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
-//         //properties
-//         this.imagesDiv = document.querySelector(".listofpix");
-//         // this.searchForm = document.querySelector(".header form");
-//         // this.load = document.querySelector(".load");
-//         this.eventHandler(); //call in constructor
-//     }
-//     //add handler
-//     eventHandler() {
-//         //with function '() => ' inside the eventListener, so the images load
-//         document.addEventListener("DOMContentLoaded", () => {
-//             // get another function to get image
-//             this.getImg();
-//             //fetch image inside the Handler function:
-//         });
-//     }
-//     async getImg() {
-//         //link from PEXEL for search pic: "https://api.pexels.com/v1/search?query=nature&per_page=1"
-//         var pexelURL = "https://api.pexels.com/v1/curated?query=${nature}&per_page=2";
-//         var data = await this.fetchImages(pexelURL); //await and async used together
-//         this.generateHTML(data.photos) //photos is a data=an array from pexel in console log
-//         console.log(data)//(response); //use 'awain in fetch function to wait for the results to load on page- get a response
-//         //'await' goes together with 'async' -add to var
-//     }
-//     //add the function to fetch url, and call it above 
-//     async fetchImages(pexelURL) {
-//         var response = await fetch(pexelURL, {
-//             method: "GET", //there are 5 methods total to use if needed
-//             headers: {
-//                 Accept: 'application/json',
-//                 Authorization: this.API_key
-//             }
-//         });
-//         var data = await response.json();
-//         // console.log(data); will display the array
-//         return data; //return data and store it in var data above
-//     }
-//     //per pexel documentation, include sources and give credit to photographers
-//     //either hardcode? or use display below the added info through classList.add
-//     generateHTML(photos) {
-//         photos.forEach(photo => {//photos in here refers to data in array from console log, when using another object- change to that
-//             //create var for instead of a div in html that <div class="item" for example
-//             var item = document.createElement("div");
-//             //add class
-//             item.classList.add("item");
-//             //string 
-//             item.innerHTML = `
-//             <a href="#">
-//              <img src="${photo.src.large}">
-//              <h4>${photo.photographer}</h4>
-//              </a>
-//              `;//from array of objects- change if needed a dif source displayed
-//             //append
-//             this.imagesDiv.appendChild(item);
-//         })
-//     }
-// }
-// //initialize the class
-// var listofpix = new Images;
+//Pixabay key:18755179-1cec5558437abfcfe27155a57
+
+var pixabay_KEY = '18755179-1cec5558437abfcfe27155a57';
+var pixabayUrl = "https://pixabay.com/api/?key=" + pixabay_KEY + "&q=" + encodeURIComponent('roses');
+
+fetch(pixabayUrl)
+    // .then(function (response) {
+    //     return response.json();
+    // })
+    // .then(function (response) {
+    //     console.log(response);
+    // })
+    ////Convert the response to JSON
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (response) {
+        // Use 'querySelector' to get the ID of where the img will be displayed
+        var responseContPixabayEl = document.querySelector('#listofpixabay');
+        // Create an '<img>' element
+        var pixabayImg = document.createElement('img');
+        // Set that element's 'src' attribute to the 'image_url' from API response
+        pixabayImg.setAttribute('src', response.hits[0].userImageURL);
+        // Append the '<img>' element to the page
+        responseContPixabayEl.appendChild(pixabayImg);
+    });
+
+// $.getJSON(pixabayUrl, function (data) {
+//     // if (parseInt(data.totalHits) > 0)
+//     //     $.each(data.hits, function (i, hit) { console.log(hit.pageURL); });
+//     // else
+//     console.log(data);
+//     //('No hits');
+// });
 //API token is: b215d9b947a47ebd06cee1f48819e44474eeff9f
 //curl--header "Authorization: Token b215d9b947a47ebd06cee1f48819e44474eeff9f" https://owlbot.info/api/v4/dictionary/owl -s | json_pp
 
