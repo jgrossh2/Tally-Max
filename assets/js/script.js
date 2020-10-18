@@ -8,6 +8,8 @@ var highScoreBtnEl = document.getElementById('highScoreBtn');
 var letterContainerEl = document.getElementById('possible-letters');
 var searchContentEl = document.getElementById('search-content');
 var resultsContainerEl = document.getElementById('results-container');
+var letterEl = document.querySelector(".letter");
+var spaceEl = document.querySelector(".space");
 
 // global page variables
 var wordLength = 0;
@@ -155,7 +157,7 @@ randomLetterBtnEl.addEventListener('click', function () {
     letterCounter(letters);
     function letterCounter(letters) {
         // reset global variable
-        wordLength = 0;   
+        wordLength = 0;
         var alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
         var ar = alphabet.split("");
         for (var i = 0; i < letters.length; i++) {
@@ -245,6 +247,9 @@ var getDefData = function (letters, results) {
         searchContentEl.textContent = '';
         searchContentEl.textContent = letters;
     }
+    var wordDefArr = [];
+    var imgSrcInfoArr = [];
+    
     // generate API data for each word
     for (var i = 0; i < results.length; i++) {
         let word = results[i];
@@ -261,10 +266,11 @@ var getDefData = function (letters, results) {
                         audio: def.hwi.prs[0].sound.audio,
                         offensive: def.meta.offensive,
                     };
-                    // console.log(wordDef)
-                    displayWordDefSound(wordDef)
+                    console.log(wordDef)
+                    // displayWordDefSound(wordDef)
                     // displaySoundBite(wordDef
-                    return wordDef
+                    wordDefArr.push(wordDef);
+                    // return wordDef
                 })
             } else {
                 alert("Error:" + response.statusText)
@@ -285,26 +291,33 @@ var getDefData = function (letters, results) {
             }
         })
             .then(function (response) {
-                console.log(response);
+                // console.log(response);
                 return response.json();
             })
             //console.log(response);// will display the array
             .then(function (response) {
-                console.log(response.photos);
-                // Use 'querySelector' to get the ID of where the pic/ will be displayed
-                var responseContainerEl = document.querySelector('#images');
-                // // Create an '<img>' element
-                var pexelImg = document.createElement('img');
-                // Set that element's 'src' attribute to the 'image_url' from API response
-                pexelImg.setAttribute('src', response.photos[0].src.small);
-                responseContainerEl.appendChild(pexelImg);
+                var imgSrcInfo = response.photos;
+                // console.log(response.photos);
+                // // Use 'querySelector' to get the ID of where the pic/ will be displayed
+                // var responseContainerEl = document.querySelector('#images');
+                // // // Create an '<img>' element
+                // var pexelImg = document.createElement('img');
+                // // Set that element's 'src' attribute to the 'image_url' from API response
+                // pexelImg.setAttribute('src', response.photos[0].src.small);
+                // responseContainerEl.appendChild(pexelImg);
+                imgSrcInfoArr.push(imgSrcInfo);
+                // console.log(imgSrcInfo);
+                // return imgSrcInfo;
             })
     }
+    console.log(wordDefArr);
+    console.log(imgSrcInfoArr);
+    //displayWordDefSound(wordDef, imgSrcInfo);
 }
 
 // function takes MW api object data and packages word & class (e.g. noun, verb adjective) for DOM object display
 var displayWordDefSound = function (defObject) {
-    console.log(defObject)
+    // console.log(defObject)
 
     // resultsContainerEl.textContent = '';
 
@@ -418,4 +431,3 @@ var displayWordDefSound = function (defObject) {
     //         })
     // }
     // document.getElementById("images").innerHTML = "Image";
-
