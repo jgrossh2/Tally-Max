@@ -10,7 +10,7 @@ var letterContainerEl = document.getElementById('possible-letters');
 var wordLength = 0;
 var totalLetters = 0;
 var dropLetters = [];
-var letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+// var letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 var letterEl = document.querySelector(".letter");
 var spaceEl = document.querySelector(".space");
 // get user input area
