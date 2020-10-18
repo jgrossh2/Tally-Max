@@ -17,6 +17,11 @@ header, footer.page-footer {
     font-family: var(--primary);
 }
 
+main {
+    font-family: var(--secondary);
+    color: var(--dark);
+}
+
 div.container {
     max-width: 1170px;
 }
@@ -39,6 +44,14 @@ h1.x {
 .results-list {
     font-family: var(--secondary);
     color: var(--dark);
+}
+
+.collapsible-header {
+
+}
+
+.collapsible-header.active {
+    background-color: var(--lblue);
 }
 
 .subtitle {
