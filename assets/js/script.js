@@ -94,6 +94,11 @@ $(".space").droppable({
         dropLetters.push(dragged);
         console.log(dropLetters);
         $(".space").removeClass("dropZone");
+        var compareLetters= [];
+        var getLetters = $(".letter").data("data-letter");
+        console.log(getLetters);
+        compareLetters.push(getLetters);
+        // if (compareLetters )
         },
  
     over: function(event, ui) {
