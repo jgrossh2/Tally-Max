@@ -32,17 +32,17 @@ div.container {
 
 h1.m {
     margin: 0;
-    padding: 0 0 0 36px;
+    padding: 0 0 0 46px;
 }
 
 h1.tally {
-    margin: 0;
+    margin: 10px;
     letter-spacing: 15px;
 }
 
 h1.x {
     margin: 0;
-    padding: 0 0 0 42px;
+    padding: 0 0 5px 52px;
 }
 
 .results-list {
