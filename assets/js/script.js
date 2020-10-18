@@ -360,7 +360,7 @@ var displayWordDefSound = function (defObject) {
         //create button to contain 'more info"
         var moreBtn = document.createElement('a');
         moreBtn.setAttribute('class', "btn-floating btn-large waves-effect waves-light var(--lblue)");
-        moreBtn.innerHTML = '<span><img id="info-icon" src="assets/iconfinder_speaker-high-sound-volume-voice_3643734.png"></span>'
+        moreBtn.innerHTML = '<span><img id="info-icon" src="iconfinder_Information_Circle_4781829.png"></span>'
 
         // create div body element for class, audio button, and definitions
         var resultBody = document.createElement('div');
@@ -380,7 +380,8 @@ var displayWordDefSound = function (defObject) {
         resultLI.append(resultHeader);
         resultLI.append(resultBody);
         resultsContainerEl.append(resultLI);
-        //resultBody.append(pexelImg);
+        resultBody.append(infoBtn);
+        //resultBody.append(pexelImg);s
     } else {
         console.log("Sorry, this word cannot be displayed.");
     }
