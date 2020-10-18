@@ -308,13 +308,8 @@ var displayWord = function (wordData) {
     if (!wordData.offensive) {
         // create DOM elements
         var resultLI = document.createElement('li');
-<<<<<<< HEAD
         resultLI.setAttribute('class', 'col-12');
         
-=======
-        resultLI.setAttribute('class', 'col s12 m6 l3');
-
->>>>>>> develop
         // display word within result container header
         var resultHeader = document.createElement('div');
         resultHeader.setAttribute('class', 'collapsible-header');
