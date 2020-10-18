@@ -4,17 +4,130 @@
 var twoLetterBtnEl = document.getElementById('twoLetterBtn');
 var threeLetterBtnEl = document.getElementById('threeLetterBtn');
 var randomLetterBtnEl = document.getElementById('randomLetterBtn');
+var highScoreBtnEl = document.getElementById('highScoreBtn');
 var letterContainerEl = document.getElementById('possible-letters');
 var searchContentEl = document.getElementById('search-content');
 var resultsContainerEl = document.getElementById('results-container');
 
 // global page variables
 var wordLength = 0;
+var dropLetters = [];
+
+// get user input area
+spaceEl.textContent = "Drag Letters Here! "
+
+// drag letters
+var dragLetters = function (event) {
+    event.preventDefault();
+    console.log("works")
+}
+
+$(".letter").sortable({
+    revert: true
+});
+
+// make letters drag
+$(".letter").draggable({
+    connectToSortable: ".space",
+    tolerance: "pointer",
+    helper: "clone",
+    appendTo: ".space",
+    containment: "#keyboard",
+    cursor: "move",
+    snap: ".space",
+    revert: "invalid",
+    start: function (event, ui) {
+        console.log(ui);
+        //clone of tile
+        $(ui.helper).addClass("dragging");
+        console.log("test");
+    },
+    stop: function (event, ui) {
+        $(ui.helper).removeClass("dragging");
+        console.log("stop");
+        // var grid = document.createElement("div");
+        // grid.id = "grid";
+        // grid.className = "grid";
+        // for (i=0; i<7; i++) {
+        //     var row = grid.appendChild(document.createElement("div"));
+        //     row.className = "row";
+        //     row.id = "row" +i;
+        //     console.log("well?");
+        // };
+    }
+    //remove class
+    // add grid item
+});
+
+// $(".letter").sortable({
+//     revert: true
+// });
+//     connectWith: $(".space .letter"),
+//     tolerance: "pointer",
+//     helper: "clone",
+//     activate: function(event) {
+//         var letterVal= $(this).attr("data-letter");
+//             dropLetters.push(letterVal);
+//             console.log(letterVal);
+// $(".space").addClass("dropZone");
+// console.log("activate", this);
+//   },
+//       deactivate: function(event) {
+//         // $(".bottom-trash").removeClass("dropover bottom-trash-drag");
+//         console.log("deactivate", this);
+//       },
+//       over: function(event) {
+//         // $(event.target).addClass("dropover-active");
+//       },
+//       out: function(event) {
+//         // $(event.target).removeClass("dropover-active");
+//         console.log("out", event.target);
+//       },
+// })
+//pull tiles into dropzone if overlap
+
+//make dropzone
+$(".space").droppable({
+    accept: ".letter",
+    tolerance: "touch",
+    revert: false,
+    drop: function (event, ui) {
+        console.log(ui);
+        console.log("drop");
+        var helper = ui.helper.clone(true);
+        helper.appendTo(".space");
+        $(ui.helper).removeClass("dragging");
+        // finds object and then letter value of that object
+
+        var dragged = ui.draggable[0].dataset.letter;
+        console.log(ui.draggable[0].dataset.letter);
+        //add drop letters to array
+        dropLetters.push(dragged);
+        console.log(dropLetters);
+        $(".space").removeClass("dropZone");
+    },
+
+    over: function (event, ui) {
+        $(".space").addClass("dropZone");
+        console.log("over");
+    },
+    out: function (event, ui) {
+        $(".space").removeClass("dropZone");
+        console.log("out");
+    },
+    update: function (event) {
+        console.log(this)
+    }
+});
+
+//only accept so many of each letter
+
+letterEl.addEventListener("click", dragLetters)
 
 // event listeners to gather user input and start generator function
-twoLetterBtnEl.addEventListener('click', function() {
+twoLetterBtnEl.addEventListener('click', function () {
     // get possible letters from form
-    var letters = letterContainerEl.value;
+    var letters = dropLetters.join('');
     // reset global variable
     var wordLength = 0;
     // set search criteria
@@ -23,9 +136,9 @@ twoLetterBtnEl.addEventListener('click', function() {
     genWordList(wordLength, letters);
 });
 
-threeLetterBtnEl.addEventListener('click', function() {
+threeLetterBtnEl.addEventListener('click', function () {
     // get possible letters from form
-    var letters = letterContainerEl.value;
+    var letters = dropLetters.join('');
     // reset global variable
     var wordLength = 0;
     // set search criteria
@@ -34,9 +147,9 @@ threeLetterBtnEl.addEventListener('click', function() {
     genWordList(wordLength, letters);
 });
 
-randomLetterBtnEl.addEventListener('click', function() {
+randomLetterBtnEl.addEventListener('click', function () {
     // get possible letters from form
-    var letters = letterContainerEl.value;
+    var letters = dropLetters.join('');
 
     // get total letter count
     letterCounter(letters);
@@ -56,16 +169,46 @@ randomLetterBtnEl.addEventListener('click', function() {
     genWordList(wordLength, letters);
 });
 
+highScoreBtnEl.addEventListener('click', function () {
+    // get possible letters from form
+    var letters = dropLetters.join('');
+
+    // get total letter count
+    letterCounter(letters);
+    function letterCounter(letters) {
+        // reset global variable
+        wordLength = 0;
+        var alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        var ar = alphabet.split("");
+        for (var i = 0; i < letters.length; i++) {
+            if (ar.indexOf(letters[i]) > -1) {
+                wordLength = wordLength + 1;
+            }
+        }
+        return wordLength;
+    }
+
+    // sort letters based on value before sending to genWordList
+    // var priorityLetters = ['z','q','x','j','k','w','y','v','f','h','o','m','c','b','g','d','u','s','l','t','r','n','o','i','a','e'];
+    // var lettersArray = letters.split('');
+    // lettersArray.sort(function(a, b) {
+    //     return priorityLetters[a] - priorityLetters[b];
+    // })
+    // console.log(lettersArray);
+    // call word generator
+    genWordList(wordLength, letters);
+});
+
 // generate all possible combinations of inputted letters
-var genWordList = function(wordLength, letters) {
+var genWordList = function (wordLength, letters) {
     // reset form container
-    letterContainerEl.value = '';
+
     var results = [];
     var arrayCounter = 0;
 
-    var generate = function(possWord) {
+    var generate = function (possWord) {
         for (var i = 0; i < letters.length; i++) {
-            if (arrayCounter <= 9) {
+            if (arrayCounter <= 11) {
                 possWord += letters[i];
                 if (possWord.length === wordLength) {
                     if (dict.includes(possWord)) {
@@ -76,7 +219,7 @@ var genWordList = function(wordLength, letters) {
                     generate(possWord);
                 }
                 possWord = possWord.slice(0, -1);
-            // break from loop to cut down on load time    
+                // break from loop to cut down on load time    
             } else {
                 break;
             }
@@ -87,81 +230,125 @@ var genWordList = function(wordLength, letters) {
     // store user search / results
     localStorage.setItem(letters, results);
 
-    displayResults(letters, results);
+    // get data from API
+    getDefData(letters, results);
     return console.log(results);
 };
 
-// When the user clicks on a button generate a list of words and then put them on the page
-//for each word create a corresponding BUTTON with a info-ICON -API
-//and with IMAGE corresponding to the meaning of that word -API
-
-
-//create function to show words in the list
-//cleate button function for modal Picture display(next step will be :get picAPI to display inside)
-//document.getElementById("images").addEventListener("click", showImage);
-
-var displayResults = function(letters, results) {
-    //check if there are any results
+// function fetches definition data for each in an array of words and returns subset of data packaged as an object
+var getDefData = function (letters, results) {
+    // display searched letters
     if (results.length === 0) {
-        searchContentEl.textContent = "No Results Found";
-        return;
+        searchContentEl.textContent = '';
+        searchContentEl.textContent = 'No Words Found';
     } else {
-        // display searched letters
         searchContentEl.textContent = '';
         searchContentEl.textContent = letters;
-        // display results and add api links
-        for (var i = 0; i < results.length; i++) {
-            // assign word to variable
-            var wordResult = results[i];
-
-            // create a container for each word
-            var wordEl = document.createElement("a");
-            wordEl.classList = "col s6 m4 l3";
-            // wordEl.setAttribute("href", `link for modal?`);
-        
-            // create a span element to hold the word
-            var word = document.createElement("span");
-            word.textContent = wordResult;
-            // append to container
-            wordEl.appendChild(word);
-
-            // append result to result container
-            resultsContainerEl.appendChild(wordEl);
-        }
     }
-};
+    // generate API data for each word
+    for (var i = 0; i < results.length; i++) {
+        let word = results[i];
+        var mwApiUrl = 'https://www.dictionaryapi.com/api/v3/references/collegiate/json/'
+            + results[i] + '?key=' + smkmw;
+        fetch(mwApiUrl).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (data) {
+                    var def = (data[0])
+                    var wordDef = {
+                        word: word,
+                        class: def.fl,
+                        definition: def.shortdef,
+                        audio: def.hwi.prs[0].sound.audio,
+                        offensive: def.meta.offensive,
+                    };
 
-//document.querySelector("?button").addEventListener("click");
-var showDescription = function (word_array) {
-    word_array.forEach(word => {
-        //posWord or word you get form the dictionary
-        var apiUrl = "https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=9197f1fd-982d-40cb-b0ef-a4e64d1afabb";
-        //make a get request for url
-        fetch(apiUrl)
-            // Convert the response to JSON
-            .then(function (response) {
-                //request was sucessful
-                if (response.ok) {
-                    response.json().then(function (data) {
-                        console.log(data);
-                    });
+                    // console.log(wordDef)
+                    displayWordDefSound(wordDef)
+                    // displaySoundBite(wordDef
 
-                } else {
-                    return
-                }
-
-            });
-    })
+                    return wordDef
+                })
+            } else {
+                alert("Error:" + response.statusText)
+            }
+        });
+    }
 }
 
+// function takes MW api object data and packages word & class (e.g. noun, verb adjective) for DOM object display
+var displayWordDefSound = function (defObject) {
+    console.log(defObject)
+
+    // resultsContainerEl.textContent = '';
+
+    // check to see whether term is offensive
+    if (!defObject.offensive) {
+        // create DOM elements
+        var resultLI = document.createElement('li');
+        resultLI.setAttribute('class', 'col s12 m6 l3');
+
+        // display word within result container header
+        var resultHeader = document.createElement('div');
+        resultHeader.setAttribute('class', 'collapsible-header');
+        resultHeader.innerHTML = '<p>' + defObject.word + '</p>';
+
+        // display class, definitions and sound button within result container body
+
+        // takes audio file reference and creates link for audio playback; 'subdir' uses conditions provided by MW api documentation to determine 'subdir' component of href
+        var aud = defObject.audio.split('', 3)
+        var regex = RegExp('[\\d\\W]')
+        var subdir = ''
+        if (aud[0] + aud[1] + aud[2] === 'bix') {
+            subdir = 'bix'
+        } else if (aud[0] + aud[1] === 'gg') {
+            subdir = 'gg'
+        } else if (regex.test(aud[0])) {
+            subdir = 'number'
+        } else {
+            subdir = aud[0]
+        }
+        var audioLink = 'https://media.merriam-webster.com/audio/prons/en/us/ogg/' + subdir + '/' + defObject.audio + '.ogg';
+        // console.log(audioLink)
+
+        // create button element to contain sound link
+        var audioBtn = document.createElement('a');
+        audioBtn.setAttribute('class', 'btn-floating waves-effect waves-light red')
+        audioBtn.setAttribute('href', audioLink);
+        audioBtn.innerHTML = '<span><img id="audio-icon" src="assets/iconfinder_speaker-high-sound-volume-voice_3643734.png"></span>'
+
+        // create div body element for class, audio button, and definitions
+        var resultBody = document.createElement('div');
+        resultBody.setAttribute('class', 'collapsible-body');
+        resultBody.innerHTML = '<span>' + defObject.class + '</span>';
+
+        // loop through each homonym and display within element for that word
+        for (var i = 0; i < defObject.definition.length; i++) {
+            n = i + 1
+            var resultDef = document.createElement('p');
+            resultDef.textContent = n + ') ' + defObject.definition[i];
+            resultBody.append(resultDef);
+        }
+
+        // append content to page elements
+        resultBody.append(audioBtn);
+        resultLI.append(resultHeader);
+        resultLI.append(resultBody);
+        resultsContainerEl.append(resultLI);
+    } else {
+        console.log("Sorry, this word cannot be displayed.");
+    }
+
+};
+
 var showImage = function () {
-    var pexelURL = `https://api.pexels.com/v1/search?query=nature&per_page=5`;
+    var pexelURL = `https://api.pexels.com/v1/search?query=${new_words[0]}&per_page=1`;// ${new_words[0]}
     var API_key = "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
     //add the function to fetch url, and call it above 
     fetch(pexelURL, {
         headers: {
             // Accept: 'application/json',
             Authorization: API_key
+            //credentials: 'include'
         }
     })
         .then(function (response) {
@@ -170,84 +357,38 @@ var showImage = function () {
         })
         //console.log(response);// will display the array
         .then(function (response) {
-            console.log(response.data);
-            // Use 'querySelector' to get the ID of where the GIF will be displayed
-            var responseContainerEl = document.querySelector('#containerimg');
-            // // // Create an '<img>' element
+            console.log(response.photos);
+            // Use 'querySelector' to get the ID of where the pic/ will be displayed
+            var responseContainerEl = document.querySelector('#images');
+            // Pexel credit
+            var pexelCreditEl = document.createElement('div')
+            pexelCreditEl.classList.add("card-body");
+            // Create an '<img>' element
             var pexelImg = document.createElement('img');
-            //responseContainerEl.innerHTML = "";
-            // // // Set that element's 'src' attribute to the 'image_url' from API response
-            pexelImg.setAttribute('src', response.data);
-            // // console.log(headers.url);
+            //pexel credit <div> element
+            // var pexelInfoDiv = document.createElement('div');
+            // pexelInfoDiv.classList.add("card");
+            var photographerEl = document.createElement("p");
+            photographerEl.textContent = "Photo by: ";
+            photographerEl.classList.add("card-text");
+            var madeByPexelEl = document.createElement("p");
+            madeByPexelEl.textContent = "Photos provided by Pexels";
+            madeByPexelEl.classList.add("card-text");
+            var logoLinkEl = document.createElement("p");
+            logoLinkEl.textContent = "";//''"<a href="https://www.pexels.com"><img src="https://images.pexels.com/lib/api/pexels.png"/></a>';
+            logoLinkEl.classList.add("card-text");
+            // Set that element's 'src' attribute to the 'image_url' from API response
+            pexelImg.setAttribute('src', response.photos[0].src.small);
+            //
+            //pexelInfoDiv.setAttribute('src', response.photographer);
+            // console.log(headers.url);
+            //pexelInfoDiv.appendChild(pexelCreditEl);
+            pexelCreditEl.appendChild(photographerEl);
+            pexelCreditEl.appendChild(madeByPexelEl);
+            pexelCreditEl.appendChild(logoLinkEl);
+            //pexelCreditEl.appendChild(pexelInfoDiv);
             responseContainerEl.appendChild(pexelImg);
         })
 }
 document.getElementById("images").innerHTML = "Image";
-//}
 
-// class Images {
-//     //The constructor property returns a reference to the Object constructor function that created the instance object. Note that the value of this property is a reference to the function itself, not a string containing the function's name.
-//     constructor() {
-//         this.API_key = "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
-//         //properties
-//         this.imagesDiv = document.querySelector(".listofpix");
-//         // this.searchForm = document.querySelector(".header form");
-//         // this.load = document.querySelector(".load");
-//         this.eventHandler(); //call in constructor
-//     }
-//     //add handler
-//     eventHandler() {
-//         //with function '() => ' inside the eventListener, so the images load
-//         document.addEventListener("DOMContentLoaded", () => {
-//             // get another function to get image
-//             this.getImg();
-//             //fetch image inside the Handler function:
-//         });
-//     }
-//     async getImg() {
-//         //link from PEXEL for search pic: "https://api.pexels.com/v1/search?query=nature&per_page=1"
-//         var pexelURL = "https://api.pexels.com/v1/curated?query=${new-words}&per_page=10";
-//         var data = await this.fetchImages(pexelURL); //await and async used together
-//         this.generateHTML(data.photos) //photos is a data=an array from pexel in console log
-//         console.log(data)//(response); //use 'awain in fetch function to wait for the results to load on page- get a response
-//         //'await' goes together with 'async' -add to var
-//     }
-//     //add the function to fetch url, and call it above 
-//     async fetchImages(pexelURL) {
-//         var response = await fetch(pexelURL, {
-//             method: "GET", //there are 5 methods total to use if needed
-//             headers: {
-//                 Accept: 'application/json',
-//                 Authorization: this.API_key
-//             }
-//         });
-//         var data = await response.json();
-//         // console.log(data); will display the array
-//         return data; //return data and store it in var data above
-//     }
-//     //per pexel documentation, include sources and give credit to photographers
-//     //either hardcode? or use display below the added info through classList.add
-//     generateHTML(photos) {
-//         photos.forEach(photo => {//photos in here refers to data in array from console log, when using another object- change to that
-//             //create var for instead of a div in html that <div class="item" for example
-//             var item = document.createElement("div");
-//             //add class
-//             item.classList.add("item");
-//             //string 
-//             item.innerHTML = `
-//             <a href="#">
-//              <img src="${photo.src.large}">
-//              <h4>${photo.photographer}</h4>
-//              </a>
-//              `;//from array of objects- change if needed a dif source displayed
-//             //append
-//             this.imagesDiv.appendChild(item);
-//         })
-//     }
-// }
-//initialize the class
-// var listofpix = new Images;
-//API token is: b215d9b947a47ebd06cee1f48819e44474eeff9f
-//curl--header "Authorization: Token b215d9b947a47ebd06cee1f48819e44474eeff9f" https://owlbot.info/api/v4/dictionary/owl -s | json_pp
-
-///unsplash: acess key: "epv9i5i5P0XQj0_SD3Ez8WxX88fh9d8ts18CgJKJ0Uw"; secret key: "u9UGbWywxfI-tsOZU-Lvfd-qebY5WDF47_8Nhqc2Zms" //50 requests per hour //application status 5-10 days
