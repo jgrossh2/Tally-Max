@@ -60,18 +60,19 @@ $(".sortable1, .sortable4").sortable({
     helper: "clone",
     placeholder: "highlight",
     connectWith: ".sortable4",
+    items: ".tiles",
     start: function (event, ui) {
-        ui.item.addClass("dragging");
-        offsetFix = false;
+        ui.helper.addClass("dragging");
+        $(".dropped").addClass("dropZone");
         },
     stop: function (event, ui) {
+        $(".dropped").removeClass("dropZone");
         },
     remove: function (event, ui) {
         // $(this).sortable('disable');
         ui.item.clone().appendTo(".sortable4");
         $(this).sortable('cancel');
         $(this).addClass("gray");
-        offsetFix = false;
     }
     // start: function(event) {
     //     // ui.helper.toggleClass("highlight");
@@ -130,6 +131,7 @@ $(function () {
         placeholder: "highlight",
         connectWith: ".sortable4",
         start: function (event, ui) {
+            $(".dropped").addClass("dropZone");
             },
         stop: function (event, ui) {
             },
@@ -152,6 +154,7 @@ $(".dropped").droppable({
     drop: function(event, ui){
         console.log(ui);
         console.log("drop");
+        $(".dropped").addClass("dropZone");
         // var helper = ui.helper.clone(true);
         // helper.appendTo(".dropped");
         // $(ui.helper).removeClass("dragging");
@@ -162,7 +165,7 @@ $(".dropped").droppable({
         //add drop letters to array
         dropLetters.push(dragged);
         console.log(dropLetters);
-        $(".space").removeClass("dropZone");
+        // $(".space").removeClass("dropZone");
         // var compareLetters= [];
         // var getLetters = $(".letter").data("data-letter");
         // console.log(getLetters);
