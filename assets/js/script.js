@@ -26,16 +26,6 @@ var dragLetters = function(event) {
     event.preventDefault();
     console.log("works")
 }
-
-// $("#sortable").sortable({
-//     revert: true,
-//     axis: "x",
-// });
-
-// $(".letter").sortable({
-//     revert: true
-// });
-
 // make letters drag
 // $(".letter").draggable({ 
 //     // connectToSortable: ".space",
@@ -63,6 +53,7 @@ var dragLetters = function(event) {
 $(function () {
 $(".sortable1, .sortable4").sortable({
     // revert: true,
+    containment: "#keyboard",
     tolerance: "pointer",
     cursor: "move",
     helper: "clone",
@@ -101,6 +92,7 @@ $(".sortable4").sortable({
 $(function () {
     $(".sortable2, .sortable4").sortable({
         // revert: true,
+        containment: "#keyboard",
         tolerance: "pointer",
         cursor: "move",
         helper: "clone",
@@ -124,6 +116,7 @@ $(function () {
 $(function () {
     $(".sortable3, .sortable4").sortable({
         // revert: true,
+        containment: "#keyboard",
         tolerance: "pointer",
         cursor: "move",
         helper: "clone",
@@ -163,29 +156,19 @@ $(".dropped").droppable({
         dropLetters.push(dragged);
         console.log(dropLetters);
         $(".space").removeClass("dropZone");
-        var compareLetters= [];
-        var getLetters = $(".letter").data("data-letter");
-        console.log(getLetters);
-        compareLetters.push(getLetters);
+        // var compareLetters= [];
+        // var getLetters = $(".letter").data("data-letter");
+        // console.log(getLetters);
+        // compareLetters.push(getLetters);
         // if (compareLetters )
         },
- 
     // over: function(event, ui) {
-    //     $(".drop").addClass("dropZone");
-    //     console.log("over");
     // },
     // out: function(event, ui) {
-    //     $(".drop").removeClass("dropZone");
-    //     console.log("out");
     // },
     // update: function(event) {
-    //     console.log(this)
     // }
 });
-
-// grays out letter on drop, find ids and match
-
-
 letterEl.addEventListener("click", dragLetters)
 
 // event listeners to gather user input and start generator function
