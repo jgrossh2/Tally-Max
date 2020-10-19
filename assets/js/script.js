@@ -380,7 +380,7 @@ var displayWord = function (wordData) {
 
         // create button element to contain sound link
         var audioBtn = document.createElement('a');
-        audioBtn.setAttribute('class', 'btn-floating waves-effect waves-light red')
+        audioBtn.setAttribute('class', 'btn-floating waves-effect waves-light')
         audioBtn.setAttribute('href', audioLink);
         audioBtn.innerHTML = '<span><img id="audio-icon" src="assets/iconfinder_speaker-high-sound-volume-voice_3643734.png"></span>'
 
