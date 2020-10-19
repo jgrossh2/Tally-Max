@@ -287,7 +287,12 @@ var getDefData = function (letters, results) {
                         offensive: def.meta.offensive,
                         imageInfo: imgSrc.photos,
                     };
+
+                    // var imageInfo = {
+                    //     src: medium
+                    // };
                     console.log(wordData)
+                    // console.log(wordData.imageInfo[0])
                     displayWord(wordData);
                     return wordData
                 })
@@ -342,20 +347,9 @@ var displayWord = function (wordData) {
         var modal = document.getElementById("myModal");
         // Use 'querySelector' to get the ID of where the pic/ will be displayed
         var picBodyEl = document.getElementById('img-body');
-        //var imageInfo =
-        // Create an '<img>' element
-        var pexelImg = document.createElement('img');
-        // // Set that element's 'src' attribute to the 'image_url' from API response
-        pexelImg.setAttribute('src', wordData.imageInfo[0].src.medium); //response.photos[0].src.small);
-        picBodyEl.append(pexelImg);
-
-        var photographerEl = document.getElementById("ph-body");
-        // //photographerEl.textContent = "Photo by: ";
-        photographerEl.setAttribute('src', wordData.imageInfo[0].photographer);
-        // //.append(photographerEl);
 
         // Get the button that opens the modal --- //var btn = document.getElementById("myBtn");
-        var imgBtn = document.createElement('a')
+        var imgBtn = document.createElement('a')//addEventListener('click', onclick);
         imgBtn.setAttribute('class', 'btn-floating waves-effect waves-light red disabled')
         imgBtn.innerHTML = '<span><img id="info-icon" src="assets/iconfinder_Information_Circle_4781829.png"></span>'
 
@@ -364,7 +358,6 @@ var displayWord = function (wordData) {
         // When the user clicks the button, open the modal 
         imgBtn.onclick = function () {
             modal.style.display = "block";
-
         }// When the user clicks on <span> (x), close the modal
         span.onclick = function () {
             modal.style.display = "none";
@@ -386,18 +379,40 @@ var displayWord = function (wordData) {
             resultDef.textContent = n + ') ' + wordData.definition[i];
             resultBody.append(resultDef);
         }
+        for (var i = 0; i < wordData.imageInfo[0].src.medium.length; i++) {
+            // Create an '<img>' element
+            var pexelImg = document.createElement('img');
+            // // Set that element's 'src' attribute to the 'image_url' from API response
+            pexelImg.setAttribute('src', wordData.imageInfo[0].src.medium); //response.photos[0].src.small);
+            picBodyEl.append(pexelImg);
+        }
+        //
+        var photographerEl = document.getElementById("ph-body");
+        for (var i = 0; i < wordData.imageInfo[0].photographer.length; i++) {
+            var resultPhtr = document.createElement('p');
+            resultPhtr.textContent = wordData.imageInfo[0].photographer[i];
+            photographerEl.append(resultPhtr);
+        }
+
+        // photographerEl.setAttribute('src', wordData.imageInfo[0].photographer);
         // append content to page elements
         resultBody.append(audioBtn);
         resultLI.append(resultHeader);
         resultLI.append(resultBody);
         resultsContainerEl.append(resultLI);
         resultBody.append(imgBtn);
-        //resultBody.append(pexelImg);
+        // //modal display:
+        // picBodyEl.append(pexelImg);
     } else {
         console.log("Sorry, this word cannot be displayed.");
     }
+    //document.addEventListener('click', imgBtn.onclick = function () { });
+    //{ modal.style.display = "block"});
 };
-
+// document.addEventListener('click', imgBtn.onclick = function () {
+//     modal.style.display = "block"
+// });
+//document.addEventListener('click', imgBtn.onclick);
 // var showImage = function () {
 //     var pexelURL = `https://api.pexels.com/v1/search?query=${wordDef[0]}&per_page=1`;// ${new_words[0]}
 //     var API_key = "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
