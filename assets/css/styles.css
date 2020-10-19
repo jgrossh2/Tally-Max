@@ -87,10 +87,10 @@ img#mwlogo {
     border: solid white;
     border-radius: 15px;
 }
-.row .col.s1 {
+.container-1 .col.s1 {
     width: 75px;
 }
-.row .col {
+.tiles {
     float: left;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
