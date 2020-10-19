@@ -340,31 +340,30 @@ var displayWord = function (wordData) {
 
         // Get the modal
         var modal = document.getElementById("myModal");
-
         // Use 'querySelector' to get the ID of where the pic/ will be displayed
         var picBodyEl = document.getElementById('img-body');
+        //var imageInfo =
         // Create an '<img>' element
         var pexelImg = document.createElement('img');
-        // Set that element's 'src' attribute to the 'image_url' from API response
-        pexelImg.setAttribute('src', imageInfo.src.small); //response.photos[0].src.small);
+        // // Set that element's 'src' attribute to the 'image_url' from API response
+        pexelImg.setAttribute('src', imageInfo[0].src.small); //response.photos[0].src.small);
         picBodyEl.append(pexelImg);
 
         var photographerEl = document.getElementById("ph-body");
-        //photographerEl.textContent = "Photo by: ";
+        // //photographerEl.textContent = "Photo by: ";
         photographerEl.setAttribute('src', imageInfo[0].photographer);
-        //.append(photographerEl);
+        // //.append(photographerEl);
 
         // Get the button that opens the modal --- //var btn = document.getElementById("myBtn");
-        var infoBtn = document.createElement('a')
-        infoBtn.setAttribute('class', 'btn-floating waves-effect waves-light red disabled')
-        infoBtn.innerHTML = '<span><img id="info-icon" src="assets/iconfinder_Information_Circle_4781829.png"></span>'
+        var imgBtn = document.createElement('a')
+        imgBtn.setAttribute('class', 'btn-floating waves-effect waves-light red disabled')
+        imgBtn.innerHTML = '<span><img id="info-icon" src="assets/iconfinder_Information_Circle_4781829.png"></span>'
 
         // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];
         // When the user clicks the button, open the modal 
-        infoBtn.onclick = function () {
+        imgBtn.onclick = function () {
             modal.style.display = "block";
-
 
         }// When the user clicks on <span> (x), close the modal
         span.onclick = function () {
@@ -392,7 +391,7 @@ var displayWord = function (wordData) {
         resultLI.append(resultHeader);
         resultLI.append(resultBody);
         resultsContainerEl.append(resultLI);
-        resultBody.append(infoBtn);
+        resultBody.append(imgBtn);
         //resultBody.append(pexelImg);
     } else {
         console.log("Sorry, this word cannot be displayed.");
