@@ -125,11 +125,11 @@ a#mwtext {
 }
 
 .letter {
-    background: var(--keys3);
+    /* background: var(--keys3); */
     width: 100%;
     height: 100%;
-    border: solid white;
-    border-radius: 15px;
+    border: solid black;
+    border-radius: 10px;
 }
 .container-1 .col.s1 {
     width: 75px;
@@ -158,7 +158,19 @@ a#mwtext {
 .highlight {
     background-color: mblue;
 }
-
+.dropped {
+    border: dotted 3px black;
+    width: 681px;
+    height: 96px;
+}
+.drop {
+    border: none;
+}
+.todo {
+    margin: auto;
+    font-size: 24px;
+    font-weight: bold;
+}
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */
 @media screen and (max-width: 980px) {
 
