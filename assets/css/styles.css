@@ -84,7 +84,14 @@ img#audio-icon {
 
 img#mwlogo {
     width: 100px;
+
 }
+
+img#imgBtn {
+    width: 32px;
+    padding: 4px 0 0 4px;
+}
+
 #container {
     display: flex;
     flex-wrap: wrap;
@@ -218,8 +225,8 @@ img#mwlogo {
     padding-top: 100px; /* Location of the box */
     left: 0;
     top: 0;
-    width: 50%; /* Full width */
-    height: 50%; /* Full height */
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: lightgrey; /* Fallback color */
     background-color: white; /* Black w/ opacity */
@@ -255,7 +262,7 @@ img#mwlogo {
   .close {
     color: var(--lblue);
     float: right;
-    font-size: 35px;
+    font-size: 20px;
     font-weight: bold;
   }
   
@@ -272,12 +279,11 @@ img#mwlogo {
     color: black;
   }
   
-  .modal-body {padding: 2px 16px;}
+  .modal-body {padding: 80px 80px;}
   
   .modal-footer {
     padding: 0.05px 1px;
     background-color: lightgrey;
-    color: black;
   }
 
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */

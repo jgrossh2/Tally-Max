@@ -346,12 +346,12 @@ var displayWord = function (wordData) {
         // Create an '<img>' element
         var pexelImg = document.createElement('img');
         // // Set that element's 'src' attribute to the 'image_url' from API response
-        pexelImg.setAttribute('src', imageInfo[0].src.small); //response.photos[0].src.small);
+        pexelImg.setAttribute('src', wordData.imageInfo[0].src.medium); //response.photos[0].src.small);
         picBodyEl.append(pexelImg);
 
         var photographerEl = document.getElementById("ph-body");
         // //photographerEl.textContent = "Photo by: ";
-        photographerEl.setAttribute('src', imageInfo[0].photographer);
+        photographerEl.setAttribute('src', wordData.imageInfo[0].photographer);
         // //.append(photographerEl);
 
         // Get the button that opens the modal --- //var btn = document.getElementById("myBtn");
