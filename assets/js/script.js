@@ -59,23 +59,24 @@ var dragLetters = function(event) {
 //         console.log("stop");
 //     }
 // });
+//row 1 and dropzone
 $(function () {
 $(".sortable1, .sortable4").sortable({
     // revert: true,
+    tolerance: "pointer",
+    cursor: "move",
+    helper: "clone",
     placeholder: "highlight",
     connectWith: ".sortable4",
     start: function (event, ui) {
-        ui.item.toggleClass("highlight");
-        console.log(ui.item);
         },
     stop: function (event, ui) {
-        ui.item.toggleClass("highlight");
         },
-    // axis: "x",
-    
-    tolerance: "pointer",
-    helper: "clone",
-    // appendTo: ".space",
+    remove: function (event, ui) {
+        ui.item.clone().appendTo(".sortable4");
+        $(this).sortable('cancel');
+        $(this).addClass("gray");
+    }
     // start: function(event) {
     //     // ui.helper.toggleClass("highlight");
     //   },
@@ -84,56 +85,103 @@ $(".sortable1, .sortable4").sortable({
     //     // $(".bottom-trash").removeClass("dropover bottom-trash-drag");
     //     console.log("deactivate", this);
     //   },
-      over: function(event) {
-        // $(event.target).addClass("dropover-active");
-      },
-      out: function(event) {
-        // $(event.target).removeClass("dropover-active");
-        console.log("out", event.target);
-      },
+    //   over: function(event) {
+    //     // $(event.target).addClass("dropover-active");
+    //   },
+    //   out: function(event) {
+    //     // $(event.target).removeClass("dropover-active");
+    //     console.log("out", event.target);
+    //   },
+}).disableSelection();
+$(".sortable4").sortable({
+    connectWith: ".sortable4"
+}).disableSelection();
 });
-$("#sortable").disableSelection();
+//row 2 and dropzone
+$(function () {
+    $(".sortable2, .sortable4").sortable({
+        // revert: true,
+        tolerance: "pointer",
+        cursor: "move",
+        helper: "clone",
+        placeholder: "highlight",
+        connectWith: ".sortable4",
+        start: function (event, ui) {
+            },
+        stop: function (event, ui) {
+            },
+        remove: function (event, ui) {
+            ui.item.clone().appendTo(".sortable4");
+            $(this).sortable('cancel');
+            $(this).addClass("gray");
+        }
+    }).disableSelection();
+    $(".sortable4").sortable({
+        connectWith: ".sortable4"
+    }).disableSelection();
 });
-//pull tiles into dropzone if overlap
-
+//row 3 and drop area
+$(function () {
+    $(".sortable3, .sortable4").sortable({
+        // revert: true,
+        tolerance: "pointer",
+        cursor: "move",
+        helper: "clone",
+        placeholder: "highlight",
+        connectWith: ".sortable4",
+        start: function (event, ui) {
+            },
+        stop: function (event, ui) {
+            },
+        remove: function (event, ui) {
+            ui.item.clone().appendTo(".sortable4");
+            $(this).sortable('cancel');
+            console.log(this);
+            $(this).addClass("gray");
+        }
+    }).disableSelection();
+    $(".sortable4").sortable({
+        connectWith: ".sortable4"
+    }).disableSelection();
+});
 //make dropzone
-// $(".drop").droppable({
-//     accept: ".letter",
-//     tolerance: "touch",
-//     revert: false,
-//     drop: function(event, ui){
-//         console.log(ui);
-//         console.log("drop");
-//         var helper = ui.helper.clone(true);
-//         helper.appendTo(".drop");
-//         // $(ui.helper).removeClass("dragging");
-//         // $(".letter").draggable('disable');
-//         // finds object and then letter value of that object
-//         var dragged= ui.draggable[0].dataset.letter;
-//         console.log(ui.draggable[0].dataset.letter);
-//         //add drop letters to array
-//         dropLetters.push(dragged);
-//         console.log(dropLetters);
-//         $(".space").removeClass("dropZone");
-//         var compareLetters= [];
-//         var getLetters = $(".letter").data("data-letter");
-//         console.log(getLetters);
-//         compareLetters.push(getLetters);
-//         // if (compareLetters )
-//         },
+$(".dropped").droppable({
+    accept: ".letter",
+    tolerance: "touch",
+    revert: false,
+    drop: function(event, ui){
+        console.log(ui);
+        console.log("drop");
+        // var helper = ui.helper.clone(true);
+        // helper.appendTo(".dropped");
+        // $(ui.helper).removeClass("dragging");
+        // $(".letter").draggable('disable');
+        // finds object and then letter value of that object
+        var dragged= ui.draggable[0].dataset.letter;
+        console.log(ui.draggable[0].dataset.letter);
+        //add drop letters to array
+        dropLetters.push(dragged);
+        console.log(dropLetters);
+        $(".space").removeClass("dropZone");
+        var compareLetters= [];
+        var getLetters = $(".letter").data("data-letter");
+        console.log(getLetters);
+        compareLetters.push(getLetters);
+        // if (compareLetters )
+        },
  
-//     over: function(event, ui) {
-//         $(".space").addClass("dropZone");
-//         console.log("over");
-//     },
-//     out: function(event, ui) {
-//         $(".space").removeClass("dropZone");
-//         console.log("out");
-//     },
-//     update: function(event) {
-//         console.log(this)
-//     }
-// });
+    // over: function(event, ui) {
+    //     $(".drop").addClass("dropZone");
+    //     console.log("over");
+    // },
+    // out: function(event, ui) {
+    //     $(".drop").removeClass("dropZone");
+    //     console.log("out");
+    // },
+    // update: function(event) {
+    //     console.log(this)
+    // }
+});
 
 // grays out letter on drop, find ids and match
 

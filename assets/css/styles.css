@@ -132,8 +132,18 @@ img#mwlogo {
 .highlight {
     background-color: blue;
 }
+.dropped {
+    border: dotted 3px black;
+    width: 681px;
+    height: 96px;
+}
 .drop {
     border: none;
+}
+.todo {
+    margin: auto;
+    font-size: 24px;
+    font-weight: bold;
 }
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */
 @media screen and (max-width: 980px) {
