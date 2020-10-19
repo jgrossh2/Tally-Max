@@ -2,15 +2,14 @@
     margin: 0;
     padding: 0;
 }
+
 :root {
     --dark: #00303f;
-    --grey:#bcbdbd;
-    --red: #;
     --dblue: #01627B;
     --lblue: #6A99A5;
+    --red: #D15362ff;
+    --grey:#bcbdbd;
     --keys3: #e1c596;
-    --keys1: #eabe76;
-    --keys2: #e1b268;
     --primary: 'Oswald', sans-serif;
     --secondary: 'Merriweather', serif;
 }
@@ -52,17 +51,29 @@ li.col {
     padding: 0;
 }
 
-.collapsible-header {
-
+.collapsible-header:hover {
+    color: var(--red);
+    background-color: var(--grey);
 }
 
 .collapsible-header.active {
     background-color: var(--lblue);
+    color: white;
+    font-weight: bold;
+}
+
+div.collapsible-body {
+    padding: 10px;
+}
+
+div.col.valign-wrapper {
+    padding: 0;
 }
 
 .subtitle {
     font-family: var(--primary);
     color: var(--dark);
+    padding: 10px;
 }
 
 button.waves-effect.searchbtn {
@@ -73,8 +84,12 @@ button.waves-effect.searchbtn {
     margin: 3px
 }
 
-div.row.z-depth-2 {
-    z-index: 100;
+button.waves-effect.searchbtn:hover {
+    background-color: var(--red);
+}
+
+.btn-floating.waves-effect.waves-light {
+    background-color: var(--red);
 }
 
 img#audio-icon {
@@ -85,20 +100,30 @@ img#audio-icon {
 img#mwlogo {
     width: 100px;
 }
+
+a#mwtext {
+    color: var(--dark);
+    font-family: var(--secondary);
+}
+
 #container {
     display: flex;
     flex-wrap: wrap;
     /* margin: 50px 0 0 325px; */
     width: 100%;
 }
+
 .space {
-    border: dotted black;
+    border: dotted;
+    border-color: var(--dark);
 }
+
 #keyboard {
     margin: 0;
     padding: 0;
     list-style: none;
 }
+
 .letter {
     background: var(--keys3);
     width: 100%;
@@ -124,14 +149,16 @@ img#mwlogo {
     background-image: url("images/scrabble1.jpg"); 
 }
 .dragging {
-    border: solid black 3px;
+    border: solid 3px;
+    border-color: var(--dark);
 }
 .gray {
     filter: grayscale(100%);
 }
 .highlight {
-    background-color: blue;
+    background-color: mblue;
 }
+
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */
 @media screen and (max-width: 980px) {
 
