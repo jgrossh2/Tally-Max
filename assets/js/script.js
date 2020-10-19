@@ -346,6 +346,9 @@ var displayWord = function (wordData) {
         var modal = document.getElementById("myModal");
         // Get the button that opens the modal --- //var btn = document.getElementById("myBtn");
         var infoBtn = document.createElement('a')
+        infoBtn.setAttribute('class', 'btn-floating waves-effect waves-light red disabled')
+        infoBtn.innerHTML = '<span><img id="info-icon" src="assets/iconfinder_Information_Circle_4781829.png"></span>'
+
         // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];
         // When the user clicks the button, open the modal 
@@ -361,12 +364,6 @@ var displayWord = function (wordData) {
                 modal.style.display = "none";
             }
         }
-        //displayImg();
-        //create button to contain 'more info"
-
-
-        infoBtn.setAttribute('class', 'btn-floating waves-effect waves-light red disabled')
-        infoBtn.innerHTML = '<span><img id="info-icon" src="assets/iconfinder_Information_Circle_4781829.png"></span>'
 
         // create div body element for class, audio button, and definitions
         var resultBody = document.createElement('div');
@@ -380,39 +377,17 @@ var displayWord = function (wordData) {
             resultDef.textContent = n + ') ' + wordData.definition[i];
             resultBody.append(resultDef);
         }
-
         // append content to page elements
         resultBody.append(audioBtn);
         resultLI.append(resultHeader);
         resultLI.append(resultBody);
         resultsContainerEl.append(resultLI);
         resultBody.append(infoBtn);
-        //resultBody.append(pexelImg);s
+        //resultBody.append(pexelImg);
     } else {
         console.log("Sorry, this word cannot be displayed.");
     }
-
 };
-// // Get the modal
-// var modal = document.getElementById("myModal");
-// // Get the button that opens the modal
-// var btn = document.getElementById("myBtn");
-// // Get the <span> element that closes the modal
-// var span = document.getElementsByClassName("close")[0];
-// // When the user clicks the button, open the modal 
-// function displayImg() {
-//     modal.style.display = "block";
-// }
-// // When the user clicks on <span> (x), close the modal
-// span.onclick = function () {
-//     modal.style.display = "none";
-// }
-// // When the user clicks anywhere outside of the modal, close it
-// window.onclick = function (event) {
-//     if (event.target == modal) {
-//         modal.style.display = "none";
-//     }
-// }
 
 // var showImage = function () {
 //     var pexelURL = `https://api.pexels.com/v1/search?query=${wordDef[0]}&per_page=1`;// ${new_words[0]}
