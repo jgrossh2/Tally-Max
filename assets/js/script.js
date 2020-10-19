@@ -300,7 +300,7 @@ var getDefData = function (letters, results) {
 
 // function takes MW api object data and packages word & class (e.g. noun, verb adjective) for DOM object display
 var displayWord = function (wordData) {
-    // console.log(defObject)
+    console.log(wordData)
 
     // resultsContainerEl.textContent = '';
 
@@ -315,11 +315,7 @@ var displayWord = function (wordData) {
         resultHeader.setAttribute('class', 'collapsible-header');
         resultHeader.innerHTML = '<p>' + wordData.word + '</p>';
 
-        // //display image
-        // var pexelImg = document.createElement('img');
-        // pexelImg.setAttribute('src', response.photos[0].src.small);
-
-        // *******************display class, definitions and sound button within result container body
+        // display class, definitions and sound button within result container body
         // takes audio file reference and creates link for audio playback; 'subdir' uses conditions provided by MW api documentation to determine 'subdir' component of href
         var aud = wordData.audio.split('', 3)
         var regex = RegExp('[\\d\\W]')
@@ -344,6 +340,20 @@ var displayWord = function (wordData) {
 
         // Get the modal
         var modal = document.getElementById("myModal");
+
+        // Use 'querySelector' to get the ID of where the pic/ will be displayed
+        var picBodyEl = document.getElementById('img-body');
+        // Create an '<img>' element
+        var pexelImg = document.createElement('img');
+        // Set that element's 'src' attribute to the 'image_url' from API response
+        pexelImg.setAttribute('src', imageInfo.[0].src.small); //response.photos[0].src.small);
+        picBodyEl.append(pexelImg);
+
+        var photographerEl = document.getElementById("ph-body");
+        //photographerEl.textContent = "Photo by: ";
+        photographerEl.setAttribute('src', imageInfo[0].photographer);
+        //.append(photographerEl);
+
         // Get the button that opens the modal --- //var btn = document.getElementById("myBtn");
         var infoBtn = document.createElement('a')
         infoBtn.setAttribute('class', 'btn-floating waves-effect waves-light red disabled')
@@ -355,6 +365,7 @@ var displayWord = function (wordData) {
         infoBtn.onclick = function () {
             modal.style.display = "block";
 
+
         }// When the user clicks on <span> (x), close the modal
         span.onclick = function () {
             modal.style.display = "none";
@@ -364,7 +375,6 @@ var displayWord = function (wordData) {
                 modal.style.display = "none";
             }
         }
-
         // create div body element for class, audio button, and definitions
         var resultBody = document.createElement('div');
         resultBody.setAttribute('class', 'collapsible-body');
