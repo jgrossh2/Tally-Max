@@ -56,10 +56,13 @@ $(".sortable1, .sortable4").sortable({
     containment: "#keyboard",
     tolerance: "pointer",
     cursor: "move",
+    appendTo: "body",
     helper: "clone",
     placeholder: "highlight",
     connectWith: ".sortable4",
     start: function (event, ui) {
+        ui.item.addClass("dragging");
+        offsetFix = false;
         },
     stop: function (event, ui) {
         },
@@ -68,6 +71,7 @@ $(".sortable1, .sortable4").sortable({
         ui.item.clone().appendTo(".sortable4");
         $(this).sortable('cancel');
         $(this).addClass("gray");
+        offsetFix = false;
     }
     // start: function(event) {
     //     // ui.helper.toggleClass("highlight");
@@ -96,6 +100,7 @@ $(function () {
         containment: "#keyboard",
         tolerance: "pointer",
         cursor: "move",
+        appendTo: "body",
         helper: "clone",
         placeholder: "highlight",
         connectWith: ".sortable4",
@@ -120,6 +125,7 @@ $(function () {
         containment: "#keyboard",
         tolerance: "pointer",
         cursor: "move",
+        appendTo: "body",
         helper: "clone",
         placeholder: "highlight",
         connectWith: ".sortable4",

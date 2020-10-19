@@ -155,9 +155,9 @@ a#mwtext:hover {
 .gray {
     filter: grayscale(100%);
 }
-.highlight {
+/* .highlight {
     background-color: mblue;
-}
+} */
 .dropped {
     border: dotted 3px black;
     width: 681px;
