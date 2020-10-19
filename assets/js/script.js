@@ -64,6 +64,7 @@ $(".sortable1, .sortable4").sortable({
     stop: function (event, ui) {
         },
     remove: function (event, ui) {
+        // $(this).sortable('disable');
         ui.item.clone().appendTo(".sortable4");
         $(this).sortable('cancel');
         $(this).addClass("gray");
