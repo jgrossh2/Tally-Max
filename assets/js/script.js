@@ -47,8 +47,46 @@ $(".letter").draggable({
     stop: function (event, ui) {
         $(ui.helper).removeClass("dragging");
         console.log("stop");
+        // var grid = document.createElement("div");
+        // grid.id = "grid";
+        // grid.className = "grid";
+        // for (i=0; i<7; i++) {
+        //     var row = grid.appendChild(document.createElement("div"));
+        //     row.className = "row";
+        //     row.id = "row" +i;
+        //     console.log("well?");
+        // };
     }
+    //remove class
+    // add grid item
 });
+
+// $(".letter").sortable({
+//     revert: true
+// });
+//     connectWith: $(".space .letter"),
+//     tolerance: "pointer",
+//     helper: "clone",
+//     activate: function(event) {
+//         var letterVal= $(this).attr("data-letter");
+//             dropLetters.push(letterVal);
+//             console.log(letterVal);
+// $(".space").addClass("dropZone");
+// console.log("activate", this);
+//   },
+//       deactivate: function(event) {
+//         // $(".bottom-trash").removeClass("dropover bottom-trash-drag");
+//         console.log("deactivate", this);
+//       },
+//       over: function(event) {
+//         // $(event.target).addClass("dropover-active");
+//       },
+//       out: function(event) {
+//         // $(event.target).removeClass("dropover-active");
+//         console.log("out", event.target);
+//       },
+// })
+//pull tiles into dropzone if overlap
 
 //make dropzone
 $(".space").droppable({
@@ -61,11 +99,10 @@ $(".space").droppable({
         var helper = ui.helper.clone(true);
         helper.appendTo(".space");
         $(ui.helper).removeClass("dragging");
-
         // finds object and then letter value of that object
+
         var dragged = ui.draggable[0].dataset.letter;
         console.log(ui.draggable[0].dataset.letter);
-
         //add drop letters to array
         dropLetters.push(dragged);
         console.log(dropLetters);
@@ -86,6 +123,7 @@ $(".space").droppable({
 });
 
 //only accept so many of each letter
+
 letterEl.addEventListener("click", dragLetters)
 
 // event listeners to gather user input and start generator function
@@ -151,6 +189,15 @@ highScoreBtnEl.addEventListener('click', function () {
         }
         return wordLength;
     }
+
+    // sort letters based on value before sending to genWordList
+    // var priorityLetters = ['z','q','x','j','k','w','y','v','f','h','o','m','c','b','g','d','u','s','l','t','r','n','o','i','a','e'];
+    // var lettersArray = letters.split('');
+    // lettersArray.sort(function(a, b) {
+    //     return priorityLetters[a] - priorityLetters[b];
+    // })
+    // console.log(lettersArray);
+    // call word generator
     genWordList(wordLength, letters);
 });
 
@@ -241,11 +288,17 @@ var getDefData = function (letters, results) {
                         imageInfo: imgSrc.photos,
                     };
 
+                    // var imageInfo = {
+                    //     src: medium
+                    // };
                     console.log(wordData)
+                    // console.log(wordData.imageInfo[0])
                     displayWord(wordData);
                     return wordData
                 })
-
+            // } else {
+            //     alert("Error:" + response.statusText)
+            // }
         });
     };
 };
@@ -253,6 +306,8 @@ var getDefData = function (letters, results) {
 // function takes MW api object data and packages word & class (e.g. noun, verb adjective) for DOM object display
 var displayWord = function (wordData) {
     console.log(wordData)
+
+    // resultsContainerEl.textContent = '';
 
     // check to see whether term is offensive
     if (!wordData.offensive) {
@@ -288,30 +343,14 @@ var displayWord = function (wordData) {
         audioBtn.setAttribute('href', audioLink);
         audioBtn.innerHTML = '<span><img id="audio-icon" src="assets/iconfinder_speaker-high-sound-volume-voice_3643734.png"></span>'
 
-        // create div body element for class, audio button, and definitions
-        var resultBody = document.createElement('div');
-        resultBody.setAttribute('class', 'collapsible-body');
-        resultBody.innerHTML = '<span>' + wordData.class + '</span>';
-
-        // loop through each homonym and display within element for that word
-        for (var i = 0; i < wordData.definition.length; i++) {
-            n = i + 1
-            var resultDef = document.createElement('p');
-            resultDef.textContent = n + ') ' + wordData.definition[i];
-            resultBody.append(resultDef);
-        }
-
-        // append content to page elements
-        resultBody.append(audioBtn);
-        resultLI.append(resultHeader);
-        resultLI.append(resultBody);
-        resultsContainerEl.append(resultLI);
-        resultBody.append(imgBtn);
-
         // Get the modal
         var modal = document.getElementById("myModal");
         // Use 'querySelector' to get the ID of where the pic/ will be displayed
         var picBodyEl = document.getElementById('img-body');
+
+        var photographerEl = document.getElementById("ph-body");
+        photographerEl.setAttribute('src', wordData.imageInfo[0].photographer);
+        // //.append(photographerEl);
 
         // Get the button that opens the modal --- //var btn = document.getElementById("myBtn");
         var imgBtn = document.createElement('a')//addEventListener('click', onclick);
@@ -332,26 +371,50 @@ var displayWord = function (wordData) {
                 modal.style.display = "none";
             }
         }
+        // create div body element for class, audio button, and definitions
+        var resultBody = document.createElement('div');
+        resultBody.setAttribute('class', 'collapsible-body');
+        resultBody.innerHTML = '<span>' + wordData.class + '</span>';
 
-        //loop for images display and for photographer credit
-        for (var i = 0; i < wordData.imageInfo[0].src.medium.length; i++) {
-            // Create an '<img>' element
-            var pexelImg = document.createElement('img');
-            // // Set that element's 'src' attribute to the 'image_url' from API response
+        // loop through each homonym and display within element for that word
+        for (var i = 0; i < wordData.definition.length; i++) {
+            n = i + 1
+            var resultDef = document.createElement('p');
+            resultDef.textContent = n + ') ' + wordData.definition[i];
+            resultBody.append(resultDef);
+        }
+        var pexelImg = document.createElement('img');
+        var i = wordData.imageInfo[0];
+        //for (var i = 0; i < ; i++) 
+        do {
             pexelImg.setAttribute('src', wordData.imageInfo[0].src.medium); //response.photos[0].src.small);
             picBodyEl.append(pexelImg);
         }
+        while (i < 0)
+        // Create an '<img>' element
 
-        var photographerEl = document.getElementById("ph-body");
+        // // Set that element's 'src' attribute to the 'image_url' from API response
+        //
         for (var i = 0; i < wordData.imageInfo[0].photographer.length; i++) {
             var resultPhtr = document.createElement('p');
             resultPhtr.textContent = wordData.imageInfo[0].photographer[i];
             photographerEl.append(resultPhtr);
         }
+        // append content to page elements
+        resultBody.append(audioBtn);
+        resultLI.append(resultHeader);
+        resultLI.append(resultBody);
+        resultsContainerEl.append(resultLI);
+        resultBody.append(imgBtn);
 
+        // picBodyEl.append(pexelImg);
     } else {
         console.log("Sorry, this word cannot be displayed.");
     }
-    //document.addEventListener('click', imgBtn.onclick = function () { });
+    //document.addEventListener('click', function);
     //{ modal.style.display = "block"});
 };
+// // document.addEventListener('click', imgBtn.onclick = function () {
+//    modal.style.display = "block"
+//  });
+//document.addEventListener('click', imgBtn.onclick);
