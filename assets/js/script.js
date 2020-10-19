@@ -320,7 +320,6 @@ var displayWord = function (wordData) {
         // pexelImg.setAttribute('src', response.photos[0].src.small);
 
         // *******************display class, definitions and sound button within result container body
-
         // takes audio file reference and creates link for audio playback; 'subdir' uses conditions provided by MW api documentation to determine 'subdir' component of href
         var aud = wordData.audio.split('', 3)
         var regex = RegExp('[\\d\\W]')
@@ -346,11 +345,11 @@ var displayWord = function (wordData) {
         // Get the modal
         var modal = document.getElementById("myModal");
         // Get the button that opens the modal --- //var btn = document.getElementById("myBtn");
-
+        var infoBtn = document.createElement('a')
         // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];
         // When the user clicks the button, open the modal 
-        function displayImg() {
+        infoBtn.onclick = function () {
             modal.style.display = "block";
 
         }// When the user clicks on <span> (x), close the modal
@@ -362,10 +361,10 @@ var displayWord = function (wordData) {
                 modal.style.display = "none";
             }
         }
-        displayImg();
+        //displayImg();
         //create button to contain 'more info"
 
-        var infoBtn = document.createElement('a')
+
         infoBtn.setAttribute('class', 'btn-floating waves-effect waves-light red disabled')
         infoBtn.innerHTML = '<span><img id="info-icon" src="assets/iconfinder_Information_Circle_4781829.png"></span>'
 
@@ -387,7 +386,7 @@ var displayWord = function (wordData) {
         resultLI.append(resultHeader);
         resultLI.append(resultBody);
         resultsContainerEl.append(resultLI);
-        // resultBody.append(infoBtn);
+        resultBody.append(infoBtn);
         //resultBody.append(pexelImg);s
     } else {
         console.log("Sorry, this word cannot be displayed.");
