@@ -19,60 +19,60 @@ var letterEl = document.querySelector(".letter");
 var spaceEl = document.querySelector(".space");
 
 // get user input area
-spaceEl.textContent = "Drag Letters Here! "
+// spaceEl.textContent = "Drag Letters Here! "
 
 // drag letters
 var dragLetters = function(event) {
     event.preventDefault();
     console.log("works")
 }
-
-// $("#sortable").sortable({
-//     revert: true,
-//     axis: "x",
-// });
-
-$(".letter").sortable({
-    revert: true
-});
-
 // make letters drag
-$(".letter").draggable({ 
-    // connectToSortable: ".space",
+// $(".letter").draggable({ 
+//     // connectToSortable: ".space",
+//     tolerance: "pointer",
+//     helper: "clone",
+//     appendTo: ".space",
+//     containment: "#container",
+//     cursor: "move",
+//     snap: ".space",
+//     // snapMode: "inner",
+//     revert: "invalid",
+//     start: function(event, ui) {
+//         console.log("uivalue " + JSON.stringify(ui));
+//         //clone of tile
+//         $(ui.helper).addClass("dragging");
+//         console.log("test");
+//         $(this).addClass("gray");
+//     },
+//     stop: function(event, ui) {
+//         $(ui.helper).removeClass("dragging");
+//         console.log("stop");
+//     }
+// });
+//row 1 and dropzone
+$(function () {
+$(".sortable1, .sortable4").sortable({
+    // revert: true,
+    containment: "#keyboard",
     tolerance: "pointer",
-    helper: "clone",
-    appendTo: ".space",
-    containment: "#container",
     cursor: "move",
-    snap: ".space",
-    // snapMode: "inner",
-    revert: "invalid",
-    start: function(event, ui) {
-        console.log("uivalue " + JSON.stringify(ui));
-        //clone of tile
-        $(ui.helper).addClass("dragging");
-        console.log("test");
-        $(this).addClass("gray");
-    },
-    stop: function(event, ui) {
-        $(ui.helper).removeClass("dragging");
-        console.log("stop");
-    }
-});
-
-$((".space").children).sortable({
-    revert: true,
-    placeholder: "highlight",
-    axis: "x",
-    connectWith: $(".dropped"),
-    tolerance: "pointer",
     helper: "clone",
-    appendTo: ".space",
+    placeholder: "highlight",
+    connectWith: ".sortable4",
+    start: function (event, ui) {
+        },
+    stop: function (event, ui) {
+        },
+    remove: function (event, ui) {
+        ui.item.clone().appendTo(".sortable4");
+        $(this).sortable('cancel');
+        $(this).addClass("gray");
+    }
     // start: function(event) {
-    //     ui.helper.toggleClass("highlight");
+    //     // ui.helper.toggleClass("highlight");
     //   },
     //   stop: function(event) {
-    //       ui.helper.toggleClass("highlight");
+    //     //   ui.helper.toggleClass("highlight");
     //     // $(".bottom-trash").removeClass("dropover bottom-trash-drag");
     //     console.log("deactivate", this);
     //   },
@@ -83,20 +83,71 @@ $((".space").children).sortable({
     //     // $(event.target).removeClass("dropover-active");
     //     console.log("out", event.target);
     //   },
-})
-//pull tiles into dropzone if overlap
-
+}).disableSelection();
+$(".sortable4").sortable({
+    connectWith: ".sortable4"
+}).disableSelection();
+});
+//row 2 and dropzone
+$(function () {
+    $(".sortable2, .sortable4").sortable({
+        // revert: true,
+        containment: "#keyboard",
+        tolerance: "pointer",
+        cursor: "move",
+        helper: "clone",
+        placeholder: "highlight",
+        connectWith: ".sortable4",
+        start: function (event, ui) {
+            },
+        stop: function (event, ui) {
+            },
+        remove: function (event, ui) {
+            ui.item.clone().appendTo(".sortable4");
+            $(this).sortable('cancel');
+            $(this).addClass("gray");
+        }
+    }).disableSelection();
+    $(".sortable4").sortable({
+        connectWith: ".sortable4"
+    }).disableSelection();
+});
+//row 3 and drop area
+$(function () {
+    $(".sortable3, .sortable4").sortable({
+        // revert: true,
+        containment: "#keyboard",
+        tolerance: "pointer",
+        cursor: "move",
+        helper: "clone",
+        placeholder: "highlight",
+        connectWith: ".sortable4",
+        start: function (event, ui) {
+            },
+        stop: function (event, ui) {
+            },
+        remove: function (event, ui) {
+            ui.item.clone().appendTo(".sortable4");
+            $(this).sortable('cancel');
+            console.log(this);
+            $(this).addClass("gray");
+        }
+    }).disableSelection();
+    $(".sortable4").sortable({
+        connectWith: ".sortable4"
+    }).disableSelection();
+});
 //make dropzone
-$(".space").droppable({
+$(".dropped").droppable({
     accept: ".letter",
     tolerance: "touch",
     revert: false,
     drop: function(event, ui){
         console.log(ui);
         console.log("drop");
-        var helper = ui.helper.clone(true);
-        helper.appendTo(".space");
-        $(ui.helper).removeClass("dragging");
+        // var helper = ui.helper.clone(true);
+        // helper.appendTo(".dropped");
+        // $(ui.helper).removeClass("dragging");
         // $(".letter").draggable('disable');
         // finds object and then letter value of that object
         var dragged= ui.draggable[0].dataset.letter;
@@ -105,29 +156,19 @@ $(".space").droppable({
         dropLetters.push(dragged);
         console.log(dropLetters);
         $(".space").removeClass("dropZone");
-        var compareLetters= [];
-        var getLetters = $(".letter").data("data-letter");
-        console.log(getLetters);
-        compareLetters.push(getLetters);
+        // var compareLetters= [];
+        // var getLetters = $(".letter").data("data-letter");
+        // console.log(getLetters);
+        // compareLetters.push(getLetters);
         // if (compareLetters )
         },
- 
-    over: function(event, ui) {
-        $(".space").addClass("dropZone");
-        console.log("over");
-    },
-    out: function(event, ui) {
-        $(".space").removeClass("dropZone");
-        console.log("out");
-    },
-    update: function(event) {
-        console.log(this)
-    }
+    // over: function(event, ui) {
+    // },
+    // out: function(event, ui) {
+    // },
+    // update: function(event) {
+    // }
 });
-
-// grays out letter on drop, find ids and match
-
-
 letterEl.addEventListener("click", dragLetters)
 
 // event listeners to gather user input and start generator function
