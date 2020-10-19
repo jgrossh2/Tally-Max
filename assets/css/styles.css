@@ -81,11 +81,11 @@ img#mwlogo {
     list-style: none;
 }
 .letter {
-    background: var(--keys3);
+    /* background: var(--keys3); */
     width: 100%;
     height: 100%;
-    border: solid white;
-    border-radius: 15px;
+    border: solid black;
+    border-radius: 10px;
 }
 .container-1 .col.s1 {
     width: 75px;
@@ -112,6 +112,9 @@ img#mwlogo {
 }
 .highlight {
     background-color: blue;
+}
+.drop {
+    border: none;
 }
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */
 @media screen and (max-width: 980px) {
