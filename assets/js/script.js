@@ -56,12 +56,17 @@ $(".sortable1, .sortable4").sortable({
     containment: "#keyboard",
     tolerance: "pointer",
     cursor: "move",
+    appendTo: "body",
     helper: "clone",
     placeholder: "highlight",
     connectWith: ".sortable4",
+    items: ".tiles",
     start: function (event, ui) {
+        ui.helper.addClass("dragging");
+        $(".dropped").addClass("dropZone");
         },
     stop: function (event, ui) {
+        $(".dropped").removeClass("dropZone");
         },
     remove: function (event, ui) {
         // $(this).sortable('disable');
@@ -96,6 +101,7 @@ $(function () {
         containment: "#keyboard",
         tolerance: "pointer",
         cursor: "move",
+        appendTo: "body",
         helper: "clone",
         placeholder: "highlight",
         connectWith: ".sortable4",
@@ -120,10 +126,12 @@ $(function () {
         containment: "#keyboard",
         tolerance: "pointer",
         cursor: "move",
+        appendTo: "body",
         helper: "clone",
         placeholder: "highlight",
         connectWith: ".sortable4",
         start: function (event, ui) {
+            $(".dropped").addClass("dropZone");
             },
         stop: function (event, ui) {
             },
@@ -146,6 +154,7 @@ $(".dropped").droppable({
     drop: function(event, ui){
         console.log(ui);
         console.log("drop");
+        $(".dropped").addClass("dropZone");
         // var helper = ui.helper.clone(true);
         // helper.appendTo(".dropped");
         // $(ui.helper).removeClass("dragging");
@@ -156,7 +165,7 @@ $(".dropped").droppable({
         //add drop letters to array
         dropLetters.push(dragged);
         console.log(dropLetters);
-        $(".space").removeClass("dropZone");
+        // $(".space").removeClass("dropZone");
         // var compareLetters= [];
         // var getLetters = $(".letter").data("data-letter");
         // console.log(getLetters);

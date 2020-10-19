@@ -149,14 +149,11 @@ a#mwtext:hover {
     background-image: url("images/scrabble1.jpg"); 
 }
 .dragging {
-    border: solid 3px;
+    border: solid 8px;
     border-color: var(--dark);
 }
 .gray {
     filter: grayscale(100%);
-}
-.highlight {
-    background-color: mblue;
 }
 .dropped {
     border: dotted 3px black;
