@@ -5,7 +5,7 @@
 :root {
     --dark: #00303f;
     --grey:#bcbdbd;
-    --pink: #f5b4be;
+    --red: #;
     --dblue: #01627B;
     --lblue: #6A99A5;
     --keys3: #e1c596;
@@ -19,30 +19,45 @@ header, footer.page-footer {
     background-color: var(--lblue);
     color: var(--dark);
     font-family: var(--primary);
+    padding: 5px;
 }
 
-div.container {
-    max-width: 1170px;
+main {
+    font-family: var(--secondary);
+    color: var(--dark);
 }
 
 h1.m {
     margin: 0;
-    padding: 0 0 0 36px;
+    padding: 0 0 0 46px;
 }
 
 h1.tally {
-    margin: 0;
+    margin: 10px;
     letter-spacing: 15px;
 }
 
 h1.x {
     margin: 0;
-    padding: 0 0 0 42px;
+    padding: 0 0 5px 52px;
 }
 
 .results-list {
     font-family: var(--secondary);
     color: var(--dark);
+}
+
+li.col {
+    margin: 0;
+    padding: 0;
+}
+
+.collapsible-header {
+
+}
+
+.collapsible-header.active {
+    background-color: var(--lblue);
 }
 
 .subtitle {
@@ -56,6 +71,10 @@ button.waves-effect.searchbtn {
     color: white;
     padding: 12px;
     margin: 3px
+}
+
+div.row.z-depth-2 {
+    z-index: 100;
 }
 
 img#audio-icon {
