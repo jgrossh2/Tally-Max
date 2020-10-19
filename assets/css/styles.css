@@ -84,10 +84,6 @@ button.waves-effect.searchbtn {
     margin: 3px
 }
 
-button.waves-effect.searchbtn:hover {
-    background-color: var(--red);
-}
-
 .btn-floating.waves-effect.waves-light {
     background-color: var(--red);
 }
@@ -104,6 +100,10 @@ img#mwlogo {
 a#mwtext {
     color: var(--dark);
     font-family: var(--secondary);
+}
+
+a#mwtext:hover {
+    color: var(--red);
 }
 
 #container {
