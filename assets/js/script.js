@@ -338,13 +338,34 @@ var displayWord = function (wordData) {
         // console.log(audioLink)
 
         // create button element to contain sound link
-        var audioBtn = document.getElementById("#info-btn");
+        var audioBtn = document.createElement('a')
         audioBtn.setAttribute('class', 'btn-floating waves-effect waves-light red')
         audioBtn.setAttribute('href', audioLink);
         audioBtn.innerHTML = '<span><img id="audio-icon" src="assets/iconfinder_speaker-high-sound-volume-voice_3643734.png"></span>'
 
+        // Get the modal
+        var modal = document.getElementById("myModal");
+        // Get the button that opens the modal --- //var btn = document.getElementById("myBtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+        // When the user clicks the button, open the modal 
+        function displayImg() {
+            modal.style.display = "block";
+
+        }// When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }// When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        displayImg();
         //create button to contain 'more info"
-        var infoBtn = document.createElement('a');
+
+        var infoBtn = document.createElement('a')
         infoBtn.setAttribute('class', 'btn-floating waves-effect waves-light red disabled')
         infoBtn.innerHTML = '<span><img id="info-icon" src="assets/iconfinder_Information_Circle_4781829.png"></span>'
 
@@ -366,34 +387,33 @@ var displayWord = function (wordData) {
         resultLI.append(resultHeader);
         resultLI.append(resultBody);
         resultsContainerEl.append(resultLI);
-        resultBody.append(infoBtn);
+        // resultBody.append(infoBtn);
         //resultBody.append(pexelImg);s
     } else {
         console.log("Sorry, this word cannot be displayed.");
     }
 
 };
-//********pick up from modal work-left on this line */
-// Get the modal
-var modal = document.getElementById("myModal");
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-// When the user clicks the button, open the modal 
-function displayImg() {
-    modal.style.display = "block";
-}
-// When the user clicks on <span> (x), close the modal
-span.onclick = function () {
-    modal.style.display = "none";
-}
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
+// // Get the modal
+// var modal = document.getElementById("myModal");
+// // Get the button that opens the modal
+// var btn = document.getElementById("myBtn");
+// // Get the <span> element that closes the modal
+// var span = document.getElementsByClassName("close")[0];
+// // When the user clicks the button, open the modal 
+// function displayImg() {
+//     modal.style.display = "block";
+// }
+// // When the user clicks on <span> (x), close the modal
+// span.onclick = function () {
+//     modal.style.display = "none";
+// }
+// // When the user clicks anywhere outside of the modal, close it
+// window.onclick = function (event) {
+//     if (event.target == modal) {
+//         modal.style.display = "none";
+//     }
+// }
 
 // var showImage = function () {
 //     var pexelURL = `https://api.pexels.com/v1/search?query=${wordDef[0]}&per_page=1`;// ${new_words[0]}
