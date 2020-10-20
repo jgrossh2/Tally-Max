@@ -166,7 +166,8 @@ a#mwtext:hover {
 }
 .dropped {
     border: dotted 3px var(--dark);
-    width: 681px;
+    /* width: 681px; */
+    /* width: 45%; */
     height: 96px;
 }
 .drop {
@@ -249,7 +250,9 @@ a#mwtext:hover {
 
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */
 @media screen and (max-width: 980px) {
-
+/* .dropped {
+    width: 45%;
+} */
 }
 
 /* MEDIA QUERY FOR TABLETS */

@@ -110,6 +110,16 @@ $(function () {
             ui.item.clone().appendTo(".sortable4");
             $(this).sortable('cancel');
             $(this).addClass("gray");
+            //if tile === dropped tile then disable sortable
+            var oldTile = ui.item[0].dataset.letter;
+            console.log(oldTile);
+            // $(this).sortable('disable');
+            // if (oldTile === dragged){
+            //     $(this).sortable("disable")
+            // } else {
+
+            // };
+             
         }
     }).disableSelection();
     $(".sortable4").sortable({
@@ -122,8 +132,8 @@ $(".dropped").droppable({
     tolerance: "touch",
     revert: false,
     drop: function (event, ui) {
-        console.log(ui);
-        console.log("drop");
+        // console.log(ui);
+        // console.log("drop");
         $(".dropped").addClass("dropZone");
         // var helper = ui.helper.clone(true);
         // helper.appendTo(".dropped");
@@ -131,7 +141,7 @@ $(".dropped").droppable({
         // $(".letter").draggable('disable');
         // finds object and then letter value of that object
         var dragged = ui.draggable[0].dataset.letter;
-        console.log(ui.draggable[0].dataset.letter);
+        console.log(dragged);
         //add drop letters to array
         dropLetters.push(dragged);
         console.log(dropLetters);
@@ -220,6 +230,7 @@ highScoreBtnEl.addEventListener('click', function () {
 
 // generate all possible combinations of inputted letters
 var genWordList = function (wordLength, letters) {
+    
     // reset form container
     spaceEl.innerHTML = " ";
     dropLetters = [];
