@@ -339,6 +339,7 @@ var getDefData = function (results) {
                     wordObjArr.push(response)
                     // pass resulting object array to display function
                     displayWordData(results, wordObjArr);
+                    console.log(wordObjArr)
                     return wordObjArr
 
                 })
@@ -351,7 +352,7 @@ var getDefData = function (results) {
 
 // function takes api object array and parses for display
 var displayWordData = function (results, wordObjArr) {
-    // console.log(wordObjArr)
+    console.log(wordObjArr)
     // console.log(results)
 
     // loop through each object generated from the word-results array
@@ -498,6 +499,7 @@ var displayWordData = function (results, wordObjArr) {
     resultBody.append(audioBtn);
     resultBody.append(imgBtn);
     // modal (via image-button)
+
 
     // picBodyEl.append(pexelImg);
 
