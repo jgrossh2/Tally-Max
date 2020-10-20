@@ -390,6 +390,7 @@ var displayWord = function (wordData) {
 
         // Get the modal
         var modal = document.getElementById("myModal");
+
         // Use 'getElementById' to get the ID of where the Img will be displayed
         var picBodyEl = document.getElementById('img-body');
 
@@ -404,12 +405,15 @@ var displayWord = function (wordData) {
 
         // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];
+
         // When the user clicks the button, open the modal 
         imgBtn.onclick = function () {
             modal.style.display = "block";
+
         }// When the user clicks on <span> (x), close the modal
         span.onclick = function () {
             modal.style.display = "none";
+
         }// When the user clicks anywhere outside of the modal, close it
         window.onclick = function (event) {
             if (event.target == modal) {
@@ -428,12 +432,12 @@ var displayWord = function (wordData) {
             resultDef.textContent = n + ') ' + wordData.definition[i];
             resultBody.append(resultDef);
         }
-        // Create an '<img>' element
+        // Create an '<img>' element//might need to create for loop for images 
         var pexelImg = document.createElement('img');
         var i = wordData.imageInfo[0];
         pexelImg.setAttribute('src', wordData.imageInfo[0].src.medium); //response.photos[0].src.small);
         picBodyEl.append(pexelImg);
-
+        //for loop for photographer info(started, not functioning )
         for (var i = 0; i < wordData.imageInfo[0].photographer.length; i++) {
             if (wordData.imageInfo[0].photographer === resultHeader) {
                 photographerEl.append(resultPhtr);
@@ -453,8 +457,6 @@ var displayWord = function (wordData) {
     resultLI.append(resultBody);
     resultsContainerEl.append(resultLI);
     resultBody.append(imgBtn);
-    // picBodyEl.append(pexelImg);
-
 
     // document.addEventListener('click', imgBtn.onclick = function () {
     //     modal.style.display = "block"
