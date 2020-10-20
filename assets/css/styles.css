@@ -179,7 +179,7 @@ a#mwtext:hover {
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 2; /* Sit on top */
+    z-index: 4; /* Sit on top */
     padding-top: 100px; /* Location of the box */
     left: 0;
     top: 0;
@@ -232,7 +232,7 @@ a#mwtext:hover {
   }
   
   .modal-header {
-    padding: 0.5px 2px;
+    padding: 1px 2px;
     background-color: lightgrey;
     color: black;
   }
@@ -240,7 +240,7 @@ a#mwtext:hover {
   .modal-body {padding: 80px 80px;}
   
   .modal-footer {
-    padding: 0.05px 1px;
+    padding: 0.5px 1px;
     background-color: lightgrey;
   }
 
