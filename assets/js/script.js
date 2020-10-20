@@ -26,29 +26,6 @@ var dragLetters = function (event) {
     event.preventDefault();
     console.log("works")
 }
-// make letters drag
-// $(".letter").draggable({ 
-//     // connectToSortable: ".space",
-//     tolerance: "pointer",
-//     helper: "clone",
-//     appendTo: ".space",
-//     containment: "#container",
-//     cursor: "move",
-//     snap: ".space",
-//     // snapMode: "inner",
-//     revert: "invalid",
-//     start: function(event, ui) {
-//         console.log("uivalue " + JSON.stringify(ui));
-//         //clone of tile
-//         $(ui.helper).addClass("dragging");
-//         console.log("test");
-//         $(this).addClass("gray");
-//     },
-//     stop: function(event, ui) {
-//         $(ui.helper).removeClass("dragging");
-//         console.log("stop");
-//     }
-// });
 //row 1 and dropzone
 $(function () {
     $(".sortable1, .sortable4").sortable({
@@ -73,22 +50,11 @@ $(function () {
             ui.item.clone().appendTo(".sortable4");
             $(this).sortable('cancel');
             $(this).addClass("gray");
-        }
-        // start: function(event) {
-        //     // ui.helper.toggleClass("highlight");
-        //   },
-        //   stop: function(event) {
-        //     //   ui.helper.toggleClass("highlight");
-        //     // $(".bottom-trash").removeClass("dropover bottom-trash-drag");
-        //     console.log("deactivate", this);
-        //   },
-        //   over: function(event) {
-        //     // $(event.target).addClass("dropover-active");
-        //   },
-        //   out: function(event) {
-        //     // $(event.target).removeClass("dropover-active");
-        //     console.log("out", event.target);
-        //   },
+        },
+        over: function(event, ui) {
+        },
+        out: function(event, ui) {
+        },
     }).disableSelection();
     $(".sortable4").sortable({
         connectWith: ".sortable4"
@@ -143,7 +109,6 @@ $(function () {
         remove: function (event, ui) {
             ui.item.clone().appendTo(".sortable4");
             $(this).sortable('cancel');
-            console.log(this);
             $(this).addClass("gray");
         }
     }).disableSelection();
