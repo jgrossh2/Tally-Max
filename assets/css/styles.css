@@ -148,6 +148,7 @@ a#mwtext:hover {
     padding: 0 0.75rem;
     height: 90px;
 }
+
 .dropZone {
     background: lightgray;
 }
@@ -162,7 +163,7 @@ a#mwtext:hover {
     filter: grayscale(100%);
 }
 .dropped {
-    border: dotted 3px black;
+    border: dotted 3px var(--dark);
     width: 681px;
     height: 96px;
 }
