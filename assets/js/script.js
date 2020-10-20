@@ -106,8 +106,10 @@ $(function () {
         placeholder: "highlight",
         connectWith: ".sortable4",
         start: function (event, ui) {
+            $(".dropped").addClass("dropZone");
             },
         stop: function (event, ui) {
+            $(".dropped").removeClass("dropZone");
             },
         remove: function (event, ui) {
             ui.item.clone().appendTo(".sortable4");
@@ -134,6 +136,7 @@ $(function () {
             $(".dropped").addClass("dropZone");
             },
         stop: function (event, ui) {
+            $(".dropped").removeClass("dropZone");
             },
         remove: function (event, ui) {
             ui.item.clone().appendTo(".sortable4");
@@ -260,6 +263,7 @@ highScoreBtnEl.addEventListener('click', function() {
 var genWordList = function(wordLength, letters) {
     // reset form container
     spaceEl.innerHTML = " ";
+    dropLetters = [];
     var results = [];
     var arrayCounter = 0;
 
