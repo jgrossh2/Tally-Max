@@ -47,48 +47,12 @@ $(".letter").draggable({
     stop: function (event, ui) {
         $(ui.helper).removeClass("dragging");
         console.log("stop");
-        // var grid = document.createElement("div");
-        // grid.id = "grid";
-        // grid.className = "grid";
-        // for (i=0; i<7; i++) {
-        //     var row = grid.appendChild(document.createElement("div"));
-        //     row.className = "row";
-        //     row.id = "row" +i;
-        //     console.log("well?");
-        // };
+
     }
-    //remove class
-    // add grid item
+
 });
 
-// $(".letter").sortable({
-//     revert: true
-// });
-//     connectWith: $(".space .letter"),
-//     tolerance: "pointer",
-//     helper: "clone",
-//     activate: function(event) {
-//         var letterVal= $(this).attr("data-letter");
-//             dropLetters.push(letterVal);
-//             console.log(letterVal);
-// $(".space").addClass("dropZone");
-// console.log("activate", this);
-//   },
-//       deactivate: function(event) {
-//         // $(".bottom-trash").removeClass("dropover bottom-trash-drag");
-//         console.log("deactivate", this);
-//       },
-//       over: function(event) {
-//         // $(event.target).addClass("dropover-active");
-//       },
-//       out: function(event) {
-//         // $(event.target).removeClass("dropover-active");
-//         console.log("out", event.target);
-//       },
-// })
-//pull tiles into dropzone if overlap
 
-//make dropzone
 $(".space").droppable({
     accept: ".letter",
     tolerance: "touch",
@@ -190,14 +154,6 @@ highScoreBtnEl.addEventListener('click', function () {
         return wordLength;
     }
 
-    // sort letters based on value before sending to genWordList
-    // var priorityLetters = ['z','q','x','j','k','w','y','v','f','h','o','m','c','b','g','d','u','s','l','t','r','n','o','i','a','e'];
-    // var lettersArray = letters.split('');
-    // lettersArray.sort(function(a, b) {
-    //     return priorityLetters[a] - priorityLetters[b];
-    // })
-    // console.log(lettersArray);
-    // call word generator
     genWordList(wordLength, letters);
 });
 
@@ -287,13 +243,11 @@ var getDefData = function (letters, results) {
                         offensive: def.meta.offensive,
                         imageInfo: imgSrc.photos,
                     };
-
-                    // var imageInfo = {
-                    //     src: medium
-                    // };
                     console.log(wordData)
-                    // console.log(wordData.imageInfo[0])
+                    console.log(wordData.imageInfo[0])
+                    console.log(ImgSrc)
                     displayWord(wordData);
+
                     return wordData
                 })
             // } else {
@@ -345,14 +299,14 @@ var displayWord = function (wordData) {
 
         // Get the modal
         var modal = document.getElementById("myModal");
-        // Use 'querySelector' to get the ID of where the pic/ will be displayed
+        // Use 'getElementById' to get the ID of where the Img will be displayed
         var picBodyEl = document.getElementById('img-body');
 
+        // Use 'getElementById' to get the ID of where the photographer name will be displayed
         var photographerEl = document.getElementById("ph-body");
         photographerEl.setAttribute('src', wordData.imageInfo[0].photographer);
-        // //.append(photographerEl);
 
-        // Get the button that opens the modal --- //var btn = document.getElementById("myBtn");
+        // Get the button that opens the modal
         var imgBtn = document.createElement('a')//addEventListener('click', onclick);
         imgBtn.setAttribute('class', 'btn-floating waves-effect waves-light red disabled')
         imgBtn.innerHTML = '<span><img id="info-icon" src="assets/iconfinder_Information_Circle_4781829.png"></span>'
@@ -383,38 +337,37 @@ var displayWord = function (wordData) {
             resultDef.textContent = n + ') ' + wordData.definition[i];
             resultBody.append(resultDef);
         }
+        // Create an '<img>' element
         var pexelImg = document.createElement('img');
         var i = wordData.imageInfo[0];
-        //for (var i = 0; i < ; i++) 
-        do {
-            pexelImg.setAttribute('src', wordData.imageInfo[0].src.medium); //response.photos[0].src.small);
-            picBodyEl.append(pexelImg);
-        }
-        while (i < 0)
-        // Create an '<img>' element
+        pexelImg.setAttribute('src', wordData.imageInfo[0].src.medium); //response.photos[0].src.small);
+        picBodyEl.append(pexelImg);
 
-        // // Set that element's 'src' attribute to the 'image_url' from API response
-        //
         for (var i = 0; i < wordData.imageInfo[0].photographer.length; i++) {
-            var resultPhtr = document.createElement('p');
+            if (wordData.imageInfo[0].photographer === resultHeader) {
+                photographerEl.append(resultPhtr);
+            } //also add if no image found-404 img-in assets file -results.length = 0(in array)
+
+            var resultPhtr = document.createElement('span');
             resultPhtr.textContent = wordData.imageInfo[0].photographer[i];
             photographerEl.append(resultPhtr);
         }
-        // append content to page elements
-        resultBody.append(audioBtn);
-        resultLI.append(resultHeader);
-        resultLI.append(resultBody);
-        resultsContainerEl.append(resultLI);
-        resultBody.append(imgBtn);
-
-        // picBodyEl.append(pexelImg);
-    } else {
+    }
+    else {
         console.log("Sorry, this word cannot be displayed.");
     }
-    //document.addEventListener('click', function);
-    //{ modal.style.display = "block"});
+    // append content to page elements
+    resultBody.append(audioBtn);
+    resultLI.append(resultHeader);
+    resultLI.append(resultBody);
+    resultsContainerEl.append(resultLI);
+    resultBody.append(imgBtn);
+    // picBodyEl.append(pexelImg);
+
+
+    // document.addEventListener('click', imgBtn.onclick = function () {
+    //     modal.style.display = "block"
+    // });
 };
-// // document.addEventListener('click', imgBtn.onclick = function () {
-//    modal.style.display = "block"
-//  });
-//document.addEventListener('click', imgBtn.onclick);
+
+
