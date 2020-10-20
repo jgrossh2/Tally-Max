@@ -2,15 +2,14 @@
     margin: 0;
     padding: 0;
 }
+
 :root {
     --dark: #00303f;
-    --grey:#bcbdbd;
-    --pink: #f5b4be;
     --dblue: #01627B;
     --lblue: #6A99A5;
+    --red: #D15362ff;
+    --grey:#bcbdbd;
     --keys3: #e1c596;
-    --keys1: #eabe76;
-    --keys2: #e1b268;
     --primary: 'Oswald', sans-serif;
     --secondary: 'Merriweather', serif;
 }
@@ -19,25 +18,27 @@ header, footer.page-footer {
     background-color: var(--lblue);
     color: var(--dark);
     font-family: var(--primary);
+    padding: 5px;
 }
 
-div.container {
-    max-width: 1170px;
+main {
+    font-family: var(--secondary);
+    color: var(--dark);
 }
 
 h1.m {
     margin: 0;
-    padding: 0 0 0 36px;
+    padding: 0 0 0 46px;
 }
 
 h1.tally {
-    margin: 0;
+    margin: 10px;
     letter-spacing: 15px;
 }
 
 h1.x {
     margin: 0;
-    padding: 0 0 0 42px;
+    padding: 0 0 5px 52px;
 }
 
 .results-list {
@@ -45,9 +46,34 @@ h1.x {
     color: var(--dark);
 }
 
+li.col {
+    margin: 0;
+    padding: 0;
+}
+
+.collapsible-header:hover {
+    color: var(--red);
+    background-color: var(--grey);
+}
+
+.collapsible-header.active {
+    background-color: var(--lblue);
+    color: white;
+    font-weight: bold;
+}
+
+div.collapsible-body {
+    padding: 10px;
+}
+
+div.col.valign-wrapper {
+    padding: 0;
+}
+
 .subtitle {
     font-family: var(--primary);
     color: var(--dark);
+    padding: 10px;
 }
 
 button.waves-effect.searchbtn {
@@ -58,6 +84,10 @@ button.waves-effect.searchbtn {
     margin: 3px
 }
 
+.btn-floating.waves-effect.waves-light {
+    background-color: var(--red);
+}
+
 img#audio-icon {
     width: 32px;
     padding: 4px 0 0 4px;
@@ -65,122 +95,60 @@ img#audio-icon {
 
 img#mwlogo {
     width: 100px;
+
 }
+
+img#imgBtn {
+    width: 32px;
+    padding: 4px 0 0 4px;
+}
+
+a#mwtext {
+    color: var(--dark);
+    font-family: var(--secondary);
+}
+
+a#mwtext:hover {
+    color: var(--red);
+}
+
 #container {
     display: flex;
     flex-wrap: wrap;
     /* margin: 50px 0 0 325px; */
     width: 100%;
 }
+
 .space {
-    border: dotted black;
+    border: dotted;
+    border-color: var(--dark);
 }
+
 #keyboard {
     margin: 0;
     padding: 0;
     list-style: none;
-    /* background: var(--keys3); */
 }
-/* #keyboard li {
-    float: left;
-    margin: 0 5px 5px 0;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    /* background-image: url("scrabble.jpg"); */
-    /* background: var(--keys3); */
-    /* border: 1px solid #f9f9f9;
-    border-radius: 5px;
-    } */
-        /* .capslock, .tab, .left-shift {
-        clear: left; */
-        /* background: var(--keys3); */
-
-        /* } */
-            /* #keyboard .tab, #keyboard .delete {
-            width: 70px;
-            /* background: var(--keys3); */
-            /* }
-            #keyboard .capslock {
-            width: 80px; */
-            /* background: var(--keys3); */
-            /* }
-            #keyboard .return {
-            width: 77px; */
-            /* background: var(--keys3); */
-            /* }
-            #keyboard .left-shift {
-            width: 95px; */
-            /* background: var(--keys3); */
-            /* } */
-            /* #keyboard .right-shift {
-            width: 109px;
-            /* background: var(--keys3); */
-            /* } */
-        /* .lastitem {
-        margin-right: 0;   */
-        /* background: var(--keys3); */
-        
-        /* .uppercase {
-        text-transform: uppercase;
-        /* background: var(--keys3); */
-        /* }
-        #keyboard .space {
-        clear: left;
-        width: 638px;
-        border: dotted;
-        }
-        .on {
-        display: none;
-        }  */
-        /* #keyboard li:hover {
-        position: relative;
-        top: 1px;
-        left: 1px;
-        border-color: #e5e5e5;
-        } */
-    
-    /* .one::before {
-        text-transform: uppercase;
-        font-family: Oswald, sans-serif;
-        font-size: 70% ;
-        position: absolute;
-        top: 50%; left: 50%; 
-        transform: translate(-50%,-50%);
-    }  */
-    /* .one {
-        color: fadeout(black, 30%);
-        font-family: sans-serif;
-        /* font-size: 25%; */
-        /* position: absolute; */
-        /* right: 12.5%; */
-        /* bottom: 12.5%; */
-        /* transform: translate(50%,50%); */
-        /* content: "1"; */
-      /* } */ 
-/* .symbol { */
-    /* background: var(--keys3); */
-/* } */
 
 .letter {
-    background: var(--keys3);
+    /* background: var(--keys3); */
     width: 100%;
     height: 100%;
-    border: solid white;
-    border-radius: 15px;
+    border: solid black;
+    border-radius: 10px;
 }
-.row .col.s1 {
+.container-1 .col.s1 {
     width: 75px;
 }
-.row .col {
+.tiles {
     float: left;
-    /* -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box; */
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
     padding: 0 0.75rem;
     height: 90px;
 }
+
 .dropZone {
     background: lightgray;
 }
@@ -188,8 +156,94 @@ img#mwlogo {
     background-image: url("images/scrabble1.jpg"); 
 }
 .dragging {
-    border: solid black 3px;
+    border: solid 8px;
+    border-color: var(--dark);
 }
+.gray {
+    filter: grayscale(100%);
+}
+.dropped {
+    border: dotted 3px var(--dark);
+    width: 681px;
+    height: 96px;
+}
+.drop {
+    border: none;
+}
+.todo {
+    margin: auto;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 2; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: lightgrey; /* Fallback color */
+    background-color: white; /* Black w/ opacity */
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    position: relative;
+    background-color: white;
+    margin: auto;
+    padding: 0;
+    border: 3px solid var(--lblue);
+    width: 90%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+  }
+  
+  /* Add Animation */
+  @-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+  }
+  
+  @keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+  }
+  
+  /* The Close Button */
+  .close {
+    color: var(--lblue);
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: black;
+    cursor: pointer;
+  }
+  
+  .modal-header {
+    padding: 0.5px 2px;
+    background-color: lightgrey;
+    color: black;
+  }
+  
+  .modal-body {padding: 80px 80px;}
+  
+  .modal-footer {
+    padding: 0.05px 1px;
+    background-color: lightgrey;
+  }
 
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */
 @media screen and (max-width: 980px) {
