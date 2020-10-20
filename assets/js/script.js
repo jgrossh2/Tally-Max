@@ -335,8 +335,8 @@ var getDefData = function (letters, results) {
                         imageInfo: imgSrc.photos,
                     };
                     console.log(wordData)
-                    console.log(wordData.imageInfo[0])
-                    //console.log(ImgSrc)
+                    // console.log(wordData.imageInfo[0])
+                    // console.log(ImgSrc)
                     displayWord(wordData);
 
                     return wordData
@@ -460,5 +460,4 @@ var displayWord = function (wordData) {
     //     modal.style.display = "block"
     // });
 };
-
 
