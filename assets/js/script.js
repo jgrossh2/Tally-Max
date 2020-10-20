@@ -210,6 +210,13 @@ threeLetterBtnEl.addEventListener('click', function () {
 });
 
 randomLetterBtnEl.addEventListener('click', function () {
+    // sort letters based on value before sending to genWordList
+    function sortFunc(a, b) {
+        var priorityLetters = ['z','q','x','j','k','w','y','v','f','h','o','m','c','b','g','d','u','s','l','t','r','n','o','i','a','e'];
+            return priorityLetters.indexOf(a) - priorityLetters.indexOf(b);
+    }
+    dropLetters.sort(sortFunc);
+    
     // get possible letters from form
     var letters = dropLetters.join('');
 
@@ -231,32 +238,11 @@ randomLetterBtnEl.addEventListener('click', function () {
     genWordList(wordLength, letters);
 });
 
-highScoreBtnEl.addEventListener('click', function () {
-    // get possible letters from form
-    var letters = dropLetters.join('');
-
-    // get total letter count
-    letterCounter(letters);
-    function letterCounter(letters) {
-        // reset global variable
-        wordLength = 0;
-        var alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        var ar = alphabet.split("");
-        for (var i = 0; i < letters.length; i++) {
-            if (ar.indexOf(letters[i]) > -1) {
-                wordLength = wordLength + 1;
-            }
-        }
-        return wordLength;
-    }
-
-    genWordList(wordLength, letters);
-});
-
 // generate all possible combinations of inputted letters
 var genWordList = function (wordLength, letters) {
-    // reset form container
+    // reset search containers & arrays
     spaceEl.innerHTML = " ";
+    // resultsContainerEl.textContent = '';
     dropLetters = [];
     var results = [];
     var arrayCounter = 0;
@@ -301,7 +287,7 @@ var getDefData = function (letters, results) {
         searchContentEl.textContent = letters;
     }
 
-    var wordDataArr = [];
+    // var wordDataArr = [];
     
     // generate API data for each word
     for (var i = 0; i < results.length; i++) {
@@ -342,9 +328,10 @@ var getDefData = function (letters, results) {
                     offensive: def.meta.offensive,
                     imageInfo: imgSrc.photos,
                 };
-                console.log(wordData)
-                wordDataArr.push(wordData);
-                displayWord(wordDataArr);
+                console.log(wordData);
+                displayWord(wordData);
+                // wordDataArr.push(wordData);
+                // displayWord(wordDataArr);
                 return wordData
             })
             .catch((error) => {
@@ -357,8 +344,6 @@ var getDefData = function (letters, results) {
 // function takes MW api object data and packages word & class (e.g. noun, verb adjective) for DOM object display
 var displayWord = function (wordData) {
     console.log(wordData)
-
-    // resultsContainerEl.textContent = '';
 
     // check to see whether term is offensive
     if (!wordData.offensive) {
@@ -396,6 +381,7 @@ var displayWord = function (wordData) {
 
         // Get the modal
         var modal = document.getElementById("myModal");
+
         // Use 'getElementById' to get the ID of where the Img will be displayed
         var picBodyEl = document.getElementById('img-body');
 
@@ -410,12 +396,15 @@ var displayWord = function (wordData) {
 
         // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];
+
         // When the user clicks the button, open the modal 
         imgBtn.onclick = function () {
             modal.style.display = "block";
+
         }// When the user clicks on <span> (x), close the modal
         span.onclick = function () {
             modal.style.display = "none";
+
         }// When the user clicks anywhere outside of the modal, close it
         window.onclick = function (event) {
             if (event.target == modal) {
@@ -434,12 +423,12 @@ var displayWord = function (wordData) {
             resultDef.textContent = n + ') ' + wordData.definition[i];
             resultBody.append(resultDef);
         }
-        // Create an '<img>' element
+        // Create an '<img>' element//might need to create for loop for images 
         var pexelImg = document.createElement('img');
         var i = wordData.imageInfo[0];
         pexelImg.setAttribute('src', wordData.imageInfo[0].src.medium); //response.photos[0].src.small);
         picBodyEl.append(pexelImg);
-
+        //for loop for photographer info(started, not functioning )
         for (var i = 0; i < wordData.imageInfo[0].photographer.length; i++) {
             if (wordData.imageInfo[0].photographer === resultHeader) {
                 photographerEl.append(resultPhtr);
@@ -459,12 +448,9 @@ var displayWord = function (wordData) {
     resultLI.append(resultBody);
     resultsContainerEl.append(resultLI);
     resultBody.append(imgBtn);
-    // picBodyEl.append(pexelImg);
-
 
     // document.addEventListener('click', imgBtn.onclick = function () {
     //     modal.style.display = "block"
     // });
 };
-
 
