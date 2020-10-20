@@ -106,6 +106,7 @@ $(function () {
         placeholder: "highlight",
         connectWith: ".sortable4",
         start: function (event, ui) {
+            ui.helper.addClass("dragging");
             $(".dropped").addClass("dropZone");
             },
         stop: function (event, ui) {
@@ -133,6 +134,7 @@ $(function () {
         placeholder: "highlight",
         connectWith: ".sortable4",
         start: function (event, ui) {
+            ui.helper.addClass("dragging");
             $(".dropped").addClass("dropZone");
             },
         stop: function (event, ui) {
