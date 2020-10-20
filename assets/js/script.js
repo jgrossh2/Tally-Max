@@ -17,6 +17,10 @@ var dropLetters = [];
 // var letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 var letterEl = document.querySelector(".letter");
 var spaceEl = document.querySelector(".space");
+// var oldTile = ui.item[0].dataset.letter;
+// var dragged = ui.draggable[0].dataset.letter;
+var oldTile = [];
+var dragged = [];
 
 // get user input area
 // spaceEl.textContent = "Drag Letters Here! "
@@ -49,7 +53,10 @@ $(function () {
             // $(this).sortable('disable');
             ui.item.clone().appendTo(".sortable4");
             $(this).sortable('cancel');
+            console.log(this);
             $(this).addClass("gray");
+            // $(ui.item.ui-sortable-handle).sortable("disable");
+            // console.log(ui.item.ui-sortable-handle);
         },
         over: function(event, ui) {
         },
@@ -62,7 +69,7 @@ $(function () {
 });
 //row 2 and dropzone
 $(function () {
-    $(".sortable2, .sortable4").sortable({
+    $(".tiles, .sortable4").sortable({
         // revert: true,
         containment: "#keyboard",
         tolerance: "pointer",
@@ -90,7 +97,7 @@ $(function () {
 });
 //row 3 and drop area
 $(function () {
-    $(".sortable3, .sortable4").sortable({
+    $(".tiles, .sortable4").sortable({
         // revert: true,
         containment: "#keyboard",
         tolerance: "pointer",
@@ -110,14 +117,16 @@ $(function () {
             ui.item.clone().appendTo(".sortable4");
             $(this).sortable('cancel');
             $(this).addClass("gray");
+            // function forOldTile({})
             //if tile === dropped tile then disable sortable
-            var oldTile = ui.item[0].dataset.letter;
+            var toOldTile = ui.item[0].dataset.letter;
+            // console.log(oldTile);
+            oldTile.push(toOldTile);
             console.log(oldTile);
             // $(this).sortable('disable');
             // if (oldTile === dragged){
             //     $(this).sortable("disable")
             // } else {
-
             // };
              
         }
@@ -136,21 +145,32 @@ $(".dropped").droppable({
         // console.log("drop");
         $(".dropped").addClass("dropZone");
         // var helper = ui.helper.clone(true);
-        // helper.appendTo(".dropped");
-        // $(ui.helper).removeClass("dragging");
         // $(".letter").draggable('disable');
         // finds object and then letter value of that object
+        // function forDragged() {
         var dragged = ui.draggable[0].dataset.letter;
+        // console.log(todragged);
+        // dragged.push(toDragged);
         console.log(dragged);
+
+        // }
         //add drop letters to array
         dropLetters.push(dragged);
-        console.log(dropLetters);
-        // $(".space").removeClass("dropZone");
-        // var compareLetters= [];
-        // var getLetters = $(".letter").data("data-letter");
+        // console.log(dropLetters);
+        // forOldTile()
+        // forDragged()
+        // function compareLetters() {
+        // if (JSON.stringify(oldTile) === JSON.stringify(dragged)) {
+        //         $(this).sortable("disable")
+        //         console.log("works");
+        //     } else {
+        //         console.log("nope");
+        //     };
+        // }
+        
         // console.log(getLetters);
         // compareLetters.push(getLetters);
-        // if (compareLetters )
+        // compareLetters();
     },
     // over: function(event, ui) {
     // },
