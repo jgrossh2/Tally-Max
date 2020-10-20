@@ -260,6 +260,7 @@ highScoreBtnEl.addEventListener('click', function() {
 var genWordList = function(wordLength, letters) {
     // reset form container
     spaceEl.innerHTML = " ";
+    dropLetters = [];
     var results = [];
     var arrayCounter = 0;
 
@@ -302,6 +303,8 @@ var getDefData = function (letters, results) {
         searchContentEl.textContent = '';
         searchContentEl.textContent = letters;
     }
+
+    var wordDataArr = [];
     
     // generate API data for each word
     for (var i = 0; i < results.length; i++) {
@@ -343,12 +346,13 @@ var getDefData = function (letters, results) {
                     imageInfo: imgSrc.photos,
                 };
                 console.log(wordData)
-                displayWord(wordData);
+                wordDataArr.push(wordData);
+                displayWord(wordDataArr);
                 return wordData
             })
-                // } else {
-                //     alert("Error:" + response.statusText)
-                // }
+            .catch((error) => {
+                console.error('Error: ', error);
+            })
         });
     };
 };
