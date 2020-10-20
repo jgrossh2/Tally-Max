@@ -95,6 +95,12 @@ img#audio-icon {
 
 img#mwlogo {
     width: 100px;
+
+}
+
+img#imgBtn {
+    width: 32px;
+    padding: 4px 0 0 4px;
 }
 
 a#mwtext {
@@ -168,6 +174,76 @@ a#mwtext:hover {
     font-size: 24px;
     font-weight: bold;
 }
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 2; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: lightgrey; /* Fallback color */
+    background-color: white; /* Black w/ opacity */
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    position: relative;
+    background-color: white;
+    margin: auto;
+    padding: 0;
+    border: 3px solid var(--lblue);
+    width: 90%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+  }
+  
+  /* Add Animation */
+  @-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+  }
+  
+  @keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+  }
+  
+  /* The Close Button */
+  .close {
+    color: var(--lblue);
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: black;
+    cursor: pointer;
+  }
+  
+  .modal-header {
+    padding: 0.5px 2px;
+    background-color: lightgrey;
+    color: black;
+  }
+  
+  .modal-body {padding: 80px 80px;}
+  
+  .modal-footer {
+    padding: 0.05px 1px;
+    background-color: lightgrey;
+  }
+
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */
 @media screen and (max-width: 980px) {
 
