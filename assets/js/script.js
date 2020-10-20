@@ -108,10 +108,10 @@ $(function () {
         start: function (event, ui) {
             ui.helper.addClass("dragging");
             $(".dropped").addClass("dropZone");
-            },
+        },
         stop: function (event, ui) {
             $(".dropped").removeClass("dropZone");
-            },
+        },
         remove: function (event, ui) {
             ui.item.clone().appendTo(".sortable4");
             $(this).sortable('cancel');
@@ -139,7 +139,7 @@ $(function () {
         },
         stop: function (event, ui) {
             $(".dropped").removeClass("dropZone");
-            },
+        },
         remove: function (event, ui) {
             ui.item.clone().appendTo(".sortable4");
             $(this).sortable('cancel');
@@ -212,11 +212,11 @@ threeLetterBtnEl.addEventListener('click', function () {
 randomLetterBtnEl.addEventListener('click', function () {
     // sort letters based on value before sending to genWordList
     function sortFunc(a, b) {
-        var priorityLetters = ['z','q','x','j','k','w','y','v','f','h','o','m','c','b','g','d','u','s','l','t','r','n','o','i','a','e'];
-            return priorityLetters.indexOf(a) - priorityLetters.indexOf(b);
+        var priorityLetters = ['z', 'q', 'x', 'j', 'k', 'w', 'y', 'v', 'f', 'h', 'o', 'm', 'c', 'b', 'g', 'd', 'u', 's', 'l', 't', 'r', 'n', 'o', 'i', 'a', 'e'];
+        return priorityLetters.indexOf(a) - priorityLetters.indexOf(b);
     }
     dropLetters.sort(sortFunc);
-    
+
     // get possible letters from form
     var letters = dropLetters.join('');
 
@@ -288,7 +288,7 @@ var getDefData = function (letters, results) {
     }
 
     // var wordDataArr = [];
-    
+
     // generate API data for each word
     for (var i = 0; i < results.length; i++) {
         // api variables
@@ -314,29 +314,29 @@ var getDefData = function (letters, results) {
             return Promise.all(responses.map(function (response) {
                 return response.json();
             }))
-            // word definition
-            .then(function (response) {
-                var wordDef = response[0];
-                var imgSrc = response[1];
+                // word definition
+                .then(function (response) {
+                    var wordDef = response[0];
+                    var imgSrc = response[1];
 
-                var def = (wordDef[0])
-                var wordData = {
-                    word: word,
-                    class: def.fl,
-                    definition: def.shortdef,
-                    audio: def.hwi.prs[0].sound.audio,
-                    offensive: def.meta.offensive,
-                    imageInfo: imgSrc.photos,
-                };
-                console.log(wordData);
-                displayWord(wordData);
-                // wordDataArr.push(wordData);
-                // displayWord(wordDataArr);
-                return wordData
-            })
-            .catch((error) => {
-                console.error('Error: ', error);
-            })
+                    var def = (wordDef[0])
+                    var wordData = {
+                        word: word,
+                        class: def.fl,
+                        definition: def.shortdef,
+                        audio: def.hwi.prs[0].sound.audio,
+                        offensive: def.meta.offensive,
+                        imageInfo: imgSrc.photos,
+                    };
+                    console.log(wordData);
+                    displayWord(wordData);
+                    // wordDataArr.push(wordData);
+                    // displayWord(wordDataArr);
+                    return wordData
+                })
+                .catch((error) => {
+                    console.error('Error: ', error);
+                })
         });
     };
 };
@@ -392,7 +392,7 @@ var displayWord = function (wordData) {
         // Get the button that opens the modal
         var imgBtn = document.createElement('a')//addEventListener('click', onclick);
         imgBtn.setAttribute('class', 'btn-floating waves-effect waves-light red disabled')
-        imgBtn.innerHTML = '<span><img id="info-icon" src="assets/iconfinder_Information_Circle_4781829.png"></span>'
+        imgBtn.innerHTML = '<span><img id="info-icon" src="assets/pexels-icon.png"></span>'
 
         // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];

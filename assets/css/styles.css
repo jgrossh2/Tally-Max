@@ -103,7 +103,8 @@ img#imgBtn {
     padding: 4px 0 0 4px;
 }
 
-a#mwtext {
+a#mwtext,
+a#ptext {
     color: var(--dark);
     font-family: var(--secondary);
 }
@@ -180,11 +181,13 @@ a#mwtext:hover {
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 2; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
+    z-index: 4; /* Sit on top */
+    padding-top: none;/*/100px; /* Location of the box */
+    left: 5px;
+    right: 5px;
+    top: 5px;
+    bottom: 5px;
+    width: 90%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: lightgrey; /* Fallback color */
@@ -207,15 +210,15 @@ a#mwtext:hover {
   }
   
   /* Add Animation */
-  @-webkit-keyframes animatetop {
+   @-webkit-keyframes animatetop {
     from {top:-300px; opacity:0} 
     to {top:0; opacity:1}
-  }
+  } 
   
   @keyframes animatetop {
-    from {top:-300px; opacity:0}
+    from {top:-300px; opacity:3}
     to {top:0; opacity:1}
-  }
+  } 
   
   /* The Close Button */
   .close {
