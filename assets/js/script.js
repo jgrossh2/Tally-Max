@@ -22,7 +22,7 @@ var spaceEl = document.querySelector(".space");
 // spaceEl.textContent = "Drag Letters Here! "
 
 // drag letters
-var dragLetters = function(event) {
+var dragLetters = function (event) {
     event.preventDefault();
     console.log("works")
 }
@@ -51,48 +51,48 @@ var dragLetters = function(event) {
 // });
 //row 1 and dropzone
 $(function () {
-$(".sortable1, .sortable4").sortable({
-    // revert: true,
-    containment: "#keyboard",
-    tolerance: "pointer",
-    cursor: "move",
-    appendTo: "body",
-    helper: "clone",
-    placeholder: "highlight",
-    connectWith: ".sortable4",
-    items: ".tiles",
-    start: function (event, ui) {
-        ui.helper.addClass("dragging");
-        $(".dropped").addClass("dropZone");
+    $(".sortable1, .sortable4").sortable({
+        // revert: true,
+        containment: "#keyboard",
+        tolerance: "pointer",
+        cursor: "move",
+        appendTo: "body",
+        helper: "clone",
+        placeholder: "highlight",
+        connectWith: ".sortable4",
+        items: ".tiles",
+        start: function (event, ui) {
+            ui.helper.addClass("dragging");
+            $(".dropped").addClass("dropZone");
         },
-    stop: function (event, ui) {
-        $(".dropped").removeClass("dropZone");
+        stop: function (event, ui) {
+            $(".dropped").removeClass("dropZone");
         },
-    remove: function (event, ui) {
-        // $(this).sortable('disable');
-        ui.item.clone().appendTo(".sortable4");
-        $(this).sortable('cancel');
-        $(this).addClass("gray");
-    }
-    // start: function(event) {
-    //     // ui.helper.toggleClass("highlight");
-    //   },
-    //   stop: function(event) {
-    //     //   ui.helper.toggleClass("highlight");
-    //     // $(".bottom-trash").removeClass("dropover bottom-trash-drag");
-    //     console.log("deactivate", this);
-    //   },
-    //   over: function(event) {
-    //     // $(event.target).addClass("dropover-active");
-    //   },
-    //   out: function(event) {
-    //     // $(event.target).removeClass("dropover-active");
-    //     console.log("out", event.target);
-    //   },
-}).disableSelection();
-$(".sortable4").sortable({
-    connectWith: ".sortable4"
-}).disableSelection();
+        remove: function (event, ui) {
+            // $(this).sortable('disable');
+            ui.item.clone().appendTo(".sortable4");
+            $(this).sortable('cancel');
+            $(this).addClass("gray");
+        }
+        // start: function(event) {
+        //     // ui.helper.toggleClass("highlight");
+        //   },
+        //   stop: function(event) {
+        //     //   ui.helper.toggleClass("highlight");
+        //     // $(".bottom-trash").removeClass("dropover bottom-trash-drag");
+        //     console.log("deactivate", this);
+        //   },
+        //   over: function(event) {
+        //     // $(event.target).addClass("dropover-active");
+        //   },
+        //   out: function(event) {
+        //     // $(event.target).removeClass("dropover-active");
+        //     console.log("out", event.target);
+        //   },
+    }).disableSelection();
+    $(".sortable4").sortable({
+        connectWith: ".sortable4"
+    }).disableSelection();
 });
 //row 2 and dropzone
 $(function () {
@@ -106,8 +106,11 @@ $(function () {
         placeholder: "highlight",
         connectWith: ".sortable4",
         start: function (event, ui) {
+            ui.helper.addClass("dragging");
+            $(".dropped").addClass("dropZone");
             },
         stop: function (event, ui) {
+            $(".dropped").removeClass("dropZone");
             },
         remove: function (event, ui) {
             ui.item.clone().appendTo(".sortable4");
@@ -131,9 +134,11 @@ $(function () {
         placeholder: "highlight",
         connectWith: ".sortable4",
         start: function (event, ui) {
+            ui.helper.addClass("dragging");
             $(".dropped").addClass("dropZone");
-            },
+        },
         stop: function (event, ui) {
+            $(".dropped").removeClass("dropZone");
             },
         remove: function (event, ui) {
             ui.item.clone().appendTo(".sortable4");
@@ -151,7 +156,7 @@ $(".dropped").droppable({
     accept: ".letter",
     tolerance: "touch",
     revert: false,
-    drop: function(event, ui){
+    drop: function (event, ui) {
         console.log(ui);
         console.log("drop");
         $(".dropped").addClass("dropZone");
@@ -160,7 +165,7 @@ $(".dropped").droppable({
         // $(ui.helper).removeClass("dragging");
         // $(".letter").draggable('disable');
         // finds object and then letter value of that object
-        var dragged= ui.draggable[0].dataset.letter;
+        var dragged = ui.draggable[0].dataset.letter;
         console.log(ui.draggable[0].dataset.letter);
         //add drop letters to array
         dropLetters.push(dragged);
@@ -171,7 +176,7 @@ $(".dropped").droppable({
         // console.log(getLetters);
         // compareLetters.push(getLetters);
         // if (compareLetters )
-        },
+    },
     // over: function(event, ui) {
     // },
     // out: function(event, ui) {
@@ -182,7 +187,7 @@ $(".dropped").droppable({
 letterEl.addEventListener("click", dragLetters)
 
 // event listeners to gather user input and start generator function
-twoLetterBtnEl.addEventListener('click', function() {
+twoLetterBtnEl.addEventListener('click', function () {
     // get possible letters from form
     var letters = dropLetters.join('');
     // reset global variable
@@ -193,7 +198,7 @@ twoLetterBtnEl.addEventListener('click', function() {
     genWordList(wordLength, letters);
 });
 
-threeLetterBtnEl.addEventListener('click', function() {
+threeLetterBtnEl.addEventListener('click', function () {
     // get possible letters from form
     var letters = dropLetters.join('');
     // reset global variable
@@ -204,7 +209,7 @@ threeLetterBtnEl.addEventListener('click', function() {
     genWordList(wordLength, letters);
 });
 
-randomLetterBtnEl.addEventListener('click', function() {
+randomLetterBtnEl.addEventListener('click', function () {
     // get possible letters from form
     var letters = dropLetters.join('');
 
@@ -212,7 +217,7 @@ randomLetterBtnEl.addEventListener('click', function() {
     letterCounter(letters);
     function letterCounter(letters) {
         // reset global variable
-        wordLength = 0;   
+        wordLength = 0;
         var alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
         var ar = alphabet.split("");
         for (var i = 0; i < letters.length; i++) {
@@ -226,7 +231,7 @@ randomLetterBtnEl.addEventListener('click', function() {
     genWordList(wordLength, letters);
 });
 
-highScoreBtnEl.addEventListener('click', function() {
+highScoreBtnEl.addEventListener('click', function () {
     // get possible letters from form
     var letters = dropLetters.join('');
 
@@ -234,7 +239,7 @@ highScoreBtnEl.addEventListener('click', function() {
     letterCounter(letters);
     function letterCounter(letters) {
         // reset global variable
-        wordLength = 0;   
+        wordLength = 0;
         var alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
         var ar = alphabet.split("");
         for (var i = 0; i < letters.length; i++) {
@@ -245,26 +250,18 @@ highScoreBtnEl.addEventListener('click', function() {
         return wordLength;
     }
 
-    // sort letters based on value before sending to genWordList
-    // var priorityLetters = ['z','q','x','j','k','w','y','v','f','h','o','m','c','b','g','d','u','s','l','t','r','n','o','i','a','e'];
-    // var lettersArray = letters.split('');
-    // lettersArray.sort(function(a, b) {
-    //     return priorityLetters[a] - priorityLetters[b];
-    // })
-    // console.log(lettersArray);
-    // call word generator
     genWordList(wordLength, letters);
 });
 
 // generate all possible combinations of inputted letters
-var genWordList = function(wordLength, letters) {
+var genWordList = function (wordLength, letters) {
     // reset form container
     spaceEl.innerHTML = " ";
     dropLetters = [];
     var results = [];
     var arrayCounter = 0;
 
-    var generate = function(possWord) {
+    var generate = function (possWord) {
         for (var i = 0; i < letters.length; i++) {
             if (arrayCounter <= 11) {
                 possWord += letters[i];
@@ -277,7 +274,7 @@ var genWordList = function(wordLength, letters) {
                     generate(possWord);
                 }
                 possWord = possWord.slice(0, -1);
-            // break from loop to cut down on load time    
+                // break from loop to cut down on load time    
             } else {
                 break;
             }
@@ -287,7 +284,7 @@ var genWordList = function(wordLength, letters) {
 
     // store user search / results
     localStorage.setItem(letters, results);
-    
+
     // get data from API
     getDefData(letters, results);
     return console.log(results);
@@ -316,8 +313,8 @@ var getDefData = function (letters, results) {
 
         // fetch both APIs
         var apiUrls = [
-            fetch (`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${smkmw}`),
-            fetch (pexelURL, {
+            fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${smkmw}`),
+            fetch(pexelURL, {
                 headers: {
                     // Accept: 'application/json',
                     Authorization: API_key
@@ -359,7 +356,7 @@ var getDefData = function (letters, results) {
 
 // function takes MW api object data and packages word & class (e.g. noun, verb adjective) for DOM object display
 var displayWord = function (wordData) {
-    // console.log(defObject)
+    console.log(wordData)
 
     // resultsContainerEl.textContent = '';
 
@@ -368,14 +365,13 @@ var displayWord = function (wordData) {
         // create DOM elements
         var resultLI = document.createElement('li');
         resultLI.setAttribute('class', 'col-12');
-        
+
         // display word within result container header
         var resultHeader = document.createElement('div');
         resultHeader.setAttribute('class', 'collapsible-header');
         resultHeader.innerHTML = '<p>' + wordData.word + '</p>';
 
         // display class, definitions and sound button within result container body
-
         // takes audio file reference and creates link for audio playback; 'subdir' uses conditions provided by MW api documentation to determine 'subdir' component of href
         var aud = wordData.audio.split('', 3)
         var regex = RegExp('[\\d\\W]')
@@ -398,6 +394,34 @@ var displayWord = function (wordData) {
         audioBtn.setAttribute('href', audioLink);
         audioBtn.innerHTML = '<span><img id="audio-icon" src="assets/iconfinder_speaker-high-sound-volume-voice_3643734.png"></span>'
 
+        // Get the modal
+        var modal = document.getElementById("myModal");
+        // Use 'getElementById' to get the ID of where the Img will be displayed
+        var picBodyEl = document.getElementById('img-body');
+
+        // Use 'getElementById' to get the ID of where the photographer name will be displayed
+        var photographerEl = document.getElementById("ph-body");
+        photographerEl.setAttribute('src', wordData.imageInfo[0].photographer);
+
+        // Get the button that opens the modal
+        var imgBtn = document.createElement('a')//addEventListener('click', onclick);
+        imgBtn.setAttribute('class', 'btn-floating waves-effect waves-light red disabled')
+        imgBtn.innerHTML = '<span><img id="info-icon" src="assets/iconfinder_Information_Circle_4781829.png"></span>'
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+        // When the user clicks the button, open the modal 
+        imgBtn.onclick = function () {
+            modal.style.display = "block";
+        }// When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }// When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
         // create div body element for class, audio button, and definitions
         var resultBody = document.createElement('div');
         resultBody.setAttribute('class', 'collapsible-body');
@@ -410,13 +434,37 @@ var displayWord = function (wordData) {
             resultDef.textContent = n + ') ' + wordData.definition[i];
             resultBody.append(resultDef);
         }
+        // Create an '<img>' element
+        var pexelImg = document.createElement('img');
+        var i = wordData.imageInfo[0];
+        pexelImg.setAttribute('src', wordData.imageInfo[0].src.medium); //response.photos[0].src.small);
+        picBodyEl.append(pexelImg);
 
-        // append content to page elements
-        resultBody.append(audioBtn);
-        resultLI.append(resultHeader);
-        resultLI.append(resultBody);
-        resultsContainerEl.append(resultLI);
-    } else {
+        for (var i = 0; i < wordData.imageInfo[0].photographer.length; i++) {
+            if (wordData.imageInfo[0].photographer === resultHeader) {
+                photographerEl.append(resultPhtr);
+            } //also add if no image found-404 img-in assets file -results.length = 0(in array)
+
+            var resultPhtr = document.createElement('span');
+            resultPhtr.textContent = wordData.imageInfo[0].photographer[i];
+            photographerEl.append(resultPhtr);
+        }
+    }
+    else {
         console.log("Sorry, this word cannot be displayed.");
     }
+    // append content to page elements
+    resultBody.append(audioBtn);
+    resultLI.append(resultHeader);
+    resultLI.append(resultBody);
+    resultsContainerEl.append(resultLI);
+    resultBody.append(imgBtn);
+    // picBodyEl.append(pexelImg);
+
+
+    // document.addEventListener('click', imgBtn.onclick = function () {
+    //     modal.style.display = "block"
+    // });
 };
+
+
