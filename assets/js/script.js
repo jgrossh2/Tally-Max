@@ -336,7 +336,7 @@ var getDefData = function (letters, results) {
                     };
                     console.log(wordData)
                     console.log(wordData.imageInfo[0])
-                    console.log(ImgSrc)
+                    //console.log(ImgSrc)
                     displayWord(wordData);
 
                     return wordData
