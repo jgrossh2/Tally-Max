@@ -122,12 +122,14 @@ a#mwtext:hover {
 .space {
     border: dotted;
     border-color: var(--dark);
+    margin-left: 0;
 }
 
 #keyboard {
     margin: 0;
     padding: 0;
     list-style: none;
+    width: 100%;
 }
 
 .letter {
