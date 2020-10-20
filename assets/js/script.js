@@ -331,7 +331,9 @@ var getDefData = function (letters, results) {
             // word definition
             .then(function (response) {
                 var wordDef = response[0];
+                console.log(wordDef)
                 var imgSrc = response[1];
+                console.log(imgSrc)
 
                 var def = (wordDef[0])
                 var wordData = {
