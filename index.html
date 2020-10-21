@@ -16,71 +16,66 @@
     <title>Scrabble-Word-Generator</title>
 </head>
 
-<body class='container'>
+<body>
     <header>
         <div>
-            <h1 class="m"> M</h1>
+            <h1 class="m">M</h1>
             <h1 class="tally">TALLY</h1>
-            <h1 class="x"> X</h1>
+            <h1 class="x">X</h1>
         </div>
     </header>
 
     <main>
         <!-- START KEYBOARD CONTAINER: includes keyboard and drop zone-->
 
-        <div id='container'>
+        <div id='container' class="card-panel center-align row z-depth-1">
             <div id="keyboard">
-                <div class="row">
-                    <div class="col s1 letter one" data-letter="a" data-value="1"></div>
-                    <div class="col s1 letter" id="b" data-letter="b" data-value="1">B</div>
-                    <div class="col s1 letter" id="c" data-letter="c" data-value="1">C</div>
-                    <div class="col s1 letter" id="d" data-letter="d" data-value="1">D</div>
-                    <div class="col s1 letter" id="e" data-letter="e" data-value="1">E</div>
-                    <div class="col s1 letter" id="f" data-letter="f" data-value="1">F</div>
-                    <div class="col s1 letter" id="g" data-letter="g" data-value="1">G</div>
-                    <div class="col s1 letter" id="h" data-letter="h" data-value="1">H</div>
-                    <div class="col s1 letter" id="i" data-letter="i" data-value="1">I</div>
-                    <!-- <div class="col s1 letter">10</div> -->
-                    <!-- <div class="col s1 letter">11</div> -->
-                    <!-- <div class="col s1 letter">12</div> -->
+                <div class="row container-1 sortable1">
+                    <div class="col s1 letter one tiles" data-letter="a"></div>
+                    <div class="col s1 letter tiles" id="b" data-letter="b">B</div>
+                    <div class="col s1 letter tiles" id="c" data-letter="c">C</div>
+                    <div class="col s1 letter tiles" id="d" data-letter="d">D</div>
+                    <div class="col s1 letter tiles" id="e" data-letter="e">E</div>
+                    <div class="col s1 letter tiles" id="f" data-letter="f">F</div>
+                    <div class="col s1 letter tiles" id="g" data-letter="g">G</div>
+                    <div class="col s1 letter tiles" id="h" data-letter="h">H</div>
+                    <div class="col s1 letter tiles" id="i" data-letter="i">I</div>
                 </div>
-                <div class="row">
-                    <div class="col s1 letter" id="j" data-letter="j" data-value="1">J</div>
-                    <div class="col s1 letter" id="k" data-letter="k" data-value="1">K</div>
-                    <div class="col s1 letter" id="l" data-letter="l" data-value="1">L</div>
-                    <div class="col s1 letter" id="m" data-letter="m" data-value="1">M</div>
-                    <div class="col s1 letter" id="n" data-letter="n" data-value="1">N</div>
-                    <div class="col s1 letter" id="o" data-letter="o" data-value="1">O</div>
-                    <div class="col s1 letter" id="p" data-letter="p" data-value="1">P</div>
-                    <div class="col s1 letter" id="q" data-letter="q" data-value="1">Q</div>
-                    <div class="col s1 letter" id="r" data-letter="r" data-value="1">R</div>
-                    <!-- <div class="col s1 letter">10</div> -->
-                    <!-- <div class="col s1 letter">11</div> -->
-                    <!-- <div class="col s1 letter">12</div> -->
+                <div class="row container-1 sortable2">
+                    <div class="col s1 letter tiles" id="j" data-letter="j">J</div>
+                    <div class="col s1 letter tiles" id="k" data-letter="k">K</div>
+                    <div class="col s1 letter tiles" id="l" data-letter="l">L</div>
+                    <div class="col s1 letter tiles" id="m" data-letter="m">M</div>
+                    <div class="col s1 letter tiles" id="n" data-letter="n">N</div>
+                    <div class="col s1 letter tiles" id="o" data-letter="o">O</div>
+                    <div class="col s1 letter tiles" id="p" data-letter="p">P</div>
+                    <div class="col s1 letter tiles" id="q" data-letter="q">Q</div>
+                    <div class="col s1 letter tiles" id="r" data-letter="r">R</div>
                 </div>
-                <div class="row">
-                    <div class="col s1 letter" id="s" data-letter="s" data-value="1">S</div>
-                    <div class="col s1 letter" id="t" data-letter="t" data-value="1">T</div>
-                    <div class="col s1 letter" id="u" data-letter="u" data-value="1">U</div>
-                    <div class="col s1 letter" id="v" data-letter="v" data-value="1">V</div>
-                    <div class="col s1 letter" id="w" data-letter="w" data-value="1">W</div>
-                    <div class="col s1 letter" id="x" data-letter="x" data-value="1">X</div>
-                    <div class="col s1 letter" id="y" data-letter="y" data-value="1">Y</div>
-                    <div class="col s1 letter" id="z" data-letter="z" data-value="1">Z</div>
-                    <div class="col s1 letter" id="empty"></div>
-                    <!-- <div class="col s1 letter">10</div> -->
-                    <!-- <div class="col s1 letter">11</div> -->
-                    <!-- <div class="col s1 letter">12</div> -->
+                <div class="row container-1 sortable3">
+                    <div class="col s1 letter tiles" id="s" data-letter="s">S</div>
+                    <div class="col s1 letter tiles" id="t" data-letter="t">T</div>
+                    <div class="col s1 letter tiles" id="u" data-letter="u">U</div>
+                    <div class="col s1 letter tiles" id="v" data-letter="v">V</div>
+                    <div class="col s1 letter tiles" id="w" data-letter="w">W</div>
+                    <div class="col s1 letter tiles" id="x" data-letter="x">X</div>
+                    <div class="col s1 letter tiles" id="y" data-letter="y">Y</div>
+                    <div class="col s1 letter tiles" id="z" data-letter="z">Z</div>
+                    <div class="col s1 letter tiles" id="empty"></div>
                 </div>
-                <div class="row">
-                    <div class=" col s9 space center" id="sortable"></div>
+                <div>
+                    <p class="todo">Drag Letters Here!</p>
+                </div>
+                <div class="row container-1 dropped sortable4 space">
+                    <!-- <div class="col s1 letter tiles drop" id="s" data-letter="s" ></div> -->
+                    <!-- <div class="col s1 letter tiles drop" id="t" data-letter="t" ></div> -->
+                    <!-- <div class="col s1 letter tiles drop" id="u" data-letter="u" ></div> -->
+                    <!-- </div> -->
                 </div>
             </div>
-        </div>
 
-        <!-- START SEARCH-BUTTONS CONTAINER -->
-        <div class='container'>
-            <div class='search-type card-panel row z-depth-2'>
+            <!-- START SEARCH-BUTTONS CONTAINER -->
+            <div class='search-type row'>
                 <h5 class='subtitle'>Select your search type!</h5>
                 <div class='search center-align col s6 m3 l3'>
                     <button id="twoLetterBtn" class="waves-effect searchbtn"><i
@@ -99,23 +94,46 @@
                             class="material-icons left">grade</i>HIGH SCORE</button></td>
                 </div>
             </div>
-        </div>
 
-        <!-- START RESULTS CONTAINER: words resulting from search are listed here -->
-        <div class='container'>
-            <div class="row z-depth-2">
+            <!-- START RESULTS CONTAINER: words resulting from search are listed here -->
+            <div class="row">
                 <div class='col valign-wrapper results-title'>
                     <h5 class='valign subtitle'>Search results for: <span id="search-content"></span></h5>
                 </div>
-                <ul class="collapsible popout col s12 m12 l12" id="results-container" data-collapsible='accordion'>
-                </ul>
+                <ul class="collapsible popout col s12 m12 l12" id="results-container" data-collapsible='accordion'></ul>
             </div>
         </div>
 
-        <!--  START IMAGE CONTAINER: image selected from results list by user is displayed here-->
+        <!-- MODAL -->
+
+        <!-- Trigger/Open The Modal -->
+        <!-- <button class="btn-floating waves-effect waves-light red disabled" id="info-btn">Info</button> -->
+
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+            <!-- When the user clicks the button, open the modal  -->
+            <!-- <button onclick="displayImg()"></button> -->
+            <!-- <span><img id="info-icon" src="assets/iconfinder_Information_Circle_4781829.png"></span> -->
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close">&times;</span>
+                    <h4>Powered by Pexel</h4>
+                </div>
+                <div class="modal-body" id="img-body">
+                    <!-- <img>Image HERE</img> -->
+                </div>
+                <div class="modal-footer" id="ph-body">
+                    <span class="close">&times;</span>
+                    <h5>Photographer: </h5>
+                </div>
+            </div>
+        </div>
+
+        <!-- START IMAGE CONTAINER: image selected from results list by user is displayed here
         <div class="container" id="images">
             <button onclick="showImage()"></button>
-        </div>
+        </div> -->
 
     </main>
 
@@ -128,9 +146,12 @@
             </div>
             <div class='col s9 m8 l6'>
                 <h5>API Support:</h5>
-                <a href="https://www.dictionaryapi.com/products/api-collegiate-dictionary">
+                <a id='mwtext' href="https://www.dictionaryapi.com/products/api-collegiate-dictionary">
                     <img id='mwlogo' src="assets/MWLogo_LightBG_120X120_2x.png"><br />
-                    MERRIAM-WEBSTER'S COLLEGIATE® DICTIONARY WITH AUDIO</a>
+                    Merriam-Webster's Collegiate® Dictionary with Audio</a><br />
+                <a href="https://www.pexels.com/api/"><br />
+                    <!-- <img id='pexelLogo' src="assets/Pexels-logo.png"> -->
+                    PEXELS</a>
             </div>
         </div>
     </footer>
@@ -141,6 +162,7 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+    <script type="text/javascript" src="http://www.pureexample.com/js/lib/jquery.ui.touch-punch.min.js"></script>
     <script src='projectSupport/smkeys.js'></script>
     <script src="assets/js/dict.js"></script>
     <script src="assets/js/script.js"></script>
