@@ -1,6 +1,6 @@
 // Scrabble Word Generator
 
-// page elements
+// page elements / DOM variables
 var twoLetterBtnEl = document.getElementById('twoLetterBtn');
 var threeLetterBtnEl = document.getElementById('threeLetterBtn');
 var randomLetterBtnEl = document.getElementById('randomLetterBtn');
@@ -17,39 +17,13 @@ var dropLetters = [];
 // var letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 var letterEl = document.querySelector(".letter");
 var spaceEl = document.querySelector(".space");
-
-// get user input area
-// spaceEl.textContent = "Drag Letters Here! "
+var noImage = "no-image.png"
 
 // drag letters
 var dragLetters = function (event) {
     event.preventDefault();
     console.log("works")
 }
-// make letters drag
-// $(".letter").draggable({ 
-//     // connectToSortable: ".space",
-//     tolerance: "pointer",
-//     helper: "clone",
-//     appendTo: ".space",
-//     containment: "#container",
-//     cursor: "move",
-//     snap: ".space",
-//     // snapMode: "inner",
-//     revert: "invalid",
-//     start: function(event, ui) {
-//         console.log("uivalue " + JSON.stringify(ui));
-//         //clone of tile
-//         $(ui.helper).addClass("dragging");
-//         console.log("test");
-//         $(this).addClass("gray");
-//     },
-//     stop: function(event, ui) {
-//         $(ui.helper).removeClass("dragging");
-//         console.log("stop");
-//     }
-// });
-//row 1 and dropzone
 $(function () {
     $(".sortable1, .sortable4").sortable({
         // revert: true,
@@ -74,7 +48,6 @@ $(function () {
             $(this).sortable('cancel');
             $(this).addClass("gray");
         }
-
     }).disableSelection();
     $(".sortable4").sortable({
         connectWith: ".sortable4"
@@ -108,6 +81,7 @@ $(function () {
         connectWith: ".sortable4"
     }).disableSelection();
 });
+
 //row 3 and drop area
 $(function () {
     $(".sortable3, .sortable4").sortable({
@@ -244,13 +218,16 @@ var genWordList = function (wordLength, letters) {
     localStorage.setItem(letters, results);
 
     // get data from API
-    getDefData(letters, results);
+    getDefData(results);
+
+    // display letter array to page
+    displayLetters(letters, results);
+
     return console.log(results);
 };
 
-// function fetches definition data for each in an array of words and returns subset of data packaged as an object
-var getDefData = function (letters, results) {
-    // display searched letters
+// display searched letters
+var displayLetters = function (letters, results) {
     if (results.length === 0) {
         searchContentEl.textContent = '';
         searchContentEl.textContent = 'No Words Found';
@@ -258,20 +235,25 @@ var getDefData = function (letters, results) {
         searchContentEl.textContent = '';
         searchContentEl.textContent = letters;
     }
+}
 
-    // var wordDataArr = [];
+// function fetches definition data for each in an array of words and returns subset of data packaged as an object
+var getDefData = function (results) {
+    // console.log(results)
 
-    // generate API data for each word
+    var wordObjArr = [];
+
+    // generate combined-API response data for each word
     for (var i = 0; i < results.length; i++) {
-        // api variables
+
         let word = results[i];
         var images = results[i];
-        var pexelURL = `https://api.pexels.com/v1/search?query=${images}&per_page=1`;
-        var API_key = "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
+        var pexelURL = `https://api.pexels.com/v1/search?query=${word}&per_page=1`;
+        var API_key = "563492ad6f91700001000001d01c380d928e472983ed037be8073298";
 
         // fetch both APIs
         var apiUrls = [
-            fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${smkmw}`),
+            fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${images}?key=${smkmw}`),
             fetch(pexelURL, {
                 headers: {
                     // Accept: 'application/json',
@@ -280,109 +262,193 @@ var getDefData = function (letters, results) {
                 }
             }),
         ];
+
         // submit https request
         Promise.all(apiUrls).then(function (responses) {
+
             // using map() method to get a response array of json objects, 
             return Promise.all(responses.map(function (response) {
                 return response.json();
             }))
-                // word definition
+                // resulting definition & image data for each word
                 .then(function (response) {
-                    var wordDef = response[0];
+                    // console.log(response[0][0])
+                    // console.log(response[1])
+                    var wordDef = response[0][0];
                     var imgSrc = response[1];
 
-                    var def = (wordDef[0])
-                    var wordData = {
-                        word: word,
-                        class: def.fl,
-                        definition: def.shortdef,
-                        audio: def.hwi.prs[0].sound.audio,
-                        offensive: def.meta.offensive,
-                        imageInfo: imgSrc.photos,
-                    };
-                    console.log(wordData);
-                    displayWord(wordData);
-                    // wordDataArr.push(wordData);
-                    // displayWord(wordDataArr);
-                    return wordData
+                    if (imgSrc.photos.length > 0) {
+                        var wordObj = {
+                            word: wordDef.hwi.hw,
+                            class: wordDef.fl,
+                            definition: wordDef.shortdef,
+                            audio: wordDef.hwi.prs[0].sound.audio,
+                            offensive: wordDef.meta.offensive,
+                            image_s: imgSrc.photos[0].src.small,
+                            image_m: imgSrc.photos[0].src.medium,
+                            image_l: imgSrc.photos[0].src.large,
+                            photographer: imgSrc.photos[0].photographer,
+                            photog_url: imgSrc.photos[0].photographer_url,
+                        }
+                    } else {
+                        var wordObj = {
+                            word: wordDef.hwi.hw,
+                            class: wordDef.fl,
+                            definition: wordDef.shortdef,
+                            audio: wordDef.hwi.prs[0].sound.audio,
+                            offensive: wordDef.meta.offensive,
+                            image_s: noImage,
+                            image_m: noImage,
+                            image_l: noImage,
+                            photographer: noImage,
+                            photog_url: noImage,
+                        }
+                    }
+                    // pass resulting object array to display function
+                    wordObjArr.push(wordObj);
+                    return wordObj;
                 })
                 .catch((error) => {
                     console.error('Error: ', error);
-                })
+                });
         });
     };
+    displayWordData(wordObjArr)
 };
 
-// function takes MW api object data and packages word & class (e.g. noun, verb adjective) for DOM object display
-var displayWord = function (wordData) {
-    console.log(wordData)
 
-    // check to see whether term is offensive
-    if (!wordData.offensive) {
-        // create DOM elements
-        var resultLI = document.createElement('li');
-        resultLI.setAttribute('class', 'col-12');
+// function takes api object array and parses for display
+var displayWordData = function (wordObjArr) {
+    console.log(wordObjArr)
 
-        // display word within result container header
-        var resultHeader = document.createElement('div');
-        resultHeader.setAttribute('class', 'collapsible-header');
-        resultHeader.innerHTML = '<p>' + wordData.word + '</p>';
+    var resultLI = document.createElement('li');
+    var resultHeader = document.createElement('div');
+    var audioBtn = document.createElement('a');
+    var resultBody = document.createElement('div');
+    var modal = document.createElement('div');
+    var modalContent = document.createElement('div')
+    var modalBody = document.createElement('div');
+    var modalFooter = document.createElement('div');
+    var picBodyEl = document.getElementById('img-body');
+    var photographerEl = document.getElementById("ph-body");
+    var imgBtn = document.createElement('a')
 
-        // display class, definitions and sound button within result container body
-        // takes audio file reference and creates link for audio playback; 'subdir' uses conditions provided by MW api documentation to determine 'subdir' component of href
-        var aud = wordData.audio.split('', 3)
-        var regex = RegExp('[\\d\\W]')
-        var subdir = ''
-        if (aud[0] + aud[1] + aud[2] === 'bix') {
-            subdir = 'bix'
-        } else if (aud[0] + aud[1] === 'gg') {
-            subdir = 'gg'
-        } else if (regex.test(aud[0])) {
-            subdir = 'number'
-        } else {
-            subdir = aud[0]
-        }
-        var audioLink = 'https://media.merriam-webster.com/audio/prons/en/us/ogg/' + subdir + '/' + wordData.audio + '.ogg';
-        // console.log(audioLink)
+    // loop through each object generated from the word-results array
+    for (var i = 0; i < wordObjArr.length; i++) {
+        console.log(wordObjArr[i])
+        wordObj = wordObjArr[i]
 
-        // create button element to contain sound link
-        var audioBtn = document.createElement('a');
-        audioBtn.setAttribute('class', 'btn-floating waves-effect waves-light')
-        audioBtn.setAttribute('href', audioLink);
-        audioBtn.innerHTML = '<span><img id="audio-icon" src="assets/iconfinder_speaker-high-sound-volume-voice_3643734.png"></span>'
+        // check to see whether term is offensive
+        if (!wordObj.offensive) {
+            // create DOM elements
+            // var resultLI = document.createElement('li');
+            resultLI.setAttribute('class', 'col-12');
 
-        // Get the modal
-        var modal = document.getElementById("myModal");
+            // display word within result container header
+            // var resultHeader = document.createElement('div');
+            resultHeader.setAttribute('class', 'collapsible-header');
+            resultHeader.innerHTML = '<p>' + wordObj.word + '</p>';
 
-        // Use 'getElementById' to get the ID of where the Img will be displayed
-        var picBodyEl = document.getElementById('img-body');
-
-        // Use 'getElementById' to get the ID of where the photographer name will be displayed
-        var photographerEl = document.getElementById("ph-body");
-        photographerEl.setAttribute('src', wordData.imageInfo[0].photographer);
-
-        // Get the button that opens the modal
-        var imgBtn = document.createElement('a')//addEventListener('click', onclick);
-        imgBtn.setAttribute('class', 'btn-floating waves-effect waves-light img')
-        imgBtn.innerHTML = '<span><img id="img-icon" src="assets/pexels_icon.png"></span>'
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-
-        // When the user clicks the button, open the modal 
-        imgBtn.onclick = function () {
-            modal.style.display = "block";
-
-        }// When the user clicks on <span> (x), close the modal
-        span.onclick = function () {
-            modal.style.display = "none";
-
-        }// When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
+            // display audio-button within result-container body: takes 'audio' property from wordObj[i] and creates link for audio playback; conditions outlined in the Merriam-Webster api documentation are used to determine the 'subdir' value, which is a component of the audio-link href
+            var aud = wordObj.audio.split('', 3)
+            // this regular expression refers to any number (\d) or punctuation symbol (\W)
+            var regex = RegExp('[\\d\\W]')
+            var subdir = ''
+            if (aud[0] + aud[1] + aud[2] === 'bix') {
+                subdir = 'bix'
+            } else if (aud[0] + aud[1] === 'gg') {
+                subdir = 'gg'
+            } else if (regex.test(aud[0])) {
+                subdir = 'number'
+            } else {
+                subdir = aud[0]
             }
+            var audioLink = 'https://media.merriam-webster.com/audio/prons/en/us/ogg/' + subdir + '/' + wordObj.audio + '.ogg';
+            // console.log(audioLink)
+
+            // create button element to contain sound link
+            // var audioBtn = document.createElement('a');
+            audioBtn.setAttribute('class', 'btn-floating waves-effect waves-light')
+            audioBtn.setAttribute('href', audioLink);
+            audioBtn.innerHTML = '<span><img id="audio-icon" src="assets/iconfinder_speaker-high-sound-volume-voice_3643734.png"></span>'
+
+            // create div body element for class, audio button, definitions, and image-modal
+            // var resultBody = document.createElement('div');
+            resultBody.setAttribute('class', 'collapsible-body');
+            resultBody.innerHTML = '<span>' + wordObj.class + '</span>';
+
+            // loop through each homonym and display within element for that word
+            for (var i = 0; i < wordObj.definition.length; i++) {
+                n = i + 1
+                var resultDef = document.createElement('p');
+                resultDef.textContent = n + ') ' + wordObj.definition[i];
+                resultBody.append(resultDef);
+            }
+
+            // Get the modal
+            // var modal = document.getElementById("myModal");
+            // var modal = document.createElement('div');
+            modal.setAttribute('id', myModal);
+            modal.setAttribute('class', modal);
+            // create container for modal header content
+            // var modalContent = document.createElement('div')
+            modalContent.setAttribute('class', 'modal-content');
+            modalContent.innerHTML = "<span class='close'>&times;</span><h4>Powered by Pexel</h4>";
+            // create container for modal body content
+            // var modalBody = document.createElement('div');
+            modalBody.setAttribute('class', 'modal-body');
+            modalBody.setAttribute('id', 'img-body');
+            // create container for modal footer content
+            // var modalFooter = document.createElement('div');
+            modalFooter.setAttribute('class', 'modal-footer');
+            modalFooter.setAttribute('id', 'ph-body');
+            modalFooter.innerHTML = '<span class="close">&times;</span><h5>Photographer: </h5>';
+
+            // Use 'getElementById' to get the ID of where the Img will be displayed
+            // var picBodyEl = document.getElementById('img-body');
+
+            // Use 'getElementById' to get the ID of where the photographer name will be displayed
+            // var photographerEl = document.getElementById("ph-body");
+            photographerEl.setAttribute('src', wordObj.photographer);
+
+            // Get the button that opens the modal
+            // var imgBtn = document.createElement('a')//addEventListener('click', onclick);
+            imgBtn.setAttribute('class', 'btn-floating waves-effect waves-light red disabled')
+            imgBtn.innerHTML = '<span><img id="info-icon" src="assets/iconfinder_Information_Circle_4781829.png"></span>'
+
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
+            // When the user clicks the button, open the modal 
+            imgBtn.onclick = function () {
+                modal.style.display = "block";
+            }// When the user clicks on <span> (x), close the modal
+            span.onclick = function () {
+                modal.style.display = "none";
+            }// When the user clicks anywhere outside of the modal, close it
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+            // // Create an '<img>' element
+            // var pexelImg = document.createElement('img');
+            // var i = wordObj.imageInfo[0];
+            // pexelImg.setAttribute('src', image_m); //response.photos[0].src.small);
+            // picBodyEl.append(pexelImg);
+
+            // for (var i = 0; i < wordObj.imageInfo[0].photographer.length; i++) {
+            //     if (wordObj.imageInfo[0].photographer === resultHeader) {
+            //         photographerEl.append(resultPhtr);
+            //     } //also add if no image found-404 img-in assets file -results.length = 0(in array)
+
+            //     var resultPhtr = document.createElement('span');
+            //     resultPhtr.textContent = wordObj.imageInfo[0].photographer[i];
+            //     photographerEl.append(resultPhtr);
+            // }
+        } else {
+            resultHeader.innerHTML = '<p>Sorry, this word cannot be displayed.</p>';
         }
+
         // create div body element for class, audio button, and definitions
         var resultBody = document.createElement('div');
         resultBody.setAttribute('class', 'collapsible-body');
@@ -411,62 +477,16 @@ var displayWord = function (wordData) {
             photographerEl.append(resultPhtr);
         }
     }
-    else {
-        console.log("Sorry, this word cannot be displayed.");
-        // window.location.href = "https://www.google.com/imghp?hl=EN";
-    }
     // append content to page elements
-    resultBody.append(audioBtn);
-    resultLI.append(resultHeader);
-    resultLI.append(resultBody);
     resultsContainerEl.append(resultLI);
+    // results header
+    resultLI.append(resultHeader);
+    // results body (class, definitions, audio-button, image-button)
+    resultLI.append(resultBody);
+    resultBody.append(audioBtn);
     resultBody.append(imgBtn);
 
     // document.addEventListener('click', imgBtn.onclick = function () {
     //     modal.style.display = "block"
     // });
 };
-
-// var pass;
-// pass = true;
-// if (pass == "def") {
-//     <a href="google.html">This is the link to .</a>
-// } else {
-//     document.write("The password you've is enter is incorrect");
-// }
-// // similar behavior as an HTTP redirect
-// window.location.replace("http://stackoverflow.com");
-
-// // similar behavior as clicking on a link
-// window.location.href = "http://stackoverflow.com";
-
-
-
-// <img id="myImage" onclick="changeImage()" src="pic_bulboff.gif" width="100" height="180">
-
-//     <p>Click the light bulb to turn on/off the light.</p>
-
-//     <script>
-//         function changeImage() {
-//   var image = document.getElementById("myImage");
-//   if (image.src.match("bulbon")) {
-//             image.src = "pic_bulboff.gif";
-//   } else {
-//             image.src = "pic_bulbon.gif";
-// //   }
-// // }
-// // </script>
-
-// function renderResults() {
-
-//     if (results.length > 0) {
-//         console.log(sucess);
-
-//         // navigator.notification.alert('Login, Success!');
-//     } else {
-//         //navigator.notification.alert('Incorrect! Please try again.');
-//         //  $(window)[0].location = newURL;
-//         window.location.href = "https://www.google.com/imghp?hl=EN";
-//     }
-// }
-
