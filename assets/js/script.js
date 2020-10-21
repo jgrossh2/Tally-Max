@@ -18,10 +18,8 @@ var dropLetters = [];
 // var letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 var letterEl = document.querySelector(".letter");
 var spaceEl = document.querySelector(".space");
-// var oldTile = ui.item[0].dataset.letter;
-// var dragged = ui.draggable[0].dataset.letter;
-var oldTile = [];
-var dragged = [];
+// var oldTile = [];
+// var dragged = [];
 
 // get user input area
 // spaceEl.textContent = "Drag Letters Here! "
@@ -65,7 +63,6 @@ $(function () {
            $(oldTile).sortable("disable");
         //    $(oldTile).sortable('enable');
         //    console.log(oldTile);
-            // console.log(this);
         },
         over: function(event, ui) {
         },
@@ -128,7 +125,7 @@ $(function () {
         },
         stop: function (event, ui) {
             $(".dropped").removeClass("dropZone");
-            },
+        },
         remove: function (event, ui) {
             ui.item.clone().appendTo(".sortable4");
             $(this).sortable('cancel');
@@ -156,7 +153,6 @@ $(".dropped").droppable({
         // console.log(ui);
         // console.log("drop");
         $(".dropped").addClass("dropZone");
-        
         // $(this).sortable('disable');
         // var helper = ui.helper.clone(true);
         // $(".letter").draggable('disable');
@@ -172,12 +168,12 @@ $(".dropped").droppable({
         //add drop letters to array
         dropLetters.push(dragged);
     },
-    // over: function(event, ui) {
-    // },
-    // out: function(event, ui) {
-    // },
-    // update: function(event) {
-    // }
+    over: function(event, ui) {
+    },
+    out: function(event, ui) {
+    },
+    update: function(event) {
+    }
 });
 letterEl.addEventListener("click", dragLetters)
 

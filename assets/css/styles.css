@@ -95,7 +95,6 @@ img#audio-icon {
 
 img#mwlogo {
     width: 100px;
-
 }
 
 img#imgBtn {
@@ -115,8 +114,6 @@ a#mwtext:hover {
 #container {
     display: flex;
     flex-wrap: wrap;
-    /* margin: 50px 0 0 325px; */
-    /* width: 100%; */
 }
 
 .space {
@@ -257,8 +254,6 @@ a#mwtext:hover {
 }
 .dropped {
     border: dotted 3px var(--dark);
-    /* width: 681px; */
-    /* width: 45%; */
     height: 120px;
 }
 .drop {
