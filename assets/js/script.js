@@ -205,6 +205,13 @@ threeLetterBtnEl.addEventListener('click', function () {
 });
 
 randomLetterBtnEl.addEventListener('click', function () {
+    // sort letters based on value before sending to genWordList
+    function sortFunc(a, b) {
+        var priorityLetters = ['z','q','x','j','k','w','y','v','f','h','o','m','c','b','g','d','u','s','l','t','r','n','o','i','a','e'];
+            return priorityLetters.indexOf(a) - priorityLetters.indexOf(b);
+    }
+    dropLetters.sort(sortFunc);
+    
     // get possible letters from form
     var letters = dropLetters.join('');
 
@@ -226,33 +233,11 @@ randomLetterBtnEl.addEventListener('click', function () {
     genWordList(wordLength, letters);
 });
 
-highScoreBtnEl.addEventListener('click', function () {
-    // get possible letters from form
-    var letters = dropLetters.join('');
-
-    // get total letter count
-    letterCounter(letters);
-    function letterCounter(letters) {
-        // reset global variable
-        wordLength = 0;
-        var alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        var ar = alphabet.split("");
-        for (var i = 0; i < letters.length; i++) {
-            if (ar.indexOf(letters[i]) > -1) {
-                wordLength = wordLength + 1;
-            }
-        }
-        return wordLength;
-    }
-
-    genWordList(wordLength, letters);
-});
-
 // generate all possible combinations of inputted letters
 var genWordList = function (wordLength, letters) {
-    
-    // reset form container
+    // reset search containers & arrays
     spaceEl.innerHTML = " ";
+    // resultsContainerEl.textContent = '';
     dropLetters = [];
     var results = [];
     var arrayCounter = 0;
@@ -297,6 +282,8 @@ var getDefData = function (letters, results) {
         searchContentEl.textContent = letters;
     }
 
+    // var wordDataArr = [];
+    
     // generate API data for each word
     for (var i = 0; i < results.length; i++) {
         // api variables
@@ -322,30 +309,29 @@ var getDefData = function (letters, results) {
             return Promise.all(responses.map(function (response) {
                 return response.json();
             }))
-                // word definition
-                .then(function (response) {
-                    var wordDef = response[0];
-                    var imgSrc = response[1];
+            // word definition
+            .then(function (response) {
+                var wordDef = response[0];
+                var imgSrc = response[1];
 
-                    var def = (wordDef[0])
-                    var wordData = {
-                        word: word,
-                        class: def.fl,
-                        definition: def.shortdef,
-                        audio: def.hwi.prs[0].sound.audio,
-                        offensive: def.meta.offensive,
-                        imageInfo: imgSrc.photos,
-                    };
-                    console.log(wordData)
-                    // console.log(wordData.imageInfo[0])
-                    // console.log(ImgSrc)
-                    displayWord(wordData);
-
-                    return wordData
-                })
-            // } else {
-            //     alert("Error:" + response.statusText)
-            // }
+                var def = (wordDef[0])
+                var wordData = {
+                    word: word,
+                    class: def.fl,
+                    definition: def.shortdef,
+                    audio: def.hwi.prs[0].sound.audio,
+                    offensive: def.meta.offensive,
+                    imageInfo: imgSrc.photos,
+                };
+                console.log(wordData);
+                displayWord(wordData);
+                // wordDataArr.push(wordData);
+                // displayWord(wordDataArr);
+                return wordData
+            })
+            .catch((error) => {
+                console.error('Error: ', error);
+            })
         });
     };
 };
@@ -353,8 +339,6 @@ var getDefData = function (letters, results) {
 // function takes MW api object data and packages word & class (e.g. noun, verb adjective) for DOM object display
 var displayWord = function (wordData) {
     console.log(wordData)
-
-    // resultsContainerEl.textContent = '';
 
     // check to see whether term is offensive
     if (!wordData.offensive) {
