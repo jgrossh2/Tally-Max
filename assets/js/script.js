@@ -58,12 +58,11 @@ $(function () {
            var done = $(ui.item).clone().attr('id');
            console.log(done);
            var oldTile = document.getElementById(done);
-
+           $(oldTile).sortable();
+           $(oldTile).sortable('enable');
             $(oldTile).addClass("gray");
-            // $(oldTile).disableSelection();
+            $(oldTile).sortable('disable');
             // console.log(this);
-            // $(ui.item.ui-sortable-handle).sortable("disable");
-            // console.log(ui.item.ui-sortable-handle);
         },
         over: function(event, ui) {
         },
@@ -158,9 +157,9 @@ $(".dropped").droppable({
         // finds object and then letter value of that object
         var dragged = ui.draggable[0].dataset.letter;
         console.log(dragged);
-        var droppedDone = $(dragged).attr('id');
-        console.log(droppedDone);
-        var dragTile = document.getElementById(droppedDone);
+        // var droppedDone = $(dragged).attr('id');
+        // console.log(droppedDone);
+        // var dragTile = document.getElementById(droppedDone);
         // dragTile.sortable('disable');
          $(oldTile).addClass("gray");
 
