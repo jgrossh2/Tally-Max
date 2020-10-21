@@ -336,32 +336,36 @@ var getDefData = function (results) {
             .then(function (response) {
                 var wordDef = response[0][0];
                 var imgSrc = response[1];
-
-                if (imgSrc.photos.length > 0) {
-                    var wordObj = {
-                        word: response[i],
-                        class: wordDef.fl,
-                        definition: wordDef.shortdef,
-                        audio: wordDef.hwi.prs[0].sound.audio,
-                        offensive: wordDef.meta.offensive,
-                        image_s: imgSrc.photos[0].src.small,
-                        image_m: imgSrc.photos[0].src.medium,
-                        image_l: imgSrc.photos[0].src.large,
-                        photographer: imgSrc.photos[0].photographer,
-                        photog_url: imgSrc.photos[0].photographer_url,
-                    }
+                
+                if (!wordDef.hwi.prs) {
+                    return;
                 } else {
-                    var wordObj = {
-                        word: results[i],
-                        class: wordDef.fl,
-                        definition: wordDef.shortdef,
-                        audio: wordDef.hwi.prs[0].sound.audio,
-                        offensive: wordDef.meta.offensive,
-                        image_s: noImage,
-                        image_m: noImage,
-                        image_l: noImage,
-                        photographer: noImage,
-                        photog_url: noImage,
+                    if (imgSrc.photos.length > 0) {
+                        var wordObj = {
+                            word: response[i],
+                            class: wordDef.fl,
+                            definition: wordDef.shortdef,
+                            audio: wordDef.hwi.prs[0].sound.audio,
+                            offensive: wordDef.meta.offensive,
+                            image_s: imgSrc.photos[0].src.small,
+                            image_m: imgSrc.photos[0].src.medium,
+                            image_l: imgSrc.photos[0].src.large,
+                            photographer: imgSrc.photos[0].photographer,
+                            photog_url: imgSrc.photos[0].photographer_url,
+                        }
+                    } else {
+                        var wordObj = {
+                            word: results[i],
+                            class: wordDef.fl,
+                            definition: wordDef.shortdef,
+                            audio: wordDef.hwi.prs[0].sound.audio,
+                            offensive: wordDef.meta.offensive,
+                            image_s: noImage,
+                            image_m: noImage,
+                            image_l: noImage,
+                            photographer: noImage,
+                            photog_url: noImage,
+                        }
                     }
                 }
                 wordObjArr.push(wordObj);
@@ -372,7 +376,11 @@ var getDefData = function (results) {
             })
         });
     };
-    displayWordData(wordObjArr);
+    displayWordTest(wordObjArr);
+};
+
+var displayWordTest = function(wordObjArr) {
+    console.log(wordObjArr);
 };
 
 // var objectData = function(results, response) {
