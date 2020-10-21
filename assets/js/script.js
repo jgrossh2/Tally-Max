@@ -378,6 +378,18 @@ var getDefData = function (results) {
 // function takes api object array and parses for display
 var displayWordData = function (wordObjArr) {
     console.log(wordObjArr)
+    
+    var resultLI = document.createElement('li');
+    var resultHeader = document.createElement('div');
+    var audioBtn = document.createElement('a');
+    var resultBody = document.createElement('div');
+    var modal = document.createElement('div');
+    var modalContent = document.createElement('div')
+    var modalBody = document.createElement('div');
+    var modalFooter = document.createElement('div');
+    var picBodyEl = document.getElementById('img-body');
+    var photographerEl = document.getElementById("ph-body");
+    var imgBtn = document.createElement('a')
 
     // loop through each object generated from the word-results array
     for (var i = 0; i < wordObjArr.length; i++) {
@@ -387,11 +399,11 @@ var displayWordData = function (wordObjArr) {
         // check to see whether term is offensive
         if (!wordObj.offensive) {
             // create DOM elements
-            var resultLI = document.createElement('li');
+            // var resultLI = document.createElement('li');
             resultLI.setAttribute('class', 'col-12');
 
             // display word within result container header
-            var resultHeader = document.createElement('div');
+            // var resultHeader = document.createElement('div');
             resultHeader.setAttribute('class', 'collapsible-header');
             resultHeader.innerHTML = '<p>' + wordObj.word + '</p>';
 
@@ -413,13 +425,13 @@ var displayWordData = function (wordObjArr) {
             // console.log(audioLink)
 
             // create button element to contain sound link
-            var audioBtn = document.createElement('a');
+            // var audioBtn = document.createElement('a');
             audioBtn.setAttribute('class', 'btn-floating waves-effect waves-light')
             audioBtn.setAttribute('href', audioLink);
             audioBtn.innerHTML = '<span><img id="audio-icon" src="assets/iconfinder_speaker-high-sound-volume-voice_3643734.png"></span>'
 
             // create div body element for class, audio button, definitions, and image-modal
-            var resultBody = document.createElement('div');
+            // var resultBody = document.createElement('div');
             resultBody.setAttribute('class', 'collapsible-body');
             resultBody.innerHTML = '<span>' + wordObj.class + '</span>';
 
@@ -433,32 +445,32 @@ var displayWordData = function (wordObjArr) {
 
             // Get the modal
             // var modal = document.getElementById("myModal");
-            var modal = document.createElement('div');
+            // var modal = document.createElement('div');
             modal.setAttribute('id', myModal);
             modal.setAttribute('class', modal);
             // create container for modal header content
-            var modalContent = document.createElement('div')
+            // var modalContent = document.createElement('div')
             modalContent.setAttribute('class', 'modal-content');
             modalContent.innerHTML = "<span class='close'>&times;</span><h4>Powered by Pexel</h4>";
             // create container for modal body content
-            var modalBody = document.createElement('div');
+            // var modalBody = document.createElement('div');
             modalBody.setAttribute('class', 'modal-body');
             modalBody.setAttribute('id', 'img-body');
             // create container for modal footer content
-            var modalFooter = document.createElement('div');
+            // var modalFooter = document.createElement('div');
             modalFooter.setAttribute('class', 'modal-footer');
             modalFooter.setAttribute('id', 'ph-body');
             modalFooter.innerHTML = '<span class="close">&times;</span><h5>Photographer: </h5>';
 
             // Use 'getElementById' to get the ID of where the Img will be displayed
-            var picBodyEl = document.getElementById('img-body');
+            // var picBodyEl = document.getElementById('img-body');
 
             // Use 'getElementById' to get the ID of where the photographer name will be displayed
-            var photographerEl = document.getElementById("ph-body");
+            // var photographerEl = document.getElementById("ph-body");
             photographerEl.setAttribute('src', wordObj.photographer);
 
             // Get the button that opens the modal
-            var imgBtn = document.createElement('a')//addEventListener('click', onclick);
+            // var imgBtn = document.createElement('a')//addEventListener('click', onclick);
             imgBtn.setAttribute('class', 'btn-floating waves-effect waves-light red disabled')
             imgBtn.innerHTML = '<span><img id="info-icon" src="assets/iconfinder_Information_Circle_4781829.png"></span>'
 
@@ -491,7 +503,10 @@ var displayWordData = function (wordObjArr) {
             //     resultPhtr.textContent = wordObj.imageInfo[0].photographer[i];
             //     photographerEl.append(resultPhtr);
             // }
+        } else {
+            resultHeader.innerHTML = '<p>Sorry, this word cannot be displayed.</p>';
         }
+
         // create div body element for class, audio button, and definitions
         var resultBody = document.createElement('div');
         resultBody.setAttribute('class', 'collapsible-body');
