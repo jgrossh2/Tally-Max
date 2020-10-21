@@ -10,6 +10,7 @@ var searchContentEl = document.getElementById('search-content');
 var resultsContainerEl = document.getElementById('results-container');
 var letterEl = document.querySelector(".letter");
 var spaceEl = document.querySelector(".space");
+var aEl = document.getElementById('a');
 
 // global page variables
 var wordLength = 0;
@@ -53,8 +54,14 @@ $(function () {
             // $(this).sortable('disable');
             ui.item.clone().appendTo(".sortable4");
             $(this).sortable('cancel');
-            console.log(this);
-            $(this).addClass("gray");
+            // console.log(this);
+           var done = $(ui.item).clone().attr('id');
+           console.log(done);
+           var oldTile = document.getElementById(done);
+
+            $(oldTile).addClass("gray");
+            // $(oldTile).disableSelection();
+            // console.log(this);
             // $(ui.item.ui-sortable-handle).sortable("disable");
             // console.log(ui.item.ui-sortable-handle);
         },
@@ -69,7 +76,7 @@ $(function () {
 });
 //row 2 and dropzone
 $(function () {
-    $(".tiles, .sortable4").sortable({
+    $(".sortable2, .sortable4").sortable({
         // revert: true,
         containment: "#keyboard",
         tolerance: "pointer",
@@ -97,7 +104,7 @@ $(function () {
 });
 //row 3 and drop area
 $(function () {
-    $(".tiles, .sortable4").sortable({
+    $(".sortable3, .sortable4").sortable({
         // revert: true,
         containment: "#keyboard",
         tolerance: "pointer",
@@ -144,14 +151,18 @@ $(".dropped").droppable({
         // console.log(ui);
         // console.log("drop");
         $(".dropped").addClass("dropZone");
+        
+        // $(this).sortable('disable');
         // var helper = ui.helper.clone(true);
         // $(".letter").draggable('disable');
         // finds object and then letter value of that object
-        // function forDragged() {
         var dragged = ui.draggable[0].dataset.letter;
-        // console.log(todragged);
-        // dragged.push(toDragged);
         console.log(dragged);
+        var droppedDone = $(dragged).attr('id');
+        console.log(droppedDone);
+        var dragTile = document.getElementById(droppedDone);
+        // dragTile.sortable('disable');
+         $(oldTile).addClass("gray");
 
         // }
         //add drop letters to array

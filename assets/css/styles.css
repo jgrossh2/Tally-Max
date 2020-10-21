@@ -127,38 +127,183 @@ a#mwtext:hover {
 
 #keyboard {
     margin: 0;
-    padding: 0;
+    padding: 10px 0 0 0;
     list-style: none;
     width: 100%;
 }
 
-.letter {
-    /* background: var(--keys3); */
-    width: 100%;
-    height: 100%;
-    border: solid black;
-    border-radius: 10px;
-}
-.container-1 .col.s1 {
-    width: 75px;
-}
 .tiles {
     float: left;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
+    /* -webkit-box-sizing: border-box; */
+    /* -moz-box-sizing: border-box; */
     box-sizing: border-box;
     padding: 0 0.75rem;
-    height: 90px;
+    height: 80px;
+    /* border: solid black; */
+    border-radius: 10px;
+    width: 70px;
 }
-
 .dropZone {
     background: lightgray;
 }
-.one {
-    background-image: url("images/scrabble1.jpg"); 
+#a {
+    background-image: url("images/A.svg");
+    background-size: cover;
+    margin: auto;
+    padding: 0 40px 0 40px;
+}
+#b {
+    background-image: url("images/B.svg");
+    background-size: cover;
+    margin: auto;
+    padding: 0 40px 0 40px;
+}
+#c {
+    background-image: url("images/C.svg");
+    background-size: cover;
+    margin: auto;
+    padding: 0 40px 0 40px;
+}
+#d {
+    background-image: url("images/D.svg");
+    background-size: cover;
+    margin: auto;
+    padding: 0 40px 0 40px;
+}
+#e {
+    background-image: url("images/E.svg");
+    background-size: cover;
+    margin: auto;
+    padding: 0 40px 0 40px;
+}
+#f {
+    background-image: url("images/F.svg");
+    background-size: cover;
+    margin: auto;
+    padding: 0 40px 0 40px;
+}
+#g {
+    background-image: url("images/G.svg");
+    background-size: cover;
+    margin: auto;
+    padding: 0 40px 0 40px;
+}
+#h {
+    background-image: url("images/H.svg");
+    background-size: cover;
+    margin: auto;
+    padding: 0 40px 0 40px;
+}
+#i {
+    background-image: url("images/I.svg");
+    background-size: cover;
+    margin: auto;
+    padding: 0 40px 0 40px;
+}
+#j {
+    background-image: url("images/J.svg");
+    background-size: cover;
+    margin: auto;
+    padding: 0 40px 0 40px;
+}
+#k {
+    background-image: url("images/K.svg");
+    background-size: cover;
+    margin: auto;
+    padding: 0 40px 0 40px;
+}
+#l {
+    background-image: url("images/L.svg");
+    background-size: cover;
+    margin: auto;
+    padding: 0 40px 0 40px;
+}
+#m {
+    background-image: url("images/M.svg");
+    background-size: cover;
+    margin: auto;
+    padding: 0 40px 0 40px;
+}
+#n {
+    background-image: url("images/N.svg");
+    background-size: cover;
+    margin: auto;
+    padding: 0 40px 0 40px;
+}
+#o {
+    background-image: url("images/O.svg");
+    background-size: cover;
+    margin: auto;
+    padding: 0 40px 0 40px;
+}
+#p {
+    background-image: url("images/P.svg");
+    background-size: cover;
+    margin: auto;
+    padding: 0 40px 0 40px;
+}
+#q {
+    background-image: url("images/Q.svg");
+    background-size: cover;
+    margin: auto;
+    padding: 0 40px 0 40px;
+}
+#r {
+    background-image: url("images/R.svg");
+    background-size: cover;
+    margin: auto;
+    padding: 0 40px 0 40px;
+}
+#s {
+    background-image: url("images/S.svg");
+    background-size: cover;
+    margin: auto;
+    padding: 0 40px 0 40px;
+}
+#t {
+    background-image: url("images/T.svg");
+    background-size: cover;
+    margin: auto;
+    padding: 0 40px 0 40px;
+}
+#u {
+    background-image: url("images/U.svg");
+    background-size: cover;
+    margin: auto;
+    padding: 0 40px 0 40px;
+}
+#v {
+    background-image: url("images/V.svg");
+    background-size: cover;
+    margin: auto;
+    padding: 0 40px 0 40px;
+}
+#w {
+    background-image: url("images/W.svg");
+    background-size: cover;
+    margin: auto;
+    padding: 0 40px 0 40px;
+}
+#x {
+    background-image: url("images/X.svg");
+    background-size: cover;
+    margin: auto;
+    padding: 0 40px 0 40px;
+}
+#y {
+    background-image: url("images/Y.svg");
+    background-size: cover;
+    margin: auto;
+    padding: 0 40px 0 40px;
+}
+#z {
+    background-image: url("images/Z.svg");
+    background-size: cover;
+    margin: auto;
+    padding: 0 40px 0 40px;
 }
 .dragging {
-    border: solid 8px;
+    border: solid 5px;
     border-color: var(--dark);
 }
 .gray {
@@ -168,7 +313,7 @@ a#mwtext:hover {
     border: dotted 3px var(--dark);
     /* width: 681px; */
     /* width: 45%; */
-    height: 96px;
+    height: 95px;
 }
 .drop {
     border: none;
