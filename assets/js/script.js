@@ -57,10 +57,10 @@ $(function () {
            console.log(done);
            var oldTile = document.getElementById(done);
            $(oldTile).addClass("gray");
-           $(oldTile).sortable(); 
-           var check = $(oldTile).sortable('instance');
-           console.log(check);
-           $(oldTile).sortable("disable");
+        //    $(oldTile).sortable(); 
+        //    var check = $(oldTile).sortable('instance');
+        //    console.log(check);
+        //    $(oldTile).sortable("disable");
         //    $(oldTile).sortable('enable');
         //    console.log(oldTile);
         },
@@ -95,13 +95,13 @@ $(function () {
             ui.item.clone().appendTo(".sortable4");
             $(this).sortable('cancel');
             var done = $(ui.item).clone().attr('id');
-            console.log(done);
+            // console.log(done);
             var oldTile = document.getElementById(done);
             $(oldTile).addClass("gray");
-            $(oldTile).sortable();
-            var check = $(oldTile).sortable('instance');
-            console.log(check);
-            $(oldTile).sortable('disable');
+            // $(oldTile).sortable();
+            // var check = $(oldTile).sortable('instance');
+            // console.log(check);
+            // $(oldTile).sortable('disable');
         }
     }).disableSelection();
     $(".sortable4").sortable({
@@ -130,13 +130,13 @@ $(function () {
             ui.item.clone().appendTo(".sortable4");
             $(this).sortable('cancel');
             var done = $(ui.item).clone().attr('id');
-            console.log(done);
+            // console.log(done);
             var oldTile = document.getElementById(done);
             $(oldTile).addClass("gray");
-            $(oldTile).sortable();
-            var check = $(oldTile).sortable('instance');
-            console.log(check);
-            $(oldTile).sortable('disable');
+            // $(oldTile).sortable();
+            // var check = $(oldTile).sortable('instance');
+            // console.log(check);
+            // $(oldTile).sortable('disable');
              
         }
     }).disableSelection();
@@ -158,12 +158,11 @@ $(".dropped").droppable({
         // $(".letter").draggable('disable');
         // finds object and then letter value of that object
         var dragged = ui.draggable[0].dataset.letter;
-        console.log(dragged);
+        // console.log(dragged);
         // var droppedDone = $(dragged).attr('id');
         // console.log(droppedDone);
         // var dragTile = document.getElementById(droppedDone);
         // dragTile.sortable('disable');
-         $(oldTile).addClass("gray");
 
         //add drop letters to array
         dropLetters.push(dragged);
