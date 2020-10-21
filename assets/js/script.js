@@ -59,7 +59,7 @@ $(function () {
            console.log(done);
            var oldTile = document.getElementById(done);
            $(oldTile).addClass("gray");
-           $(oldTile).sortable();
+           $(oldTile).sortable(); 
            var check = $(oldTile).sortable('instance');
            console.log(check);
            $(oldTile).sortable("disable");

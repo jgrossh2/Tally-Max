@@ -116,7 +116,7 @@ a#mwtext:hover {
     display: flex;
     flex-wrap: wrap;
     /* margin: 50px 0 0 325px; */
-    width: 100%;
+    /* width: 100%; */
 }
 
 .space {
@@ -126,8 +126,8 @@ a#mwtext:hover {
 }
 
 #keyboard {
-    margin: 0;
-    padding: 10px 0 0 0;
+    margin-left: 0;
+    padding: 20px 20px 0 20px;
     list-style: none;
     width: 100%;
 }
@@ -138,9 +138,7 @@ a#mwtext:hover {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     padding: 0 0.75rem;
-    height: 120px;
-    /* border: solid black; */
-    border-radius: 10px;
+    height: 130px;
     width: 40px;
 }
 .dropZone {
@@ -344,44 +342,52 @@ a#mwtext:hover {
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */
 @media screen and (max-width: 980px) {
     .tiles {
-        height: 90px;
-        /* border: solid black; */
+        height: 80px;
         border-radius: 10px;
     }
     .dropped {
-        height: 90px;
+        height: 80px;
     }
 }
 
 /* MEDIA QUERY FOR TABLETS */
 @media screen and (max-width: 768px) {
     .tiles {
-        height: 65px;
+        height: 60px;
         border-radius: 0px;
     }
+    .row {
+        margin-bottom: 15px;
+    }
     .dropped { 
-        height: 65px;
+        height: 60px;
     } 
 }
 
 /* MEDIA QUERY FOR MOBILE PHONES */
 @media screen and (max-width: 600px) {
     .tiles {
-        height: 50px;
+        height: 45px;
         border-radius: 0px;
     }
+    .row {
+        margin-bottom: 10px;
+    }
     .dropped {
-        height: 50px;
+        height: 45px;
     }
 }
 
 /* MEDIA QUERY FOR SMALL PHONES */
 @media screen and (max-width: 360px) {
     .tiles {
-        height: 30px;
+        height: 25px;
         border-radius: 0px;
     }
+    .row {
+        margin-bottom: 5px;
+    }
     .dropped {
-        height: 30px;
+        height: 25px;
     }
 }
