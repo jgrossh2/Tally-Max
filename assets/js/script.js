@@ -391,8 +391,8 @@ var displayWord = function (wordData) {
 
         // Get the button that opens the modal
         var imgBtn = document.createElement('a')//addEventListener('click', onclick);
-        imgBtn.setAttribute('class', 'btn-floating waves-effect waves-light red disabled')
-        imgBtn.innerHTML = '<span><img id="info-icon" src="assets/pexels-icon.png"></span>'
+        imgBtn.setAttribute('class', 'btn-floating waves-effect waves-light img')
+        imgBtn.innerHTML = '<span><img id="img-icon" src="assets/pexels_icon.png"></span>'
 
         // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];
@@ -441,6 +441,7 @@ var displayWord = function (wordData) {
     }
     else {
         console.log("Sorry, this word cannot be displayed.");
+        // window.location.href = "https://www.google.com/imghp?hl=EN";
     }
     // append content to page elements
     resultBody.append(audioBtn);
@@ -453,4 +454,47 @@ var displayWord = function (wordData) {
     //     modal.style.display = "block"
     // });
 };
+
+// var pass;
+// pass = true;
+// if (pass == "def") {
+//     <a href="google.html">This is the link to .</a>
+// } else {
+//     document.write("The password you've is enter is incorrect");
+// }
+// // similar behavior as an HTTP redirect
+// window.location.replace("http://stackoverflow.com");
+
+// // similar behavior as clicking on a link
+// window.location.href = "http://stackoverflow.com";
+
+
+
+// <img id="myImage" onclick="changeImage()" src="pic_bulboff.gif" width="100" height="180">
+
+//     <p>Click the light bulb to turn on/off the light.</p>
+
+//     <script>
+//         function changeImage() {
+//   var image = document.getElementById("myImage");
+//   if (image.src.match("bulbon")) {
+//             image.src = "pic_bulboff.gif";
+//   } else {
+//             image.src = "pic_bulbon.gif";
+// //   }
+// // }
+// // </script>
+
+// function renderResults() {
+
+//     if (results.length > 0) {
+//         console.log(sucess);
+
+//         // navigator.notification.alert('Login, Success!');
+//     } else {
+//         //navigator.notification.alert('Incorrect! Please try again.');
+//         //  $(window)[0].location = newURL;
+//         window.location.href = "https://www.google.com/imghp?hl=EN";
+//     }
+// }
 

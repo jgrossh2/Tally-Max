@@ -93,14 +93,9 @@ img#audio-icon {
     padding: 4px 0 0 4px;
 }
 
+
 img#mwlogo {
     width: 100px;
-
-}
-
-img#imgBtn {
-    width: 32px;
-    padding: 4px 0 0 4px;
 }
 
 a#mwtext,
@@ -208,6 +203,17 @@ a#mwtext:hover {
     animation-name: animatetop;
     animation-duration: 0.4s
   }
+
+  img#img-icon {
+    width: 32px;
+    padding: 4px 0 0 4px;
+    color: var(--lblue);
+    background-color: var(--lblue);
+}
+
+.btn-floating.waves-effect.waves-light.img {
+    background-color: var(--lblue);
+}
   
   /* Add Animation */
    @-webkit-keyframes animatetop {
