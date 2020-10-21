@@ -74,21 +74,7 @@ $(function () {
             $(this).sortable('cancel');
             $(this).addClass("gray");
         }
-        // start: function(event) {
-        //     // ui.helper.toggleClass("highlight");
-        //   },
-        //   stop: function(event) {
-        //     //   ui.helper.toggleClass("highlight");
-        //     // $(".bottom-trash").removeClass("dropover bottom-trash-drag");
-        //     console.log("deactivate", this);
-        //   },
-        //   over: function(event) {
-        //     // $(event.target).addClass("dropover-active");
-        //   },
-        //   out: function(event) {
-        //     // $(event.target).removeClass("dropover-active");
-        //     console.log("out", event.target);
-        //   },
+
     }).disableSelection();
     $(".sortable4").sortable({
         connectWith: ".sortable4"
@@ -160,29 +146,15 @@ $(".dropped").droppable({
         console.log(ui);
         console.log("drop");
         $(".dropped").addClass("dropZone");
-        // var helper = ui.helper.clone(true);
-        // helper.appendTo(".dropped");
-        // $(ui.helper).removeClass("dragging");
-        // $(".letter").draggable('disable');
-        // finds object and then letter value of that object
+
         var dragged = ui.draggable[0].dataset.letter;
         console.log(ui.draggable[0].dataset.letter);
         //add drop letters to array
         dropLetters.push(dragged);
         console.log(dropLetters);
-        // $(".space").removeClass("dropZone");
-        // var compareLetters= [];
-        // var getLetters = $(".letter").data("data-letter");
-        // console.log(getLetters);
-        // compareLetters.push(getLetters);
-        // if (compareLetters )
+
     },
-    // over: function(event, ui) {
-    // },
-    // out: function(event, ui) {
-    // },
-    // update: function(event) {
-    // }
+
 });
 letterEl.addEventListener("click", dragLetters)
 
