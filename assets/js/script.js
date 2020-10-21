@@ -17,6 +17,10 @@ var dropLetters = [];
 // var letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 var letterEl = document.querySelector(".letter");
 var spaceEl = document.querySelector(".space");
+// array to hold combined fetch results
+var wordObjArr = [];
+var noImage = "no-image.png"
+
 
 // get user input area
 // spaceEl.textContent = "Drag Letters Here! "
@@ -281,16 +285,14 @@ var genWordList = function (wordLength, letters) {
     localStorage.setItem(letters, results);
 
     // get data from API
-    getDefData(results);
-
-    // display letters incorporated into search
-    displaySearch(letters, results);
+    getDefData(letters, results);
 
     return console.log(results);
 };
 
-// display search letters once search type is selected
-var displaySearch = function (letters, results) {
+// function fetches definition data for each in an array of words and returns subset of data packaged as an object
+var getDefData = function (letters, results) {
+
     // display searched letters
     if (results.length === 0) {
         searchContentEl.textContent = '';
@@ -299,25 +301,18 @@ var displaySearch = function (letters, results) {
         searchContentEl.textContent = '';
         searchContentEl.textContent = letters;
     }
-}
-
-// function fetches definition data for each in an array of words and returns subset of data packaged as an object
-var getDefData = function (results) {
-
-    // array to hold combined fetch results
-    var wordObjArr = [];
 
     // generate API data for each word
     for (var i = 0; i < results.length; i++) {
 
-        let word = results[i];
-        var images = results[i];
-        var pexelURL = `https://api.pexels.com/v1/search?query=${images}&per_page=1`;
+        // let word = results[i];
+        // var image = results[i];
+        var pexelURL = `https://api.pexels.com/v1/search?query=${results[i]}&per_page=1`;
         var API_key = "563492ad6f91700001000001d01c380d928e472983ed037be8073298";
 
         // fetch both APIs
         var apiUrls = [
-            fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${smkmw}`),
+            fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${results[i]}?key=${smkmw}`),
             fetch(pexelURL, {
                 headers: {
                     // Accept: 'application/json',
@@ -335,10 +330,45 @@ var getDefData = function (results) {
             }))
                 // resulting definition & image data for each word
                 .then(function (response) {
+                    // console.log(response)
+                    var wordDef = response[0][0];
+                    // console.log(response[0][0])
+                    var imgSrc = response[1];
+                    // console.log(response[1])
+
+                    // pull properties from both api elements into a single object for each word, taking into account the instance of an empty array for Pexel
+                    if (imgSrc.photos.length > 0) {
+                        var wordObj = {
+                            word: results[i],
+                            class: wordDef.fl,
+                            definition: wordDef.shortdef,
+                            audio: wordDef.hwi.prs[0].sound.audio,
+                            offensive: wordDef.meta.offensive,
+                            image_s: imgSrc.photos[0].src.small,
+                            image_m: imgSrc.photos[0].src.medium,
+                            image_l: imgSrc.photos[0].src.large,
+                            photographer: imgSrc.photographer,
+                            photog_url: imgSrc.photographer_url,
+                        }
+                    } else {
+                        var wordObj = {
+                            word: results[i],
+                            class: wordDef.fl,
+                            definition: wordDef.shortdef,
+                            audio: wordDef.hwi.prs[0].sound.audio,
+                            offensive: wordDef.meta.offensive,
+                            image_s: noImage,
+                            image_m: noImage,
+                            image_l: noImage,
+                            photographer: noImage,
+                            photog_url: noImage,
+                        }
+                    }
                     // add data object to results array for each word
-                    wordObjArr.push(response)
+                    wordObjArr.push(wordObj)
+
                     // pass resulting object array to display function
-                    displayWordData(results, wordObjArr);
+                    displayWordData(wordObjArr);
                     console.log(wordObjArr)
                     return wordObjArr
 
@@ -351,33 +381,13 @@ var getDefData = function (results) {
 };
 
 // function takes api object array and parses for display
-var displayWordData = function (results, wordObjArr) {
+var displayWordData = function (wordObjArr) {
     console.log(wordObjArr)
-    // console.log(results)
 
     // loop through each object generated from the word-results array
-    for (var i = 0; i < results.length; i++) {
+    for (var i = 0; i < wordObjArr.length; i++) {
         console.log(wordObjArr[i])
-        let word = results[i];
-        var wordDef = wordObjArr[i][0][0];
-        // console.log(wordObjArr[i][0][0])
-        var imgSrc = wordObjArr[i][1].photos[0];
-        // console.log(wordObjArr[i][1].photos[0])
-
-        // pull properties from both api elements into a single object for each word
-        var wordObj = {
-            word: word,
-            class: wordDef.fl,
-            definition: wordDef.shortdef,
-            audio: wordDef.hwi.prs[0].sound.audio,
-            offensive: wordDef.meta.offensive,
-            image_s: imgSrc.src.small,
-            image_m: imgSrc.src.medium,
-            image_l: imgSrc.src.large,
-            photographer: imgSrc.photographer,
-            photog_url: imgSrc.photographer_url,
-        };
-        // console.log(wordObj)
+        wordObj = wordObjArr[i]
         // check to see whether term is offensive
         if (!wordObj.offensive) {
             // create DOM elements
