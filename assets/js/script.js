@@ -364,10 +364,9 @@ var getDefData = function (results) {
                         photog_url: noImage,
                     }
                 }
-            };
-                console.log(wordObj);
+                // console.log(wordObj);
                 wordObjArr.push(wordObj);
-                displayWordTest(wordObjArr);
+                // displayWordTest(wordObjArr);
                 return wordObj;
             })
             .catch((error) => {
@@ -381,44 +380,44 @@ var displayWordTest = function(wordObjArr) {
     console.log(wordObjArr);
 };
 
-var objectData = function(results, response) {
-    console.log(results)
-    console.log(response)
-    var wordDef = response[0][0];
-    console.log(wordDef)
-    var imgSrc = response[1];
-    console.log(imgSrc)
+// var objectData = function(results, response) {
+//     console.log(results)
+//     console.log(response)
+//     var wordDef = response[0][0];
+//     console.log(wordDef)
+//     var imgSrc = response[1];
+//     console.log(imgSrc)
 
-    // pull properties from both api elements into a single object for each word, taking into account the instance of an empty array for Pexel
-    if (imgSrc.photos.length > 0) {
-        var wordObj = {
-            word: response[i],
-            class: wordDef.fl,
-            definition: wordDef.shortdef,
-            audio: wordDef.hwi.prs[0].sound.audio,
-            offensive: wordDef.meta.offensive,
-            image_s: imgSrc.photos[0].src.small,
-            image_m: imgSrc.photos[0].src.medium,
-            image_l: imgSrc.photos[0].src.large,
-            photographer: imgSrc.photos[0].photographer,
-            photog_url: imgSrc.photos[0].photographer_url,
-        }
-    } else {
-        var wordObj = {
-            word: results[i],
-            class: wordDef.fl,
-            definition: wordDef.shortdef,
-            audio: wordDef.hwi.prs[0].sound.audio,
-            offensive: wordDef.meta.offensive,
-            image_s: noImage,
-            image_m: noImage,
-            image_l: noImage,
-            photographer: noImage,
-            photog_url: noImage,
-        }
-    }
-    console.log(wordObj)
-}
+//     // pull properties from both api elements into a single object for each word, taking into account the instance of an empty array for Pexel
+//     if (imgSrc.photos.length > 0) {
+//         var wordObj = {
+//             word: response[i],
+//             class: wordDef.fl,
+//             definition: wordDef.shortdef,
+//             audio: wordDef.hwi.prs[0].sound.audio,
+//             offensive: wordDef.meta.offensive,
+//             image_s: imgSrc.photos[0].src.small,
+//             image_m: imgSrc.photos[0].src.medium,
+//             image_l: imgSrc.photos[0].src.large,
+//             photographer: imgSrc.photos[0].photographer,
+//             photog_url: imgSrc.photos[0].photographer_url,
+//         }
+//     } else {
+//         var wordObj = {
+//             word: results[i],
+//             class: wordDef.fl,
+//             definition: wordDef.shortdef,
+//             audio: wordDef.hwi.prs[0].sound.audio,
+//             offensive: wordDef.meta.offensive,
+//             image_s: noImage,
+//             image_m: noImage,
+//             image_l: noImage,
+//             photographer: noImage,
+//             photog_url: noImage,
+//         }
+//     }
+//     console.log(wordObj)
+// }
 
 // function takes api object array and parses for display
 var displayWordData = function (wordObjArr) {
