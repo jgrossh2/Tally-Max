@@ -304,19 +304,20 @@ var displayLetters = function (letters, results) {
 
 // function fetches definition data for each in an array of words and returns subset of data packaged as an object
 var getDefData = function (results) {
-    // console.log(results)
 
+    var wordObjArr = [];
+    
     // generate API data for each word
     for (var i = 0; i < results.length; i++) {
-
-        // let word = results[i];
-        // var image = results[i];
-        var pexelURL = `https://api.pexels.com/v1/search?query=${results[i]}&per_page=1`;
-        var API_key = "563492ad6f91700001000001d01c380d928e472983ed037be8073298";
+        // api variables
+        let word = results[i];
+        var images = results[i];
+        var pexelURL = `https://api.pexels.com/v1/search?query=${images}&per_page=1`;
+        var API_key = "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
 
         // fetch both APIs
         var apiUrls = [
-            fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${results[i]}?key=${smkmw}`),
+            fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${smkmw}`),
             fetch(pexelURL, {
                 headers: {
                     // Accept: 'application/json',
@@ -325,29 +326,59 @@ var getDefData = function (results) {
                 }
             }),
         ];
-
         // submit https request
         Promise.all(apiUrls).then(function (responses) {
-
             // using map() method to get a response array of json objects, 
             return Promise.all(responses.map(function (response) {
                 return response.json();
             }))
-                // resulting definition & image data for each word
-                .then(function (response) {
-                    // console.log(response)
-                    // console.log(response[0][0])
-                    // console.log(response[1])
+            // word definition
+            .then(function (response) {
+                var wordDef = response[0][0];
+                var imgSrc = response[1];
 
-                    // pass resulting object array to display function
-                    objectData(results, response);
-                    return response
-                })
-                .catch((error) => {
-                    console.error('Error: ', error);
-                });
+                if (imgSrc.photos.length > 0) {
+                    var wordObj = {
+                        word: response[i],
+                        class: wordDef.fl,
+                        definition: wordDef.shortdef,
+                        audio: wordDef.hwi.prs[0].sound.audio,
+                        offensive: wordDef.meta.offensive,
+                        image_s: imgSrc.photos[0].src.small,
+                        image_m: imgSrc.photos[0].src.medium,
+                        image_l: imgSrc.photos[0].src.large,
+                        photographer: imgSrc.photos[0].photographer,
+                        photog_url: imgSrc.photos[0].photographer_url,
+                    }
+                } else {
+                    var wordObj = {
+                        word: results[i],
+                        class: wordDef.fl,
+                        definition: wordDef.shortdef,
+                        audio: wordDef.hwi.prs[0].sound.audio,
+                        offensive: wordDef.meta.offensive,
+                        image_s: noImage,
+                        image_m: noImage,
+                        image_l: noImage,
+                        photographer: noImage,
+                        photog_url: noImage,
+                    }
+                }
+            };
+                console.log(wordObj);
+                wordObjArr.push(wordObj);
+                displayWordTest(wordObjArr);
+                return wordObj;
+            })
+            .catch((error) => {
+                console.error('Error: ', error);
+            })
         });
     };
+};
+
+var displayWordTest = function(wordObjArr) {
+    console.log(wordObjArr);
 };
 
 var objectData = function(results, response) {
