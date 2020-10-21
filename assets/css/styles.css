@@ -134,14 +134,14 @@ a#mwtext:hover {
 
 .tiles {
     float: left;
-    /* -webkit-box-sizing: border-box; */
-    /* -moz-box-sizing: border-box; */
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
     padding: 0 0.75rem;
-    height: 120px;
+    height: 90px;
     /* border: solid black; */
     border-radius: 10px;
-    width: 80px;
+    width: 40px;
 }
 .dropZone {
     background: lightgray;
