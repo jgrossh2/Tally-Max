@@ -17,8 +17,6 @@ var dropLetters = [];
 // var letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 var letterEl = document.querySelector(".letter");
 var spaceEl = document.querySelector(".space");
-// array to hold combined fetch results
-var wordObjArr = [];
 var noImage = "no-image.png"
 
 
@@ -302,6 +300,9 @@ var getDefData = function (letters, results) {
         searchContentEl.textContent = letters;
     }
 
+    // array to hold combined fetch results
+    var wordObjArr = [];
+    
     // generate API data for each word
     for (var i = 0; i < results.length; i++) {
 
@@ -347,8 +348,8 @@ var getDefData = function (letters, results) {
                             image_s: imgSrc.photos[0].src.small,
                             image_m: imgSrc.photos[0].src.medium,
                             image_l: imgSrc.photos[0].src.large,
-                            photographer: imgSrc.photographer,
-                            photog_url: imgSrc.photographer_url,
+                            photographer: imgSrc.photos[0].photographer,
+                            photog_url: imgSrc.photos[0].photographer_url,
                         }
                     } else {
                         var wordObj = {
