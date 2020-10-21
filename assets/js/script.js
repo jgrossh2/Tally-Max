@@ -58,10 +58,13 @@ $(function () {
            var done = $(ui.item).clone().attr('id');
            console.log(done);
            var oldTile = document.getElementById(done);
+           $(oldTile).addClass("gray");
            $(oldTile).sortable();
-           $(oldTile).sortable('enable');
-            $(oldTile).addClass("gray");
-            $(oldTile).sortable('disable');
+           var check = $(oldTile).sortable('instance');
+           console.log(check);
+           $(oldTile).sortable("disable");
+        //    $(oldTile).sortable('enable');
+        //    console.log(oldTile);
             // console.log(this);
         },
         over: function(event, ui) {
@@ -94,7 +97,14 @@ $(function () {
         remove: function (event, ui) {
             ui.item.clone().appendTo(".sortable4");
             $(this).sortable('cancel');
-            $(this).addClass("gray");
+            var done = $(ui.item).clone().attr('id');
+            console.log(done);
+            var oldTile = document.getElementById(done);
+            $(oldTile).addClass("gray");
+            $(oldTile).sortable();
+            var check = $(oldTile).sortable('instance');
+            console.log(check);
+            $(oldTile).sortable('disable');
         }
     }).disableSelection();
     $(".sortable4").sortable({
@@ -122,18 +132,14 @@ $(function () {
         remove: function (event, ui) {
             ui.item.clone().appendTo(".sortable4");
             $(this).sortable('cancel');
-            $(this).addClass("gray");
-            // function forOldTile({})
-            //if tile === dropped tile then disable sortable
-            var toOldTile = ui.item[0].dataset.letter;
-            // console.log(oldTile);
-            oldTile.push(toOldTile);
-            console.log(oldTile);
-            // $(this).sortable('disable');
-            // if (oldTile === dragged){
-            //     $(this).sortable("disable")
-            // } else {
-            // };
+            var done = $(ui.item).clone().attr('id');
+            console.log(done);
+            var oldTile = document.getElementById(done);
+            $(oldTile).addClass("gray");
+            $(oldTile).sortable();
+            var check = $(oldTile).sortable('instance');
+            console.log(check);
+            $(oldTile).sortable('disable');
              
         }
     }).disableSelection();
@@ -163,24 +169,8 @@ $(".dropped").droppable({
         // dragTile.sortable('disable');
          $(oldTile).addClass("gray");
 
-        // }
         //add drop letters to array
         dropLetters.push(dragged);
-        // console.log(dropLetters);
-        // forOldTile()
-        // forDragged()
-        // function compareLetters() {
-        // if (JSON.stringify(oldTile) === JSON.stringify(dragged)) {
-        //         $(this).sortable("disable")
-        //         console.log("works");
-        //     } else {
-        //         console.log("nope");
-        //     };
-        // }
-        
-        // console.log(getLetters);
-        // compareLetters.push(getLetters);
-        // compareLetters();
     },
     // over: function(event, ui) {
     // },
