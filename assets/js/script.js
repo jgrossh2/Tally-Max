@@ -364,9 +364,7 @@ var getDefData = function (results) {
                         photog_url: noImage,
                     }
                 }
-                // console.log(wordObj);
                 wordObjArr.push(wordObj);
-                // displayWordTest(wordObjArr);
                 return wordObj;
             })
             .catch((error) => {
@@ -374,10 +372,7 @@ var getDefData = function (results) {
             })
         });
     };
-};
-
-var displayWordTest = function(wordObjArr) {
-    console.log(wordObjArr);
+    displayWordData(wordObjArr);
 };
 
 // var objectData = function(results, response) {
