@@ -463,3 +463,31 @@ var displayWord = function (wordData) {
     // });
 };
 
+// var API_KEY = '18755179-1cec5558437abfcfe27155a57';
+// var URL = "https://pixabay.com/api/?key=" + API_KEY + "&q=" + encodeURIComponent('');
+// $.getJSON(URL, function (data) {
+//     if (parseInt(data.totalHits) > 0)
+//         $.each(data.hits, function (i, hit) { console.log(hit.pageURL); });
+//     else
+//         console.log('No hits');
+// });
+
+function myFunction() {
+    var searchTerm = document.querySelector('#searchTerm').value;
+    fetch(
+        'https://api.giphy.com/v1/gifs/search?q=' +
+        searchTerm +
+        '&api_key=HvaacROi9w5oQCDYHSIk42eiDSIXH3FN&limit=1'
+    )
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (response) {
+            console.log(response.data[0]);
+            var responseContainerEl = document.querySelector('#response-container');
+            responseContainerEl.innerHTML = '';
+            var gifImg = document.createElement('img');
+            gifImg.setAttribute('src', response.data[0].images.fixed_height.url);
+            responseContainerEl.appendChild(gifImg);
+        });
+}
