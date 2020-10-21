@@ -473,6 +473,7 @@ var displayWord = function (wordData) {
 // });
 
 function myFunction() {
+    console.log("test2")
     var searchTerm = document.querySelector('#searchTerm').value;
     fetch(
         'https://api.giphy.com/v1/gifs/search?q=' +
@@ -489,5 +490,26 @@ function myFunction() {
             var gifImg = document.createElement('img');
             gifImg.setAttribute('src', response.data[0].images.fixed_height.url);
             responseContainerEl.appendChild(gifImg);
+        });
+}
+
+function searchFunction() {
+    console.log("test")
+    var srchTerm = document.querySelector('#srchTerm').value;
+    fetch(
+        'https://api.giphy.com/v1/gifs/search?q=' +
+        srchTerm +
+        '&api_key=HvaacROi9w5oQCDYHSIk42eiDSIXH3FN&limit=1'
+    )
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (response) {
+            console.log(response.data[0]);
+            var responseContEl = document.querySelector('#response-cont');
+            responseContEl.innerHTML = '';
+            var gifVideo = document.createElement('img');
+            gifVideo.setAttribute('src', response.data[0].images.fixed_height.url);
+            responseContEl.appendChild(gifVideo);
         });
 }
