@@ -329,8 +329,8 @@ var getDefData = function (results) {
             }))
                 // resulting definition & image data for each word
                 .then(function (response) {
-                    // console.log(response[0][0])
-                    // console.log(response[1])
+                    console.log(response[0][0])
+                    console.log(response[1])
                     var wordDef = response[0][0];
                     var imgSrc = response[1];
 
@@ -372,13 +372,14 @@ var getDefData = function (results) {
         });
     };
     displayWordData(wordObjArr)
+    setTimeout(() => console.log("loading"), 5000)   
 };
 
 
 // function takes api object array and parses for display
 var displayWordData = function (wordObjArr) {
     console.log(wordObjArr)
-    
+
     var resultLI = document.createElement('li');
     var resultHeader = document.createElement('div');
     var audioBtn = document.createElement('a');
