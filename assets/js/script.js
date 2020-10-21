@@ -108,8 +108,11 @@ $(function () {
         placeholder: "highlight",
         connectWith: ".sortable4",
         start: function (event, ui) {
+            ui.helper.addClass("dragging");
+            $(".dropped").addClass("dropZone");
         },
         stop: function (event, ui) {
+            $(".dropped").removeClass("dropZone");
         },
         remove: function (event, ui) {
             ui.item.clone().appendTo(".sortable4");
@@ -134,9 +137,11 @@ $(function () {
         placeholder: "highlight",
         connectWith: ".sortable4",
         start: function (event, ui) {
+            ui.helper.addClass("dragging");
             $(".dropped").addClass("dropZone");
         },
         stop: function (event, ui) {
+            $(".dropped").removeClass("dropZone");
         },
         remove: function (event, ui) {
             ui.item.clone().appendTo(".sortable4");
@@ -208,6 +213,13 @@ threeLetterBtnEl.addEventListener('click', function () {
 });
 
 randomLetterBtnEl.addEventListener('click', function () {
+    // sort letters based on value before sending to genWordList
+    function sortFunc(a, b) {
+        var priorityLetters = ['z', 'q', 'x', 'j', 'k', 'w', 'y', 'v', 'f', 'h', 'o', 'm', 'c', 'b', 'g', 'd', 'u', 's', 'l', 't', 'r', 'n', 'o', 'i', 'a', 'e'];
+        return priorityLetters.indexOf(a) - priorityLetters.indexOf(b);
+    }
+    dropLetters.sort(sortFunc);
+
     // get possible letters from form
     var letters = dropLetters.join('');
 
@@ -229,32 +241,12 @@ randomLetterBtnEl.addEventListener('click', function () {
     genWordList(wordLength, letters);
 });
 
-// highScoreBtnEl.addEventListener('click', function () {
-//     // get possible letters from form
-//     var letters = dropLetters.join('');
-
-//     // get total letter count
-//     letterCounter(letters);
-//     function letterCounter(letters) {
-//         // reset global variable
-//         wordLength = 0;
-//         var alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-//         var ar = alphabet.split("");
-//         for (var i = 0; i < letters.length; i++) {
-//             if (ar.indexOf(letters[i]) > -1) {
-//                 wordLength = wordLength + 1;
-//             }
-//         }
-//         return wordLength;
-//     }
-
-//     genWordList(wordLength, letters);
-// });
-
 // generate all possible combinations of inputted letters
 var genWordList = function (wordLength, letters) {
-    // reset form container
+    // reset search containers & arrays
     spaceEl.innerHTML = " ";
+    // resultsContainerEl.textContent = '';
+    dropLetters = [];
     var results = [];
     var arrayCounter = 0;
 
@@ -306,17 +298,19 @@ var displayLetters = function (letters, results) {
 var getDefData = function (results) {
     // console.log(results)
 
-    // generate API data for each word
+    var wordObjArr = [];
+
+    // generate combined-API response data for each word
     for (var i = 0; i < results.length; i++) {
 
-        // let word = results[i];
-        // var image = results[i];
-        var pexelURL = `https://api.pexels.com/v1/search?query=${results[i]}&per_page=1`;
+        let word = results[i];
+        var images = results[i];
+        var pexelURL = `https://api.pexels.com/v1/search?query=${word}&per_page=1`;
         var API_key = "563492ad6f91700001000001d01c380d928e472983ed037be8073298";
 
         // fetch both APIs
         var apiUrls = [
-            fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${results[i]}?key=${smkmw}`),
+            fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${images}?key=${smkmw}`),
             fetch(pexelURL, {
                 headers: {
                     // Accept: 'application/json',
@@ -335,59 +329,51 @@ var getDefData = function (results) {
             }))
                 // resulting definition & image data for each word
                 .then(function (response) {
-                    // console.log(response)
                     // console.log(response[0][0])
                     // console.log(response[1])
+                    var wordDef = response[0][0];
+                    var imgSrc = response[1];
+
+                    if (imgSrc.photos.length > 0) {
+                        var wordObj = {
+                            word: wordDef.hwi.hw,
+                            class: wordDef.fl,
+                            definition: wordDef.shortdef,
+                            audio: wordDef.hwi.prs[0].sound.audio,
+                            offensive: wordDef.meta.offensive,
+                            image_s: imgSrc.photos[0].src.small,
+                            image_m: imgSrc.photos[0].src.medium,
+                            image_l: imgSrc.photos[0].src.large,
+                            photographer: imgSrc.photos[0].photographer,
+                            photog_url: imgSrc.photos[0].photographer_url,
+                        }
+                    } else {
+                        var wordObj = {
+                            word: wordDef.hwi.hw,
+                            class: wordDef.fl,
+                            definition: wordDef.shortdef,
+                            audio: wordDef.hwi.prs[0].sound.audio,
+                            offensive: wordDef.meta.offensive,
+                            image_s: noImage,
+                            image_m: noImage,
+                            image_l: noImage,
+                            photographer: noImage,
+                            photog_url: noImage,
+                        }
+                    }
 
                     // pass resulting object array to display function
-                    objectData(results, response);
-                    return response
+                    wordObjArr.push(wordObj);
+                    return wordObj;
                 })
                 .catch((error) => {
                     console.error('Error: ', error);
                 });
         });
     };
+    displayWordData(wordObjArr)
 };
 
-var objectData = function(results, response) {
-    console.log(results)
-    console.log(response)
-    var wordDef = response[0][0];
-    console.log(wordDef)
-    var imgSrc = response[1];
-    console.log(imgSrc)
-
-    // pull properties from both api elements into a single object for each word, taking into account the instance of an empty array for Pexel
-    if (imgSrc.photos.length > 0) {
-        var wordObj = {
-            word: response[i],
-            class: wordDef.fl,
-            definition: wordDef.shortdef,
-            audio: wordDef.hwi.prs[0].sound.audio,
-            offensive: wordDef.meta.offensive,
-            image_s: imgSrc.photos[0].src.small,
-            image_m: imgSrc.photos[0].src.medium,
-            image_l: imgSrc.photos[0].src.large,
-            photographer: imgSrc.photos[0].photographer,
-            photog_url: imgSrc.photos[0].photographer_url,
-        }
-    } else {
-        var wordObj = {
-            word: results[i],
-            class: wordDef.fl,
-            definition: wordDef.shortdef,
-            audio: wordDef.hwi.prs[0].sound.audio,
-            offensive: wordDef.meta.offensive,
-            image_s: noImage,
-            image_m: noImage,
-            image_l: noImage,
-            photographer: noImage,
-            photog_url: noImage,
-        }
-    }
-    console.log(wordObj)
-}
 
 // function takes api object array and parses for display
 var displayWordData = function (wordObjArr) {
@@ -397,6 +383,7 @@ var displayWordData = function (wordObjArr) {
     for (var i = 0; i < wordObjArr.length; i++) {
         console.log(wordObjArr[i])
         wordObj = wordObjArr[i]
+
         // check to see whether term is offensive
         if (!wordObj.offensive) {
             // create DOM elements
@@ -505,8 +492,32 @@ var displayWordData = function (wordObjArr) {
             //     photographerEl.append(resultPhtr);
             // }
         }
-        else {
-            resultHeader.innerHTML = "<p>This word did not make it past our sensors.</p>"
+        // create div body element for class, audio button, and definitions
+        var resultBody = document.createElement('div');
+        resultBody.setAttribute('class', 'collapsible-body');
+        resultBody.innerHTML = '<span>' + wordData.class + '</span>';
+
+        // loop through each homonym and display within element for that word
+        for (var i = 0; i < wordData.definition.length; i++) {
+            n = i + 1
+            var resultDef = document.createElement('p');
+            resultDef.textContent = n + ') ' + wordData.definition[i];
+            resultBody.append(resultDef);
+        }
+        // Create an '<img>' element//might need to create for loop for images 
+        var pexelImg = document.createElement('img');
+        var i = wordData.imageInfo[0];
+        pexelImg.setAttribute('src', wordData.imageInfo[0].src.medium); //response.photos[0].src.small);
+        picBodyEl.append(pexelImg);
+        //for loop for photographer info(started, not functioning )
+        for (var i = 0; i < wordData.imageInfo[0].photographer.length; i++) {
+            if (wordData.imageInfo[0].photographer === resultHeader) {
+                photographerEl.append(resultPhtr);
+            } //also add if no image found-404 img-in assets file -results.length = 0(in array)
+
+            var resultPhtr = document.createElement('span');
+            resultPhtr.textContent = wordData.imageInfo[0].photographer[i];
+            photographerEl.append(resultPhtr);
         }
     }
     // append content to page elements
@@ -517,15 +528,9 @@ var displayWordData = function (wordObjArr) {
     resultLI.append(resultBody);
     resultBody.append(audioBtn);
     resultBody.append(imgBtn);
-    // modal (via image-button)
-
-
-    // picBodyEl.append(pexelImg);
-
 
     // document.addEventListener('click', imgBtn.onclick = function () {
     //     modal.style.display = "block"
     // });
 };
-
 
