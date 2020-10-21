@@ -283,15 +283,16 @@ var genWordList = function (wordLength, letters) {
     localStorage.setItem(letters, results);
 
     // get data from API
-    getDefData(letters, results);
+    getDefData(results);
+
+    // display letter array to page
+    displayLetters(letters, results);
 
     return console.log(results);
 };
 
-// function fetches definition data for each in an array of words and returns subset of data packaged as an object
-var getDefData = function (letters, results) {
-
-    // display searched letters
+// display searched letters
+var displayLetters = function (letters, results) {
     if (results.length === 0) {
         searchContentEl.textContent = '';
         searchContentEl.textContent = 'No Words Found';
@@ -299,10 +300,12 @@ var getDefData = function (letters, results) {
         searchContentEl.textContent = '';
         searchContentEl.textContent = letters;
     }
+}
 
-    // array to hold combined fetch results
-    var wordObjArr = [];
-    
+// function fetches definition data for each in an array of words and returns subset of data packaged as an object
+var getDefData = function (results) {
+    // console.log(results)
+
     // generate API data for each word
     for (var i = 0; i < results.length; i++) {
 
@@ -325,6 +328,7 @@ var getDefData = function (letters, results) {
 
         // submit https request
         Promise.all(apiUrls).then(function (responses) {
+
             // using map() method to get a response array of json objects, 
             return Promise.all(responses.map(function (response) {
                 return response.json();
@@ -332,47 +336,12 @@ var getDefData = function (letters, results) {
                 // resulting definition & image data for each word
                 .then(function (response) {
                     // console.log(response)
-                    var wordDef = response[0][0];
                     // console.log(response[0][0])
-                    var imgSrc = response[1];
                     // console.log(response[1])
 
-                    // pull properties from both api elements into a single object for each word, taking into account the instance of an empty array for Pexel
-                    if (imgSrc.photos.length > 0) {
-                        var wordObj = {
-                            word: results[i],
-                            class: wordDef.fl,
-                            definition: wordDef.shortdef,
-                            audio: wordDef.hwi.prs[0].sound.audio,
-                            offensive: wordDef.meta.offensive,
-                            image_s: imgSrc.photos[0].src.small,
-                            image_m: imgSrc.photos[0].src.medium,
-                            image_l: imgSrc.photos[0].src.large,
-                            photographer: imgSrc.photos[0].photographer,
-                            photog_url: imgSrc.photos[0].photographer_url,
-                        }
-                    } else {
-                        var wordObj = {
-                            word: results[i],
-                            class: wordDef.fl,
-                            definition: wordDef.shortdef,
-                            audio: wordDef.hwi.prs[0].sound.audio,
-                            offensive: wordDef.meta.offensive,
-                            image_s: noImage,
-                            image_m: noImage,
-                            image_l: noImage,
-                            photographer: noImage,
-                            photog_url: noImage,
-                        }
-                    }
-                    // add data object to results array for each word
-                    wordObjArr.push(wordObj)
-
                     // pass resulting object array to display function
-                    displayWordData(wordObjArr);
-                    console.log(wordObjArr)
-                    return wordObjArr
-
+                    objectData(results, response);
+                    return response
                 })
                 .catch((error) => {
                     console.error('Error: ', error);
@@ -380,6 +349,45 @@ var getDefData = function (letters, results) {
         });
     };
 };
+
+var objectData = function(results, response) {
+    console.log(results)
+    console.log(response)
+    var wordDef = response[0][0];
+    console.log(wordDef)
+    var imgSrc = response[1];
+    console.log(imgSrc)
+
+    // pull properties from both api elements into a single object for each word, taking into account the instance of an empty array for Pexel
+    if (imgSrc.photos.length > 0) {
+        var wordObj = {
+            word: response[i],
+            class: wordDef.fl,
+            definition: wordDef.shortdef,
+            audio: wordDef.hwi.prs[0].sound.audio,
+            offensive: wordDef.meta.offensive,
+            image_s: imgSrc.photos[0].src.small,
+            image_m: imgSrc.photos[0].src.medium,
+            image_l: imgSrc.photos[0].src.large,
+            photographer: imgSrc.photos[0].photographer,
+            photog_url: imgSrc.photos[0].photographer_url,
+        }
+    } else {
+        var wordObj = {
+            word: results[i],
+            class: wordDef.fl,
+            definition: wordDef.shortdef,
+            audio: wordDef.hwi.prs[0].sound.audio,
+            offensive: wordDef.meta.offensive,
+            image_s: noImage,
+            image_m: noImage,
+            image_l: noImage,
+            photographer: noImage,
+            photog_url: noImage,
+        }
+    }
+    console.log(wordObj)
+}
 
 // function takes api object array and parses for display
 var displayWordData = function (wordObjArr) {
