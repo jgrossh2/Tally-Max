@@ -111,9 +111,10 @@ a#mwtext:hover {
     color: var(--red);
 }
 
-#container {
-    display: flex;
-    flex-wrap: wrap;
+.container {
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+    width: 100%;
 }
 
 .space {
@@ -126,7 +127,7 @@ a#mwtext:hover {
     margin-left: 0;
     padding: 20px 20px 0 20px;
     list-style: none;
-    width: 100%;
+    /* width: 100%; */
 }
 
 .tiles {
@@ -135,8 +136,21 @@ a#mwtext:hover {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     padding: 0 0.75rem;
-    height: 130px;
-    width: 40px;
+    height: 100px;
+    width: 100%;
+}
+.dropped {
+    border: dotted 3px var(--dark);
+    height: 90px;
+    width: 100%;
+}
+.drop {
+    border: none;
+}
+.todo {
+ /* margin: auto; */
+    font-size: 24px;
+    font-weight: bold;
 }
 .dropZone {
     background: lightgray;
@@ -252,18 +266,7 @@ a#mwtext:hover {
 .gray {
     filter: grayscale(100%);
 }
-.dropped {
-    border: dotted 3px var(--dark);
-    height: 120px;
-}
-.drop {
-    border: none;
-}
-.todo {
-    margin: auto;
-    font-size: 24px;
-    font-weight: bold;
-}
+
 
 /* The Modal (background) */
 .modal {
