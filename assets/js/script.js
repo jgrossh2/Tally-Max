@@ -4,7 +4,7 @@
 var twoLetterBtnEl = document.getElementById('twoLetterBtn');
 var threeLetterBtnEl = document.getElementById('threeLetterBtn');
 var randomLetterBtnEl = document.getElementById('randomLetterBtn');
-var highScoreBtnEl = document.getElementById('highScoreBtn');
+var resetBtnEl = document.getElementById('resetBtn');
 var letterContainerEl = document.getElementById('possible-letters');
 var searchContentEl = document.getElementById('search-content');
 var resultsContainerEl = document.getElementById('results-container');
@@ -18,17 +18,12 @@ var dropLetters = [];
 // var letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 var letterEl = document.querySelector(".letter");
 var spaceEl = document.querySelector(".space");
-// var oldTile = [];
-// var dragged = [];
-
-// get user input area
-// spaceEl.textContent = "Drag Letters Here! "
 
 // drag letters
-var dragLetters = function (event) {
-    event.preventDefault();
-    console.log("works")
-}
+// var dragLetters = function (event) {
+//     event.preventDefault();
+//     console.log("works")
+// }
 //row 1 and dropzone
 $(function () {
     $(".sortable1, .sortable4").sortable({
@@ -177,7 +172,7 @@ $(".dropped").droppable({
     update: function(event) {
     }
 });
-letterEl.addEventListener("click", dragLetters)
+// letterEl.addEventListener("click", dragLetters)
 
 // event listeners to gather user input and start generator function
 twoLetterBtnEl.addEventListener('click', function () {
@@ -230,7 +225,12 @@ randomLetterBtnEl.addEventListener('click', function () {
     // call word generator
     genWordList(wordLength, letters);
 });
-
+resetBtnEl.addEventListener('click', function () {
+    // reset serch containers & arrays
+    spaceEl.innerHTML = " ";
+    dropLetters = [];
+    var results = [];
+});
 // generate all possible combinations of inputted letters
 var genWordList = function (wordLength, letters) {
     // reset search containers & arrays
