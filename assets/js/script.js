@@ -233,7 +233,6 @@ var genWordList = function (wordLength, letters) {
     // reset form container
     spaceEl.innerHTML = " ";
     var results = [];
-    var wordObj;
     var arrayCounter = 0;
 
     var generate = function (possWord) {
@@ -249,7 +248,7 @@ var genWordList = function (wordLength, letters) {
                     generate(possWord);
                 }
                 possWord = possWord.slice(0, -1);
-                // break from loop to cut down on load time    
+            // break from loop to cut down on load time    
             } else {
                 break;
             }
@@ -312,49 +311,49 @@ var getDefData = function (results) {
             }))
             // word object definition
             .then(function (response) {
+                console.log(response)
                 var wordDef = response[0][0];
                 var imgSrc = response[1];
 
-                // properties not always available within response data
+                // properties that are inconsistently available within response data
                 var audio;
-                var image_s;
-                var image_m;
-                var image_l;
-                var photographer;
-                var photog_url;
-
                 if (wordDef.hwi.prs[0].sound.audio) {
                     audio = wordDef.hwi.prs[0].sound.audio
                 } else {
-                    audio = '' //or poss "sorry no audio available"
+                    audio = console.log("Sorry, there is no audio available for" + word) // to be added as message on page
                 }
-                if (imgSrc.photos[0].src.small) {
+                var image_s;
+                if (imgSrc.photos[0]) {
                     image_s = imgSrc.photos[0].src.small
                 } else {
-                    image_s = ''//or poss "sorry no audio available"
+                    image_s = console.log("Sorry, there is no image available for " + word) // to be added as message on page
                 }
-                if (imgSrc.photos[0].src.medium) {
+                var image_m;
+                if (imgSrc.photos[0]) {
                     image_m = imgSrc.photos[0].src.medium
                 } else {
-                    image_m = ''//or poss "sorry no audio available"
-                } 
-                if (imgSrc.photos[0].src.large) {
+                    image_m = ''
+                }
+                var image_l;
+                if (imgSrc.photos[0]) {
                     image_l = imgSrc.photos[0].src.large
                 } else {
-                    image_l = ''//or poss "sorry no audio available"
+                    image_l = ''
                 }
-                if (imgSrc.photos[0].photographer) {
+                var photographer;
+                if (imgSrc.photos[0]) {
                     photographer = imgSrc.photos[0].photographer
                 } else {
-                    photographer = ''//or poss "sorry no audio available"
+                    photographer = ''
                 }
-                if (imgSrc.photos[0].photographer_url) {
+                var photog_url;
+                if (imgSrc.photos[0]) {
                     photog_url = imgSrc.photos[0].photographer_url
                 } else {
-                    photog_url = ''//or poss "sorry no audio available"
+                    photog_url = ''
                 }
 
-                // collating all necessary response properties into a single object
+                // collating properties from both api responses into single object
                 var wordObj = {
                     word: wordDef.hwi.hw,
                     class: wordDef.fl,
@@ -376,6 +375,7 @@ var getDefData = function (results) {
         });
     };
     displayWordData(wordObjArr);
+    setTimeout
 };
 
 // function takes api object array and parses for display
