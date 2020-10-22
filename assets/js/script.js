@@ -336,7 +336,7 @@ var getDefData = function (results) {
             .then(function (response) {
                 var wordDef = response[0][0];
                 var imgSrc = response[1];
-                
+                console.log(wordDef)
                 if (!wordDef.hwi.prs) {
                     return;
                 } else {
