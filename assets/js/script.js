@@ -463,14 +463,14 @@ var displayWord = function (wordData) {
     // });
 };
 
-// var API_KEY = '18755179-1cec5558437abfcfe27155a57';
-// var URL = "https://pixabay.com/api/?key=" + API_KEY + "&q=" + encodeURIComponent('');
-// $.getJSON(URL, function (data) {
-//     if (parseInt(data.totalHits) > 0)
-//         $.each(data.hits, function (i, hit) { console.log(hit.pageURL); });
-//     else
-//         console.log('No hits');
-// });
+var API_KEY = '18755179-1cec5558437abfcfe27155a57';
+var URL = "https://pixabay.com/api/?key=" + API_KEY + "&q=" + encodeURIComponent('cat');
+$.getJSON(URL, function (data) {
+    if (parseInt(data.totalHits) > 0)
+        $.each(data.hits, function (i, hit) { console.log(hit.pageURL); });
+    else
+        console.log('No hits');
+});
 
 function myFunction() {
     console.log("test2")
