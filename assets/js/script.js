@@ -58,9 +58,11 @@ $(function () {
            var oldTile = document.getElementById(done);
            $(oldTile).addClass("gray");
         //    $(oldTile).sortable(); 
-        //    var check = $(oldTile).sortable('instance');
-        //    console.log(check);
+        //    console.log("yes");
+        //    $(oldTile).sortable('instance');
+        //    console.log("no");
         //    $(oldTile).sortable("disable");
+        //    console.log("works");
         //    $(oldTile).sortable('enable');
         //    console.log(oldTile);
         },
@@ -134,6 +136,7 @@ $(function () {
             var oldTile = document.getElementById(done);
             $(oldTile).addClass("gray");
             // $(oldTile).sortable();
+            // console.log("yes");
             // var check = $(oldTile).sortable('instance');
             // console.log(check);
             // $(oldTile).sortable('disable');
