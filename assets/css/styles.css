@@ -295,6 +295,16 @@ a#mwtext:hover {
     animation-duration: 0.4s
   }
   
+  img#img-icon {
+    width: 32px;
+    padding: 4px 0 0 4px;
+    color: var(--lblue);
+    background-color: var(--lblue);
+}
+
+.btn-floating.waves-effect.waves-light.img {
+    background-color: var(--lblue);
+}
   /* Add Animation */
   @-webkit-keyframes animatetop {
     from {top:-300px; opacity:0} 
