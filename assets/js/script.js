@@ -431,34 +431,17 @@ var displayWordData = function (wordObjArr) {
                 }
                 var audioLink = 'https://media.merriam-webster.com/audio/prons/en/us/ogg/' + subdir + '/' + wordData.audio + '.ogg';
 
-                // create button element to contain sound link
-                // var audioBtn = document.createElement('a');
-                // audioBtn.setAttribute('class', 'btn-floating waves-effect waves-light')
-                // audioBtn.setAttribute('href', audioLink);
-                // audioBtn.innerHTML = '<span><img id="audio-icon" src="assets/iconfinder_speaker-high-sound-volume-voice_3643734.png"></span>'
-                // resultBody.append(audioBtn);
-
-                // var audioDiv = document.createElement('div');
-                // audioDiv.innerHTML = "<audio controls>"
-                //                         "<source src=" + audioLink + " type='audio/ogg'>"
-                //                         "<p>Your audio does not support HTML5 audio. Try this instead:"
-                //                         "<a class = 'btn-floating waves-effect waves-light' href = " + audioLink + ">"
-                //                         "<span><img id='audio-icon' src='assets/iconfinder_speaker-high-sound-volume-voice_3643734.png'></span>"
-                //                         "</a></p></audio>"
-                // resultBody.append(audioDiv);
-
+                // create 'audio' element for word playback 
                 var audioEl = document.createElement('audio');
-                audioEl.setAttribute('id', 'audio-play');
+                // the 'audio' element will use the first direction it understands
                 audioEl.innerHTML = "<source src=" + audioLink + " type='audio/ogg'>"
-                                    "<p>Your audio does not support HTML5 audio. Try this instead: "
-                                    "<a class='btn-floating waves-effect waves-light' href=" + audioLink + " >"
-                                    "<span><img id='audio-icon' src='assets/iconfinder_speaker-high-sound-volume-voice_3643734.png'>"
-                                    "</span></a></p>";
+                                    "<p>Your audio does not support HTML5 audio.</p>";
                 var audioBtn = document.createElement('button');
                 audioBtn.setAttribute('onClick', 'playAudio()');
                 audioBtn.setAttribute('type', 'button');
                 resultBody.append(audioBtn);
-                audioBtn.innerHTML = 'Play Audio'
+                // 
+                audioBtn.innerHTML = "<span><img class='btn-floating waves-effect waves-light' id='audio-icon' src='assets/iconfinder_speaker-high-sound-volume-voice_32x32.png'></span></a>"
                 audioBtn.addEventListener('click', playAudio);
 
                 function playAudio() {

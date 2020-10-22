@@ -93,8 +93,7 @@ button.waves-effect.searchbtn:hover {
 }
 
 img#audio-icon {
-    width: 32px;
-    padding: 4px 0 0 4px;
+    border-style: none;
 }
 
 img#mwlogo {
