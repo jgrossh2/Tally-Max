@@ -233,6 +233,7 @@ var genWordList = function (wordLength, letters) {
     // reset form container
     spaceEl.innerHTML = " ";
     var results = [];
+    var wordObj;
     var arrayCounter = 0;
 
     var generate = function (possWord) {
@@ -282,14 +283,14 @@ var displayLetters = function (letters, results) {
 // function fetches definition data for each in an array of words and returns subset of data packaged as an object
 var getDefData = function (results) {
 
+    // empty array to capture object-response resulting from each word in the results array
     var wordObjArr = [];
     
     // generate API data for each word
     for (var i = 0; i < results.length; i++) {
         // api variables
         let word = results[i];
-        var images = results[i];
-        var pexelURL = `https://api.pexels.com/v1/search?query=${images}&per_page=1`;
+        var pexelURL = `https://api.pexels.com/v1/search?query=${word}&per_page=1`;
         var API_key = "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
 
         // fetch both APIs
@@ -309,41 +310,62 @@ var getDefData = function (results) {
             return Promise.all(responses.map(function (response) {
                 return response.json();
             }))
-            // word definition
+            // word object definition
             .then(function (response) {
                 var wordDef = response[0][0];
                 var imgSrc = response[1];
-                
-                if (!wordDef.hwi.prs) {
-                    return;
+
+                // properties not always available within response data
+                var audio;
+                var image_s;
+                var image_m;
+                var image_l;
+                var photographer;
+                var photog_url;
+
+                if (wordDef.hwi.prs[0].sound.audio) {
+                    audio = wordDef.hwi.prs[0].sound.audio
                 } else {
-                    if (imgSrc.photos.length > 0) {
-                        var wordObj = {
-                            word: wordDef.hwi.hw,
-                            class: wordDef.fl,
-                            definition: wordDef.shortdef,
-                            audio: wordDef.hwi.prs[0].sound.audio,
-                            offensive: wordDef.meta.offensive,
-                            image_s: imgSrc.photos[0].src.small,
-                            image_m: imgSrc.photos[0].src.medium,
-                            image_l: imgSrc.photos[0].src.large,
-                            photographer: imgSrc.photos[0].photographer,
-                            photog_url: imgSrc.photos[0].photographer_url,
-                        }
-                    } else {
-                        var wordObj = {
-                            word: wordDef.hwi.hw,
-                            class: wordDef.fl,
-                            definition: wordDef.shortdef,
-                            audio: wordDef.hwi.prs[0].sound.audio,
-                            offensive: wordDef.meta.offensive,
-                            image_s: noImage,
-                            image_m: noImage,
-                            image_l: noImage,
-                            photographer: noImage,
-                            photog_url: noImage,
-                        }
-                    }
+                    audio = '' //or poss "sorry no audio available"
+                }
+                if (imgSrc.photos[0].src.small) {
+                    image_s = imgSrc.photos[0].src.small
+                } else {
+                    image_s = ''//or poss "sorry no audio available"
+                }
+                if (imgSrc.photos[0].src.medium) {
+                    image_m = imgSrc.photos[0].src.medium
+                } else {
+                    image_m = ''//or poss "sorry no audio available"
+                } 
+                if (imgSrc.photos[0].src.large) {
+                    image_l = imgSrc.photos[0].src.large
+                } else {
+                    image_l = ''//or poss "sorry no audio available"
+                }
+                if (imgSrc.photos[0].photographer) {
+                    photographer = imgSrc.photos[0].photographer
+                } else {
+                    photographer = ''//or poss "sorry no audio available"
+                }
+                if (imgSrc.photos[0].photographer_url) {
+                    photog_url = imgSrc.photos[0].photographer_url
+                } else {
+                    photog_url = ''//or poss "sorry no audio available"
+                }
+
+                // collating all necessary response properties into a single object
+                var wordObj = {
+                    word: wordDef.hwi.hw,
+                    class: wordDef.fl,
+                    definition: wordDef.shortdef,
+                    audio: audio,
+                    offensive: wordDef.meta.offensive,
+                    image_s: image_s,
+                    image_m: image_m,
+                    image_l: image_l,
+                    photographer: photographer,
+                    photog_url: photog_url,
                 }
                 wordObjArr.push(wordObj);
                 return wordObj;
