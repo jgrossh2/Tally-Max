@@ -459,6 +459,7 @@ var displayWordData = function (wordObjArr) {
                 audioBtn.setAttribute('type', 'button');
                 resultBody.append(audioBtn);
                 audioBtn.innerHTML = 'Play Audio'
+                audioBtn.addEventListener('click', playAudio);
 
                 function playAudio() {
                     audioEl.play();
