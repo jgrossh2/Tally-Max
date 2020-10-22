@@ -10,6 +10,7 @@ var searchContentEl = document.getElementById('search-content');
 var resultsContainerEl = document.getElementById('results-container');
 var letterEl = document.querySelector(".letter");
 var spaceEl = document.querySelector(".space");
+var aEl = document.getElementById('a');
 
 // global page variables
 var wordLength = 0;
@@ -17,6 +18,8 @@ var dropLetters = [];
 // var letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 var letterEl = document.querySelector(".letter");
 var spaceEl = document.querySelector(".space");
+// var oldTile = [];
+// var dragged = [];
 
 // get user input area
 // spaceEl.textContent = "Drag Letters Here! "
@@ -26,29 +29,6 @@ var dragLetters = function (event) {
     event.preventDefault();
     console.log("works")
 }
-// make letters drag
-// $(".letter").draggable({ 
-//     // connectToSortable: ".space",
-//     tolerance: "pointer",
-//     helper: "clone",
-//     appendTo: ".space",
-//     containment: "#container",
-//     cursor: "move",
-//     snap: ".space",
-//     // snapMode: "inner",
-//     revert: "invalid",
-//     start: function(event, ui) {
-//         console.log("uivalue " + JSON.stringify(ui));
-//         //clone of tile
-//         $(ui.helper).addClass("dragging");
-//         console.log("test");
-//         $(this).addClass("gray");
-//     },
-//     stop: function(event, ui) {
-//         $(ui.helper).removeClass("dragging");
-//         console.log("stop");
-//     }
-// });
 //row 1 and dropzone
 $(function () {
     $(".sortable1, .sortable4").sortable({
@@ -72,23 +52,22 @@ $(function () {
             // $(this).sortable('disable');
             ui.item.clone().appendTo(".sortable4");
             $(this).sortable('cancel');
-            $(this).addClass("gray");
-        }
-        // start: function(event) {
-        //     // ui.helper.toggleClass("highlight");
-        //   },
-        //   stop: function(event) {
-        //     //   ui.helper.toggleClass("highlight");
-        //     // $(".bottom-trash").removeClass("dropover bottom-trash-drag");
-        //     console.log("deactivate", this);
-        //   },
-        //   over: function(event) {
-        //     // $(event.target).addClass("dropover-active");
-        //   },
-        //   out: function(event) {
-        //     // $(event.target).removeClass("dropover-active");
-        //     console.log("out", event.target);
-        //   },
+            // console.log(this);
+           var done = $(ui.item).clone().attr('id');
+           console.log(done);
+           var oldTile = document.getElementById(done);
+           $(oldTile).addClass("gray");
+        //    $(oldTile).sortable(); 
+        //    var check = $(oldTile).sortable('instance');
+        //    console.log(check);
+        //    $(oldTile).sortable("disable");
+        //    $(oldTile).sortable('enable');
+        //    console.log(oldTile);
+        },
+        over: function(event, ui) {
+        },
+        out: function(event, ui) {
+        },
     }).disableSelection();
     $(".sortable4").sortable({
         connectWith: ".sortable4"
@@ -115,7 +94,14 @@ $(function () {
         remove: function (event, ui) {
             ui.item.clone().appendTo(".sortable4");
             $(this).sortable('cancel');
-            $(this).addClass("gray");
+            var done = $(ui.item).clone().attr('id');
+            // console.log(done);
+            var oldTile = document.getElementById(done);
+            $(oldTile).addClass("gray");
+            // $(oldTile).sortable();
+            // var check = $(oldTile).sortable('instance');
+            // console.log(check);
+            // $(oldTile).sortable('disable');
         }
     }).disableSelection();
     $(".sortable4").sortable({
@@ -139,12 +125,19 @@ $(function () {
         },
         stop: function (event, ui) {
             $(".dropped").removeClass("dropZone");
-            },
+        },
         remove: function (event, ui) {
             ui.item.clone().appendTo(".sortable4");
             $(this).sortable('cancel');
-            console.log(this);
-            $(this).addClass("gray");
+            var done = $(ui.item).clone().attr('id');
+            // console.log(done);
+            var oldTile = document.getElementById(done);
+            $(oldTile).addClass("gray");
+            // $(oldTile).sortable();
+            // var check = $(oldTile).sortable('instance');
+            // console.log(check);
+            // $(oldTile).sortable('disable');
+             
         }
     }).disableSelection();
     $(".sortable4").sortable({
@@ -157,32 +150,29 @@ $(".dropped").droppable({
     tolerance: "touch",
     revert: false,
     drop: function (event, ui) {
-        console.log(ui);
-        console.log("drop");
+        // console.log(ui);
+        // console.log("drop");
         $(".dropped").addClass("dropZone");
+        // $(this).sortable('disable');
         // var helper = ui.helper.clone(true);
-        // helper.appendTo(".dropped");
-        // $(ui.helper).removeClass("dragging");
         // $(".letter").draggable('disable');
         // finds object and then letter value of that object
         var dragged = ui.draggable[0].dataset.letter;
-        console.log(ui.draggable[0].dataset.letter);
+        // console.log(dragged);
+        // var droppedDone = $(dragged).attr('id');
+        // console.log(droppedDone);
+        // var dragTile = document.getElementById(droppedDone);
+        // dragTile.sortable('disable');
+
         //add drop letters to array
         dropLetters.push(dragged);
-        console.log(dropLetters);
-        // $(".space").removeClass("dropZone");
-        // var compareLetters= [];
-        // var getLetters = $(".letter").data("data-letter");
-        // console.log(getLetters);
-        // compareLetters.push(getLetters);
-        // if (compareLetters )
     },
-    // over: function(event, ui) {
-    // },
-    // out: function(event, ui) {
-    // },
-    // update: function(event) {
-    // }
+    over: function(event, ui) {
+    },
+    out: function(event, ui) {
+    },
+    update: function(event) {
+    }
 });
 letterEl.addEventListener("click", dragLetters)
 
