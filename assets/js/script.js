@@ -410,7 +410,7 @@ var displayWordData = function (wordObjArr) {
                     resultBody.append(resultDef);
                 }
 
-                // display audio-button within result-container body: takes 'audio' property from wordObj[i] and creates link for audio playback; conditions outlined in the Merriam-Webster api documentation are used to determine the 'subdir' value, which is a component of the audio-link href
+                // display audio-button to page; takes 'audio' property from data object to create link for audio playback; conditions outlined in the Merriam-Webster api documentation are used to determine the 'subdir' value, which is a component of the audio-link href
                 var aud;
                 if (wordData.audio) {
                     aud = (wordData.audio.split('', 3))
@@ -432,11 +432,38 @@ var displayWordData = function (wordObjArr) {
                 var audioLink = 'https://media.merriam-webster.com/audio/prons/en/us/ogg/' + subdir + '/' + wordData.audio + '.ogg';
 
                 // create button element to contain sound link
-                var audioBtn = document.createElement('a');
-                audioBtn.setAttribute('class', 'btn-floating waves-effect waves-light')
-                audioBtn.setAttribute('href', audioLink);
-                audioBtn.innerHTML = '<span><img id="audio-icon" src="assets/iconfinder_speaker-high-sound-volume-voice_3643734.png"></span>'
+                // var audioBtn = document.createElement('a');
+                // audioBtn.setAttribute('class', 'btn-floating waves-effect waves-light')
+                // audioBtn.setAttribute('href', audioLink);
+                // audioBtn.innerHTML = '<span><img id="audio-icon" src="assets/iconfinder_speaker-high-sound-volume-voice_3643734.png"></span>'
+                // resultBody.append(audioBtn);
+
+                // var audioDiv = document.createElement('div');
+                // audioDiv.innerHTML = "<audio controls>"
+                //                         "<source src=" + audioLink + " type='audio/ogg'>"
+                //                         "<p>Your audio does not support HTML5 audio. Try this instead:"
+                //                         "<a class = 'btn-floating waves-effect waves-light' href = " + audioLink + ">"
+                //                         "<span><img id='audio-icon' src='assets/iconfinder_speaker-high-sound-volume-voice_3643734.png'></span>"
+                //                         "</a></p></audio>"
+                // resultBody.append(audioDiv);
+
+                var audioEl = document.createElement('audio');
+                audioEl.setAttribute('id', 'audio-play');
+                audioEl.innerHTML = "<source src=" + audioLink + " type='audio/ogg'>"
+                                    "<p>Your audio does not support HTML5 audio. Try this instead: "
+                                    "<a class='btn-floating waves-effect waves-light' href=" + audioLink + " >"
+                                    "<span><img id='audio-icon' src='assets/iconfinder_speaker-high-sound-volume-voice_3643734.png'>"
+                                    "</span></a></p>";
+                var audioBtn = document.createElement('button');
+                audioBtn.setAttribute('onClick', 'playAudio()');
+                audioBtn.setAttribute('type', 'button');
                 resultBody.append(audioBtn);
+                audioBtn.innerHTML = 'Play Audio'
+
+                function playAudio() {
+                    audioEl.play();
+                }
+
 
                 // Get the modal
                 var modal = document.getElementById("myModal");
