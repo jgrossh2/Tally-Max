@@ -10,6 +10,7 @@ var searchContentEl = document.getElementById('search-content');
 var resultsContainerEl = document.getElementById('results-container');
 var letterEl = document.querySelector(".letter");
 var spaceEl = document.querySelector(".space");
+var aEl = document.getElementById('a');
 
 // global page variables
 var wordLength = 0;
@@ -17,6 +18,8 @@ var dropLetters = [];
 // var letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 var letterEl = document.querySelector(".letter");
 var spaceEl = document.querySelector(".space");
+// var oldTile = [];
+// var dragged = [];
 
 // get user input area
 // spaceEl.textContent = "Drag Letters Here! "
@@ -26,29 +29,6 @@ var dragLetters = function (event) {
     event.preventDefault();
     console.log("works")
 }
-// make letters drag
-// $(".letter").draggable({ 
-//     // connectToSortable: ".space",
-//     tolerance: "pointer",
-//     helper: "clone",
-//     appendTo: ".space",
-//     containment: "#container",
-//     cursor: "move",
-//     snap: ".space",
-//     // snapMode: "inner",
-//     revert: "invalid",
-//     start: function(event, ui) {
-//         console.log("uivalue " + JSON.stringify(ui));
-//         //clone of tile
-//         $(ui.helper).addClass("dragging");
-//         console.log("test");
-//         $(this).addClass("gray");
-//     },
-//     stop: function(event, ui) {
-//         $(ui.helper).removeClass("dragging");
-//         console.log("stop");
-//     }
-// });
 //row 1 and dropzone
 $(function () {
     $(".sortable1, .sortable4").sortable({
@@ -72,23 +52,22 @@ $(function () {
             // $(this).sortable('disable');
             ui.item.clone().appendTo(".sortable4");
             $(this).sortable('cancel');
-            $(this).addClass("gray");
-        }
-        // start: function(event) {
-        //     // ui.helper.toggleClass("highlight");
-        //   },
-        //   stop: function(event) {
-        //     //   ui.helper.toggleClass("highlight");
-        //     // $(".bottom-trash").removeClass("dropover bottom-trash-drag");
-        //     console.log("deactivate", this);
-        //   },
-        //   over: function(event) {
-        //     // $(event.target).addClass("dropover-active");
-        //   },
-        //   out: function(event) {
-        //     // $(event.target).removeClass("dropover-active");
-        //     console.log("out", event.target);
-        //   },
+            // console.log(this);
+           var done = $(ui.item).clone().attr('id');
+           console.log(done);
+           var oldTile = document.getElementById(done);
+           $(oldTile).addClass("gray");
+        //    $(oldTile).sortable(); 
+        //    var check = $(oldTile).sortable('instance');
+        //    console.log(check);
+        //    $(oldTile).sortable("disable");
+        //    $(oldTile).sortable('enable');
+        //    console.log(oldTile);
+        },
+        over: function(event, ui) {
+        },
+        out: function(event, ui) {
+        },
     }).disableSelection();
     $(".sortable4").sortable({
         connectWith: ".sortable4"
@@ -115,7 +94,14 @@ $(function () {
         remove: function (event, ui) {
             ui.item.clone().appendTo(".sortable4");
             $(this).sortable('cancel');
-            $(this).addClass("gray");
+            var done = $(ui.item).clone().attr('id');
+            // console.log(done);
+            var oldTile = document.getElementById(done);
+            $(oldTile).addClass("gray");
+            // $(oldTile).sortable();
+            // var check = $(oldTile).sortable('instance');
+            // console.log(check);
+            // $(oldTile).sortable('disable');
         }
     }).disableSelection();
     $(".sortable4").sortable({
@@ -139,12 +125,19 @@ $(function () {
         },
         stop: function (event, ui) {
             $(".dropped").removeClass("dropZone");
-            },
+        },
         remove: function (event, ui) {
             ui.item.clone().appendTo(".sortable4");
             $(this).sortable('cancel');
-            console.log(this);
-            $(this).addClass("gray");
+            var done = $(ui.item).clone().attr('id');
+            // console.log(done);
+            var oldTile = document.getElementById(done);
+            $(oldTile).addClass("gray");
+            // $(oldTile).sortable();
+            // var check = $(oldTile).sortable('instance');
+            // console.log(check);
+            // $(oldTile).sortable('disable');
+             
         }
     }).disableSelection();
     $(".sortable4").sortable({
@@ -157,32 +150,29 @@ $(".dropped").droppable({
     tolerance: "touch",
     revert: false,
     drop: function (event, ui) {
-        console.log(ui);
-        console.log("drop");
+        // console.log(ui);
+        // console.log("drop");
         $(".dropped").addClass("dropZone");
+        // $(this).sortable('disable');
         // var helper = ui.helper.clone(true);
-        // helper.appendTo(".dropped");
-        // $(ui.helper).removeClass("dragging");
         // $(".letter").draggable('disable');
         // finds object and then letter value of that object
         var dragged = ui.draggable[0].dataset.letter;
-        console.log(ui.draggable[0].dataset.letter);
+        // console.log(dragged);
+        // var droppedDone = $(dragged).attr('id');
+        // console.log(droppedDone);
+        // var dragTile = document.getElementById(droppedDone);
+        // dragTile.sortable('disable');
+
         //add drop letters to array
         dropLetters.push(dragged);
-        console.log(dropLetters);
-        // $(".space").removeClass("dropZone");
-        // var compareLetters= [];
-        // var getLetters = $(".letter").data("data-letter");
-        // console.log(getLetters);
-        // compareLetters.push(getLetters);
-        // if (compareLetters )
     },
-    // over: function(event, ui) {
-    // },
-    // out: function(event, ui) {
-    // },
-    // update: function(event) {
-    // }
+    over: function(event, ui) {
+    },
+    out: function(event, ui) {
+    },
+    update: function(event) {
+    }
 });
 letterEl.addEventListener("click", dragLetters)
 
@@ -210,6 +200,13 @@ threeLetterBtnEl.addEventListener('click', function () {
 });
 
 randomLetterBtnEl.addEventListener('click', function () {
+    // sort letters based on value before sending to genWordList
+    function sortFunc(a, b) {
+        var priorityLetters = ['z','q','x','j','k','w','y','v','f','h','o','m','c','b','g','d','u','s','l','t','r','n','o','i','a','e'];
+            return priorityLetters.indexOf(a) - priorityLetters.indexOf(b);
+    }
+    dropLetters.sort(sortFunc);
+    
     // get possible letters from form
     var letters = dropLetters.join('');
 
@@ -231,32 +228,11 @@ randomLetterBtnEl.addEventListener('click', function () {
     genWordList(wordLength, letters);
 });
 
-highScoreBtnEl.addEventListener('click', function () {
-    // get possible letters from form
-    var letters = dropLetters.join('');
-
-    // get total letter count
-    letterCounter(letters);
-    function letterCounter(letters) {
-        // reset global variable
-        wordLength = 0;
-        var alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        var ar = alphabet.split("");
-        for (var i = 0; i < letters.length; i++) {
-            if (ar.indexOf(letters[i]) > -1) {
-                wordLength = wordLength + 1;
-            }
-        }
-        return wordLength;
-    }
-
-    genWordList(wordLength, letters);
-});
-
 // generate all possible combinations of inputted letters
 var genWordList = function (wordLength, letters) {
-    // reset form container
+    // reset search containers & arrays
     spaceEl.innerHTML = " ";
+    // resultsContainerEl.textContent = '';
     dropLetters = [];
     var results = [];
     var arrayCounter = 0;
@@ -301,6 +277,8 @@ var getDefData = function (letters, results) {
         searchContentEl.textContent = letters;
     }
 
+    // var wordDataArr = [];
+    
     // generate API data for each word
     for (var i = 0; i < results.length; i++) {
         // api variables
@@ -326,30 +304,29 @@ var getDefData = function (letters, results) {
             return Promise.all(responses.map(function (response) {
                 return response.json();
             }))
-                // word definition
-                .then(function (response) {
-                    var wordDef = response[0];
-                    var imgSrc = response[1];
+            // word definition
+            .then(function (response) {
+                var wordDef = response[0];
+                var imgSrc = response[1];
 
-                    var def = (wordDef[0])
-                    var wordData = {
-                        word: word,
-                        class: def.fl,
-                        definition: def.shortdef,
-                        audio: def.hwi.prs[0].sound.audio,
-                        offensive: def.meta.offensive,
-                        imageInfo: imgSrc.photos,
-                    };
-                    console.log(wordData)
-                    console.log(wordData.imageInfo[0])
-                    console.log(ImgSrc)
-                    displayWord(wordData);
-
-                    return wordData
-                })
-            // } else {
-            //     alert("Error:" + response.statusText)
-            // }
+                var def = (wordDef[0])
+                var wordData = {
+                    word: word,
+                    class: def.fl,
+                    definition: def.shortdef,
+                    audio: def.hwi.prs[0].sound.audio,
+                    offensive: def.meta.offensive,
+                    imageInfo: imgSrc.photos,
+                };
+                console.log(wordData);
+                displayWord(wordData);
+                // wordDataArr.push(wordData);
+                // displayWord(wordDataArr);
+                return wordData
+            })
+            .catch((error) => {
+                console.error('Error: ', error);
+            })
         });
     };
 };
@@ -357,8 +334,6 @@ var getDefData = function (letters, results) {
 // function takes MW api object data and packages word & class (e.g. noun, verb adjective) for DOM object display
 var displayWord = function (wordData) {
     console.log(wordData)
-
-    // resultsContainerEl.textContent = '';
 
     // check to see whether term is offensive
     if (!wordData.offensive) {
@@ -396,6 +371,7 @@ var displayWord = function (wordData) {
 
         // Get the modal
         var modal = document.getElementById("myModal");
+
         // Use 'getElementById' to get the ID of where the Img will be displayed
         var picBodyEl = document.getElementById('img-body');
 
@@ -410,12 +386,15 @@ var displayWord = function (wordData) {
 
         // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];
+
         // When the user clicks the button, open the modal 
         imgBtn.onclick = function () {
             modal.style.display = "block";
+
         }// When the user clicks on <span> (x), close the modal
         span.onclick = function () {
             modal.style.display = "none";
+
         }// When the user clicks anywhere outside of the modal, close it
         window.onclick = function (event) {
             if (event.target == modal) {
@@ -434,12 +413,12 @@ var displayWord = function (wordData) {
             resultDef.textContent = n + ') ' + wordData.definition[i];
             resultBody.append(resultDef);
         }
-        // Create an '<img>' element
+        // Create an '<img>' element//might need to create for loop for images 
         var pexelImg = document.createElement('img');
         var i = wordData.imageInfo[0];
         pexelImg.setAttribute('src', wordData.imageInfo[0].src.medium); //response.photos[0].src.small);
         picBodyEl.append(pexelImg);
-
+        //for loop for photographer info(started, not functioning )
         for (var i = 0; i < wordData.imageInfo[0].photographer.length; i++) {
             if (wordData.imageInfo[0].photographer === resultHeader) {
                 photographerEl.append(resultPhtr);
@@ -459,12 +438,9 @@ var displayWord = function (wordData) {
     resultLI.append(resultBody);
     resultsContainerEl.append(resultLI);
     resultBody.append(imgBtn);
-    // picBodyEl.append(pexelImg);
-
 
     // document.addEventListener('click', imgBtn.onclick = function () {
     //     modal.style.display = "block"
     // });
 };
-
 
