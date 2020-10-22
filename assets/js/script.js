@@ -230,10 +230,8 @@ randomLetterBtnEl.addEventListener('click', function () {
 
 // generate all possible combinations of inputted letters
 var genWordList = function (wordLength, letters) {
-    // reset search containers & arrays
+    // reset form container
     spaceEl.innerHTML = " ";
-    // resultsContainerEl.textContent = '';
-    dropLetters = [];
     var results = [];
     var arrayCounter = 0;
 
@@ -262,9 +260,24 @@ var genWordList = function (wordLength, letters) {
     localStorage.setItem(letters, results);
 
     // get data from API
-    getDefData(letters, results);
+    getDefData(results);
+
+    // display letter array to page
+    displayLetters(letters, results);
+
     return console.log(results);
 };
+
+// display searched letters
+var displayLetters = function (letters, results) {
+    if (results.length === 0) {
+        searchContentEl.textContent = '';
+        searchContentEl.textContent = 'No Words Found';
+    } else {
+        searchContentEl.textContent = '';
+        searchContentEl.textContent = letters;
+    }
+}
 
 // function fetches definition data for each in an array of words and returns subset of data packaged as an object
 var getDefData = function (results) {
