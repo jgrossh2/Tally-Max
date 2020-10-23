@@ -18,6 +18,11 @@ var dropLetters = [];
 // var letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 var letterEl = document.querySelector(".letter");
 var spaceEl = document.querySelector(".space");
+// var oldTile = [];
+// var dragged = [];
+
+// get user input area
+// spaceEl.textContent = "Drag Letters Here! "
 
 // drag letters
 var dragLetters = function (event) {
@@ -148,7 +153,16 @@ $(".dropped").droppable({
         // console.log(ui);
         // console.log("drop");
         $(".dropped").addClass("dropZone");
+        // $(this).sortable('disable');
+        // var helper = ui.helper.clone(true);
+        // $(".letter").draggable('disable');
+        // finds object and then letter value of that object
         var dragged = ui.draggable[0].dataset.letter;
+        // console.log(dragged);
+        // var droppedDone = $(dragged).attr('id');
+        // console.log(droppedDone);
+        // var dragTile = document.getElementById(droppedDone);
+        // dragTile.sortable('disable');
 
         //add drop letters to array
         dropLetters.push(dragged);
@@ -268,14 +282,14 @@ var displayLetters = function (letters, results) {
 // function fetches definition data for each in an array of words and returns subset of data packaged as an object
 var getDefData = function (results) {
 
-    // empty array to capture object-response resulting from each word in the results array
     var wordObjArr = [];
 
     // generate API data for each word
     for (var i = 0; i < results.length; i++) {
         // api variables
         let word = results[i];
-        var pexelURL = `https://api.pexels.com/v1/search?query=${word}&per_page=1`;
+        var images = results[i];
+        var pexelURL = `https://api.pexels.com/v1/search?query=${images}&per_page=1`;
         var API_key = "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
 
         // fetch both APIs
@@ -295,62 +309,41 @@ var getDefData = function (results) {
             return Promise.all(responses.map(function (response) {
                 return response.json();
             }))
-                // word object definition
+                // word definition
                 .then(function (response) {
-                    console.log(response)
                     var wordDef = response[0][0];
                     var imgSrc = response[1];
 
-                    // properties that are inconsistently available within response data
-                    var audio;
-                    if (wordDef.hwi.prs) {
-                        audio = wordDef.hwi.prs[0].sound.audio
+                    if (!wordDef.hwi.prs) {
+                        return;
                     } else {
-                        audio = console.log("Sorry, there is no audio available for " + word) // to be added as message on page
-                    }
-                    var image_s;
-                    if (imgSrc.photos[0]) {
-                        image_s = imgSrc.photos[0].src.small
-                    } else {
-                        image_s = console.log("Sorry, there is no image available for " + word) // to be added as message on page
-                    }
-                    var image_m;
-                    if (imgSrc.photos[0]) {
-                        image_m = imgSrc.photos[0].src.medium
-                    } else {
-                        image_m = ''
-                    }
-                    var image_l;
-                    if (imgSrc.photos[0]) {
-                        image_l = imgSrc.photos[0].src.large
-                    } else {
-                        image_l = ''
-                    }
-                    var photographer;
-                    if (imgSrc.photos[0]) {
-                        photographer = imgSrc.photos[0].photographer
-                    } else {
-                        photographer = ''
-                    }
-                    var photog_url;
-                    if (imgSrc.photos[0]) {
-                        photog_url = imgSrc.photos[0].photographer_url
-                    } else {
-                        photog_url = ''
-                    }
-
-                    // collating properties from both api responses into single object
-                    var wordObj = {
-                        word: wordDef.hwi.hw,
-                        class: wordDef.fl,
-                        definition: wordDef.shortdef,
-                        audio: audio,
-                        offensive: wordDef.meta.offensive,
-                        image_s: image_s,
-                        image_m: image_m,
-                        image_l: image_l,
-                        photographer: photographer,
-                        photog_url: photog_url,
+                        if (imgSrc.photos.length > 0) {
+                            var wordObj = {
+                                word: wordDef.hwi.hw,
+                                class: wordDef.fl,
+                                definition: wordDef.shortdef,
+                                audio: wordDef.hwi.prs[0].sound.audio,
+                                offensive: wordDef.meta.offensive,
+                                image_s: imgSrc.photos[0].src.small,
+                                image_m: imgSrc.photos[0].src.medium,
+                                image_l: imgSrc.photos[0].src.large,
+                                photographer: imgSrc.photos[0].photographer,
+                                photog_url: imgSrc.photos[0].photographer_url,
+                            }
+                        } else {
+                            var wordObj = {
+                                word: wordDef.hwi.hw,
+                                class: wordDef.fl,
+                                definition: wordDef.shortdef,
+                                audio: wordDef.hwi.prs[0].sound.audio,
+                                offensive: wordDef.meta.offensive,
+                                image_s: noImage,
+                                image_m: noImage,
+                                image_l: noImage,
+                                photographer: noImage,
+                                photog_url: noImage,
+                            }
+                        }
                     }
                     wordObjArr.push(wordObj);
                     return wordObj;
@@ -392,17 +385,12 @@ var displayWordData = function (wordObjArr) {
                 for (var j = 0; j < wordData.definition.length; j++) {
                     n = j + 1
                     var resultDef = document.createElement('p');
-                    resultDef.textContent = n + ') ' + wordData.definition[j];
+                    resultDef.textContent = n + ') ' + wordData.definition[i];
                     resultBody.append(resultDef);
                 }
 
                 // display audio-button within result-container body: takes 'audio' property from wordObj[i] and creates link for audio playback; conditions outlined in the Merriam-Webster api documentation are used to determine the 'subdir' value, which is a component of the audio-link href
-                var aud;
-                if (wordData.audio) {
-                    aud = (wordData.audio.split('', 3))
-                } else {
-                    aud = ''
-                }
+                var aud = wordData.audio.split('', 3)
                 // this regular expression refers to any number (\d) or punctuation symbol (\W)
                 var regex = RegExp('[\\d\\W]')
                 var subdir = ''
@@ -427,14 +415,17 @@ var displayWordData = function (wordObjArr) {
                 // Get the modal
                 var modal = document.getElementById("myModal");
 
+                // Use 'getElementById' to get the ID of where the Img will be displayed
+                var picBodyEl = document.getElementById('img-body');
+
                 // Use 'getElementById' to get the ID of where the photographer name will be displayed
                 var photographerEl = document.getElementById("ph-body");
                 photographerEl.setAttribute('src', wordData.photographer);
 
                 // Get the button that opens the modal
                 var imgBtn = document.createElement('a')//addEventListener('click', onclick);
-                imgBtn.setAttribute('class', 'btn-floating waves-effect waves-light img')
-                imgBtn.innerHTML = '<span><img id="img-icon" src="assets/iconfinder_pexels_photo_free_5340265.png"></span>'
+                imgBtn.setAttribute('class', 'btn-floating waves-effect waves-light red disabled')
+                imgBtn.innerHTML = '<span><img id="info-icon" src="assets/iconfinder_Information_Circle_4781829.png"></span>'
 
                 // Get the <span> element that closes the modal
                 var span = document.getElementsByClassName("close")[0];
@@ -450,25 +441,6 @@ var displayWordData = function (wordObjArr) {
                         modal.style.display = "none";
                     }
                 }
-                // Use 'getElementById' to get the ID of where the Img will be displayed
-
-                // Create an '<img>' element//might need to create for loop for images 
-                var pexelImg = document.createElement('img');
-                // var i = wordData.imageInfo[0];
-                // pexelImg.setAttribute('src', wordData.imageInfo[0].src.medium); //response.photos[0].src.small);
-                // picBodyEl.append(pexelImg);
-                // //for loop for photographer info(started, not functioning )
-                // for (var i = 0; i < wordData.imageInfo[0].photographer.length; i++) {
-                //     if (wordData.imageInfo[0].photographer === resultHeader) {
-                //         photographerEl.append(resultPhtr);
-                //     } //also add if no image found-404 img-in assets file -results.length = 0(in array)
-
-                //     var resultPhtr = document.createElement('span');
-                //     resultPhtr.textContent = wordData.imageInfo[0].photographer[i];
-                //     photographerEl.append(resultPhtr);
-                var picBodyEl = document.getElementById('img-body');
-
-
 
                 resultBody.append(imgBtn);
                 resultLI.append(resultBody);
@@ -478,7 +450,7 @@ var displayWordData = function (wordObjArr) {
                 resultHeader.innerHTML = "<p>This word did not make it past our sensors.</p>"
             }
         }
-    }, 1000);
+    }, 500);
 };
 
 function myFunction() {
