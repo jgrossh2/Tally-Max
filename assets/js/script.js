@@ -504,7 +504,7 @@ function searchFunction() {
         + srchTerm;
 
     fetch(
-        // 'https://pixabay.com/api/?key='
+        // 'https://pixabay.com/api/videos/?key='
         // + API_KEY
         // + '&q='
         // + srchTerm
@@ -514,18 +514,18 @@ function searchFunction() {
             return response.json();
 
         })
-        .then(function (data) {
-            console.log(data);
-        });
+        .then(function (response) {
+            console.log(response);
 
+            var responseContEl = document.querySelector('#response-cont');
+            responseContEl.innerHTML = '';
+            var picabayVideo = document.createElement('img');
+            picabayVideo.setAttribute('src', response.hits[0].userImageURL);
+            responseContEl.appendChild(picabayVideo);
+
+
+        })
 }
-    //             var responseContEl = document.querySelector('#response-cont');
-    //             responseContEl.innerHTML = '';
-    //             var gifVideo = document.createElement('img');
-    //             gifVideo.setAttribute('src', response.data[0].images.fixed_height.url);
-    //             responseContEl.appendChild(gifVideo);
-    //         });
-    // }
 
 
 
