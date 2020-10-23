@@ -415,8 +415,8 @@ var displayWordData = function (wordObjArr) {
                 // Get the modal
                 var modal = document.getElementById("myModal");
 
-                // Use 'getElementById' to get the ID of where the Img will be displayed
-                var picBodyEl = document.getElementById('img-body');
+                // // Use 'getElementById' to get the ID of where the Img will be displayed
+                // var picBodyEl = document.getElementById('img-body');
 
                 // Use 'getElementById' to get the ID of where the photographer name will be displayed
                 var photographerEl = document.getElementById("ph-body");
@@ -424,8 +424,8 @@ var displayWordData = function (wordObjArr) {
 
                 // Get the button that opens the modal
                 var imgBtn = document.createElement('a')//addEventListener('click', onclick);
-                imgBtn.setAttribute('class', 'btn-floating waves-effect waves-light red disabled')
-                imgBtn.innerHTML = '<span><img id="info-icon" src="assets/iconfinder_Information_Circle_4781829.png"></span>'
+                imgBtn.setAttribute('class', 'btn-floating waves-effect waves-light img')
+                imgBtn.innerHTML = '<span><img id="img-icon" src="assets/iconfinder_pexels_photo_free_5340265.png"></span>'
 
                 // Get the <span> element that closes the modal
                 var span = document.getElementsByClassName("close")[0];
@@ -474,23 +474,61 @@ function myFunction() {
         });
 }
 
+// function searchFunction() {
+//     console.log("test")
+//     var srchTerm = document.querySelector('#srchTerm').value;
+//     fetch(
+//         'https://api.giphy.com/v1/gifs/search?q=' +
+//         srchTerm +
+//         '&api_key=HvaacROi9w5oQCDYHSIk42eiDSIXH3FN&limit=1'
+//     )
+//         .then(function (response) {
+//             return response.json();
+//         })
+//         .then(function (response) {
+//             console.log(response.data[0]);
+//             var responseContEl = document.querySelector('#response-cont');
+//             responseContEl.innerHTML = '';
+//             var gifVideo = document.createElement('img');
+//             gifVideo.setAttribute('src', response.data[0].images.fixed_height.url);
+//             responseContEl.appendChild(gifVideo);
+//         });
+
+var API_KEY = '18755179-1cec5558437abfcfe27155a57';
 function searchFunction() {
     console.log("test")
     var srchTerm = document.querySelector('#srchTerm').value;
+    var URL = 'https://pixabay.com/api/?key='
+        + API_KEY
+        + '&q='
+        + srchTerm;
+
     fetch(
-        'https://api.giphy.com/v1/gifs/search?q=' +
-        srchTerm +
-        '&api_key=HvaacROi9w5oQCDYHSIk42eiDSIXH3FN&limit=1'
+        // 'https://pixabay.com/api/?key='
+        // + API_KEY
+        // + '&q='
+        // + srchTerm
+        URL
     )
         .then(function (response) {
             return response.json();
+
         })
-        .then(function (response) {
-            console.log(response.data[0]);
-            var responseContEl = document.querySelector('#response-cont');
-            responseContEl.innerHTML = '';
-            var gifVideo = document.createElement('img');
-            gifVideo.setAttribute('src', response.data[0].images.fixed_height.url);
-            responseContEl.appendChild(gifVideo);
+        .then(function (data) {
+            console.log(data);
         });
+
 }
+    //             var responseContEl = document.querySelector('#response-cont');
+    //             responseContEl.innerHTML = '';
+    //             var gifVideo = document.createElement('img');
+    //             gifVideo.setAttribute('src', response.data[0].images.fixed_height.url);
+    //             responseContEl.appendChild(gifVideo);
+    //         });
+    // }
+
+
+
+
+// API_KEY = '18755179-1cec5558437abfcfe27155a57';
+
