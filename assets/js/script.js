@@ -5,6 +5,7 @@ var twoLetterBtnEl = document.getElementById('twoLetterBtn');
 var threeLetterBtnEl = document.getElementById('threeLetterBtn');
 var randomLetterBtnEl = document.getElementById('randomLetterBtn');
 var highScoreBtnEl = document.getElementById('highScoreBtn');
+var audioEl = document.createElement('audio');
 var letterContainerEl = document.getElementById('possible-letters');
 var searchContentEl = document.getElementById('search-content');
 var resultsContainerEl = document.getElementById('results-container');
@@ -432,21 +433,15 @@ var displayWordData = function (wordObjArr) {
                 console.log(subdir)
                 var audioLink = 'https://media.merriam-webster.com/audio/prons/en/us/ogg/' + subdir + '/' + wordData.audio + '.ogg';
 
-                // create 'audio' element for word playback 
-                var audioEl = document.createElement('audio');
                 // the 'audio' element will use the first direction it understands
                 audioEl.innerHTML = "<source src=" + audioLink + " type='audio/ogg'>"
-                                    "<p>Your audio does not support HTML5 audio.</p>";
+                "<p>Your audio does not support HTML5 audio.</p>";
                 var audioBtn = document.createElement('button');
                 audioBtn.setAttribute('type', 'button');
-                audioBtn.innerHTML = "<span><img class='btn-floating waves-effect waves-light' id='audio-icon' src='assets/iconfinder_speaker-high-sound-volume-voice_32x32.png'></span></a>"
+                audioBtn.innerHTML = "<span><img class='btn-floating waves-effect waves-light' id='audio-icon' src='assets/iconfinder_speaker-high-sound-volume-voice_32x32.png'></span>"
                 audioBtn.addEventListener('click', playAudio);
                 audioBtn.setAttribute('onClick', 'playAudio()');
                 resultBody.append(audioBtn);
-
-                function playAudio() {
-                    audioEl.play();
-                }
 
                 // Get the modal
                 var modal = document.getElementById("myModal");
@@ -488,6 +483,10 @@ var displayWordData = function (wordObjArr) {
         }
     }, 1500);
 };
+
+function playAudio() {
+    audioEl.play();
+}
 
 function myFunction() {
     console.log("test2")
