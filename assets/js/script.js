@@ -513,15 +513,16 @@ function searchFunction() {
         .then(function (response) {
             return response.json();
 
+
         })
         .then(function (response) {
             console.log(response);
 
             var responseContEl = document.querySelector('#response-cont');
             responseContEl.innerHTML = '';
-            var picabayVideo = document.createElement('img');
-            picabayVideo.setAttribute('src', response.hits[0].videos.medium.url);
-            responseContEl.appendChild(picabayVideo);
+            var pixabayVideo = document.createElement('video');
+            pixabayVideo.setAttribute('src.#video.mp4', response.hits[0].videos.tiny.url);
+            responseContEl.appendChild(pixabayVideo);
         })
 }
 
@@ -529,4 +530,8 @@ function searchFunction() {
 
 
 // API_KEY = '18755179-1cec5558437abfcfe27155a57';
+
+///unsplash: acess key: "epv9i5i5P0XQj0_SD3Ez8WxX88fh9d8ts18CgJKJ0Uw"; 
+//secret key: "u9UGbWywxfI-tsOZU-Lvfd-qebY5WDF47_8Nhqc2Zms" 
+//50 requests per hour //application status 5-10 days
 
