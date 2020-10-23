@@ -1,4 +1,4 @@
-# To-Be-Named PROJECT
+# Scrabble Word Generator
 <!-- ### To stay on track:
 Project ideation
 Project decided
@@ -97,7 +97,7 @@ Your presentation should follow the Project Presentation Template (Links to an e
 There are no major disparities in the number of GitHub contributions between group member -->
 
 ## DESCRIPTION
-This application is an educational tool geared toward Scrabble-players and language enthusiasts. Its drag-and-drop features allow you to build a set of 2-7 letters and then generate a list of words. If you click on a word in the results list, the definition will be displayed.
+This application is an educational tool geared toward Scrabble-players and language enthusiasts. This application can be used by dragging and dropping letters into a box and choosing whether to generate a 2 or 3 letter word. The user is then presented with a list of generated words, each clickable in order to view the definition of that word. Along with the definition, the user is given the options of having an audio file play with the word, and/or to view images related to the generated word. There is also a "random" word button which will give the user a random word with emphasis on words beginning with higher point letters. This application uses APIs from Merriam Webster and Pexel.
 
 ## USER STORY
 AS A person who would like to be a better Scrabble player
@@ -125,4 +125,8 @@ https://jgrossh2.github.io/Scrabble-word-generator/
 
 
 ### CONTRIBUTION
-Created by: Sara Krizan
+Created by: 
+* Sara Krizan smkrizan@gmail.com
+* Ricky Pajewski richard.pajewski@gmail.com
+* Joanna Grosshans joannagrosshans2@gmail.com
+* Maryna Pryadka pryadkamaryna@gmail.com
