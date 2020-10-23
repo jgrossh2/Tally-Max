@@ -474,55 +474,29 @@ function myFunction() {
         });
 }
 
-// function searchFunction() {
-//     console.log("test")
-//     var srchTerm = document.querySelector('#srchTerm').value;
-//     fetch(
-//         'https://api.giphy.com/v1/gifs/search?q=' +
-//         srchTerm +
-//         '&api_key=HvaacROi9w5oQCDYHSIk42eiDSIXH3FN&limit=1'
-//     )
-//         .then(function (response) {
-//             return response.json();
-//         })
-//         .then(function (response) {
-//             console.log(response.data[0]);
-//             var responseContEl = document.querySelector('#response-cont');
-//             responseContEl.innerHTML = '';
-//             var gifVideo = document.createElement('img');
-//             gifVideo.setAttribute('src', response.data[0].images.fixed_height.url);
-//             responseContEl.appendChild(gifVideo);
-//         });
 
 var API_KEY = '18755179-1cec5558437abfcfe27155a57';
 function searchFunction() {
     console.log("test")
     var srchTerm = document.querySelector('#srchTerm').value;
-    var URL = 'https://pixabay.com/api/videos/?key='
+    var URL = 'https://pixabay.com/api/?key='
         + API_KEY
         + '&q='
         + srchTerm;
 
     fetch(
-        // 'https://pixabay.com/api/videos/?key='
-        // + API_KEY
-        // + '&q='
-        // + srchTerm
         URL
     )
         .then(function (response) {
             return response.json();
-
-
         })
         .then(function (response) {
             console.log(response);
-
             var responseContEl = document.querySelector('#response-cont');
             responseContEl.innerHTML = '';
-            var pixabayVideo = document.createElement('video');
-            pixabayVideo.setAttribute('src.#video.mp4', response.hits[0].videos.tiny.url);
-            responseContEl.appendChild(pixabayVideo);
+            var pixabayImg = document.createElement('img');
+            pixabayImg.setAttribute('src', response.hits[0].webformatURL);
+            responseContEl.appendChild(pixabayImg);
         })
 }
 
