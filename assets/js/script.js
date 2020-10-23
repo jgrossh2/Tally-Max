@@ -268,14 +268,14 @@ var displayLetters = function (letters, results) {
 // function fetches definition data for each in an array of words and returns subset of data packaged as an object
 var getDefData = function (results) {
 
+    // empty array to capture object-response resulting from each word in the results array
     var wordObjArr = [];
 
     // generate API data for each word
     for (var i = 0; i < results.length; i++) {
         // api variables
         let word = results[i];
-        var images = results[i];
-        var pexelURL = `https://api.pexels.com/v1/search?query=${images}&per_page=1`;
+        var pexelURL = `https://api.pexels.com/v1/search?query=${word}&per_page=1`;
         var API_key = "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
 
         // fetch both APIs
@@ -295,41 +295,62 @@ var getDefData = function (results) {
             return Promise.all(responses.map(function (response) {
                 return response.json();
             }))
-                // word definition
+                // word object definition
                 .then(function (response) {
+                    console.log(response)
                     var wordDef = response[0][0];
                     var imgSrc = response[1];
 
-                    if (!wordDef.hwi.prs) {
-                        return;
+                    // properties that are inconsistently available within response data
+                    var audio;
+                    if (wordDef.hwi.prs) {
+                        audio = wordDef.hwi.prs[0].sound.audio
                     } else {
-                        if (imgSrc.photos.length > 0) {
-                            var wordObj = {
-                                word: wordDef.hwi.hw,
-                                class: wordDef.fl,
-                                definition: wordDef.shortdef,
-                                audio: wordDef.hwi.prs[0].sound.audio,
-                                offensive: wordDef.meta.offensive,
-                                image_s: imgSrc.photos[0].src.small,
-                                image_m: imgSrc.photos[0].src.medium,
-                                image_l: imgSrc.photos[0].src.large,
-                                photographer: imgSrc.photos[0].photographer,
-                                photog_url: imgSrc.photos[0].photographer_url,
-                            }
-                        } else {
-                            var wordObj = {
-                                word: wordDef.hwi.hw,
-                                class: wordDef.fl,
-                                definition: wordDef.shortdef,
-                                audio: wordDef.hwi.prs[0].sound.audio,
-                                offensive: wordDef.meta.offensive,
-                                image_s: noImage,
-                                image_m: noImage,
-                                image_l: noImage,
-                                photographer: noImage,
-                                photog_url: noImage,
-                            }
-                        }
+                        audio = console.log("Sorry, there is no audio available for " + word) // to be added as message on page
+                    }
+                    var image_s;
+                    if (imgSrc.photos[0]) {
+                        image_s = imgSrc.photos[0].src.small
+                    } else {
+                        image_s = console.log("Sorry, there is no image available for " + word) // to be added as message on page
+                    }
+                    var image_m;
+                    if (imgSrc.photos[0]) {
+                        image_m = imgSrc.photos[0].src.medium
+                    } else {
+                        image_m = ''
+                    }
+                    var image_l;
+                    if (imgSrc.photos[0]) {
+                        image_l = imgSrc.photos[0].src.large
+                    } else {
+                        image_l = ''
+                    }
+                    var photographer;
+                    if (imgSrc.photos[0]) {
+                        photographer = imgSrc.photos[0].photographer
+                    } else {
+                        photographer = ''
+                    }
+                    var photog_url;
+                    if (imgSrc.photos[0]) {
+                        photog_url = imgSrc.photos[0].photographer_url
+                    } else {
+                        photog_url = ''
+                    }
+
+                    // collating properties from both api responses into single object
+                    var wordObj = {
+                        word: wordDef.hwi.hw,
+                        class: wordDef.fl,
+                        definition: wordDef.shortdef,
+                        audio: audio,
+                        offensive: wordDef.meta.offensive,
+                        image_s: image_s,
+                        image_m: image_m,
+                        image_l: image_l,
+                        photographer: photographer,
+                        photog_url: photog_url,
                     }
                     wordObjArr.push(wordObj);
                     return wordObj;
@@ -371,12 +392,17 @@ var displayWordData = function (wordObjArr) {
                 for (var j = 0; j < wordData.definition.length; j++) {
                     n = j + 1
                     var resultDef = document.createElement('p');
-                    resultDef.textContent = n + ') ' + wordData.definition[i];
+                    resultDef.textContent = n + ') ' + wordData.definition[j];
                     resultBody.append(resultDef);
                 }
 
                 // display audio-button within result-container body: takes 'audio' property from wordObj[i] and creates link for audio playback; conditions outlined in the Merriam-Webster api documentation are used to determine the 'subdir' value, which is a component of the audio-link href
-                var aud = wordData.audio.split('', 3)
+                var aud;
+                if (wordData.audio) {
+                    aud = (wordData.audio.split('', 3))
+                } else {
+                    aud = ''
+                }
                 // this regular expression refers to any number (\d) or punctuation symbol (\W)
                 var regex = RegExp('[\\d\\W]')
                 var subdir = ''
@@ -436,7 +462,7 @@ var displayWordData = function (wordObjArr) {
                 resultHeader.innerHTML = "<p>This word did not make it past our sensors.</p>"
             }
         }
-    }, 500);
+    }, 1000);
 };
 
 function myFunction() {
