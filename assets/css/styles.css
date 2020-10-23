@@ -25,15 +25,19 @@ div.row.header {
     margin: 0;
 }
 
-h6.headline {
+h6.headline.center-align {
     font-family: var(--secondary);
     font-size: 1.5rem;
-    vertical-align: baseline;
+    margin: 170px auto auto auto
 }
 
 main {
     font-family: var(--secondary);
     color: var(--dark);
+}
+
+div#tmax {
+    font-size: 3rem;
 }
 
 h1.m {
@@ -384,6 +388,11 @@ a#mwtext:hover {
 
 /* MEDIA QUERY FOR TABLETS */
 @media screen and (max-width: 768px) {
+    
+    h6.headline.center-align {
+        margin: 150px auto 0 auto;
+    }
+
     .tiles {
         min-height: 60px;
         min-width: 60px;
@@ -399,6 +408,11 @@ a#mwtext:hover {
 
 /* MEDIA QUERY FOR MOBILE PHONES */
 @media screen and (max-width: 600px) {
+    
+    h6.headline.center-align {
+        margin: 10px auto;
+    }
+
     .tiles {
         min-height: 47px;
         min-width: 47px;
@@ -415,6 +429,12 @@ a#mwtext:hover {
 
 /* MEDIA QUERY FOR SMALL PHONES */
 @media screen and (max-width: 360px) {
+   
+    h6.headline.center-align {
+        margin: 5px;
+        font-size: 1.3rem;
+    }
+
     .tiles {
         min-height: 27px;
         min-width: 27px;
