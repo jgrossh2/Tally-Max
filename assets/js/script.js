@@ -415,18 +415,25 @@ var displayWordData = function (wordObjArr) {
                 // Get the modal
                 var modal = document.getElementById("myModal");
 
-                // // Use 'getElementById' to get the ID of where the Img will be displayed
-                // var picBodyEl = document.getElementById('img-body');
-
-                // Use 'getElementById' to get the ID of where the photographer name will be displayed
-                var photographerEl = document.getElementById("ph-body");
-                photographerEl.setAttribute('src', wordData.photographer);
-
                 // Get the button that opens the modal
                 var imgBtn = document.createElement('a')//addEventListener('click', onclick);
                 imgBtn.setAttribute('class', 'btn-floating waves-effect waves-light img')
                 imgBtn.innerHTML = '<span><img id="img-icon" src="assets/iconfinder_pexels_photo_free_5340265.png"></span>'
 
+                // // Use 'getElementById' to get the ID of where the Img will be displayed
+                var picBodyEl = document.getElementById('img-body');
+                var pexelImg = document.createElement('img');
+                pexelImg.setAttribute('src', wordData.definition.image_s)
+
+                // Use 'getElementById' to get the ID of where the photographer name will be displayed
+                var photographerEl = document.getElementById("ph-body");
+                photographerEl.setAttribute('src', wordData.definition.photographer);
+                picBodyEl.append(pexelImg);
+
+                //Creat span to display photographer's name
+                var resultPhtr = document.createElement('span');
+                resultPhtr.textContent = wordData.definition.photographer;//imageSrc[1].photos;//.photographer[i];
+                photographerEl.append(resultPhtr);
                 // Get the <span> element that closes the modal
                 var span = document.getElementsByClassName("close")[0];
                 // When the user clicks the button, open the modal 
@@ -445,6 +452,7 @@ var displayWordData = function (wordObjArr) {
                 resultBody.append(imgBtn);
                 resultLI.append(resultBody);
                 resultsContainerEl.append(resultLI);
+
             }
             else {
                 resultHeader.innerHTML = "<p>This word did not make it past our sensors.</p>"
@@ -473,7 +481,6 @@ function myFunction() {
             responseContainerEl.appendChild(gifImg);
         });
 }
-
 
 var API_KEY = '18755179-1cec5558437abfcfe27155a57';
 function searchFunction() {
