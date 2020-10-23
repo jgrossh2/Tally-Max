@@ -311,7 +311,7 @@ var getDefData = function (results) {
             }))
                 // word object definition
                 .then(function (response) {
-                    console.log(response)
+                    // console.log(response)
                     var wordDef = response[0][0];
                     var imgSrc = response[1];
 
@@ -386,7 +386,7 @@ var displayWordData = function (wordObjArr) {
             var wordData = wordObjArr[i]
             console.log(wordData)
             // check to see whether term is offensive
-            if (!wordObjArr[i].offensive) {
+            if (!wordData.offensive) {
                 // create DOM elements
                 var resultLI = document.createElement('li');
                 resultLI.setAttribute('class', 'col-12');
@@ -429,6 +429,7 @@ var displayWordData = function (wordObjArr) {
                 } else {
                     subdir = aud[0]
                 }
+                console.log(subdir)
                 var audioLink = 'https://media.merriam-webster.com/audio/prons/en/us/ogg/' + subdir + '/' + wordData.audio + '.ogg';
 
                 // create 'audio' element for word playback 
@@ -437,17 +438,15 @@ var displayWordData = function (wordObjArr) {
                 audioEl.innerHTML = "<source src=" + audioLink + " type='audio/ogg'>"
                                     "<p>Your audio does not support HTML5 audio.</p>";
                 var audioBtn = document.createElement('button');
-                audioBtn.setAttribute('onClick', 'playAudio()');
                 audioBtn.setAttribute('type', 'button');
-                resultBody.append(audioBtn);
-                // 
                 audioBtn.innerHTML = "<span><img class='btn-floating waves-effect waves-light' id='audio-icon' src='assets/iconfinder_speaker-high-sound-volume-voice_32x32.png'></span></a>"
                 audioBtn.addEventListener('click', playAudio);
+                audioBtn.setAttribute('onClick', 'playAudio()');
+                resultBody.append(audioBtn);
 
                 function playAudio() {
                     audioEl.play();
                 }
-
 
                 // Get the modal
                 var modal = document.getElementById("myModal");
@@ -487,7 +486,7 @@ var displayWordData = function (wordObjArr) {
                 resultHeader.innerHTML = "<p>This word did not make it past our sensors.</p>"
             }
         }
-    }, 1000);
+    }, 1500);
 };
 
 function myFunction() {
