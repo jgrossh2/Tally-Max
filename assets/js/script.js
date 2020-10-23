@@ -4,7 +4,7 @@
 var twoLetterBtnEl = document.getElementById('twoLetterBtn');
 var threeLetterBtnEl = document.getElementById('threeLetterBtn');
 var randomLetterBtnEl = document.getElementById('randomLetterBtn');
-var highScoreBtnEl = document.getElementById('highScoreBtn');
+var resetBtnEl = document.getElementById('resetBtn');
 var letterContainerEl = document.getElementById('possible-letters');
 var searchContentEl = document.getElementById('search-content');
 var resultsContainerEl = document.getElementById('results-container');
@@ -15,19 +15,14 @@ var aEl = document.getElementById('a');
 // global page variables
 var wordLength = 0;
 var dropLetters = [];
-// var letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 var letterEl = document.querySelector(".letter");
 var spaceEl = document.querySelector(".space");
-// var oldTile = [];
-// var dragged = [];
 
-// get user input area
-// spaceEl.textContent = "Drag Letters Here! "
-
-// drag letters
-var dragLetters = function (event) {
-    event.preventDefault();
-    console.log("works")
+// set letters
+var setLetters = function () {
+    window.location.href = "index.html";
+    spaceEl.innerHTML = " ";
+    dropLetters = [];
 }
 //row 1 and dropzone
 $(function () {
@@ -49,6 +44,28 @@ $(function () {
             $(".dropped").removeClass("dropZone");
         },
         remove: function (event, ui) {
+//<<<<<<< feature/keyboard
+        //     $(this).sortable('disable');
+        //     ui.item.clone().appendTo(".sortable4");
+        //     $(this).sortable('cancel');
+        //     console.log(this);
+        //    var done = $(ui.item).clone().attr('id');
+        //    console.log(done);
+        //    var oldTile = document.getElementById(done);
+        //    $(oldTile).addClass("gray");
+        //    $(oldTile).addClass("disabled", true);
+        //    resetBtnEl.addEventListener('click', function (oldTile){
+        //     $(oldTile).removeClass("gray");
+        //    });
+        //    $(oldTile).sortable(); 
+        //    console.log("yes");
+        //    $(oldTile).sortable('instance');
+        //    console.log("no");
+        //    $(oldTile).sortable("disable");
+        //    console.log("works");
+        //    $(oldTile).sortable('enable');
+        //    console.log(oldTile);
+//>>>>>>>develop + merge from Joanna(keeping both just in case)
             // $(this).sortable('disable');
             ui.item.clone().appendTo(".sortable4");
             $(this).sortable('cancel');
@@ -63,6 +80,7 @@ $(function () {
             //    $(oldTile).sortable("disable");
             //    $(oldTile).sortable('enable');
             //    console.log(oldTile);
+//>>>>>>> develop end
         },
         over: function (event, ui) {
         },
@@ -92,12 +110,12 @@ $(function () {
             $(".dropped").removeClass("dropZone");
         },
         remove: function (event, ui) {
-            ui.item.clone().appendTo(".sortable4");
-            $(this).sortable('cancel');
-            var done = $(ui.item).clone().attr('id');
-            // console.log(done);
-            var oldTile = document.getElementById(done);
-            $(oldTile).addClass("gray");
+            // ui.item.clone().appendTo(".sortable4");
+            // $(this).sortable('cancel');
+            // var done = $(ui.item).clone().attr('id');
+            // // console.log(done);
+            // var oldTile = document.getElementById(done);
+            // $(oldTile).addClass("gray");
             // $(oldTile).sortable();
             // var check = $(oldTile).sortable('instance');
             // console.log(check);
@@ -127,13 +145,14 @@ $(function () {
             $(".dropped").removeClass("dropZone");
         },
         remove: function (event, ui) {
-            ui.item.clone().appendTo(".sortable4");
-            $(this).sortable('cancel');
-            var done = $(ui.item).clone().attr('id');
-            // console.log(done);
-            var oldTile = document.getElementById(done);
-            $(oldTile).addClass("gray");
+            // ui.item.clone().appendTo(".sortable4");
+            // $(this).sortable('cancel');
+            // var done = $(ui.item).clone().attr('id');
+            // // console.log(done);
+            // var oldTile = document.getElementById(done);
+            // $(oldTile).addClass("gray");
             // $(oldTile).sortable();
+            // console.log("yes");
             // var check = $(oldTile).sortable('instance');
             // console.log(check);
             // $(oldTile).sortable('disable');
@@ -174,7 +193,6 @@ $(".dropped").droppable({
     update: function (event) {
     }
 });
-letterEl.addEventListener("click", dragLetters)
 
 // event listeners to gather user input and start generator function
 twoLetterBtnEl.addEventListener('click', function () {
@@ -227,7 +245,11 @@ randomLetterBtnEl.addEventListener('click', function () {
     // call word generator
     genWordList(wordLength, letters);
 });
-
+resetBtnEl.addEventListener('click', function () {
+    // reset serch containers & arrays
+    setLetters();
+    
+});
 // generate all possible combinations of inputted letters
 var genWordList = function (wordLength, letters) {
     // reset form container

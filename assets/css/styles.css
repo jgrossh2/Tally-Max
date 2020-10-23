@@ -115,9 +115,10 @@ a#mwtext:hover {
     color: var(--red);
 }
 
-#container {
-    display: flex;
-    flex-wrap: wrap;
+.container {
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+    width: 100%;
 }
 
 .space {
@@ -128,27 +129,40 @@ a#mwtext:hover {
 
 #keyboard {
     margin-left: 0;
-    padding: 20px 20px 0 20px;
+    padding: 15px;
     list-style: none;
-    width: 100%;
+    /* width: 100%; */
 }
 
-.tiles {
+.tiles { 
     float: left;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     padding: 0 0.75rem;
+    min-height: 130px;
+    margin: 0 5px 0 5px;
+    min-width: 130px;
+} 
+.dropped {
+    border: dotted 3px var(--dark);
     height: 130px;
-    width: 40px;
+    width: 100%;
+}
+.drop {
+    border: none;
+}
+.todo {
+    font-size: 24px;
+    font-weight: bold;
 }
 .dropZone {
     background: lightgray;
 }
 #a {
-    background-image: url("images/A.svg");
+    background-image: url("./assets/images/A.svg");
     background-size: cover;
-}
+} 
 #b {
     background-image: url("images/B.svg");
     background-size: cover;
@@ -156,7 +170,7 @@ a#mwtext:hover {
 #c {
     background-image: url("images/C.svg");
     background-size: cover;
-}
+} 
 #d {
     background-image: url("images/D.svg");
     background-size: cover;
@@ -256,18 +270,6 @@ a#mwtext:hover {
 .gray {
     filter: grayscale(100%);
 }
-.dropped {
-    border: dotted 3px var(--dark);
-    height: 120px;
-}
-.drop {
-    border: none;
-}
-.todo {
-    margin: auto;
-    font-size: 24px;
-    font-weight: bold;
-}
 
 /* The Modal (background) */
 .modal {
@@ -341,10 +343,11 @@ a#mwtext:hover {
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */
 @media screen and (max-width: 980px) {
     .tiles {
-        height: 80px;
+        min-height: 80px;
+        min-width: 80px;
         border-radius: 10px;
-    }
-    .dropped {
+    } 
+    .dropped { 
         height: 80px;
     }
 }
@@ -352,9 +355,10 @@ a#mwtext:hover {
 /* MEDIA QUERY FOR TABLETS */
 @media screen and (max-width: 768px) {
     .tiles {
-        height: 60px;
+        min-height: 60px;
+        min-width: 60px;
         border-radius: 0px;
-    }
+    } 
     .row {
         margin-bottom: 15px;
     }
@@ -366,27 +370,31 @@ a#mwtext:hover {
 /* MEDIA QUERY FOR MOBILE PHONES */
 @media screen and (max-width: 600px) {
     .tiles {
-        height: 45px;
+        min-height: 47px;
+        min-width: 47px;
         border-radius: 0px;
+        margin: 0 5px 0 5px;
     }
     .row {
         margin-bottom: 10px;
     }
     .dropped {
-        height: 45px;
+        height: 47px;
     }
 }
 
 /* MEDIA QUERY FOR SMALL PHONES */
 @media screen and (max-width: 360px) {
     .tiles {
-        height: 25px;
+        min-height: 27px;
+        min-width: 27px;
         border-radius: 0px;
+        margin: 0 7px 0 7px;
     }
     .row {
         margin-bottom: 5px;
     }
     .dropped {
-        height: 25px;
+        height: 27px;
     }
-}
+} 
