@@ -97,10 +97,6 @@ img#mwlogo {
     width: 100px;
 }
 
-img#imgBtn {
-    width: 32px;
-    padding: 4px 0 0 4px;
-}
 
 a#mwtext {
     color: var(--dark);

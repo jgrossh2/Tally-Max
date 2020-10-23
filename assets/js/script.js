@@ -18,11 +18,6 @@ var dropLetters = [];
 // var letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 var letterEl = document.querySelector(".letter");
 var spaceEl = document.querySelector(".space");
-// var oldTile = [];
-// var dragged = [];
-
-// get user input area
-// spaceEl.textContent = "Drag Letters Here! "
 
 // drag letters
 var dragLetters = function (event) {
@@ -53,20 +48,20 @@ $(function () {
             ui.item.clone().appendTo(".sortable4");
             $(this).sortable('cancel');
             // console.log(this);
-           var done = $(ui.item).clone().attr('id');
-           console.log(done);
-           var oldTile = document.getElementById(done);
-           $(oldTile).addClass("gray");
-        //    $(oldTile).sortable(); 
-        //    var check = $(oldTile).sortable('instance');
-        //    console.log(check);
-        //    $(oldTile).sortable("disable");
-        //    $(oldTile).sortable('enable');
-        //    console.log(oldTile);
+            var done = $(ui.item).clone().attr('id');
+            console.log(done);
+            var oldTile = document.getElementById(done);
+            $(oldTile).addClass("gray");
+            //    $(oldTile).sortable(); 
+            //    var check = $(oldTile).sortable('instance');
+            //    console.log(check);
+            //    $(oldTile).sortable("disable");
+            //    $(oldTile).sortable('enable');
+            //    console.log(oldTile);
         },
-        over: function(event, ui) {
+        over: function (event, ui) {
         },
-        out: function(event, ui) {
+        out: function (event, ui) {
         },
     }).disableSelection();
     $(".sortable4").sortable({
@@ -87,10 +82,10 @@ $(function () {
         start: function (event, ui) {
             ui.helper.addClass("dragging");
             $(".dropped").addClass("dropZone");
-            },
+        },
         stop: function (event, ui) {
             $(".dropped").removeClass("dropZone");
-            },
+        },
         remove: function (event, ui) {
             ui.item.clone().appendTo(".sortable4");
             $(this).sortable('cancel');
@@ -137,7 +132,7 @@ $(function () {
             // var check = $(oldTile).sortable('instance');
             // console.log(check);
             // $(oldTile).sortable('disable');
-             
+
         }
     }).disableSelection();
     $(".sortable4").sortable({
@@ -153,25 +148,16 @@ $(".dropped").droppable({
         // console.log(ui);
         // console.log("drop");
         $(".dropped").addClass("dropZone");
-        // $(this).sortable('disable');
-        // var helper = ui.helper.clone(true);
-        // $(".letter").draggable('disable');
-        // finds object and then letter value of that object
         var dragged = ui.draggable[0].dataset.letter;
-        // console.log(dragged);
-        // var droppedDone = $(dragged).attr('id');
-        // console.log(droppedDone);
-        // var dragTile = document.getElementById(droppedDone);
-        // dragTile.sortable('disable');
 
         //add drop letters to array
         dropLetters.push(dragged);
     },
-    over: function(event, ui) {
+    over: function (event, ui) {
     },
-    out: function(event, ui) {
+    out: function (event, ui) {
     },
-    update: function(event) {
+    update: function (event) {
     }
 });
 letterEl.addEventListener("click", dragLetters)
@@ -202,11 +188,11 @@ threeLetterBtnEl.addEventListener('click', function () {
 randomLetterBtnEl.addEventListener('click', function () {
     // sort letters based on value before sending to genWordList
     function sortFunc(a, b) {
-        var priorityLetters = ['z','q','x','j','k','w','y','v','f','h','o','m','c','b','g','d','u','s','l','t','r','n','o','i','a','e'];
-            return priorityLetters.indexOf(a) - priorityLetters.indexOf(b);
+        var priorityLetters = ['z', 'q', 'x', 'j', 'k', 'w', 'y', 'v', 'f', 'h', 'o', 'm', 'c', 'b', 'g', 'd', 'u', 's', 'l', 't', 'r', 'n', 'o', 'i', 'a', 'e'];
+        return priorityLetters.indexOf(a) - priorityLetters.indexOf(b);
     }
     dropLetters.sort(sortFunc);
-    
+
     // get possible letters from form
     var letters = dropLetters.join('');
 
@@ -283,7 +269,7 @@ var displayLetters = function (letters, results) {
 var getDefData = function (results) {
 
     var wordObjArr = [];
-    
+
     // generate API data for each word
     for (var i = 0; i < results.length; i++) {
         // api variables
@@ -309,48 +295,48 @@ var getDefData = function (results) {
             return Promise.all(responses.map(function (response) {
                 return response.json();
             }))
-            // word definition
-            .then(function (response) {
-                var wordDef = response[0][0];
-                var imgSrc = response[1];
-                
-                if (!wordDef.hwi.prs) {
-                    return;
-                } else {
-                    if (imgSrc.photos.length > 0) {
-                        var wordObj = {
-                            word: wordDef.hwi.hw,
-                            class: wordDef.fl,
-                            definition: wordDef.shortdef,
-                            audio: wordDef.hwi.prs[0].sound.audio,
-                            offensive: wordDef.meta.offensive,
-                            image_s: imgSrc.photos[0].src.small,
-                            image_m: imgSrc.photos[0].src.medium,
-                            image_l: imgSrc.photos[0].src.large,
-                            photographer: imgSrc.photos[0].photographer,
-                            photog_url: imgSrc.photos[0].photographer_url,
-                        }
+                // word definition
+                .then(function (response) {
+                    var wordDef = response[0][0];
+                    var imgSrc = response[1];
+
+                    if (!wordDef.hwi.prs) {
+                        return;
                     } else {
-                        var wordObj = {
-                            word: wordDef.hwi.hw,
-                            class: wordDef.fl,
-                            definition: wordDef.shortdef,
-                            audio: wordDef.hwi.prs[0].sound.audio,
-                            offensive: wordDef.meta.offensive,
-                            image_s: noImage,
-                            image_m: noImage,
-                            image_l: noImage,
-                            photographer: noImage,
-                            photog_url: noImage,
+                        if (imgSrc.photos.length > 0) {
+                            var wordObj = {
+                                word: wordDef.hwi.hw,
+                                class: wordDef.fl,
+                                definition: wordDef.shortdef,
+                                audio: wordDef.hwi.prs[0].sound.audio,
+                                offensive: wordDef.meta.offensive,
+                                image_s: imgSrc.photos[0].src.small,
+                                image_m: imgSrc.photos[0].src.medium,
+                                image_l: imgSrc.photos[0].src.large,
+                                photographer: imgSrc.photos[0].photographer,
+                                photog_url: imgSrc.photos[0].photographer_url,
+                            }
+                        } else {
+                            var wordObj = {
+                                word: wordDef.hwi.hw,
+                                class: wordDef.fl,
+                                definition: wordDef.shortdef,
+                                audio: wordDef.hwi.prs[0].sound.audio,
+                                offensive: wordDef.meta.offensive,
+                                image_s: noImage,
+                                image_m: noImage,
+                                image_l: noImage,
+                                photographer: noImage,
+                                photog_url: noImage,
+                            }
                         }
                     }
-                }
-                wordObjArr.push(wordObj);
-                return wordObj;
-            })
-            .catch((error) => {
-                console.error('Error: ', error);
-            })
+                    wordObjArr.push(wordObj);
+                    return wordObj;
+                })
+                .catch((error) => {
+                    console.error('Error: ', error);
+                })
         });
     };
     displayWordData(wordObjArr);
@@ -360,7 +346,7 @@ var getDefData = function (results) {
 var displayWordData = function (wordObjArr) {
 
     setTimeout(function tick() {
-    // loop through each object generated from the word-results array
+        // loop through each object generated from the word-results array
         for (var i = 0; i < wordObjArr.length; i++) {
             var wordData = wordObjArr[i]
             console.log(wordData)
@@ -410,7 +396,7 @@ var displayWordData = function (wordObjArr) {
                 audioBtn.setAttribute('class', 'btn-floating waves-effect waves-light')
                 audioBtn.setAttribute('href', audioLink);
                 audioBtn.innerHTML = '<span><img id="audio-icon" src="assets/iconfinder_speaker-high-sound-volume-voice_3643734.png"></span>'
-                resultBody.append(audioBtn);           
+                resultBody.append(audioBtn);
 
                 // Get the modal
                 var modal = document.getElementById("myModal");
@@ -424,8 +410,8 @@ var displayWordData = function (wordObjArr) {
 
                 // Get the button that opens the modal
                 var imgBtn = document.createElement('a')//addEventListener('click', onclick);
-                imgBtn.setAttribute('class', 'btn-floating waves-effect waves-light red disabled')
-                imgBtn.innerHTML = '<span><img id="info-icon" src="assets/iconfinder_Information_Circle_4781829.png"></span>'
+                imgBtn.setAttribute('class', 'btn-floating waves-effect waves-light img')
+                imgBtn.innerHTML = '<span><img id="img-icon" src="assets/iconfinder_pexels_photo_free_5340265.png"></span>'
 
                 // Get the <span> element that closes the modal
                 var span = document.getElementsByClassName("close")[0];
