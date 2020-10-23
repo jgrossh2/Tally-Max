@@ -290,7 +290,7 @@ var getDefData = function (results) {
         let word = results[i];
         var images = results[i];
         var pexelURL = `https://api.pexels.com/v1/search?query=${images}&per_page=1`;
-        var API_key = "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
+        var API_key = "563492ad6f91700001000001d01c380d928e472983ed037be8073298";//"563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
 
         // fetch both APIs
         var apiUrls = [
@@ -498,7 +498,7 @@ var API_KEY = '18755179-1cec5558437abfcfe27155a57';
 function searchFunction() {
     console.log("test")
     var srchTerm = document.querySelector('#srchTerm').value;
-    var URL = 'https://pixabay.com/api/?key='
+    var URL = 'https://pixabay.com/api/videos/?key='
         + API_KEY
         + '&q='
         + srchTerm;
@@ -520,10 +520,8 @@ function searchFunction() {
             var responseContEl = document.querySelector('#response-cont');
             responseContEl.innerHTML = '';
             var picabayVideo = document.createElement('img');
-            picabayVideo.setAttribute('src', response.hits[0].userImageURL);
+            picabayVideo.setAttribute('src', response.hits[0].videos.medium.url);
             responseContEl.appendChild(picabayVideo);
-
-
         })
 }
 
