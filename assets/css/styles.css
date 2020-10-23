@@ -136,26 +136,19 @@ a#mwtext:hover {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     padding: 0 0.75rem;
-    height: 105px;
+    min-height: 130px;
     margin: 0 5px 0 5px;
-    /* width: 100%; */
+    min-width: 130px;
 } 
-/* img {
-    height: 55px;
-    border: 0;
-    margin: 0px;
-    padding: 0px
-} */
 .dropped {
     border: dotted 3px var(--dark);
-    height: 105px;
+    height: 130px;
     width: 100%;
 }
 .drop {
     border: none;
 }
 .todo {
- /* margin: auto; */
     font-size: 24px;
     font-weight: bold;
 }
@@ -346,12 +339,10 @@ a#mwtext:hover {
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */
 @media screen and (max-width: 980px) {
     .tiles {
-        height: 80px;
+        min-height: 80px;
+        min-width: 80px;
         border-radius: 10px;
     } 
-    /* img {
-        margin: 30px;
-    } */
     .dropped { 
         height: 80px;
     }
@@ -360,12 +351,10 @@ a#mwtext:hover {
 /* MEDIA QUERY FOR TABLETS */
 @media screen and (max-width: 768px) {
     .tiles {
-        height: 60px;
+        min-height: 60px;
+        min-width: 60px;
         border-radius: 0px;
     } 
-    /* img {
-        margin: 30px;
-    } */
     .row {
         margin-bottom: 15px;
     }
@@ -377,13 +366,11 @@ a#mwtext:hover {
 /* MEDIA QUERY FOR MOBILE PHONES */
 @media screen and (max-width: 600px) {
     .tiles {
-        height: 47px;
+        min-height: 47px;
+        min-width: 47px;
         border-radius: 0px;
         margin: 0 5px 0 5px;
     }
-    /* img {
-        margin: 30px;
-    } */
     .row {
         margin-bottom: 10px;
     }
@@ -395,7 +382,8 @@ a#mwtext:hover {
 /* MEDIA QUERY FOR SMALL PHONES */
 @media screen and (max-width: 360px) {
     .tiles {
-        height: 27px;
+        min-height: 27px;
+        min-width: 27px;
         border-radius: 0px;
         margin: 0 7px 0 7px;
     }
@@ -405,7 +393,4 @@ a#mwtext:hover {
     .dropped {
         height: 27px;
     }
-    /* img {
-        margin: 30px;
-    } */
 } 

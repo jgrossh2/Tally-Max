@@ -15,7 +15,6 @@ var aEl = document.getElementById('a');
 // global page variables
 var wordLength = 0;
 var dropLetters = [];
-// var letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 var letterEl = document.querySelector(".letter");
 var spaceEl = document.querySelector(".space");
 
@@ -24,7 +23,6 @@ var setLetters = function () {
     window.location.href = "index.html";
     spaceEl.innerHTML = " ";
     dropLetters = [];
-    console.log("works")
 }
 //row 1 and dropzone
 $(function () {
@@ -178,7 +176,6 @@ $(".dropped").droppable({
     update: function(event) {
     }
 });
-// letterEl.addEventListener("click", dragLetters)
 
 // event listeners to gather user input and start generator function
 twoLetterBtnEl.addEventListener('click', function () {
