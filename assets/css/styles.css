@@ -60,6 +60,7 @@ li.col {
     background-color: var(--lblue);
     color: white;
     font-weight: bold;
+    letter-spacing: 1px;
 }
 
 .collapsible-header.active:hover {
@@ -68,6 +69,10 @@ li.col {
 
 div.collapsible-body {
     padding: 10px;
+}
+
+div.collapsible-body p {
+    padding: 5px;
 }
 
 div.col.valign-wrapper {
@@ -106,8 +111,6 @@ button#resetBtn:hover {
 }
 
 img#audio-icon {
-    width: 32px;
-    padding: 4px 0 0 4px;
 }
 
 a.btn-floating.waves-effect.waves-light:hover {
