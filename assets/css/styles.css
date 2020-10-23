@@ -21,6 +21,16 @@ header, footer.page-footer {
     padding: 5px;
 }
 
+div.row.header {
+    margin: 0;
+}
+
+h6.headline {
+    font-family: var(--secondary);
+    font-size: 1.5rem;
+    vertical-align: baseline;
+}
+
 main {
     font-family: var(--secondary);
     color: var(--dark);

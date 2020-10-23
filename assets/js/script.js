@@ -44,24 +44,24 @@ $(function () {
             $(".dropped").removeClass("dropZone");
         },
         remove: function (event, ui) {
-//<<<<<<< feature/keyboard
-        //     $(this).sortable('disable');
-        //     ui.item.clone().appendTo(".sortable4");
-        //     $(this).sortable('cancel');
-        //     console.log(this);
-        //    var done = $(ui.item).clone().attr('id');
-        //    console.log(done);
-        //    var oldTile = document.getElementById(done);
-        //    $(oldTile).addClass("gray");
-        //    $(oldTile).addClass("disabled", true);
-        //    $(oldTile).sortable(); 
-        //    console.log("yes");
-        //    $(oldTile).sortable('instance');
-        //    console.log("no");
-        //    $(oldTile).sortable("disable");
-        //    console.log("works");
-        //    $(oldTile).sortable('enable');
-        //    console.log(oldTile);
+            //<<<<<<< feature/keyboard
+            //     $(this).sortable('disable');
+            //     ui.item.clone().appendTo(".sortable4");
+            //     $(this).sortable('cancel');
+            //     console.log(this);
+            //    var done = $(ui.item).clone().attr('id');
+            //    console.log(done);
+            //    var oldTile = document.getElementById(done);
+            //    $(oldTile).addClass("gray");
+            //    $(oldTile).addClass("disabled", true);
+            //    $(oldTile).sortable(); 
+            //    console.log("yes");
+            //    $(oldTile).sortable('instance');
+            //    console.log("no");
+            //    $(oldTile).sortable("disable");
+            //    console.log("works");
+            //    $(oldTile).sortable('enable');
+            //    console.log(oldTile);
         },
         over: function (event, ui) {
         },
@@ -229,7 +229,7 @@ randomLetterBtnEl.addEventListener('click', function () {
 resetBtnEl.addEventListener('click', function () {
     // reset serch containers & arrays
     setLetters();
-    
+
 });
 // generate all possible combinations of inputted letters
 var genWordList = function (wordLength, letters) {
@@ -314,7 +314,7 @@ var getDefData = function (results) {
             }))
                 // word object definition
                 .then(function (response) {
-                    // console.log(response)
+                    console.log(response)
                     var wordDef = response[0][0];
                     var imgSrc = response[1];
 
@@ -435,36 +435,32 @@ var displayWordData = function (wordObjArr) {
                 }
                 var audioLink = 'https://media.merriam-webster.com/audio/prons/en/us/ogg/' + subdir + '/' + wordData.audio + '.ogg';
 
-                // 
+                // event handler function (assist from LA to develop)
                 var playAudio = function (e) {
+                    // gets unique id of the button being clicked
                     const fileName = e.path[2].dataset.file;
-          
+                    // finds container-element with matching id to connect audio-file
                     const audioEl = document.querySelector(`.${fileName}`);
-          
                     console.dir(audioEl);
+                    
                     audioEl.play();
-                    // const audios = document.querySelectorAll('audio');
-                    // console.log({ audios, i });
-                    // audios[i].play();
-                  };
+                };
 
-                // the 'audio' element will use the first direction it understands
                 var audioEl = document.createElement('audio');
+                // the 'audio' element will use the first direction it understands
                 audioEl.innerHTML = "<source src=" + audioLink + " type='audio/ogg'>"
-                                    "<p>Your audio does not support HTML5 audio.</p>";
+                "<p>Your audio does not support HTML5 audio.</p>";
 
-                // 'aud' variable becomes a unique-id class for this audio element
+                // 'aud' variable becomes unique-id for DOM property,'classlist', using 'add' and 'join' methods
                 audioEl.classList.add(aud.join(''));
+
                 var audioBtn = document.createElement('button');
                 audioBtn.setAttribute('type', 'button');
-
-                // 
+                // adds 'aud' id as an attribute to audio-play button
                 audioBtn.setAttribute('data-file', aud.join(''));
-
                 audioBtn.innerHTML = "<span><img class='btn-floating waves-effect waves-light' id='audio-icon' src='assets/iconfinder_speaker-high-sound-volume-voice_32x32.png'></span>"
                 audioBtn.addEventListener('click', playAudio);
-                // audioBtn.setAttribute('onClick', 'playAudio()');
-                //added to resolve 'closure' issue
+                // append audio elements to container
                 resultBody.append(audioEl);
                 resultBody.append(audioBtn);
 
