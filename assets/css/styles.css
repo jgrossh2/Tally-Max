@@ -52,14 +52,18 @@ li.col {
 }
 
 .collapsible-header:hover {
-    color: var(--red);
-    background-color: var(--grey);
+    color: white;
+    background-color: var(--dblue);
 }
 
 .collapsible-header.active {
     background-color: var(--lblue);
     color: white;
     font-weight: bold;
+}
+
+.collapsible-header.active:hover {
+    color: var(--red);
 }
 
 div.collapsible-body {
@@ -88,6 +92,15 @@ button.waves-effect.searchbtn:hover {
     background-color: var(--red);
 }
 
+button#resetBtn {
+    background-color: var(--red);
+}
+
+button#resetBtn:hover {
+    background-color: var(--lblue);
+    color: var(--red);
+}
+
 .btn-floating.waves-effect.waves-light {
     background-color: var(--red);
 }
@@ -95,6 +108,10 @@ button.waves-effect.searchbtn:hover {
 img#audio-icon {
     width: 32px;
     padding: 4px 0 0 4px;
+}
+
+a.btn-floating.waves-effect.waves-light:hover {
+    background-color: var(--lblue);
 }
 
 img#mwlogo {
