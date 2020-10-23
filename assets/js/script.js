@@ -427,9 +427,6 @@ var displayWordData = function (wordObjArr) {
                 // Get the modal
                 var modal = document.getElementById("myModal");
 
-                // Use 'getElementById' to get the ID of where the Img will be displayed
-                var picBodyEl = document.getElementById('img-body');
-
                 // Use 'getElementById' to get the ID of where the photographer name will be displayed
                 var photographerEl = document.getElementById("ph-body");
                 photographerEl.setAttribute('src', wordData.photographer);
@@ -453,6 +450,25 @@ var displayWordData = function (wordObjArr) {
                         modal.style.display = "none";
                     }
                 }
+                // Use 'getElementById' to get the ID of where the Img will be displayed
+
+                // Create an '<img>' element//might need to create for loop for images 
+                var pexelImg = document.createElement('img');
+                // var i = wordData.imageInfo[0];
+                // pexelImg.setAttribute('src', wordData.imageInfo[0].src.medium); //response.photos[0].src.small);
+                // picBodyEl.append(pexelImg);
+                // //for loop for photographer info(started, not functioning )
+                // for (var i = 0; i < wordData.imageInfo[0].photographer.length; i++) {
+                //     if (wordData.imageInfo[0].photographer === resultHeader) {
+                //         photographerEl.append(resultPhtr);
+                //     } //also add if no image found-404 img-in assets file -results.length = 0(in array)
+
+                //     var resultPhtr = document.createElement('span');
+                //     resultPhtr.textContent = wordData.imageInfo[0].photographer[i];
+                //     photographerEl.append(resultPhtr);
+                var picBodyEl = document.getElementById('img-body');
+
+
 
                 resultBody.append(imgBtn);
                 resultLI.append(resultBody);
