@@ -314,7 +314,7 @@ var getDefData = function (results) {
             }))
                 // word object definition
                 .then(function (response) {
-                    console.log(response)
+                    // console.log(response)
                     var wordDef = response[0][0];
                     var imgSrc = response[1];
 
@@ -383,13 +383,14 @@ var getDefData = function (results) {
 // function takes api object array and parses for display
 var displayWordData = function (wordObjArr) {
 
+    // possibly not the ideal solution for handling errors due to load-time, but the setTimeout is doing the trick
     setTimeout(function tick() {
         // loop through each object generated from the word-results array
         for (var i = 0; i < wordObjArr.length; i++) {
             var wordData = wordObjArr[i]
             console.log(wordData)
             // check to see whether term is offensive
-            if (!wordObjArr[i].offensive) {
+            if (!wordData.offensive) {
                 // create DOM elements
                 var resultLI = document.createElement('li');
                 resultLI.setAttribute('class', 'col-12');
@@ -413,7 +414,7 @@ var displayWordData = function (wordObjArr) {
                     resultBody.append(resultDef);
                 }
 
-                // display audio-button within result-container body: takes 'audio' property from wordObj[i] and creates link for audio playback; conditions outlined in the Merriam-Webster api documentation are used to determine the 'subdir' value, which is a component of the audio-link href
+                // display audio-button to page; takes 'audio' property from data object to create link for audio playback; conditions outlined in the Merriam-Webster api documentation are used to determine the 'subdir' value, which is a component of the audio-link href
                 var aud;
                 if (wordData.audio) {
                     aud = (wordData.audio.split('', 3))
@@ -434,11 +435,37 @@ var displayWordData = function (wordObjArr) {
                 }
                 var audioLink = 'https://media.merriam-webster.com/audio/prons/en/us/ogg/' + subdir + '/' + wordData.audio + '.ogg';
 
-                // create button element to contain sound link
-                var audioBtn = document.createElement('a');
-                audioBtn.setAttribute('class', 'btn-floating waves-effect waves-light')
-                audioBtn.setAttribute('href', audioLink);
-                audioBtn.innerHTML = '<span><img id="audio-icon" src="assets/iconfinder_speaker-high-sound-volume-voice_3643734.png"></span>'
+                // 
+                var playAudio = function (e) {
+                    const fileName = e.path[2].dataset.file;
+          
+                    const audioEl = document.querySelector(`.${fileName}`);
+          
+                    console.dir(audioEl);
+                    audioEl.play();
+                    // const audios = document.querySelectorAll('audio');
+                    // console.log({ audios, i });
+                    // audios[i].play();
+                  };
+
+                // the 'audio' element will use the first direction it understands
+                var audioEl = document.createElement('audio');
+                audioEl.innerHTML = "<source src=" + audioLink + " type='audio/ogg'>"
+                                    "<p>Your audio does not support HTML5 audio.</p>";
+
+                // 'aud' variable becomes a unique-id class for this audio element
+                audioEl.classList.add(aud.join(''));
+                var audioBtn = document.createElement('button');
+                audioBtn.setAttribute('type', 'button');
+
+                // 
+                audioBtn.setAttribute('data-file', aud.join(''));
+
+                audioBtn.innerHTML = "<span><img class='btn-floating waves-effect waves-light' id='audio-icon' src='assets/iconfinder_speaker-high-sound-volume-voice_32x32.png'></span>"
+                audioBtn.addEventListener('click', playAudio);
+                // audioBtn.setAttribute('onClick', 'playAudio()');
+                //added to resolve 'closure' issue
+                resultBody.append(audioEl);
                 resultBody.append(audioBtn);
 
                 // Get the modal
@@ -479,7 +506,7 @@ var displayWordData = function (wordObjArr) {
                 resultHeader.innerHTML = "<p>This word did not make it past our sensors.</p>"
             }
         }
-    }, 1000);
+    }, 1500);
 };
 
 function myFunction() {
