@@ -54,9 +54,6 @@ $(function () {
         //    var oldTile = document.getElementById(done);
         //    $(oldTile).addClass("gray");
         //    $(oldTile).addClass("disabled", true);
-        //    resetBtnEl.addEventListener('click', function (oldTile){
-        //     $(oldTile).removeClass("gray");
-        //    });
         //    $(oldTile).sortable(); 
         //    console.log("yes");
         //    $(oldTile).sortable('instance');
@@ -65,22 +62,6 @@ $(function () {
         //    console.log("works");
         //    $(oldTile).sortable('enable');
         //    console.log(oldTile);
-//>>>>>>>develop + merge from Joanna(keeping both just in case)
-            // $(this).sortable('disable');
-            ui.item.clone().appendTo(".sortable4");
-            $(this).sortable('cancel');
-            // console.log(this);
-            var done = $(ui.item).clone().attr('id');
-            console.log(done);
-            var oldTile = document.getElementById(done);
-            $(oldTile).addClass("gray");
-            //    $(oldTile).sortable(); 
-            //    var check = $(oldTile).sortable('instance');
-            //    console.log(check);
-            //    $(oldTile).sortable("disable");
-            //    $(oldTile).sortable('enable');
-            //    console.log(oldTile);
-//>>>>>>> develop end
         },
         over: function (event, ui) {
         },
