@@ -60,10 +60,15 @@ li.col {
     background-color: var(--lblue);
     color: white;
     font-weight: bold;
+    letter-spacing: 1px;
 }
 
 div.collapsible-body {
     padding: 10px;
+}
+
+div.collapsible-body p {
+    padding: 5px;
 }
 
 div.col.valign-wrapper {
@@ -93,7 +98,6 @@ button.waves-effect.searchbtn:hover {
 }
 
 img#audio-icon {
-    border-style: none;
 }
 
 img#mwlogo {

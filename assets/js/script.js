@@ -5,7 +5,6 @@ var twoLetterBtnEl = document.getElementById('twoLetterBtn');
 var threeLetterBtnEl = document.getElementById('threeLetterBtn');
 var randomLetterBtnEl = document.getElementById('randomLetterBtn');
 var highScoreBtnEl = document.getElementById('highScoreBtn');
-var audioEl = document.createElement('audio');
 var letterContainerEl = document.getElementById('possible-letters');
 var searchContentEl = document.getElementById('search-content');
 var resultsContainerEl = document.getElementById('results-container');
@@ -381,6 +380,7 @@ var getDefData = function (results) {
 // function takes api object array and parses for display
 var displayWordData = function (wordObjArr) {
 
+    // possibly not the ideal solution for handling errors due to load-time, but the setTimeout is doing the trick
     setTimeout(function tick() {
         // loop through each object generated from the word-results array
         for (var i = 0; i < wordObjArr.length; i++) {
@@ -430,17 +430,39 @@ var displayWordData = function (wordObjArr) {
                 } else {
                     subdir = aud[0]
                 }
-                console.log(subdir)
                 var audioLink = 'https://media.merriam-webster.com/audio/prons/en/us/ogg/' + subdir + '/' + wordData.audio + '.ogg';
 
+                // 
+                var playAudio = function (e) {
+                    const fileName = e.path[2].dataset.file;
+          
+                    const audioEl = document.querySelector(`.${fileName}`);
+          
+                    console.dir(audioEl);
+                    audioEl.play();
+                    // const audios = document.querySelectorAll('audio');
+                    // console.log({ audios, i });
+                    // audios[i].play();
+                  };
+
                 // the 'audio' element will use the first direction it understands
+                var audioEl = document.createElement('audio');
                 audioEl.innerHTML = "<source src=" + audioLink + " type='audio/ogg'>"
-                "<p>Your audio does not support HTML5 audio.</p>";
+                                    "<p>Your audio does not support HTML5 audio.</p>";
+
+                // 'aud' variable becomes a unique-id class for this audio element
+                audioEl.classList.add(aud.join(''));
                 var audioBtn = document.createElement('button');
                 audioBtn.setAttribute('type', 'button');
+
+                // 
+                audioBtn.setAttribute('data-file', aud.join(''));
+
                 audioBtn.innerHTML = "<span><img class='btn-floating waves-effect waves-light' id='audio-icon' src='assets/iconfinder_speaker-high-sound-volume-voice_32x32.png'></span>"
                 audioBtn.addEventListener('click', playAudio);
-                audioBtn.setAttribute('onClick', 'playAudio()');
+                // audioBtn.setAttribute('onClick', 'playAudio()');
+                //added to resolve 'closure' issue
+                resultBody.append(audioEl);
                 resultBody.append(audioBtn);
 
                 // Get the modal
@@ -483,10 +505,6 @@ var displayWordData = function (wordObjArr) {
         }
     }, 1500);
 };
-
-function playAudio() {
-    audioEl.play();
-}
 
 function myFunction() {
     console.log("test2")
