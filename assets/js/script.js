@@ -256,13 +256,14 @@ var getDefData = function (results) {
         ];
         // submit https request
         Promise.all(apiUrls).then(function (responses) {
+            // console.log("response1", responses)
             // using map() method to get a response array of json objects, 
-            return Promise.all(responses.map(function (response) {
+            Promise.all(responses.map(function (response) {
                 return response.json();
             }))
                 // word object definition
                 .then(function (response) {
-                    console.log(response)
+                    // console.log("response2", response)
                     var wordDef = response[0][0];
                     var imgSrc = response[1];
 
