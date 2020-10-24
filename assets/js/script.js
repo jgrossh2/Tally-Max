@@ -319,7 +319,7 @@ var getDefData = function (results) {
                     var wordDef = response[0][0];
                     var imgSrc = response[1];
 
-                    // properties that are inconsistently available within response data
+                    // managing properties that are inconsistently available within response data
                     var audio;
                     if (wordDef.hwi.prs) {
                         audio = wordDef.hwi.prs[0].sound.audio
@@ -436,7 +436,7 @@ var displayWordData = function (wordObjArr) {
                     aud = ''
                 }
 
-                // event handler function (assist from LA to develop)
+                // event handler function (major assist from LA to develop)
                 var playAudio = function (e) {
                     // gets unique id of the button being clicked
                     const fileName = e.path[2].dataset.file;
