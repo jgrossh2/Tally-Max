@@ -447,7 +447,7 @@ var displayWordData = function (wordObjArr) {
 
                 //Creat span to display photographer's name
                 var resultPhtr = document.createElement('span');
-                resultPhtr.textContent = wordData.photographer; //response[1].wordData.definition.photographer;//imageSrc[1].photos;//.photographer[i];
+                resultPhtr.textContent = wordData.photographer;
                 resultBody.append(pexelsPhotographerEl);
 
                 // Get the <span> element that closes the modal
