@@ -121,6 +121,12 @@ $(".dropped").droppable({
     update: function (event) {
     }
 });
+//resize letters to .14% of overall width when screen changes
+$(document).ready(function(){
+    $(".letter").resize(function() {
+        $(".letter").width(.14);
+    });
+});
 
 // event listeners to gather user input and start generator function
 twoLetterBtnEl.addEventListener('click', function () {
