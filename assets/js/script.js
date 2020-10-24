@@ -237,26 +237,17 @@ var getDefData = function (results) {
 
     // generate API data for each word
     for (var i = 0; i < results.length; i++) {
-        // api variables        
-        let word = results[i];
+        // api variables        let word = results[j];
         var images = results[i];
-        var pexelURL = `https://api.pexels.com/v1/search?query=${word}&per_page=1`;//images
+        var pexelURL = `https://api.pexels.com/v1/search?query=${images}&per_page=1`;
         var API_key = "563492ad6f91700001000001d01c380d928e472983ed037be8073298";//"563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
-        var mwKey = '6739e623-a753-4e79-bf96-58f6cd1a72a0';
+        var smkmw = '6739e623-a753-4e79-bf96-58f6cd1a72a0';
         // fetch both APIs
-        // var apiUrls = [
-        //     fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${images}?key=${smkmw}`),
-
-        // var pexelURL = `https://api.pexels.com/v1/search?query=${word}&per_page=1`;
-        console.log(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${mwKey}`);
         var apiUrls = [
-
-            fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${mwKey}`),//images
+            fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${images}?key=${smkmw}`),
             fetch(pexelURL, {
                 headers: {
-                    // Accept: 'application/json',
                     Authorization: API_key
-                    //credentials: 'include'
                 }
             }),
         ];
@@ -271,92 +262,59 @@ var getDefData = function (results) {
                     var wordDef = response[0][0];
                     var imgSrc = response[1];
 
-                    // properties that are inconsistently available within response data
-                    var audio;
-                    if (wordDef.hwi.prs) {
-                        audio = wordDef.hwi.prs[0].sound.audio
+                    console.log('image', imgSrc)
+                    if (!wordDef.hwi.prs) {
+                        return;
                     } else {
-                        audio = ''
-                    }
-                    var image_s;
-                    if (imgSrc.photos[0]) {
-                        image_s = imgSrc.photos[0].src.small
-                    } else {
-                        image_s = console.log("Sorry, there is no image available for " + word) // to be added as message on page
-                    }
-                    var image_m;
-                    if (imgSrc.photos[0]) {
-                        image_m = imgSrc.photos[0].src.medium
-                    } else {
-                        image_m = ''
-                    }
-                    var image_l;
-                    if (imgSrc.photos[0]) {
-                        image_l = imgSrc.photos[0].src.large
-                    } else {
-                        image_l = ''
-                    }
-                    // var photographer;
-                    var wordObj;
-
-                    // if (imgSrc.photos[0]) {
-                    //   photographer = imgSrc.photos[0].photographer
-                    //  } else {
-                    if (imgSrc.photos.length > 0) {
-                        wordObj = {
-                            word: wordDef.hwi.hw,
-                            class: wordDef.fl,
-                            definition: wordDef.shortdef,
-                            audio: wordDef.hwi.prs[0].sound.audio,
-                            offensive: wordDef.meta.offensive,
-                            image_s: imgSrc.photos[0].src.small,
-                            image_m: imgSrc.photos[0].src.medium,
-                            image_l: imgSrc.photos[0].src.large,
-                            photographer: imgSrc.photos[0].photographer,
-                            photog_url: imgSrc.photos[0].photographer_url,
-                        }
-                    } else {
-                        wordObj = {
-                            word: wordDef.hwi.hw,
-                            class: wordDef.fl,
-                            definition: wordDef.shortdef,
-                            audio: wordDef.hwi.prs[0].sound.audio,
-                            offensive: wordDef.meta.offensive,
-                            image_s: noImage,
-                            image_m: noImage,
-                            image_l: noImage,
-                            photographer: noImage,
-                            photog_url: noImage,
+                        if (imgSrc.photos.length > 0) {
+                            var wordObj = {
+                                word: wordDef.hwi.hw,
+                                class: wordDef.fl,
+                                definition: wordDef.shortdef,
+                                audio: wordDef.hwi.prs[0].sound.audio,
+                                offensive: wordDef.meta.offensive,
+                                // image_s: imgSrc.photos[0].src.small,
+                                image_m: imgSrc.photos[0].src.medium,
+                                // image_l: imgSrc.photos[0].src.large,
+                                photographer: imgSrc.photos[0].photographer,
+                                photog_url: imgSrc.photos[0].photographer_url,
+                            }
+                        } else {
+                            var wordObj = {
+                                word: wordDef.hwi.hw,
+                                class: wordDef.fl,
+                                definition: wordDef.shortdef,
+                                audio: wordDef.hwi.prs[0].sound.audio,
+                                offensive: wordDef.meta.offensive,
+                                // image_s: noImage,
+                                image_m: noImage,
+                                //image_l: noImage,
+                                photographer: noImage,
+                                photog_url: noImage,
+                            }
                         }
                     }
-
-                    // }
-                    console.log(wordObj);
                     wordObjArr.push(wordObj);
-                    displayWordData(wordObjArr);
                     return wordObj;
-
                 })
                 .catch((error) => {
                     console.error('Error: ', error);
                 })
         });
     };
-    //displayWordData(wordObjArr);
+    displayWordData(wordObjArr);
 };
 
 // function takes api object array and parses for display
 var displayWordData = function (wordObjArr) {
     console.log('ARRAYIMAGE', wordObjArr)
-
-    // possibly not the ideal solution for handling errors due to load-time, but the setTimeout is doing the trick
     setTimeout(function tick() {
         // loop through each object generated from the word-results array
         for (var i = 0; i < wordObjArr.length; i++) {
             var wordData = wordObjArr[i]
             console.log(wordData)
             // check to see whether term is offensive
-            if (!wordData.offensive) {
+            if (!wordObjArr[i].offensive) {
                 // create DOM elements
                 var resultLI = document.createElement('li');
                 resultLI.setAttribute('class', 'col-12');
@@ -380,62 +338,28 @@ var displayWordData = function (wordObjArr) {
                     resultBody.append(resultDef);
                 }
 
-                // display audio-button to page; takes 'audio' property from data object to create link for audio playback; conditions outlined in the Merriam-Webster api documentation are used to determine the 'subdir' value, which is a component of the audio-link href
-                var aud;
-                if (wordData.audio) {
-                    aud = (wordData.audio.split('', 3))
-                    // this regular expression refers to any number (\d) or punctuation symbol (\W)
-                    var regex = RegExp('[\\d\\W]')
-                    var subdir = ''
-                    if (aud[0] + aud[1] + aud[2] === 'bix') {
-                        subdir = 'bix'
-                    } else if (aud[0] + aud[1] === 'gg') {
-                        subdir = 'gg'
-                    } else if (regex.test(aud[0])) {
-                        subdir = 'number'
-                    } else {
-                        subdir = aud[0]
-                    }
-                    var audioLink = 'https://media.merriam-webster.com/audio/prons/en/us/ogg/' + subdir + '/' + wordData.audio + '.ogg';
+                // display audio-button within result-container body: takes 'audio' property from wordObj[i] and creates link for audio playback; conditions outlined in the Merriam-Webster api documentation are used to determine the 'subdir' value, which is a component of the audio-link href
+                var aud = wordData.audio.split('', 3)
+                // this regular expression refers to any number (\d) or punctuation symbol (\W)
+                var regex = RegExp('[\\d\\W]')
+                var subdir = ''
+                if (aud[0] + aud[1] + aud[2] === 'bix') {
+                    subdir = 'bix'
+                } else if (aud[0] + aud[1] === 'gg') {
+                    subdir = 'gg'
+                } else if (regex.test(aud[0])) {
+                    subdir = 'number'
                 } else {
-                    aud = ''
+                    subdir = aud[0]
                 }
+                var audioLink = 'https://media.merriam-webster.com/audio/prons/en/us/ogg/' + subdir + '/' + wordData.audio + '.ogg';
 
-                // event handler function (assist from LA to develop)
-                var playAudio = function (e) {
-                    // gets unique id of the button being clicked
-                    const fileName = e.path[2].dataset.file;
-                    // finds container-element with matching id to connect audio-file
-                    const audioEl = document.querySelector(`.${fileName}`);
-                    console.dir(audioEl);
-
-                    audioEl.play();
-                };
-
-                // the 'audio' element will use the first of its nested directions that it understands
-                var audioEl = document.createElement('audio');
-                audioEl.innerHTML = "<source src=" + audioLink + " type='audio/ogg'>"
-                "<p>Your audio does not support HTML5 audio.</p>";
-
-                // if audiofile is available button will be added, otherwise a message to user
-                if (aud.join) {
-                    // 'aud' variable becomes unique-id for DOM property,'classlist', using 'add' and 'join' methods
-                    audioEl.classList.add(aud.join(''))
-                    // button for audio-playback
-                    var audioBtn = document.createElement('button');
-                    audioBtn.setAttribute('type', 'button');
-                    // adds 'aud' id as an attribute to audio-play button
-                    audioBtn.setAttribute('data-file', aud.join(''));
-                    audioBtn.innerHTML = "<span><img class='btn-floating waves-effect waves-light' id='audio-icon' src='assets/images/iconfinder_speaker-high-sound-volume-voice_32x32.png'></span>"
-                    audioBtn.addEventListener('click', playAudio);
-                    // append audio elements to container
-                    resultBody.append(audioEl);
-                    resultBody.append(audioBtn);
-                } else {
-                    var noAudio = document.createElement('p');
-                    noAudio.textContent = "no audio available";
-                    resultBody.append(noAudio);
-                };
+                // create button element to contain sound link
+                var audioBtn = document.createElement('a');
+                audioBtn.setAttribute('class', 'btn-floating waves-effect waves-light')
+                audioBtn.setAttribute('href', audioLink);
+                audioBtn.innerHTML = '<span><img id="audio-icon" src="assets/css/images/iconfinder_speaker-high-sound-volume-voice_3643734.png"></span>'
+                resultBody.append(audioBtn);
 
                 var pexelsPhoto = document.createElement('img');
                 pexelsPhoto.setAttribute('src', wordData.image_m);
@@ -452,28 +376,17 @@ var displayWordData = function (wordObjArr) {
                 imgBtn.setAttribute('class', 'btn-floating waves-effect waves-light img')
                 // imgBtn.setAttribute('search-name', wordData.word);
                 imgBtn.innerHTML = '<span><img id="img-icon" src="assets/css/images/iconfinder_pexels_photo_free_5340265.png"></span>'
-
-                // // Use 'getElementById' to get the ID of where the Img will be displayed
-                //var picBodyEl = document.getElementById('img-body');
-                // var pexelImg = document.createElement('img');
-                // pexelImg.setAttribute('search-name', wordData.word);
-                // pexelImg.setAttribute('src', wordData.image_m);
                 console.log('WORDDATA', wordData.word)
-                console.log('PEXELAR', pexelsArr)
-                //picBodyEl.append(pexelImg);
+                console.log('PEXELARR', pexelsArr)
 
-                // Use 'getElementById' to get the ID of where the photographer name will be displayed
-                //var photographerEl = document.getElementById("ph-body");
+                // Use createElement to display photographer's name
                 var pexelsPhotographerEl = document.createElement('p');
-                //photographerEl.setAttribute('src', wordData.photographer);
                 pexelsPhotographerEl.innerHTML = wordData.photographer;
 
                 //Creat span to display photographer's name
                 var resultPhtr = document.createElement('span');
-                resultPhtr.textContent = wordData.photographer;
+                resultPhtr.textContent = wordData.photographer; //response[1].wordData.definition.photographer;//imageSrc[1].photos;//.photographer[i];
                 resultBody.append(pexelsPhotographerEl);
-                // imgBtn.setAttribute('class', 'btn-floating waves-effect waves-light red disabled')
-                // imgBtn.innerHTML = '<span><img id="info-icon" src="assets/images/iconfinder_Information_Circle_4781829.png"></span>'
 
                 // Get the <span> element that closes the modal
                 var span = document.getElementsByClassName("close")[0];
@@ -498,16 +411,16 @@ var displayWordData = function (wordObjArr) {
                 resultHeader.innerHTML = "<p>This word did not make it past our sensors.</p>"
             }
         }
-    }, 50);
+    }, 500);
 };
 
 //function to search for additional imades of the word in modal
-var pixabay_KEY = '18755179-1cec5558437abfcfe27155a57';
 function searchFunction() {
     console.log("test")
     var srchTerm = document.querySelector('#srchTerm').value;
+    var API_KEY = '18755179-1cec5558437abfcfe27155a57';
     var URL = 'https://pixabay.com/api/?key='
-        + pixabay_KEY
+        + API_KEY
         + '&q='
         + srchTerm;
 
@@ -526,5 +439,3 @@ function searchFunction() {
             responseContEl.appendChild(pixabayImg);
         })
 }
-
-

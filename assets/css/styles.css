@@ -125,6 +125,8 @@ button#resetBtn:hover {
 }
 
 img#audio-icon {
+    width: 32px;
+    padding: 4px 0 0 4px;
 }
 
 a.btn-floating.waves-effect.waves-light:hover {
