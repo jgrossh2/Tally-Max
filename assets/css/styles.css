@@ -21,9 +21,23 @@ header, footer.page-footer {
     padding: 5px;
 }
 
+div.row.header {
+    margin: 0;
+}
+
+h6.headline.center-align {
+    font-family: var(--secondary);
+    font-size: 1.5rem;
+    margin: 170px auto auto auto
+}
+
 main {
     font-family: var(--secondary);
     color: var(--dark);
+}
+
+div#tmax {
+    font-size: 3rem;
 }
 
 h1.m {
@@ -52,8 +66,8 @@ li.col {
 }
 
 .collapsible-header:hover {
-    color: var(--red);
-    background-color: var(--grey);
+    color: white;
+    background-color: var(--dblue);
 }
 
 .collapsible-header.active {
@@ -61,6 +75,10 @@ li.col {
     color: white;
     font-weight: bold;
     letter-spacing: 1px;
+}
+
+.collapsible-header.active:hover {
+    color: var(--red);
 }
 
 div.collapsible-body {
@@ -93,11 +111,24 @@ button.waves-effect.searchbtn:hover {
     background-color: var(--red);
 }
 
+button#resetBtn {
+    background-color: var(--red);
+}
+
+button#resetBtn:hover {
+    background-color: var(--lblue);
+    color: var(--red);
+}
+
 .btn-floating.waves-effect.waves-light {
     background-color: var(--red);
 }
 
 img#audio-icon {
+}
+
+a.btn-floating.waves-effect.waves-light:hover {
+    background-color: var(--lblue);
 }
 
 img#mwlogo {
@@ -359,6 +390,11 @@ a#mwtext:hover {
 
 /* MEDIA QUERY FOR TABLETS */
 @media screen and (max-width: 768px) {
+    
+    h6.headline.center-align {
+        margin: 150px auto 0 auto;
+    }
+
     .tiles {
         min-height: 60px;
         min-width: 60px;
@@ -374,6 +410,11 @@ a#mwtext:hover {
 
 /* MEDIA QUERY FOR MOBILE PHONES */
 @media screen and (max-width: 600px) {
+    
+    h6.headline.center-align {
+        margin: 10px auto;
+    }
+
     .tiles {
         min-height: 47px;
         min-width: 47px;
@@ -390,6 +431,12 @@ a#mwtext:hover {
 
 /* MEDIA QUERY FOR SMALL PHONES */
 @media screen and (max-width: 360px) {
+   
+    h6.headline.center-align {
+        margin: 5px;
+        font-size: 1.3rem;
+    }
+
     .tiles {
         min-height: 27px;
         min-width: 27px;

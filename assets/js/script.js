@@ -176,7 +176,7 @@ randomLetterBtnEl.addEventListener('click', function () {
 resetBtnEl.addEventListener('click', function () {
     // reset serch containers & arrays
     setLetters();
-    
+
 });
 // generate all possible combinations of inputted letters
 var genWordList = function (wordLength, letters) {
@@ -241,10 +241,11 @@ var getDefData = function (results) {
         let word = results[i];
         var pexelURL = `https://api.pexels.com/v1/search?query=${word}&per_page=1`;
         var API_key = "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
+        var mwKey = '6739e623-a753-4e79-bf96-58f6cd1a72a0';
 
         // fetch both APIs
         var apiUrls = [
-            fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${smkmw}`),
+            fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${mwKey}`),
             fetch(pexelURL, {
                 headers: {
                     // Accept: 'application/json',
@@ -261,7 +262,7 @@ var getDefData = function (results) {
             }))
                 // word object definition
                 .then(function (response) {
-                    // console.log(response)
+                    console.log(response)
                     var wordDef = response[0][0];
                     var imgSrc = response[1];
 
@@ -270,7 +271,7 @@ var getDefData = function (results) {
                     if (wordDef.hwi.prs) {
                         audio = wordDef.hwi.prs[0].sound.audio
                     } else {
-                        audio = console.log("Sorry, there is no audio available for " + word) // to be added as message on page
+                        audio = ''
                     }
                     var image_s;
                     if (imgSrc.photos[0]) {
@@ -365,55 +366,58 @@ var displayWordData = function (wordObjArr) {
                 var aud;
                 if (wordData.audio) {
                     aud = (wordData.audio.split('', 3))
+                    // this regular expression refers to any number (\d) or punctuation symbol (\W)
+                    var regex = RegExp('[\\d\\W]')
+                    var subdir = ''
+                    if (aud[0] + aud[1] + aud[2] === 'bix') {
+                        subdir = 'bix'
+                    } else if (aud[0] + aud[1] === 'gg') {
+                        subdir = 'gg'
+                    } else if (regex.test(aud[0])) {
+                        subdir = 'number'
+                    } else {
+                        subdir = aud[0]
+                    }
+                    var audioLink = 'https://media.merriam-webster.com/audio/prons/en/us/ogg/' + subdir + '/' + wordData.audio + '.ogg';
                 } else {
                     aud = ''
                 }
-                // this regular expression refers to any number (\d) or punctuation symbol (\W)
-                var regex = RegExp('[\\d\\W]')
-                var subdir = ''
-                if (aud[0] + aud[1] + aud[2] === 'bix') {
-                    subdir = 'bix'
-                } else if (aud[0] + aud[1] === 'gg') {
-                    subdir = 'gg'
-                } else if (regex.test(aud[0])) {
-                    subdir = 'number'
-                } else {
-                    subdir = aud[0]
-                }
-                var audioLink = 'https://media.merriam-webster.com/audio/prons/en/us/ogg/' + subdir + '/' + wordData.audio + '.ogg';
 
-                // 
+                // event handler function (assist from LA to develop)
                 var playAudio = function (e) {
+                    // gets unique id of the button being clicked
                     const fileName = e.path[2].dataset.file;
-          
+                    // finds container-element with matching id to connect audio-file
                     const audioEl = document.querySelector(`.${fileName}`);
-          
                     console.dir(audioEl);
+                    
                     audioEl.play();
-                    // const audios = document.querySelectorAll('audio');
-                    // console.log({ audios, i });
-                    // audios[i].play();
-                  };
+                };
 
-                // the 'audio' element will use the first direction it understands
+                // the 'audio' element will use the first of its nested directions that it understands
                 var audioEl = document.createElement('audio');
                 audioEl.innerHTML = "<source src=" + audioLink + " type='audio/ogg'>"
-                                    "<p>Your audio does not support HTML5 audio.</p>";
+                "<p>Your audio does not support HTML5 audio.</p>";
 
-                // 'aud' variable becomes a unique-id class for this audio element
-                audioEl.classList.add(aud.join(''));
-                var audioBtn = document.createElement('button');
-                audioBtn.setAttribute('type', 'button');
-
-                // 
-                audioBtn.setAttribute('data-file', aud.join(''));
-
-                audioBtn.innerHTML = "<span><img class='btn-floating waves-effect waves-light' id='audio-icon' src='assets/iconfinder_speaker-high-sound-volume-voice_32x32.png'></span>"
-                audioBtn.addEventListener('click', playAudio);
-                // audioBtn.setAttribute('onClick', 'playAudio()');
-                //added to resolve 'closure' issue
-                resultBody.append(audioEl);
-                resultBody.append(audioBtn);
+                // if audiofile is available button will be added, otherwise a message to user
+                if (aud.join) {
+                    // 'aud' variable becomes unique-id for DOM property,'classlist', using 'add' and 'join' methods
+                    audioEl.classList.add(aud.join(''))
+                    // button for audio-playback
+                    var audioBtn = document.createElement('button');
+                    audioBtn.setAttribute('type', 'button');
+                    // adds 'aud' id as an attribute to audio-play button
+                    audioBtn.setAttribute('data-file', aud.join(''));
+                    audioBtn.innerHTML = "<span><img class='btn-floating waves-effect waves-light' id='audio-icon' src='assets/images/iconfinder_speaker-high-sound-volume-voice_32x32.png'></span>"
+                    audioBtn.addEventListener('click', playAudio);
+                    // append audio elements to container
+                    resultBody.append(audioEl);
+                    resultBody.append(audioBtn);
+                } else {
+                    var noAudio = document.createElement('p');
+                    noAudio.textContent = "no audio available";
+                    resultBody.append(noAudio);
+                };
 
                 // Get the modal
                 var modal = document.getElementById("myModal");
@@ -428,7 +432,7 @@ var displayWordData = function (wordObjArr) {
                 // Get the button that opens the modal
                 var imgBtn = document.createElement('a')//addEventListener('click', onclick);
                 imgBtn.setAttribute('class', 'btn-floating waves-effect waves-light red disabled')
-                imgBtn.innerHTML = '<span><img id="info-icon" src="assets/iconfinder_Information_Circle_4781829.png"></span>'
+                imgBtn.innerHTML = '<span><img id="info-icon" src="assets/images/iconfinder_Information_Circle_4781829.png"></span>'
 
                 // Get the <span> element that closes the modal
                 var span = document.getElementsByClassName("close")[0];
