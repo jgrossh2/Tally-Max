@@ -11,7 +11,7 @@ var resultsContainerEl = document.getElementById('results-container');
 var letterEl = document.querySelector(".letter");
 var spaceEl = document.querySelector(".space");
 var aEl = document.getElementById('a');
-//var noImage = "assets/404-error-nathan-dumlao-a3ra9eXUjvo-unsplash.jpg"
+//var noImage = "assets/css/images/404-error-nathan-dumlao-a3ra9eXUjvo-unsplash.jpg"
 
 // global page variables
 var wordLength = 0;
