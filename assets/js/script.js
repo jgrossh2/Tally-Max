@@ -240,20 +240,18 @@ var getDefData = function (results) {
         // api variables        
         let word = results[i];
         var images = results[i];
-        var pexelURL = `https://api.pexels.com/v1/search?query=${images}&per_page=1`;//word
+        var pexelURL = `https://api.pexels.com/v1/search?query=${word}&per_page=1`;//images
         var API_key = "563492ad6f91700001000001d01c380d928e472983ed037be8073298";//"563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
         var mwKey = '6739e623-a753-4e79-bf96-58f6cd1a72a0';
         // fetch both APIs
         // var apiUrls = [
         //     fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${images}?key=${smkmw}`),
-        // // api variables
-        // let word = results[i];
+
         // var pexelURL = `https://api.pexels.com/v1/search?query=${word}&per_page=1`;
-
-
-        // // fetch both APIs
+        console.log(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${mwKey}`);
         var apiUrls = [
-            fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${images}?key=${mwKey}`),//word
+
+            fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${mwKey}`),//images
             fetch(pexelURL, {
                 headers: {
                     // Accept: 'application/json',
@@ -298,47 +296,53 @@ var getDefData = function (results) {
                     } else {
                         image_l = ''
                     }
-                    var photographer;
-                    if (imgSrc.photos[0]) {
-                        photographer = imgSrc.photos[0].photographer
+                    // var photographer;
+                    var wordObj;
+
+                    // if (imgSrc.photos[0]) {
+                    //   photographer = imgSrc.photos[0].photographer
+                    //  } else {
+                    if (imgSrc.photos.length > 0) {
+                        wordObj = {
+                            word: wordDef.hwi.hw,
+                            class: wordDef.fl,
+                            definition: wordDef.shortdef,
+                            audio: wordDef.hwi.prs[0].sound.audio,
+                            offensive: wordDef.meta.offensive,
+                            image_s: imgSrc.photos[0].src.small,
+                            image_m: imgSrc.photos[0].src.medium,
+                            image_l: imgSrc.photos[0].src.large,
+                            photographer: imgSrc.photos[0].photographer,
+                            photog_url: imgSrc.photos[0].photographer_url,
+                        }
                     } else {
-                        if (imgSrc.photos.length > 0) {
-                            var wordObj = {
-                                word: wordDef.hwi.hw,
-                                class: wordDef.fl,
-                                definition: wordDef.shortdef,
-                                audio: wordDef.hwi.prs[0].sound.audio,
-                                offensive: wordDef.meta.offensive,
-                                // image_s: imgSrc.photos[0].src.small,
-                                image_m: imgSrc.photos[0].src.medium,
-                                // image_l: imgSrc.photos[0].src.large,
-                                photographer: imgSrc.photos[0].photographer,
-                                photog_url: imgSrc.photos[0].photographer_url,
-                            }
-                        } else {
-                            var wordObj = {
-                                word: wordDef.hwi.hw,
-                                class: wordDef.fl,
-                                definition: wordDef.shortdef,
-                                audio: wordDef.hwi.prs[0].sound.audio,
-                                offensive: wordDef.meta.offensive,
-                                // image_s: noImage,
-                                image_m: noImage,
-                                //image_l: noImage,
-                                photographer: noImage,
-                                photog_url: noImage,
-                            }
+                        wordObj = {
+                            word: wordDef.hwi.hw,
+                            class: wordDef.fl,
+                            definition: wordDef.shortdef,
+                            audio: wordDef.hwi.prs[0].sound.audio,
+                            offensive: wordDef.meta.offensive,
+                            image_s: noImage,
+                            image_m: noImage,
+                            image_l: noImage,
+                            photographer: noImage,
+                            photog_url: noImage,
                         }
                     }
+
+                    // }
+                    console.log(wordObj);
                     wordObjArr.push(wordObj);
+                    displayWordData(wordObjArr);
                     return wordObj;
+
                 })
                 .catch((error) => {
                     console.error('Error: ', error);
                 })
         });
     };
-    displayWordData(wordObjArr);
+    //displayWordData(wordObjArr);
 };
 
 // function takes api object array and parses for display
@@ -494,16 +498,16 @@ var displayWordData = function (wordObjArr) {
                 resultHeader.innerHTML = "<p>This word did not make it past our sensors.</p>"
             }
         }
-    }, 1500);
+    }, 50);
 };
 
 //function to search for additional imades of the word in modal
-var API_KEY = '18755179-1cec5558437abfcfe27155a57';
+var pixabay_KEY = '18755179-1cec5558437abfcfe27155a57';
 function searchFunction() {
     console.log("test")
     var srchTerm = document.querySelector('#srchTerm').value;
     var URL = 'https://pixabay.com/api/?key='
-        + API_KEY
+        + pixabay_KEY
         + '&q='
         + srchTerm;
 
