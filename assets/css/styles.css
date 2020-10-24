@@ -97,17 +97,23 @@ img#audio-icon {
     padding: 4px 0 0 4px;
 }
 
-img#mwlogo {
+img#mwlogo,
+img#pexelslogo,
+img#pixabaylogo {
     width: 100px;
 }
 
 
-a#mwtext {
+a#mwtext,
+a#pexelstext,
+a#pixabaytext {
     color: var(--dark);
     font-family: var(--secondary);
 }
 
-a#mwtext:hover {
+a#mwtext:hover,
+a#pexelstext:hover,
+a#pixabaytext:hover {
     color: var(--red);
 }
 
@@ -283,7 +289,7 @@ a#mwtext:hover {
   /* Modal Content */
   .modal-content {
     position: relative;
-    background-color: white;
+    background-color: var(--grey);
     margin: auto;
     padding: 0;
     border: 3px solid var(--lblue);
@@ -343,6 +349,10 @@ a#mwtext:hover {
     padding: 0.05px 1px;
     background-color: lightgrey;
   }
+
+  img#picabaylogo {
+    width: 100px;
+}
 
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */
 @media screen and (max-width: 980px) {
