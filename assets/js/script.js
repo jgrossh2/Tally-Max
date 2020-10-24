@@ -239,19 +239,17 @@ var getDefData = function (results) {
     for (var i = 0; i < results.length; i++) {
         // api variables        
         let word = results[i];
-
         var images = results[i];
         var pexelURL = `https://api.pexels.com/v1/search?query=${images}&per_page=1`;//word
         var API_key = "563492ad6f91700001000001d01c380d928e472983ed037be8073298";//"563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
-
+        var mwKey = '6739e623-a753-4e79-bf96-58f6cd1a72a0';
         // fetch both APIs
         // var apiUrls = [
         //     fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${images}?key=${smkmw}`),
         // // api variables
         // let word = results[i];
         // var pexelURL = `https://api.pexels.com/v1/search?query=${word}&per_page=1`;
-        // var API_key = "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
-        var mwKey = '6739e623-a753-4e79-bf96-58f6cd1a72a0';
+
 
         // // fetch both APIs
         var apiUrls = [
@@ -498,27 +496,7 @@ var displayWordData = function (wordObjArr) {
         }
     }, 1500);
 };
-//example function
-function myFunction() {
-    console.log("test2")
-    var searchTerm = document.querySelector('#searchTerm').value;
-    fetch(
-        'https://api.giphy.com/v1/gifs/search?q=' +
-        searchTerm +
-        '&api_key=HvaacROi9w5oQCDYHSIk42eiDSIXH3FN&limit=1'
-    )
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (response) {
-            console.log(response.data[0]);
-            var responseContainerEl = document.querySelector('#response-container');
-            responseContainerEl.innerHTML = '';
-            var gifImg = document.createElement('img');
-            gifImg.setAttribute('src', response.data[0].images.fixed_height.url);
-            responseContainerEl.appendChild(gifImg);
-        });
-}
+
 //function to search for additional imades of the word in modal
 var API_KEY = '18755179-1cec5558437abfcfe27155a57';
 function searchFunction() {
@@ -544,7 +522,5 @@ function searchFunction() {
             responseContEl.appendChild(pixabayImg);
         })
 }
-///unsplash: acess key: "epv9i5i5P0XQj0_SD3Ez8WxX88fh9d8ts18CgJKJ0Uw";
-//secret key: "u9UGbWywxfI-tsOZU-Lvfd-qebY5WDF47_8Nhqc2Zms" 
-//50 requests per hour //application status 5-10 days
+
 
