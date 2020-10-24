@@ -24,7 +24,7 @@ var setLetters = function () {
     window.location.href = "index.html";
     spaceEl.innerHTML = " ";
     dropLetters = [];
-}
+};
 //row 1 and dropzone
 $(function () {
     $(".sortable1, .sortable4").sortable({
@@ -228,7 +228,7 @@ var displayLetters = function (letters, results) {
         searchContentEl.textContent = '';
         searchContentEl.textContent = letters;
     }
-}
+};
 
 // function fetches definition data for each in an array of words and returns subset of data packaged as an object
 var getDefData = function (results) {
@@ -240,7 +240,7 @@ var getDefData = function (results) {
         // api variables        let word = results[j];
         var images = results[i];
         var pexelURL = `https://api.pexels.com/v1/search?query=${images}&per_page=1`;
-        var API_key = "563492ad6f91700001000001d01c380d928e472983ed037be8073298";//"563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
+        var API_key = "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";//"563492ad6f91700001000001d01c380d928e472983ed037be8073298";//
         var smkmw = '6739e623-a753-4e79-bf96-58f6cd1a72a0';
         // fetch both APIs
         var apiUrls = [
@@ -375,7 +375,7 @@ var displayWordData = function (wordObjArr) {
                 var imgBtn = document.createElement('a')//addEventListener('click', onclick);
                 imgBtn.setAttribute('class', 'btn-floating waves-effect waves-light img')
                 // imgBtn.setAttribute('search-name', wordData.word);
-                imgBtn.innerHTML = '<span><img id="img-icon" src="assets/css/images/iconfinder_pexels_photo_free_5340265.png"></span>'
+                imgBtn.innerHTML = '<span><img id="img-icon" src="assets/css/images/iconfinder_photo_24_103171.png"></span>'
                 console.log('WORDDATA', wordData.word)
                 console.log('PEXELARR', pexelsArr)
 
@@ -405,7 +405,6 @@ var displayWordData = function (wordObjArr) {
                 resultBody.append(imgBtn);
                 resultLI.append(resultBody);
                 resultsContainerEl.append(resultLI);
-
             }
             else {
                 resultHeader.innerHTML = "<p>This word did not make it past our sensors.</p>"
@@ -438,4 +437,4 @@ function searchFunction() {
             pixabayImg.setAttribute('src', response.hits[0].webformatURL);
             responseContEl.appendChild(pixabayImg);
         })
-}
+};
