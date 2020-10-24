@@ -237,24 +237,25 @@ var getDefData = function (results) {
 
     // generate API data for each word
     for (var i = 0; i < results.length; i++) {
-        // api variables        let word = results[j];
+        // api variables        
+        let word = results[i];
 
         var images = results[i];
-        var pexelURL = `https://api.pexels.com/v1/search?query=${images}&per_page=1`;
+        var pexelURL = `https://api.pexels.com/v1/search?query=${images}&per_page=1`;//word
         var API_key = "563492ad6f91700001000001d01c380d928e472983ed037be8073298";//"563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
 
         // fetch both APIs
-        var apiUrls = [
-            fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${images}?key=${smkmw}`),
-            // // api variables
-            // let word = results[i];
-            // var pexelURL = `https://api.pexels.com/v1/search?query=${word}&per_page=1`;
-            // var API_key = "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
-            // var mwKey = '6739e623-a753-4e79-bf96-58f6cd1a72a0';
+        // var apiUrls = [
+        //     fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${images}?key=${smkmw}`),
+        // // api variables
+        // let word = results[i];
+        // var pexelURL = `https://api.pexels.com/v1/search?query=${word}&per_page=1`;
+        // var API_key = "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
+        var mwKey = '6739e623-a753-4e79-bf96-58f6cd1a72a0';
 
-            // // fetch both APIs
-            // var apiUrls = [
-            //     fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${mwKey}`),
+        // // fetch both APIs
+        var apiUrls = [
+            fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${images}?key=${mwKey}`),//word
             fetch(pexelURL, {
                 headers: {
                     // Accept: 'application/json',
