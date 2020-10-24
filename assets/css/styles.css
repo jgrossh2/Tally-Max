@@ -150,8 +150,6 @@ a#mwtext:hover {
 }
 
 .container {
-    /* display: flex; */
-    /* flex-wrap: wrap; */
     width: 100%;
 }
 
@@ -165,7 +163,6 @@ a#mwtext:hover {
     margin-left: 0;
     padding: 15px;
     list-style: none;
-    /* width: 100%; */
 }
 
 .tiles { 
