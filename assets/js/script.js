@@ -256,22 +256,14 @@ var getDefData = function (results) {
         ];
         // submit https request
         Promise.all(apiUrls).then(function (responses) {
-            // console.log("response1", responses)
             // using map() method to get a response array of json objects, 
             Promise.all(responses.map(function (response) {
                 return response.json();
             }))
                 // word object definition
                 .then(function (response) {
-                    console.log("response2", response)
-                    console.log('response3', response[0])
                     var wordDef = response[0];
                     var imgSrc = response[1];
-
-                    // in the instance of 'att'
-                    // type = response[0].fl
-                    // definition = response[0].shortdef
-                    // offensive = response[0].meta.offensive
 
                     // managing properties that are inconsistently available within response data
                     var type;
@@ -292,12 +284,12 @@ var getDefData = function (results) {
                         definition = ['Sorry, this definition is not available', 'Please try: www.merriam-webster.com']
                     }
                     var audio;
+                    // the following 2 lines resolve error resulting from 'att' response variant
                     if (wordDef.hwi) {
                         audio = wordDef.hwi.prs[0].sound.audio
-                    // this resolves error resulting from 'oot' response variant
-                    } else if (wordDef[0].hwi) {
-                        audio = wordDef[0].hwi.prs[0].sound.audio
-                    // this resolves error resulting from 'att' response variant
+                    // the following 2 lines resolve error resulting from 'oot' response variant
+                    } else if (typeof wordDef[0] === 'string') {
+                        audio = ''
                     } else if (wordDef[0].hwi.prs) {
                         audio = wordDef[0].hwi.prs[0].sound.audio
                     } else {
