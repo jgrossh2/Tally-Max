@@ -11,6 +11,7 @@ var resultsContainerEl = document.getElementById('results-container');
 var letterEl = document.querySelector(".letter");
 var spaceEl = document.querySelector(".space");
 var aEl = document.getElementById('a');
+//var noImage = "assets/404-error-nathan-dumlao-a3ra9eXUjvo-unsplash.jpg"
 
 // global page variables
 var wordLength = 0;
@@ -286,15 +287,15 @@ var getDefData = function (results) {
 
     // generate API data for each word
     for (var i = 0; i < results.length; i++) {
-        // api variables
-        let word = results[i];
+        // api variables        let word = results[j];
+
         var images = results[i];
         var pexelURL = `https://api.pexels.com/v1/search?query=${images}&per_page=1`;
         var API_key = "563492ad6f91700001000001d01c380d928e472983ed037be8073298";//"563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
 
         // fetch both APIs
         var apiUrls = [
-            fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${smkmw}`),
+            fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${images}?key=${smkmw}`),
             fetch(pexelURL, {
                 headers: {
                     // Accept: 'application/json',
@@ -314,6 +315,7 @@ var getDefData = function (results) {
                     var wordDef = response[0][0];
                     var imgSrc = response[1];
 
+                    console.log('image', imgSrc)
                     if (!wordDef.hwi.prs) {
                         return;
                     } else {
@@ -324,9 +326,9 @@ var getDefData = function (results) {
                                 definition: wordDef.shortdef,
                                 audio: wordDef.hwi.prs[0].sound.audio,
                                 offensive: wordDef.meta.offensive,
-                                image_s: imgSrc.photos[0].src.small,
+                                // image_s: imgSrc.photos[0].src.small,
                                 image_m: imgSrc.photos[0].src.medium,
-                                image_l: imgSrc.photos[0].src.large,
+                                // image_l: imgSrc.photos[0].src.large,
                                 photographer: imgSrc.photos[0].photographer,
                                 photog_url: imgSrc.photos[0].photographer_url,
                             }
@@ -337,9 +339,9 @@ var getDefData = function (results) {
                                 definition: wordDef.shortdef,
                                 audio: wordDef.hwi.prs[0].sound.audio,
                                 offensive: wordDef.meta.offensive,
-                                image_s: noImage,
+                                // image_s: noImage,
                                 image_m: noImage,
-                                image_l: noImage,
+                                //image_l: noImage,
                                 photographer: noImage,
                                 photog_url: noImage,
                             }
@@ -358,7 +360,7 @@ var getDefData = function (results) {
 
 // function takes api object array and parses for display
 var displayWordData = function (wordObjArr) {
-
+    console.log('ARRAYIMAGE', wordObjArr)
     setTimeout(function tick() {
         // loop through each object generated from the word-results array
         for (var i = 0; i < wordObjArr.length; i++) {
@@ -412,28 +414,42 @@ var displayWordData = function (wordObjArr) {
                 audioBtn.innerHTML = '<span><img id="audio-icon" src="assets/iconfinder_speaker-high-sound-volume-voice_3643734.png"></span>'
                 resultBody.append(audioBtn);
 
+                var pexelsPhoto = document.createElement('img');
+                pexelsPhoto.setAttribute('src', wordData.image_m);
+                resultBody.append(pexelsPhoto);
+
                 // Get the modal
                 var modal = document.getElementById("myModal");
+
+                var pexelsArr = [];
+                pexelsArr.push(wordData.image_m);
 
                 // Get the button that opens the modal
                 var imgBtn = document.createElement('a')//addEventListener('click', onclick);
                 imgBtn.setAttribute('class', 'btn-floating waves-effect waves-light img')
+                // imgBtn.setAttribute('search-name', wordData.word);
                 imgBtn.innerHTML = '<span><img id="img-icon" src="assets/iconfinder_pexels_photo_free_5340265.png"></span>'
 
                 // // Use 'getElementById' to get the ID of where the Img will be displayed
-                var picBodyEl = document.getElementById('img-body');
-                var pexelImg = document.createElement('img');
-                pexelImg.setAttribute('src', wordData.definition.image_s)
+                //var picBodyEl = document.getElementById('img-body');
+                // var pexelImg = document.createElement('img');
+                // pexelImg.setAttribute('search-name', wordData.word);
+                // pexelImg.setAttribute('src', wordData.image_m);
+                console.log('WORDDATA', wordData.word)
+                console.log('PEXELAR', pexelsArr)
+                //picBodyEl.append(pexelImg);
 
                 // Use 'getElementById' to get the ID of where the photographer name will be displayed
-                var photographerEl = document.getElementById("ph-body");
-                photographerEl.setAttribute('src', wordData.definition.photographer);
-                picBodyEl.append(pexelImg);
+                //var photographerEl = document.getElementById("ph-body");
+                var pexelsPhotographerEl = document.createElement('p');
+                //photographerEl.setAttribute('src', wordData.photographer);
+                pexelsPhotographerEl.innerHTML = wordData.photographer;
 
                 //Creat span to display photographer's name
                 var resultPhtr = document.createElement('span');
-                resultPhtr.textContent = wordData.definition.photographer;//imageSrc[1].photos;//.photographer[i];
-                photographerEl.append(resultPhtr);
+                resultPhtr.textContent = wordData.photographer; //response[1].wordData.definition.photographer;//imageSrc[1].photos;//.photographer[i];
+                resultBody.append(pexelsPhotographerEl);
+
                 // Get the <span> element that closes the modal
                 var span = document.getElementsByClassName("close")[0];
                 // When the user clicks the button, open the modal 
@@ -460,7 +476,7 @@ var displayWordData = function (wordObjArr) {
         }
     }, 500);
 };
-
+//example function
 function myFunction() {
     console.log("test2")
     var searchTerm = document.querySelector('#searchTerm').value;
@@ -481,7 +497,7 @@ function myFunction() {
             responseContainerEl.appendChild(gifImg);
         });
 }
-
+//function to search for additional imades of the word in modal
 var API_KEY = '18755179-1cec5558437abfcfe27155a57';
 function searchFunction() {
     console.log("test")
@@ -506,13 +522,7 @@ function searchFunction() {
             responseContEl.appendChild(pixabayImg);
         })
 }
-
-
-
-
-// API_KEY = '18755179-1cec5558437abfcfe27155a57';
-
-///unsplash: acess key: "epv9i5i5P0XQj0_SD3Ez8WxX88fh9d8ts18CgJKJ0Uw"; 
+///unsplash: acess key: "epv9i5i5P0XQj0_SD3Ez8WxX88fh9d8ts18CgJKJ0Uw";
 //secret key: "u9UGbWywxfI-tsOZU-Lvfd-qebY5WDF47_8Nhqc2Zms" 
 //50 requests per hour //application status 5-10 days
 
