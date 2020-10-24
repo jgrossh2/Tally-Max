@@ -131,21 +131,23 @@ a.btn-floating.waves-effect.waves-light:hover {
     background-color: var(--lblue);
 }
 
-img#mwlogo {
+img#mwlogo,
+img#pexelslogo,
+img#pixabaylogo {
     width: 100px;
 }
 
-img#imgBtn {
-    width: 32px;
-    padding: 4px 0 0 4px;
-}
 
-a#mwtext {
+a#mwtext,
+a#pexelstext,
+a#pixabaytext {
     color: var(--dark);
     font-family: var(--secondary);
 }
 
-a#mwtext:hover {
+a#mwtext:hover,
+a#pexelstext:hover,
+a#pixabaytext:hover {
     color: var(--red);
 }
 
@@ -325,7 +327,7 @@ a#mwtext:hover {
   /* Modal Content */
   .modal-content {
     position: relative;
-    background-color: white;
+    background-color: var(--grey);
     margin: auto;
     padding: 0;
     border: 3px solid var(--lblue);
@@ -337,6 +339,16 @@ a#mwtext:hover {
     animation-duration: 0.4s
   }
   
+  img#img-icon {
+    width: 32px;
+    padding: 4px 0 0 4px;
+    color: var(--lblue);
+    background-color: var(--lblue);
+}
+
+.btn-floating.waves-effect.waves-light.img {
+    background-color: var(--lblue);
+}
   /* Add Animation */
   @-webkit-keyframes animatetop {
     from {top:-300px; opacity:0} 
@@ -375,6 +387,10 @@ a#mwtext:hover {
     padding: 0.05px 1px;
     background-color: lightgrey;
   }
+
+  img#picabaylogo {
+    width: 100px;
+}
 
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */
 @media screen and (max-width: 980px) {

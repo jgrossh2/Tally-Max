@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Google Material Icons -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <!-- Materialize v0.97.3 -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
-        <!-- Oswald Google Font -->
-        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400&display=swap" rel="stylesheet">
-        <!-- Merriweather Google Font -->
-        <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="./assets/css/styles.css" />
-        <title>Scrabble-Word-Generator</title>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Material Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Materialize v0.97.3 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+    <!-- Oswald Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400&display=swap" rel="stylesheet">
+    <!-- Merriweather Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+    <title>Scrabble-Word-Generator</title>
+</head>
 
 <body>
     <header>
@@ -33,10 +33,10 @@
     </header>
     <main>
         <!-- START KEYBOARD CONTAINER: includes keyboard and drop zone-->
-        <div id='container' >
+        <div id='container'>
             <div id="keyboard" class="card horizontal container">
                 <div class="row container sortable1">
-                    <div class="col s1 letter tiles" id= "a" data-letter="a"></div>
+                    <div class="col s1 letter tiles" id="a" data-letter="a"></div>
                     <div class="col s1 letter tiles" id="b" data-letter="b"></div>
                     <div class="col s1 letter tiles" id="c" data-letter="c"></div>
                     <div class="col s1 letter tiles" id="d" data-letter="d"></div>
@@ -68,7 +68,8 @@
                     <div class="col s1 letter tiles" id="z" data-letter="z"></div>
                 </div>
                 <div>
-                    <p class="todo row container">Drag Letters Here! <span class="instructions">Include up to 5 letters, no repeating of letters</span></p>
+                    <p class="todo row container">Drag Letters Here! <span class="instructions">Include up to 5 letters,
+                            no repeating of letters</span></p>
                 </div>
                 <div class="row container dropped sortable4 space"></div>
             </div>
@@ -93,56 +94,35 @@
                             class="material-icons left">grade</i>RESET</button></td>
                 </div>
             </div>
+        </div>
 
-            <!-- START RESULTS CONTAINER: words resulting from search are listed here -->
-            <div class="row">
-                <div class='col valign-wrapper results-title'>
-                    <h5 class='valign subtitle'>Search results for: <span id="search-content"></span></h5>
-                </div>
-                <ul class="collapsible popout col s12 m12 l12" id="results-container" data-collapsible='accordion'></ul>
+        <!-- START RESULTS CONTAINER: words resulting from search are listed here -->
+        <div class="row">
+            <div class='col valign-wrapper results-title'>
+                <h5 class='valign subtitle'>Search results for: <span id="search-content"></span></h5>
             </div>
+            <ul class="collapsible popout col s12 m12 l12" id="results-container" data-collapsible='accordion'></ul>
+        </div>
         </div>
 
         <!-- MODAL -->
-
-        <!-- Trigger/Open The Modal -->
-        <!-- <button class="btn-floating waves-effect waves-light red disabled" id="info-btn">Info</button> -->
-
-        <!-- The Modal -->
         <div id="myModal" class="modal">
-            <!-- When the user clicks the button, open the modal  -->
-            <!-- <button onclick="displayImg()"></button> -->
-            <!-- <span><img id="info-icon" src="assets/iconfinder_Information_Circle_4781829.png"></span> -->
-            <!-- Modal content -->
             <div class="modal-content">
-                <div class="modal-header">
-                    <span class="close">&times;</span>
-                    <h4>Powered by Pexel</h4>
+
+                <!-- Pixabay image search -->
+                <div>
+                    <h5>Check out Pixabay for more stunning images</h5>
+                    Enter your word: <input type="text" id="srchTerm" value="" />
                 </div>
-                <!-- -->
-
-                <div>Search: <input type="text" id="searchTerm" value="" /></div>
-
-                <button onclick="myFunction()">Search!</button>
-                <div id="response-container"></div>
-                <!--  -->
-                <div>More: <input type="text" id="srchTerm" value="" /></div>
-
-                <button onclick="searchFunction()">More!</button>
+                <button onclick="searchFunction()">More Images!</button>
                 <div id="response-cont"></div>
-                <!--  -->
-                <!-- fetch function info pixabay -->
-                <!-- <div><input type="text" id="searchTerm" value="" /></div>
-                <button onclick="myFunction()">Search!</button>
-                <div id="response-container"></div> -->
-                <!-- fetch func end -->
-
-                <div class="modal-body" id="img-body">
-                    <!-- <img>Image HERE</img> -->
-                </div>
+                <div class="modal-body" id="img-body"></div>
                 <div class="modal-footer" id="ph-body">
                     <span class="close">&times;</span>
-                    <h5>Photographer: </h5>
+                    <h6>Powered by Pixabay:</h6>
+                    <a href="https://pixabay.com/"><br />
+                        <img id='picabaylogo' src="assets/css/images/pixabay.logo_square.png">
+                    </a>
                 </div>
             </div>
         </div>
@@ -161,9 +141,12 @@
                 <a id='mwtext' href="https://www.dictionaryapi.com/products/api-collegiate-dictionary">
                     <img id='mwlogo' src="assets/images/MWLogo_LightBG_120X120_2x.png"><br />
                     Merriam-Webster's Collegiate® Dictionary with Audio</a><br />
-                <a href="https://www.pexels.com/api/"><br />
-                    <!-- <img id='pexelLogo' src="assets/Pexels-logo.png"> -->
-                    PEXELS</a>
+                <a id='pexelstext' href="https://www.pexels.com/api/"><br />
+                    <img id='pexelsLogo' src="assets/css/images/pexels_logo.png"><br />
+                    Pexels</a><br />
+                <a id='pixabaytext' href="https://pixabay.com/"><br />
+                    <img id='pixabaylogo' src="assets/css/images/pixabay.logo_square.png"><br />
+                    Pixabay</a>
             </div>
         </div>
     </footer>
@@ -173,7 +156,8 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
     <script src="assets/js/dict.js"></script>
     <script src="assets/js/script.js"></script>
 
