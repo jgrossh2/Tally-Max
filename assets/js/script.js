@@ -24,6 +24,15 @@ var setLetters = function () {
     spaceEl.innerHTML = " ";
     dropLetters = [];
 }
+// resize letters to % of overall width when screen changes
+$(document).ready(function(){
+    $(window).resize(function() {
+        $(".letter").width($(window).outerWidth);
+        $(".letter").height($(window).outerHeight);
+        
+    });
+});
+// .09 .14
 //row 1 and dropzone
 $(function () {
     $(".sortable1, .sortable4").sortable({
@@ -121,12 +130,7 @@ $(".dropped").droppable({
     update: function (event) {
     }
 });
-//resize letters to .14% of overall width when screen changes
-$(document).ready(function(){
-    $(".letter").resize(function() {
-        $(".letter").width(.14);
-    });
-});
+
 
 // event listeners to gather user input and start generator function
 twoLetterBtnEl.addEventListener('click', function () {
