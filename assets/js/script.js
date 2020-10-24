@@ -411,7 +411,7 @@ var displayWordData = function (wordObjArr) {
                 var audioBtn = document.createElement('a');
                 audioBtn.setAttribute('class', 'btn-floating waves-effect waves-light')
                 audioBtn.setAttribute('href', audioLink);
-                audioBtn.innerHTML = '<span><img id="audio-icon" src="assets/iconfinder_speaker-high-sound-volume-voice_3643734.png"></span>'
+                audioBtn.innerHTML = '<span><img id="audio-icon" src="assets/css/images/iconfinder_speaker-high-sound-volume-voice_3643734.png"></span>'
                 resultBody.append(audioBtn);
 
                 var pexelsPhoto = document.createElement('img');
@@ -428,7 +428,7 @@ var displayWordData = function (wordObjArr) {
                 var imgBtn = document.createElement('a')//addEventListener('click', onclick);
                 imgBtn.setAttribute('class', 'btn-floating waves-effect waves-light img')
                 // imgBtn.setAttribute('search-name', wordData.word);
-                imgBtn.innerHTML = '<span><img id="img-icon" src="assets/iconfinder_pexels_photo_free_5340265.png"></span>'
+                imgBtn.innerHTML = '<span><img id="img-icon" src="assets/css/images/iconfinder_pexels_photo_free_5340265.png"></span>'
 
                 // // Use 'getElementById' to get the ID of where the Img will be displayed
                 //var picBodyEl = document.getElementById('img-body');
@@ -464,7 +464,6 @@ var displayWordData = function (wordObjArr) {
                         modal.style.display = "none";
                     }
                 }
-
                 resultBody.append(imgBtn);
                 resultLI.append(resultBody);
                 resultsContainerEl.append(resultLI);
