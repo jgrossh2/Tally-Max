@@ -18,18 +18,24 @@
 
 <body>
     <header>
-        <div>
-            <h1 class="m">M</h1>
-            <h1 class="tally">TALLY</h1>
-            <h1 class="x">X</h1>
+        <div class='row header'>
+            <div class='col s12 m4 l3' id='tmax'>
+                <h1 class="m">M</h1>
+                <h1 class="tally">TALLY</h1>
+                <h1 class="x">X</h1>
+            </div>
+            <div class='col s12 m8 l9'>
+                <h6 class='headline center-align'>
+                    <i>Improve your word-game competitive-edge by mastering 2-5 letter words!</i>
+                </h6>
+            </div>
         </div>
     </header>
-    <!-- class="card-panel center-align row z-depth-1" -->
     <main>
         <!-- START KEYBOARD CONTAINER: includes keyboard and drop zone-->
         <div id='container'>
-            <div id="keyboard" class="card horizontal">
-                <div class="row container-1 sortable1">
+            <div id="keyboard" class="card horizontal container">
+                <div class="row container sortable1">
                     <div class="col s1 letter tiles" id="a" data-letter="a"></div>
                     <div class="col s1 letter tiles" id="b" data-letter="b"></div>
                     <div class="col s1 letter tiles" id="c" data-letter="c"></div>
@@ -40,7 +46,7 @@
                     <div class="col s1 letter tiles" id="h" data-letter="h"></div>
                     <div class="col s1 letter tiles" id="i" data-letter="i"></div>
                 </div>
-                <div class="row container-1 sortable2">
+                <div class="row container sortable2">
                     <div class="col s1 letter tiles" id="j" data-letter="j"></div>
                     <div class="col s1 letter tiles" id="k" data-letter="k"></div>
                     <div class="col s1 letter tiles" id="l" data-letter="l"></div>
@@ -51,7 +57,7 @@
                     <div class="col s1 letter tiles" id="q" data-letter="q"></div>
                     <div class="col s1 letter tiles" id="r" data-letter="r"></div>
                 </div>
-                <div class="row container-1 sortable3">
+                <div class="row container sortable3">
                     <div class="col s1 letter tiles" id="s" data-letter="s"></div>
                     <div class="col s1 letter tiles" id="t" data-letter="t"></div>
                     <div class="col s1 letter tiles" id="u" data-letter="u"></div>
@@ -60,32 +66,33 @@
                     <div class="col s1 letter tiles" id="x" data-letter="x"></div>
                     <div class="col s1 letter tiles" id="y" data-letter="y"></div>
                     <div class="col s1 letter tiles" id="z" data-letter="z"></div>
-                    <!-- <div class="col s1 letter tiles" id="empty"></div> -->
                 </div>
                 <div>
-                    <p class="todo">Drag Letters Here!</p>
+                    <p class="todo row container">Drag Letters Here! <span class="instructions">Include up to 5 letters,
+                            no repeating of letters</span></p>
                 </div>
-                <div class="row container-1 dropped sortable4 space"></div>
+                <div class="row container dropped sortable4 space"></div>
             </div>
 
             <!-- START SEARCH-BUTTONS CONTAINER -->
             <div class='search-type row'>
                 <h5 class='subtitle'>Select your search type!</h5>
-                <div class='search center-align col s12 m4 l4'>
+                <div class='search center-align col s6 m3 l3'>
                     <button id="twoLetterBtn" class="waves-effect searchbtn"><i
                             class="material-icons left">grade</i>2-LETTER</button></td>
                 </div>
-                <div class='search center-align col s12 m4 l4'>
+                <div class='search center-align col s6 m3 l3'>
                     <button id="threeLetterBtn" class="waves-effect searchbtn"><i
                             class="material-icons left">grade</i>3-LETTER</button></td>
                 </div>
-                <div class='search center-align col s12 m4 l4'>
+                <div class='search center-align col s6 m3 l3'>
                     <button id="randomLetterBtn" class="waves-effect searchbtn"><i
                             class="material-icons left">grade</i>RANDOM</button></td>
                 </div>
-                <!-- <div class='search center-align col s6 m3 l3'>
-                    <button id="highScoreBtn" class="waves-effect searchbtn"><i
-                            class="material-icons left">grade</i>HIGH SCORE</button></td> -->
+                <div class='search center-align col s6 m3 l3'>
+                    <button id="resetBtn" class="waves-effect searchbtn"><i
+                            class="material-icons left">grade</i>RESET</button></td>
+                </div>
             </div>
         </div>
 
@@ -132,7 +139,7 @@
             <div class='col s9 m8 l6'>
                 <h5>API Support:</h5>
                 <a id='mwtext' href="https://www.dictionaryapi.com/products/api-collegiate-dictionary">
-                    <img id='mwlogo' src="assets/css/images/MWLogo_LightBG_120X120_2x.png"><br />
+                    <img id='mwlogo' src="assets/images/MWLogo_LightBG_120X120_2x.png"><br />
                     Merriam-Webster's Collegiate® Dictionary with Audio</a><br />
                 <a id='pexelstext' href="https://www.pexels.com/api/"><br />
                     <img id='pexelsLogo' src="assets/css/images/pexels_logo.png"><br />
@@ -151,9 +158,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
-
-    <!-- <script type="text/javascript" src="https://www.pureexample.com/js/lib/jquery.ui.touch-punch.min.js"></script> -->
-    <script src='projectSupport/smkeys.js'></script>
     <script src="assets/js/dict.js"></script>
     <script src="assets/js/script.js"></script>
 
