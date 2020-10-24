@@ -27,7 +27,6 @@ var setLetters = function () {
 //row 1 and dropzone
 $(function () {
     $(".sortable1, .sortable4").sortable({
-        // revert: true,
         containment: "#keyboard",
         tolerance: "pointer",
         cursor: "move",
@@ -44,27 +43,6 @@ $(function () {
             $(".dropped").removeClass("dropZone");
         },
         remove: function (event, ui) {
-            //<<<<<<< feature/keyboard
-            //     $(this).sortable('disable');
-            //     ui.item.clone().appendTo(".sortable4");
-            //     $(this).sortable('cancel');
-            //     console.log(this);
-            //    var done = $(ui.item).clone().attr('id');
-            //    console.log(done);
-            //    var oldTile = document.getElementById(done);
-            //    $(oldTile).addClass("gray");
-            //    $(oldTile).addClass("disabled", true);
-            //    resetBtnEl.addEventListener('click', function (oldTile){
-            //     $(oldTile).removeClass("gray");
-            //    });
-            //    $(oldTile).sortable(); 
-            //    console.log("yes");
-            //    $(oldTile).sortable('instance');
-            //    console.log("no");
-            //    $(oldTile).sortable("disable");
-            //    console.log("works");
-            //    $(oldTile).sortable('enable');
-            //    console.log(oldTile);
         },
         over: function (event, ui) {
         },
@@ -78,7 +56,6 @@ $(function () {
 //row 2 and dropzone
 $(function () {
     $(".sortable2, .sortable4").sortable({
-        // revert: true,
         containment: "#keyboard",
         tolerance: "pointer",
         cursor: "move",
@@ -94,16 +71,6 @@ $(function () {
             $(".dropped").removeClass("dropZone");
         },
         remove: function (event, ui) {
-            // ui.item.clone().appendTo(".sortable4");
-            // $(this).sortable('cancel');
-            // var done = $(ui.item).clone().attr('id');
-            // // console.log(done);
-            // var oldTile = document.getElementById(done);
-            // $(oldTile).addClass("gray");
-            // $(oldTile).sortable();
-            // var check = $(oldTile).sortable('instance');
-            // console.log(check);
-            // $(oldTile).sortable('disable');
         }
     }).disableSelection();
     $(".sortable4").sortable({
@@ -113,7 +80,6 @@ $(function () {
 //row 3 and drop area
 $(function () {
     $(".sortable3, .sortable4").sortable({
-        // revert: true,
         containment: "#keyboard",
         tolerance: "pointer",
         cursor: "move",
@@ -129,17 +95,6 @@ $(function () {
             $(".dropped").removeClass("dropZone");
         },
         remove: function (event, ui) {
-            // ui.item.clone().appendTo(".sortable4");
-            // $(this).sortable('cancel');
-            // var done = $(ui.item).clone().attr('id');
-            // // console.log(done);
-            // var oldTile = document.getElementById(done);
-            // $(oldTile).addClass("gray");
-            // $(oldTile).sortable();
-            // console.log("yes");
-            // var check = $(oldTile).sortable('instance');
-            // console.log(check);
-            // $(oldTile).sortable('disable');
 
         }
     }).disableSelection();
@@ -153,19 +108,8 @@ $(".dropped").droppable({
     tolerance: "touch",
     revert: false,
     drop: function (event, ui) {
-        // console.log(ui);
-        // console.log("drop");
         $(".dropped").addClass("dropZone");
-        // $(this).sortable('disable');
-        // var helper = ui.helper.clone(true);
-        // $(".letter").draggable('disable');
-        // finds object and then letter value of that object
         var dragged = ui.draggable[0].dataset.letter;
-        // console.log(dragged);
-        // var droppedDone = $(dragged).attr('id');
-        // console.log(droppedDone);
-        // var dragTile = document.getElementById(droppedDone);
-        // dragTile.sortable('disable');
 
         //add drop letters to array
         dropLetters.push(dragged);
@@ -297,10 +241,11 @@ var getDefData = function (results) {
         let word = results[i];
         var pexelURL = `https://api.pexels.com/v1/search?query=${word}&per_page=1`;
         var API_key = "563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
+        var mwKey = '6739e623-a753-4e79-bf96-58f6cd1a72a0';
 
         // fetch both APIs
         var apiUrls = [
-            fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${smkmw}`),
+            fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${mwKey}`),
             fetch(pexelURL, {
                 headers: {
                     // Accept: 'application/json',
@@ -326,7 +271,7 @@ var getDefData = function (results) {
                     if (wordDef.hwi.prs) {
                         audio = wordDef.hwi.prs[0].sound.audio
                     } else {
-                        audio = console.log("Sorry, there is no audio available for " + word) // to be added as message on page
+                        audio = ''
                     }
                     var image_s;
                     if (imgSrc.photos[0]) {
@@ -386,13 +331,14 @@ var getDefData = function (results) {
 // function takes api object array and parses for display
 var displayWordData = function (wordObjArr) {
 
+    // possibly not the ideal solution for handling errors due to load-time, but the setTimeout is doing the trick
     setTimeout(function tick() {
         // loop through each object generated from the word-results array
         for (var i = 0; i < wordObjArr.length; i++) {
             var wordData = wordObjArr[i]
             console.log(wordData)
             // check to see whether term is offensive
-            if (!wordObjArr[i].offensive) {
+            if (!wordData.offensive) {
                 // create DOM elements
                 var resultLI = document.createElement('li');
                 resultLI.setAttribute('class', 'col-12');
@@ -416,33 +362,62 @@ var displayWordData = function (wordObjArr) {
                     resultBody.append(resultDef);
                 }
 
-                // display audio-button within result-container body: takes 'audio' property from wordObj[i] and creates link for audio playback; conditions outlined in the Merriam-Webster api documentation are used to determine the 'subdir' value, which is a component of the audio-link href
+                // display audio-button to page; takes 'audio' property from data object to create link for audio playback; conditions outlined in the Merriam-Webster api documentation are used to determine the 'subdir' value, which is a component of the audio-link href
                 var aud;
                 if (wordData.audio) {
                     aud = (wordData.audio.split('', 3))
+                    // this regular expression refers to any number (\d) or punctuation symbol (\W)
+                    var regex = RegExp('[\\d\\W]')
+                    var subdir = ''
+                    if (aud[0] + aud[1] + aud[2] === 'bix') {
+                        subdir = 'bix'
+                    } else if (aud[0] + aud[1] === 'gg') {
+                        subdir = 'gg'
+                    } else if (regex.test(aud[0])) {
+                        subdir = 'number'
+                    } else {
+                        subdir = aud[0]
+                    }
+                    var audioLink = 'https://media.merriam-webster.com/audio/prons/en/us/ogg/' + subdir + '/' + wordData.audio + '.ogg';
                 } else {
                     aud = ''
                 }
-                // this regular expression refers to any number (\d) or punctuation symbol (\W)
-                var regex = RegExp('[\\d\\W]')
-                var subdir = ''
-                if (aud[0] + aud[1] + aud[2] === 'bix') {
-                    subdir = 'bix'
-                } else if (aud[0] + aud[1] === 'gg') {
-                    subdir = 'gg'
-                } else if (regex.test(aud[0])) {
-                    subdir = 'number'
-                } else {
-                    subdir = aud[0]
-                }
-                var audioLink = 'https://media.merriam-webster.com/audio/prons/en/us/ogg/' + subdir + '/' + wordData.audio + '.ogg';
 
-                // create button element to contain sound link
-                var audioBtn = document.createElement('a');
-                audioBtn.setAttribute('class', 'btn-floating waves-effect waves-light')
-                audioBtn.setAttribute('href', audioLink);
-                audioBtn.innerHTML = '<span><img id="audio-icon" src="assets/iconfinder_speaker-high-sound-volume-voice_3643734.png"></span>'
-                resultBody.append(audioBtn);
+                // event handler function (assist from LA to develop)
+                var playAudio = function (e) {
+                    // gets unique id of the button being clicked
+                    const fileName = e.path[2].dataset.file;
+                    // finds container-element with matching id to connect audio-file
+                    const audioEl = document.querySelector(`.${fileName}`);
+                    console.dir(audioEl);
+
+                    audioEl.play();
+                };
+
+                // the 'audio' element will use the first of its nested directions that it understands
+                var audioEl = document.createElement('audio');
+                audioEl.innerHTML = "<source src=" + audioLink + " type='audio/ogg'>"
+                "<p>Your audio does not support HTML5 audio.</p>";
+
+                // if audiofile is available button will be added, otherwise a message to user
+                if (aud.join) {
+                    // 'aud' variable becomes unique-id for DOM property,'classlist', using 'add' and 'join' methods
+                    audioEl.classList.add(aud.join(''))
+                    // button for audio-playback
+                    var audioBtn = document.createElement('button');
+                    audioBtn.setAttribute('type', 'button');
+                    // adds 'aud' id as an attribute to audio-play button
+                    audioBtn.setAttribute('data-file', aud.join(''));
+                    audioBtn.innerHTML = "<span><img class='btn-floating waves-effect waves-light' id='audio-icon' src='assets/images/iconfinder_speaker-high-sound-volume-voice_32x32.png'></span>"
+                    audioBtn.addEventListener('click', playAudio);
+                    // append audio elements to container
+                    resultBody.append(audioEl);
+                    resultBody.append(audioBtn);
+                } else {
+                    var noAudio = document.createElement('p');
+                    noAudio.textContent = "no audio available";
+                    resultBody.append(noAudio);
+                };
 
                 // Get the modal
                 var modal = document.getElementById("myModal");
@@ -457,7 +432,7 @@ var displayWordData = function (wordObjArr) {
                 // Get the button that opens the modal
                 var imgBtn = document.createElement('a')//addEventListener('click', onclick);
                 imgBtn.setAttribute('class', 'btn-floating waves-effect waves-light red disabled')
-                imgBtn.innerHTML = '<span><img id="info-icon" src="assets/iconfinder_Information_Circle_4781829.png"></span>'
+                imgBtn.innerHTML = '<span><img id="info-icon" src="assets/images/iconfinder_Information_Circle_4781829.png"></span>'
 
                 // Get the <span> element that closes the modal
                 var span = document.getElementsByClassName("close")[0];
@@ -482,7 +457,7 @@ var displayWordData = function (wordObjArr) {
                 resultHeader.innerHTML = "<p>This word did not make it past our sensors.</p>"
             }
         }
-    }, 1000);
+    }, 1500);
 };
 
 function myFunction() {
