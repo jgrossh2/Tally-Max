@@ -27,7 +27,6 @@ var setLetters = function () {
 //row 1 and dropzone
 $(function () {
     $(".sortable1, .sortable4").sortable({
-        // revert: true,
         containment: "#keyboard",
         tolerance: "pointer",
         cursor: "move",
@@ -44,24 +43,6 @@ $(function () {
             $(".dropped").removeClass("dropZone");
         },
         remove: function (event, ui) {
-            //<<<<<<< feature/keyboard
-            //     $(this).sortable('disable');
-            //     ui.item.clone().appendTo(".sortable4");
-            //     $(this).sortable('cancel');
-            //     console.log(this);
-            //    var done = $(ui.item).clone().attr('id');
-            //    console.log(done);
-            //    var oldTile = document.getElementById(done);
-            //    $(oldTile).addClass("gray");
-            //    $(oldTile).addClass("disabled", true);
-            //    $(oldTile).sortable(); 
-            //    console.log("yes");
-            //    $(oldTile).sortable('instance');
-            //    console.log("no");
-            //    $(oldTile).sortable("disable");
-            //    console.log("works");
-            //    $(oldTile).sortable('enable');
-            //    console.log(oldTile);
         },
         over: function (event, ui) {
         },
@@ -75,7 +56,6 @@ $(function () {
 //row 2 and dropzone
 $(function () {
     $(".sortable2, .sortable4").sortable({
-        // revert: true,
         containment: "#keyboard",
         tolerance: "pointer",
         cursor: "move",
@@ -91,16 +71,6 @@ $(function () {
             $(".dropped").removeClass("dropZone");
         },
         remove: function (event, ui) {
-            // ui.item.clone().appendTo(".sortable4");
-            // $(this).sortable('cancel');
-            // var done = $(ui.item).clone().attr('id');
-            // // console.log(done);
-            // var oldTile = document.getElementById(done);
-            // $(oldTile).addClass("gray");
-            // $(oldTile).sortable();
-            // var check = $(oldTile).sortable('instance');
-            // console.log(check);
-            // $(oldTile).sortable('disable');
         }
     }).disableSelection();
     $(".sortable4").sortable({
@@ -110,7 +80,6 @@ $(function () {
 //row 3 and drop area
 $(function () {
     $(".sortable3, .sortable4").sortable({
-        // revert: true,
         containment: "#keyboard",
         tolerance: "pointer",
         cursor: "move",
@@ -126,17 +95,6 @@ $(function () {
             $(".dropped").removeClass("dropZone");
         },
         remove: function (event, ui) {
-            // ui.item.clone().appendTo(".sortable4");
-            // $(this).sortable('cancel');
-            // var done = $(ui.item).clone().attr('id');
-            // // console.log(done);
-            // var oldTile = document.getElementById(done);
-            // $(oldTile).addClass("gray");
-            // $(oldTile).sortable();
-            // console.log("yes");
-            // var check = $(oldTile).sortable('instance');
-            // console.log(check);
-            // $(oldTile).sortable('disable');
 
         }
     }).disableSelection();
@@ -150,19 +108,8 @@ $(".dropped").droppable({
     tolerance: "touch",
     revert: false,
     drop: function (event, ui) {
-        // console.log(ui);
-        // console.log("drop");
         $(".dropped").addClass("dropZone");
-        // $(this).sortable('disable');
-        // var helper = ui.helper.clone(true);
-        // $(".letter").draggable('disable');
-        // finds object and then letter value of that object
         var dragged = ui.draggable[0].dataset.letter;
-        // console.log(dragged);
-        // var droppedDone = $(dragged).attr('id');
-        // console.log(droppedDone);
-        // var dragTile = document.getElementById(droppedDone);
-        // dragTile.sortable('disable');
 
         //add drop letters to array
         dropLetters.push(dragged);

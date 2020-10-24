@@ -161,7 +161,7 @@ a#mwtext:hover {
 
 #keyboard {
     margin-left: 0;
-    padding: 15px;
+    padding: 20px;
     list-style: none;
 }
 
@@ -179,6 +179,7 @@ a#mwtext:hover {
     border: dotted 3px var(--dark);
     height: 130px;
     width: 100%;
+    margin: 0 0 0 10px;
 }
 .drop {
     border: none;
@@ -186,6 +187,10 @@ a#mwtext:hover {
 .todo {
     font-size: 24px;
     font-weight: bold;
+    padding: 0 0 0 10px;
+}
+.instructions {
+    font-size: 18px;
 }
 .dropZone {
     background: lightgray;
