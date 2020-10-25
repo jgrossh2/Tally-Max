@@ -325,7 +325,8 @@ var getDefData = function (results) {
                         image_m = imgSrc.photos[0].src.medium
                     } else {
 
-                        image_m = "assets/images/scrabble-output-onlinepngtools.png", ["no image found for" + word] //noImage;
+                        image_m = "assets/images/scrabble-output-onlinepngtools.png"
+                        //image_m = "no image found for this word" //noImage;
                     }
                     var image_l;
                     if (imgSrc.photos[0]) {
@@ -337,7 +338,7 @@ var getDefData = function (results) {
                     if (imgSrc.photos[0]) {
                         photographer = imgSrc.photos[0].photographer
                     } else {
-                        photographer = ''
+                        photographer = 'Brett Jordan. Sorry, no new images are available for this word. Please try our image search below for other sources.'
                     }
                     var photog_url;
                     if (imgSrc.photos[0]) {
