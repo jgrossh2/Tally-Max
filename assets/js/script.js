@@ -361,6 +361,7 @@ var displayWordData = function (wordObjArr) {
                 audioBtn.innerHTML = '<span><img id="audio-icon" src="assets/css/images/iconfinder_speaker-high-sound-volume-voice_3643734.png"></span>'
                 resultBody.append(audioBtn);
 
+                //Display Image fetched from Pexels
                 var pexelsPhoto = document.createElement('img');
                 pexelsPhoto.setAttribute('src', wordData.image_m);
                 resultBody.append(pexelsPhoto);
@@ -368,6 +369,7 @@ var displayWordData = function (wordObjArr) {
                 // Get the modal
                 var modal = document.getElementById("myModal");
 
+                // create an array for images only after fetch was called
                 var pexelsArr = [];
                 pexelsArr.push(wordData.image_m);
 
@@ -422,7 +424,6 @@ function searchFunction() {
         + API_KEY
         + '&q='
         + srchTerm;
-
     fetch(
         URL
     )
