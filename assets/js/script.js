@@ -486,14 +486,18 @@ var displayWordData = function (wordObjArr) {
                 imgBtn.innerHTML = '<span><img id="img-icon" src="assets/images/iconfinder_photo-24_103171.png"></span>'
                 console.log('WORDDATA', wordData.word)
                 console.log('PEXELARR', pexelsArr)
+                //
+                var wordPhotogr = document.createElement('p');
+                wordPhotogr.textContent = "Photographer: ";
+                resultBody.append(wordPhotogr);
 
                 // Use createElement to display photographer's name
                 var pexelsPhotographerEl = document.createElement('p');
                 pexelsPhotographerEl.innerHTML = wordData.photographer;
 
-                //Creat span to display photographer's name
+                //Create span to display photographer's name
                 var resultPhtr = document.createElement('span');
-                resultPhtr.textContent = wordData.photographer; //response[1].wordData.definition.photographer;//imageSrc[1].photos;//.photographer[i];
+                resultPhtr.textContent = wordData.photographer;
                 resultBody.append(pexelsPhotographerEl);
                 // Get the <span> element that closes the modal
                 var span = document.getElementsByClassName("close")[0];
