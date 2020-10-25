@@ -147,7 +147,10 @@ a#pexelstext:hover,
 a#pixabaytext:hover {
     color: var(--red);
 }
-
+#pexelsLogo {
+    width: 100px;
+    height: 40px;
+}
 .container {
     width: 1080px;
 }
@@ -302,9 +305,6 @@ a#pixabaytext:hover {
     border: solid 5px;
     border-color: var(--dark);
 }
-.gray {
-    filter: grayscale(100%);
-}
 
 /* The Modal (background) */
 .modal {
@@ -319,10 +319,10 @@ a#pixabaytext:hover {
     overflow: auto; /* Enable scroll if needed */
     background-color: lightgrey; /* Fallback color */
     background-color: white; /* Black w/ opacity */
-  }
+}
   
-  /* Modal Content */
-  .modal-content {
+/* Modal Content */
+.modal-content {
     position: relative;
     background-color: var(--grey);
     margin: auto;
@@ -334,9 +334,12 @@ a#pixabaytext:hover {
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
     animation-duration: 0.4s
-  }
+}
+button {
+    background-color: lightgrey;
+}
 
-  img#img-icon {
+img#img-icon {
     width: 32px;
     padding: 4px 0 0 4px;
     color: var(--lblue);
@@ -352,44 +355,51 @@ a#pixabaytext:hover {
     background-color: var(--lblue);
 }
   
-  /* Add Animation */
-  @-webkit-keyframes animatetop {
+/* Add Animation */
+@-webkit-keyframes animatetop {
     from {top:-300px; opacity:0} 
     to {top:0; opacity:1}
-  }
+}
   
-  @keyframes animatetop {
+@keyframes animatetop {
     from {top:-300px; opacity:0}
     to {top:0; opacity:1}
-  }
+}
   
-  /* The Close Button */
-  .close {
+/* The Close Button */
+.close {
     color: var(--lblue);
     float: right;
     font-size: 20px;
     font-weight: bold;
-  }
+}
   
-  .close:hover,
-  .close:focus {
+.close:hover,
+.close:focus {
     color: #000;
     text-decoration: black;
     cursor: pointer;
-  }
-  
-  .modal-header {
+}
+
+.modal-header {
     padding: 0.5px 2px;
     background-color: lightgrey;
     color: black;
-  }
+}
   
-  .modal-body {padding: 80px 80px;}
+.modal-body {
+    padding: 80px 80px;
+}
   
-  .modal-footer {
+.modal-footer {
     padding: 0.05px 1px;
     background-color: lightgrey;
-  }
+}
+.modal .modal-footer {
+    background-color: lightgrey;
+    height: 190px;
+    width: 10%;
+}
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */
 @media screen and (max-width: 1080px) {
     h6.headline.center-align {
@@ -447,14 +457,12 @@ a#pixabaytext:hover {
         font-size: 14px;
     }
 }
-
 /* MEDIA QUERY FOR MOBILE PHONES */
 @media screen and (max-width: 566px) {
     
     h6.headline.center-align {
         margin: 10px auto 0 auto;
     }
-
     .tiles {
         min-height: 43px;
         min-width: 43px;
