@@ -122,6 +122,7 @@ $(".dropped").droppable({
     }
 });
 
+
 // event listeners to gather user input and start generator function
 twoLetterBtnEl.addEventListener('click', function () {
     // get possible letters from form
@@ -419,21 +420,34 @@ var displayWordData = function (wordObjArr) {
                     resultBody.append(noAudio);
                 };
 
+                //Display Image fetched from Pexels
+                var pexelsPhoto = document.createElement('img');
+                pexelsPhoto.setAttribute('src', wordData.image_m);
+                resultBody.append(pexelsPhoto);
+
                 // Get the modal
                 var modal = document.getElementById("myModal");
 
-                // Use 'getElementById' to get the ID of where the Img will be displayed
-                var picBodyEl = document.getElementById('img-body');
-
-                // Use 'getElementById' to get the ID of where the photographer name will be displayed
-                var photographerEl = document.getElementById("ph-body");
-                photographerEl.setAttribute('src', wordData.photographer);
+                // create an array for images only after fetch was called
+                var pexelsArr = [];
+                pexelsArr.push(wordData.image_m);
 
                 // Get the button that opens the modal
                 var imgBtn = document.createElement('a')//addEventListener('click', onclick);
-                imgBtn.setAttribute('class', 'btn-floating waves-effect waves-light red disabled')
-                imgBtn.innerHTML = '<span><img id="info-icon" src="assets/images/iconfinder_Information_Circle_4781829.png"></span>'
+                imgBtn.setAttribute('class', 'btn-floating waves-effect waves-light img')
+                // imgBtn.setAttribute('search-name', wordData.word);
+                imgBtn.innerHTML = '<span><img id="img-icon" src="assets/css/images/iconfinder_photo_24_103171.png"></span>'
+                console.log('WORDDATA', wordData.word)
+                console.log('PEXELARR', pexelsArr)
 
+                // Use createElement to display photographer's name
+                var pexelsPhotographerEl = document.createElement('p');
+                pexelsPhotographerEl.innerHTML = wordData.photographer;
+
+                //Creat span to display photographer's name
+                var resultPhtr = document.createElement('span');
+                resultPhtr.textContent = wordData.photographer; //response[1].wordData.definition.photographer;//imageSrc[1].photos;//.photographer[i];
+                resultBody.append(pexelsPhotographerEl);
                 // Get the <span> element that closes the modal
                 var span = document.getElementsByClassName("close")[0];
                 // When the user clicks the button, open the modal 
@@ -448,7 +462,6 @@ var displayWordData = function (wordObjArr) {
                         modal.style.display = "none";
                     }
                 }
-
                 resultBody.append(imgBtn);
                 resultLI.append(resultBody);
                 resultsContainerEl.append(resultLI);
@@ -460,44 +473,28 @@ var displayWordData = function (wordObjArr) {
     }, 1500);
 };
 
-function myFunction() {
-    console.log("test2")
-    var searchTerm = document.querySelector('#searchTerm').value;
-    fetch(
-        'https://api.giphy.com/v1/gifs/search?q=' +
-        searchTerm +
-        '&api_key=HvaacROi9w5oQCDYHSIk42eiDSIXH3FN&limit=1'
-    )
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (response) {
-            console.log(response.data[0]);
-            var responseContainerEl = document.querySelector('#response-container');
-            responseContainerEl.innerHTML = '';
-            var gifImg = document.createElement('img');
-            gifImg.setAttribute('src', response.data[0].images.fixed_height.url);
-            responseContainerEl.appendChild(gifImg);
-        });
-}
 
+//function to search for additional imades of the word in modal
 function searchFunction() {
     console.log("test")
     var srchTerm = document.querySelector('#srchTerm').value;
+    var API_KEY = '18755179-1cec5558437abfcfe27155a57';
+    var URL = 'https://pixabay.com/api/?key='
+        + API_KEY
+        + '&q='
+        + srchTerm;
     fetch(
-        'https://api.giphy.com/v1/gifs/search?q=' +
-        srchTerm +
-        '&api_key=HvaacROi9w5oQCDYHSIk42eiDSIXH3FN&limit=1'
+        URL
     )
         .then(function (response) {
             return response.json();
         })
         .then(function (response) {
-            console.log(response.data[0]);
+            console.log(response);
             var responseContEl = document.querySelector('#response-cont');
             responseContEl.innerHTML = '';
-            var gifVideo = document.createElement('img');
-            gifVideo.setAttribute('src', response.data[0].images.fixed_height.url);
-            responseContEl.appendChild(gifVideo);
-        });
-}
+            var pixabayImg = document.createElement('img');
+            pixabayImg.setAttribute('src', response.hits[0].webformatURL);
+            responseContEl.appendChild(pixabayImg);
+        })
+};
