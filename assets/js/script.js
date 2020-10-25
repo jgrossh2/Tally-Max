@@ -257,21 +257,57 @@ var getDefData = function (results) {
         // submit https request
         Promise.all(apiUrls).then(function (responses) {
             // using map() method to get a response array of json objects, 
-            return Promise.all(responses.map(function (response) {
+            Promise.all(responses.map(function (response) {
                 return response.json();
             }))
                 // word object definition
                 .then(function (response) {
-                    console.log(response)
-                    var wordDef = response[0][0];
+                    var wordDef = response[0];
                     var imgSrc = response[1];
+                    console.log(wordDef)
 
-                    // properties that are inconsistently available within response data
+                    // managing properties that are inconsistently available within response data
+                    var type;
+                    if (wordDef.fl) {
+                        type = wordDef.fl
+                    } else if (wordDef[0].fl) {
+                        type = wordDef[0].fl
+                    } else {
+                        type = ''
+                    }
+                    var definition;
+                    if (wordDef.shortdef) {
+                        definition = wordDef.shortdef
+                    } else if (wordDef[0].shortdef) {
+                        definition = wordDef[0].shortdef
+                    } else {
+                        // not the perfect solution, but came upon the error prompting this fix late in the game
+                        definition = ['Sorry, this definition is not available', 'Please try: www.merriam-webster.com']
+                    }
                     var audio;
-                    if (wordDef.hwi.prs) {
+                    // the following 2 lines resolve error resulting from 'att' response variant
+                    if (wordDef.hwi) {
                         audio = wordDef.hwi.prs[0].sound.audio
+                    // the following 2 lines resolve error resulting from 'oot' response variant
+                    } else if (typeof wordDef[0] === 'string') {
+                        audio = ''
+                    // the following 4 lines resolve error resulting from 'to' response variant
+                    } else if (wordDef[0].hwi.prs) {
+                        for (var i = 0; i < wordDef[0].hwi.prs.length; i++) {
+                            if (wordDef[0].hwi.prs[i].sound) {
+                                audio = wordDef[0].hwi.prs[i].sound.audio
+                            }
+                        }
                     } else {
                         audio = ''
+                    }
+                    var offensive;
+                    if (wordDef.meta) {
+                        offensive = wordDef.meta.offensive
+                    } else if (wordDef[0].meta) {
+                        offensive = wordDef[0].meta.offensive
+                    } else {
+                        offensive = false
                     }
                     var image_s;
                     if (imgSrc.photos[0]) {
@@ -306,11 +342,11 @@ var getDefData = function (results) {
 
                     // collating properties from both api responses into single object
                     var wordObj = {
-                        word: wordDef.hwi.hw,
-                        class: wordDef.fl,
-                        definition: wordDef.shortdef,
+                        word: word,
+                        type: type,
+                        definition: definition,
                         audio: audio,
-                        offensive: wordDef.meta.offensive,
+                        offensive: offensive,
                         image_s: image_s,
                         image_m: image_m,
                         image_l: image_l,
@@ -352,7 +388,7 @@ var displayWordData = function (wordObjArr) {
                 // create div body element for class, audio button, definitions, and image-modal
                 var resultBody = document.createElement('div');
                 resultBody.setAttribute('class', 'collapsible-body');
-                resultBody.innerHTML = '<span>' + wordData.class + '</span>';
+                resultBody.innerHTML = '<span>' + wordData.type + '</span>';
 
                 // loop through each homonym and display within element for that word
                 for (var j = 0; j < wordData.definition.length; j++) {
@@ -383,7 +419,7 @@ var displayWordData = function (wordObjArr) {
                     aud = ''
                 }
 
-                // event handler function (assist from LA to develop)
+                // event handler function (major assist from LA to develop)
                 var playAudio = function (e) {
                     // gets unique id of the button being clicked
                     const fileName = e.path[2].dataset.file;
