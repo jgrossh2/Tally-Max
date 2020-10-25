@@ -334,7 +334,7 @@ var displayWordData = function (wordObjArr) {
                 for (var j = 0; j < wordData.definition.length; j++) {
                     n = j + 1
                     var resultDef = document.createElement('p');
-                    resultDef.textContent = n + ') ' + wordData.definition[i];
+                    resultDef.textContent = n + ') ' + wordData.definition[j];
                     resultBody.append(resultDef);
                 }
 
