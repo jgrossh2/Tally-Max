@@ -24,15 +24,6 @@ var setLetters = function () {
     spaceEl.innerHTML = " ";
     dropLetters = [];
 }
-// resize letters to % of overall width when screen changes
-// $(document).ready(function(){
-//     $(window).resize(function() {
-//         $(".letter").width($(window).outerWidth);
-//         $(".letter").height($(window).outerHeight);
-        
-//     });
-// });
-// .09 .14
 //row 1 and dropzone
 $(function () {
     $(".sortable1, .sortable4").sortable({
