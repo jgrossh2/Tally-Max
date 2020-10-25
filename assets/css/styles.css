@@ -375,7 +375,7 @@ a#mwtext:hover {
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */
 @media screen and (max-width: 1080px) {
     h6.headline.center-align {
-        margin: 10px auto 0 auto;
+        margin: 170px auto 0 auto;
     }
     .tiles {
         min-height: 85px;
@@ -392,7 +392,7 @@ a#mwtext:hover {
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */
 @media screen and (max-width: 848px) {
     h6.headline.center-align {
-        margin: 10px auto 0 auto;
+        margin: 170px auto 0 auto;
     }
     .tiles {
         min-height: 66px;
@@ -408,7 +408,7 @@ a#mwtext:hover {
 @media screen and (max-width: 684px) {
     
     h6.headline.center-align {
-        margin: 10px auto 0 auto;
+        margin: 170px auto 0 auto;
     }
     .tiles {
         min-height: 53px;
@@ -419,7 +419,7 @@ a#mwtext:hover {
         margin-bottom: 15px;
     }
     .dropped { 
-        height: 55px;
+        height: 53px;
     } 
     .todo {
         font-size: 16px;
@@ -434,7 +434,7 @@ a#mwtext:hover {
 @media screen and (max-width: 566px) {
     
     h6.headline.center-align {
-        margin: 10px auto;
+        margin: 10px auto 0 auto;
     }
 
     .tiles {
