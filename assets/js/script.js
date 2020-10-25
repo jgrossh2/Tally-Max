@@ -239,18 +239,12 @@ var getDefData = function (results) {
     for (var i = 0; i < results.length; i++) {
         // api variables        
         let word = results[i];
-        var images = results[i];
         var pexelURL = `https://api.pexels.com/v1/search?query=${word}&per_page=1`;//images
         var API_key = "563492ad6f91700001000001d01c380d928e472983ed037be8073298";//"563492ad6f91700001000001294e0c620d364f5597a8efd5b7667ccf";
         var mwKey = '6739e623-a753-4e79-bf96-58f6cd1a72a0';
         // fetch both APIs
-        // var apiUrls = [
-        //     fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${images}?key=${smkmw}`),
 
-        // var pexelURL = `https://api.pexels.com/v1/search?query=${word}&per_page=1`;
-        console.log(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${mwKey}`);
         var apiUrls = [
-
             fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${mwKey}`),//images
             fetch(pexelURL, {
                 headers: {
@@ -266,13 +260,9 @@ var getDefData = function (results) {
             Promise.all(responses.map(function (response) {
                 return response.json();
             }))
-                // word definition
+                // responses
                 .then(function (response) {
-<<<<<<< HEAD
                     var wordDef = response[0];
-=======
-                    var wordDef = response[0][0];
->>>>>>> 60f59bf12c22ffcc8dadad5659fc3f270d4acc21
                     var imgSrc = response[1];
 
                     // managing properties that are inconsistently available within response data
@@ -297,7 +287,7 @@ var getDefData = function (results) {
                     // the following 2 lines resolve error resulting from 'att' response variant
                     if (wordDef.hwi) {
                         audio = wordDef.hwi.prs[0].sound.audio
-                    // the following 2 lines resolve error resulting from 'oot' response variant
+                        // the following 2 lines resolve error resulting from 'oot' response variant
                     } else if (typeof wordDef[0] === 'string') {
                         audio = ''
                     } else if (wordDef[0].hwi.prs) {
@@ -313,87 +303,45 @@ var getDefData = function (results) {
                     } else {
                         offensive = false
                     }
-                    var image_s;
-                    if (imgSrc.photos[0]) {
-                        image_s = imgSrc.photos[0].src.small
-                    } else {
-                        image_s = console.log("Sorry, there is no image available for " + word) // to be added as message on page
-                    }
                     var image_m;
                     if (imgSrc.photos[0]) {
                         image_m = imgSrc.photos[0].src.medium
                     } else {
                         image_m = ''
                     }
-                    var image_l;
+                    var photographer;
                     if (imgSrc.photos[0]) {
-                        image_l = imgSrc.photos[0].src.large
+                        photographer = imgSrc.photos[0].photographer
                     } else {
-                        image_l = ''
+                        photographer = ''
                     }
-                    // var photographer;
-                    var wordObj;
-
-                    // if (imgSrc.photos[0]) {
-                    //   photographer = imgSrc.photos[0].photographer
-                    //  } else {
-                    if (imgSrc.photos.length > 0) {
-                        wordObj = {
-                            word: wordDef.hwi.hw,
-                            class: wordDef.fl,
-                            definition: wordDef.shortdef,
-                            audio: wordDef.hwi.prs[0].sound.audio,
-                            offensive: wordDef.meta.offensive,
-                            image_s: imgSrc.photos[0].src.small,
-                            image_m: imgSrc.photos[0].src.medium,
-                            image_l: imgSrc.photos[0].src.large,
-                            photographer: imgSrc.photos[0].photographer,
-                            photog_url: imgSrc.photos[0].photographer_url,
-                        }
+                    var photog_url;
+                    if (imgSrc.photos[0]) {
+                        photog_url = imgSrc.photos[0].photographer_url
                     } else {
-                        wordObj = {
-                            word: wordDef.hwi.hw,
-                            class: wordDef.fl,
-                            definition: wordDef.shortdef,
-                            audio: wordDef.hwi.prs[0].sound.audio,
-                            offensive: wordDef.meta.offensive,
-                            image_s: noImage,
-                            image_m: noImage,
-                            image_l: noImage,
-                            photographer: noImage,
-                            photog_url: noImage,
-                        }
+                        photog_url = ''
                     }
-
-<<<<<<< HEAD
-                    // collating properties from both api responses into single object
+                    
+                    // collating properties from Pexel and MW api responses into single object
                     var wordObj = {
                         word: word,
                         type: type,
                         definition: definition,
                         audio: audio,
                         offensive: offensive,
-                        image_s: image_s,
                         image_m: image_m,
-                        image_l: image_l,
                         photographer: photographer,
                         photog_url: photog_url,
                     }
-=======
-                    // }
-                    console.log(wordObj);
->>>>>>> 60f59bf12c22ffcc8dadad5659fc3f270d4acc21
                     wordObjArr.push(wordObj);
-                    displayWordData(wordObjArr);
                     return wordObj;
-
                 })
                 .catch((error) => {
                     console.error('Error: ', error);
                 })
-        });
-    };
-    //displayWordData(wordObjArr);
+            });
+        };
+        displayWordData(wordObjArr);
 };
 
 // function takes api object array and parses for display
@@ -427,7 +375,7 @@ var displayWordData = function (wordObjArr) {
                 for (var j = 0; j < wordData.definition.length; j++) {
                     n = j + 1
                     var resultDef = document.createElement('p');
-                    resultDef.textContent = n + ') ' + wordData.definition[i];
+                    resultDef.textContent = n + ') ' + wordData.definition[j];
                     resultBody.append(resultDef);
                 }
 
@@ -489,7 +437,7 @@ var displayWordData = function (wordObjArr) {
                 };
 
                 var pexelsPhoto = document.createElement('img');
-                pexelsPhoto.setAttribute('src', wordData.image_m);
+                pexelsPhoto.setAttribute('src', image_m);
                 resultBody.append(pexelsPhoto);
 
                 // Get the modal
