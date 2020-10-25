@@ -18,18 +18,24 @@
 
 <body>
     <header>
-        <div>
-            <h1 class="m">M</h1>
-            <h1 class="tally">TALLY</h1>
-            <h1 class="x">X</h1>
+        <div class='row header'>
+            <div class='col s12 m4 l3' id='tmax'>
+                <h1 class="m">M</h1>
+                <h1 class="tally">TALLY</h1>
+                <h1 class="x">X</h1>
+            </div>
+            <div class='col s12 m8 l9'>
+                <h6 class='headline center-align'>
+                    <i>Improve your word-game competitive-edge by mastering 2-5 letter words!</i>
+                </h6>
+            </div>
         </div>
     </header>
-    <!-- class="card-panel center-align row z-depth-1" -->
     <main>
         <!-- START KEYBOARD CONTAINER: includes keyboard and drop zone-->
-        <div id='container' >
-            <div id="keyboard" class="card horizontal">
-                <div class="row container-1 sortable1">
+        <div id='container'>
+            <div id="keyboard" class="card horizontal container">
+                <div class="row container sortable1">
                     <div class="col s1 letter tiles" id="a" data-letter="a"></div>
                     <div class="col s1 letter tiles" id="b" data-letter="b"></div>
                     <div class="col s1 letter tiles" id="c" data-letter="c"></div>
@@ -40,7 +46,7 @@
                     <div class="col s1 letter tiles" id="h" data-letter="h"></div>
                     <div class="col s1 letter tiles" id="i" data-letter="i"></div>
                 </div>
-                <div class="row container-1 sortable2">
+                <div class="row container sortable2">
                     <div class="col s1 letter tiles" id="j" data-letter="j"></div>
                     <div class="col s1 letter tiles" id="k" data-letter="k"></div>
                     <div class="col s1 letter tiles" id="l" data-letter="l"></div>
@@ -51,7 +57,7 @@
                     <div class="col s1 letter tiles" id="q" data-letter="q"></div>
                     <div class="col s1 letter tiles" id="r" data-letter="r"></div>
                 </div>
-                <div class="row container-1 sortable3">
+                <div class="row container sortable3">
                     <div class="col s1 letter tiles" id="s" data-letter="s"></div>
                     <div class="col s1 letter tiles" id="t" data-letter="t"></div>
                     <div class="col s1 letter tiles" id="u" data-letter="u"></div>
@@ -60,12 +66,12 @@
                     <div class="col s1 letter tiles" id="x" data-letter="x"></div>
                     <div class="col s1 letter tiles" id="y" data-letter="y"></div>
                     <div class="col s1 letter tiles" id="z" data-letter="z"></div>
-                    <!-- <div class="col s1 letter tiles" id="empty"></div> -->
                 </div>
                 <div>
-                    <p class="todo">Drag Letters Here!</p>
+                    <p class="todo row container">Drag Letters Here! <span class="instructions">Include up to 5 letters,
+                            no repeating of letters</span></p>
                 </div>
-                <div class="row container-1 dropped sortable4 space"></div>
+                <div class="row container dropped sortable4 space"></div>
             </div>
 
             <!-- START SEARCH-BUTTONS CONTAINER -->
@@ -84,50 +90,42 @@
                             class="material-icons left">grade</i>RANDOM</button></td>
                 </div>
                 <div class='search center-align col s6 m3 l3'>
-                    <button id="highScoreBtn" class="waves-effect searchbtn"><i
-                            class="material-icons left">grade</i>HIGH SCORE</button></td>
+                    <button id="resetBtn" class="waves-effect searchbtn"><i
+                            class="material-icons left">grade</i>RESET</button></td>
                 </div>
             </div>
+        </div>
 
-            <!-- START RESULTS CONTAINER: words resulting from search are listed here -->
-            <div class="row">
-                <div class='col valign-wrapper results-title'>
-                    <h5 class='valign subtitle'>Search results for: <span id="search-content"></span></h5>
-                </div>
-                <ul class="collapsible popout col s12 m12 l12" id="results-container" data-collapsible='accordion'></ul>
+        <!-- START RESULTS CONTAINER: words resulting from search are listed here -->
+        <div class="row">
+            <div class='col valign-wrapper results-title'>
+                <h5 class='valign subtitle'>Search results for: <span id="search-content"></span></h5>
             </div>
+            <ul class="collapsible popout col s12 m12 l12" id="results-container" data-collapsible='accordion'></ul>
+        </div>
         </div>
 
         <!-- MODAL -->
-
-        <!-- Trigger/Open The Modal -->
-        <!-- <button class="btn-floating waves-effect waves-light red disabled" id="info-btn">Info</button> -->
-
-        <!-- The Modal -->
         <div id="myModal" class="modal">
-            <!-- When the user clicks the button, open the modal  -->
-            <!-- <button onclick="displayImg()"></button> -->
-            <!-- <span><img id="info-icon" src="assets/iconfinder_Information_Circle_4781829.png"></span> -->
-            <!-- Modal content -->
             <div class="modal-content">
-                <div class="modal-header">
-                    <span class="close">&times;</span>
-                    <h4>Powered by Pexel</h4>
+
+                <!-- Pixabay image search -->
+                <div>
+                    <h5>Check out Pixabay for more stunning images</h5>
+                    Enter your word: <input type="text" id="srchTerm" value="" />
                 </div>
-                <div class="modal-body" id="img-body">
-                    <!-- <img>Image HERE</img> -->
-                </div>
+                <button onclick="searchFunction()">More Images!</button>
+                <div id="response-cont"></div>
+                <div class="modal-body" id="img-body"></div>
                 <div class="modal-footer" id="ph-body">
                     <span class="close">&times;</span>
-                    <h5>Photographer: </h5>
+                    <h6>Powered by Pixabay:</h6>
+                    <a href="https://pixabay.com/"><br />
+                        <img id='pixabaylogo' src="assets/images/logo_pixabay.png">
+                    </a>
                 </div>
             </div>
         </div>
-
-        <!-- START IMAGE CONTAINER: image selected from results list by user is displayed here
-        <div class="container" id="images">
-            <button onclick="showImage()"></button>
-        </div> -->
 
     </main>
 
@@ -141,24 +139,25 @@
             <div class='col s9 m8 l6'>
                 <h5>API Support:</h5>
                 <a id='mwtext' href="https://www.dictionaryapi.com/products/api-collegiate-dictionary">
-                    <img id='mwlogo' src="assets/MWLogo_LightBG_120X120_2x.png"><br />
+                    <img id='mwlogo' src="assets/images/MWLogo_LightBG_120X120_2x.png"><br />
                     Merriam-Webster's Collegiate® Dictionary with Audio</a><br />
-                <a href="https://www.pexels.com/api/"><br />
-                    <!-- <img id='pexelLogo' src="assets/Pexels-logo.png"> -->
-                    PEXELS</a>
+                <a id='pexelstext' href="https://www.pexels.com/api/"><br />
+                    <img id='pexelsLogo' src="assets/images/pexels.png"><br />
+                    Pexels</a><br />
+                <a id='pixabaytext' href="https://pixabay.com/"><br />
+                    <img id='pixabaylogo' src="assets/images/logo_pixabay.png"><br />
+                    Pixabay</a>
             </div>
         </div>
     </footer>
 
     <!--JavaScript at end of body for optimized loading-->
-
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
-    <!-- <script type="text/javascript" src="https://www.pureexample.com/js/lib/jquery.ui.touch-punch.min.js"></script> -->
-    <script src='projectSupport/smkeys.js'></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
     <script src="assets/js/dict.js"></script>
     <script src="assets/js/script.js"></script>
 
