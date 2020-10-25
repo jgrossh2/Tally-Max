@@ -25,13 +25,13 @@ var setLetters = function () {
     dropLetters = [];
 }
 // resize letters to % of overall width when screen changes
-$(document).ready(function(){
-    $(window).resize(function() {
-        $(".letter").width($(window).outerWidth);
-        $(".letter").height($(window).outerHeight);
+// $(document).ready(function(){
+//     $(window).resize(function() {
+//         $(".letter").width($(window).outerWidth);
+//         $(".letter").height($(window).outerHeight);
         
-    });
-});
+//     });
+// });
 // .09 .14
 //row 1 and dropzone
 $(function () {

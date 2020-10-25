@@ -147,7 +147,7 @@ a#mwtext:hover {
 }
 
 .container {
-    width: 100%;
+    width: 1080px;
 }
 
 .space {
@@ -168,13 +168,13 @@ a#mwtext:hover {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     padding: 0 0.75rem;
-    min-height: 130px;
+    min-height: 97px;
     margin: 0 5px 0 5px;
-    min-width: 130px;
+    min-width: 97px;
 } 
 .dropped {
     border: dotted 3px var(--dark);
-    height: 130px;
+    height: 97px;
     width: 100%;
     margin: 0 0 0 10px;
 }
@@ -372,60 +372,134 @@ a#mwtext:hover {
     padding: 0.05px 1px;
     background-color: lightgrey;
   }
-
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */
-@media screen and (max-width: 980px) {
+@media screen and (max-width: 1080px) {
+    h6.headline.center-align {
+        margin: 10px auto 0 auto;
+    }
     .tiles {
-        min-height: 80px;
-        min-width: 80px;
+        min-height: 85px;
+        min-width: 85px;
         border-radius: 10px;
     } 
     .dropped { 
-        height: 80px;
+        height: 85px;
+    }
+    .container {
+        width: 100%;
+    }
+}
+/* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */
+@media screen and (max-width: 848px) {
+    h6.headline.center-align {
+        margin: 10px auto 0 auto;
+    }
+    .tiles {
+        min-height: 66px;
+        min-width: 66px;
+        border-radius: 10px;
+    } 
+    .dropped { 
+        height: 66px;
     }
 }
 
 /* MEDIA QUERY FOR TABLETS */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 684px) {
     
     h6.headline.center-align {
-        margin: 150px auto 0 auto;
+        margin: 10px auto 0 auto;
     }
-
     .tiles {
-        min-height: 60px;
-        min-width: 60px;
+        min-height: 53px;
+        min-width: 53px;
         border-radius: 0px;
     } 
     .row {
         margin-bottom: 15px;
     }
     .dropped { 
-        height: 60px;
+        height: 55px;
     } 
+    .todo {
+        font-size: 16px;
+        padding: 0px;
+    }
+    .instructions {
+        font-size: 14px;
+    }
 }
 
 /* MEDIA QUERY FOR MOBILE PHONES */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 566px) {
     
     h6.headline.center-align {
         margin: 10px auto;
     }
 
     .tiles {
-        min-height: 47px;
-        min-width: 47px;
+        min-height: 43px;
+        min-width: 43px;
         border-radius: 0px;
-        margin: 0 5px 0 5px;
     }
     .row {
         margin-bottom: 10px;
     }
     .dropped {
-        height: 47px;
+        height: 43px;
+    }
+    .todo {
+        font-size: 14px;
+        padding: 0px;
+    }
+    .instructions {
+        font-size: 12px;
     }
 }
 
+@media screen and (max-width: 473px) {
+    h6.headline.center-align {
+        margin: 10px auto;
+    }
+
+    .tiles {
+        min-height: 36px;
+        min-width: 36px;
+        border-radius: 0px;
+    }
+    .row {
+        margin-bottom: 10px;
+    }
+    .dropped {
+        height: 36px;
+    }
+    .todo {
+        font-size: 10px;
+        padding: 0px;
+    }
+    .instructions {
+        font-size: 10px;
+    }
+}
+/* MEDIA QUERY FOR MOBILE PHONES */
+@media screen and (max-width: 409px) {
+    
+    h6.headline.center-align {
+        margin: 10px auto;
+    }
+
+    .tiles {
+        min-height: 30px;
+        min-width: 30px;
+        border-radius: 0px;
+    }
+    .row {
+        margin-bottom: 10px;
+    }
+    .dropped {
+        height: 30px;
+    }
+}
 /* MEDIA QUERY FOR SMALL PHONES */
 @media screen and (max-width: 360px) {
    
