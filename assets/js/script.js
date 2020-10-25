@@ -11,6 +11,7 @@ var resultsContainerEl = document.getElementById('results-container');
 var letterEl = document.querySelector(".letter");
 var spaceEl = document.querySelector(".space");
 var aEl = document.getElementById('a');
+var noImage = "assets/css/images/404-error-nathan-dumlao-a3ra9eXUjvo-unsplash.png";
 
 // global page variables
 var wordLength = 0;
@@ -249,9 +250,7 @@ var getDefData = function (results) {
             fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${mwKey}`),
             fetch(pexelURL, {
                 headers: {
-                    // Accept: 'application/json',
                     Authorization: API_key
-                    //credentials: 'include'
                 }
             }),
         ];
@@ -284,7 +283,7 @@ var getDefData = function (results) {
                     if (imgSrc.photos[0]) {
                         image_m = imgSrc.photos[0].src.medium
                     } else {
-                        image_m = ''
+                        image_m = noImage;
                     }
                     var image_l;
                     if (imgSrc.photos[0]) {
