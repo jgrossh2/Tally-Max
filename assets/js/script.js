@@ -435,7 +435,7 @@ var displayWordData = function (wordObjArr) {
                 var imgBtn = document.createElement('a')//addEventListener('click', onclick);
                 imgBtn.setAttribute('class', 'btn-floating waves-effect waves-light img')
                 // imgBtn.setAttribute('search-name', wordData.word);
-                imgBtn.innerHTML = '<span><img id="img-icon" src="assets/css/images/iconfinder_photo-24_103171.png"></span>'
+                imgBtn.innerHTML = '<span><img id="img-icon" src="assets/images/iconfinder_photo-24_103171.png"></span>'
                 console.log('WORDDATA', wordData.word)
                 console.log('PEXELARR', pexelsArr)
 
