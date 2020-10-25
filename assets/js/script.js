@@ -16,7 +16,7 @@ var aEl = document.getElementById('a');
 // noImage.src = './assets/images/scrabble.png';
 // noImage.setAttribute('class', 'noimg');
 //noImage = "assets/images/scrabble.png"; ////"assets/images/scrabble.png";
-var noImage = false;
+// var noImage = false;
 
 // global page variables
 var wordLength = 0;
@@ -324,8 +324,8 @@ var getDefData = function (results) {
                     if (imgSrc.photos[0]) {
                         image_m = imgSrc.photos[0].src.medium
                     } else {
-                        noImage = true;
-                        image_m = "assets/images/scrabble.png";//noImage;
+
+                        image_m = "assets/images/scrabble-output-onlinepngtools.png", ["no image found for" + word] //noImage;
                     }
                     var image_l;
                     if (imgSrc.photos[0]) {
@@ -464,14 +464,12 @@ var displayWordData = function (wordObjArr) {
                 //Display Image fetched from Pexels
                 var pexelsPhoto = document.createElement('img');
                 pexelsPhoto.setAttribute('src', wordData.image_m);
-                console.log(noImage);
-                if (noImage) {
+                // console.log(noImage);
+                // if (noImage) {
 
-                    pexelsPhoto.setAttribute('class', "noimg")
-                    noImage = false;
-                }
-
-
+                //     pexelsPhoto.setAttribute('class', "noimg")
+                //     noImage = false;
+                // }
                 resultBody.append(pexelsPhoto);
 
                 // Get the modal

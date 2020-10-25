@@ -343,9 +343,10 @@ a#pixabaytext:hover {
     background-color: var(--lblue);
 }
 
-.noimg {
+/* .noimg {
     width: 40vw;
-}
+    align-content: center;
+} */
 
 .btn-floating.waves-effect.waves-light.img {
     background-color: var(--lblue);
