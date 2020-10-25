@@ -11,7 +11,12 @@ var resultsContainerEl = document.getElementById('results-container');
 var letterEl = document.querySelector(".letter");
 var spaceEl = document.querySelector(".space");
 var aEl = document.getElementById('a');
-var noImage = "assets/images/scrabble.png";
+// var noImage = document.createElement('img');
+
+// noImage.src = './assets/images/scrabble.png';
+// noImage.setAttribute('class', 'noimg');
+//noImage = "assets/images/scrabble.png"; ////"assets/images/scrabble.png";
+var noImage = false;
 
 // global page variables
 var wordLength = 0;
@@ -288,10 +293,10 @@ var getDefData = function (results) {
                     // the following 2 lines resolve error resulting from 'att' response variant
                     if (wordDef.hwi) {
                         audio = wordDef.hwi.prs[0].sound.audio
-                    // the following 2 lines resolve error resulting from 'oot' response variant
+                        // the following 2 lines resolve error resulting from 'oot' response variant
                     } else if (typeof wordDef[0] === 'string') {
                         audio = ''
-                    // the following 4 lines resolve error resulting from 'to' response variant
+                        // the following 4 lines resolve error resulting from 'to' response variant
                     } else if (wordDef[0].hwi.prs) {
                         for (var i = 0; i < wordDef[0].hwi.prs.length; i++) {
                             if (wordDef[0].hwi.prs[i].sound) {
@@ -319,7 +324,8 @@ var getDefData = function (results) {
                     if (imgSrc.photos[0]) {
                         image_m = imgSrc.photos[0].src.medium
                     } else {
-                        image_m = noImage;
+                        noImage = true;
+                        image_m = "assets/images/scrabble.png";//noImage;
                     }
                     var image_l;
                     if (imgSrc.photos[0]) {
@@ -458,6 +464,14 @@ var displayWordData = function (wordObjArr) {
                 //Display Image fetched from Pexels
                 var pexelsPhoto = document.createElement('img');
                 pexelsPhoto.setAttribute('src', wordData.image_m);
+                console.log(noImage);
+                if (noImage) {
+
+                    pexelsPhoto.setAttribute('class', "noimg")
+                    noImage = false;
+                }
+
+
                 resultBody.append(pexelsPhoto);
 
                 // Get the modal
