@@ -398,7 +398,7 @@ img#img-icon {
 .modal .modal-footer {
     background-color: lightgrey;
     height: 190px;
-    width: 10%;
+    width: 17%;
 }
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS */
 @media screen and (max-width: 1080px) {
