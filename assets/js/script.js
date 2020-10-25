@@ -122,6 +122,7 @@ $(".dropped").droppable({
     }
 });
 
+
 // event listeners to gather user input and start generator function
 twoLetterBtnEl.addEventListener('click', function () {
     // get possible letters from form
