@@ -11,7 +11,12 @@ var resultsContainerEl = document.getElementById('results-container');
 var letterEl = document.querySelector(".letter");
 var spaceEl = document.querySelector(".space");
 var aEl = document.getElementById('a');
-var noImage = "assets/images/scrabble.png";
+// var noImage = document.createElement('img');
+
+// noImage.src = './assets/images/scrabble.png';
+// noImage.setAttribute('class', 'noimg');
+//noImage = "assets/images/scrabble.png"; ////"assets/images/scrabble.png";
+// var noImage = false;
 
 // global page variables
 var wordLength = 0;
@@ -288,10 +293,10 @@ var getDefData = function (results) {
                     // the following 2 lines resolve error resulting from 'att' response variant
                     if (wordDef.hwi) {
                         audio = wordDef.hwi.prs[0].sound.audio
-                    // the following 2 lines resolve error resulting from 'oot' response variant
+                        // the following 2 lines resolve error resulting from 'oot' response variant
                     } else if (typeof wordDef[0] === 'string') {
                         audio = ''
-                    // the following 4 lines resolve error resulting from 'to' response variant
+                        // the following 4 lines resolve error resulting from 'to' response variant
                     } else if (wordDef[0].hwi.prs) {
                         for (var i = 0; i < wordDef[0].hwi.prs.length; i++) {
                             if (wordDef[0].hwi.prs[i].sound) {
@@ -319,7 +324,9 @@ var getDefData = function (results) {
                     if (imgSrc.photos[0]) {
                         image_m = imgSrc.photos[0].src.medium
                     } else {
-                        image_m = noImage;
+
+                        image_m = "assets/images/scrabble-output-onlinepngtools.png"
+                        //image_m = "no image found for this word" //noImage;
                     }
                     var image_l;
                     if (imgSrc.photos[0]) {
@@ -331,7 +338,7 @@ var getDefData = function (results) {
                     if (imgSrc.photos[0]) {
                         photographer = imgSrc.photos[0].photographer
                     } else {
-                        photographer = ''
+                        photographer = 'Brett Jordan. Sorry, no new images are available for this word. Please try our image search below for other sources.'
                     }
                     var photog_url;
                     if (imgSrc.photos[0]) {
@@ -458,6 +465,12 @@ var displayWordData = function (wordObjArr) {
                 //Display Image fetched from Pexels
                 var pexelsPhoto = document.createElement('img');
                 pexelsPhoto.setAttribute('src', wordData.image_m);
+                // console.log(noImage);
+                // if (noImage) {
+
+                //     pexelsPhoto.setAttribute('class', "noimg")
+                //     noImage = false;
+                // }
                 resultBody.append(pexelsPhoto);
 
                 // Get the modal
@@ -474,14 +487,18 @@ var displayWordData = function (wordObjArr) {
                 imgBtn.innerHTML = '<span><img id="img-icon" src="assets/images/iconfinder_photo-24_103171.png"></span>'
                 console.log('WORDDATA', wordData.word)
                 console.log('PEXELARR', pexelsArr)
+                //
+                var wordPhotogr = document.createElement('p');
+                wordPhotogr.textContent = "Photographer: ";
+                resultBody.append(wordPhotogr);
 
                 // Use createElement to display photographer's name
                 var pexelsPhotographerEl = document.createElement('p');
                 pexelsPhotographerEl.innerHTML = wordData.photographer;
 
-                //Creat span to display photographer's name
+                //Create span to display photographer's name
                 var resultPhtr = document.createElement('span');
-                resultPhtr.textContent = wordData.photographer; //response[1].wordData.definition.photographer;//imageSrc[1].photos;//.photographer[i];
+                resultPhtr.textContent = wordData.photographer;
                 resultBody.append(pexelsPhotographerEl);
                 // Get the <span> element that closes the modal
                 var span = document.getElementsByClassName("close")[0];
