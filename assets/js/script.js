@@ -264,6 +264,7 @@ var getDefData = function (results) {
                 .then(function (response) {
                     var wordDef = response[0];
                     var imgSrc = response[1];
+                    console.log(wordDef)
 
                     // managing properties that are inconsistently available within response data
                     var type;
@@ -290,8 +291,13 @@ var getDefData = function (results) {
                     // the following 2 lines resolve error resulting from 'oot' response variant
                     } else if (typeof wordDef[0] === 'string') {
                         audio = ''
+                    // the following 4 lines resolve error resulting from 'to' response variant
                     } else if (wordDef[0].hwi.prs) {
-                        audio = wordDef[0].hwi.prs[0].sound.audio
+                        for (var i = 0; i < wordDef[0].hwi.prs.length; i++) {
+                            if (wordDef[0].hwi.prs[i].sound) {
+                                audio = wordDef[0].hwi.prs[i].sound.audio
+                            }
+                        }
                     } else {
                         audio = ''
                     }
