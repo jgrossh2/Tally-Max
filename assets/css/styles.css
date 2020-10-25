@@ -147,7 +147,10 @@ a#pexelstext:hover,
 a#pixabaytext:hover {
     color: var(--red);
 }
-
+#pexelsLogo {
+    width: 100px;
+    height: 40px;
+}
 .container {
     width: 1080px;
 }
@@ -442,14 +445,17 @@ a#pixabaytext:hover {
         font-size: 14px;
     }
 }
-
+/* @media screen and (max-width: 684px) {
+    h6.headline.center-align {
+        margin: 170px auto 0 auto;
+    }
+} */
 /* MEDIA QUERY FOR MOBILE PHONES */
 @media screen and (max-width: 566px) {
     
     h6.headline.center-align {
         margin: 10px auto 0 auto;
     }
-
     .tiles {
         min-height: 43px;
         min-width: 43px;
