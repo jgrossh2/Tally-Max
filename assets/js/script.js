@@ -46,7 +46,11 @@ $(function () {
             $(".dropped").addClass("dropZone");
         },
         stop: function (event, ui) {
-            $(".dropped").removeClass("dropZone");
+            if (dropLetters.length === 5) {
+                $(".dropped").addClass("dropZone");
+            } else {
+                $(".dropped").removeClass("dropZone"); 
+            }
         },
         remove: function (event, ui) {
         },
@@ -74,7 +78,11 @@ $(function () {
             $(".dropped").addClass("dropZone");
         },
         stop: function (event, ui) {
-            $(".dropped").removeClass("dropZone");
+            if (dropLetters.length === 5) {
+                $(".dropped").addClass("dropZone");
+            } else {
+                $(".dropped").removeClass("dropZone"); 
+            }
         },
         remove: function (event, ui) {
         }
@@ -99,6 +107,11 @@ $(function () {
         },
         stop: function (event, ui) {
             $(".dropped").removeClass("dropZone");
+            if (dropLetters.length === 5) {
+                $(".dropped").addClass("dropZone");
+            } else {
+                $(".dropped").removeClass("dropZone"); 
+            }
         },
         remove: function (event, ui) {
 
@@ -123,9 +136,8 @@ $(".dropped").droppable({
             $('.sortable1').sortable('disable');
             $('.sortable2').sortable('disable');
             $('.sortable3').sortable('disable');
+            $(".dropped").addClass("dropZone");
         };
-        console.log(dropLetters)
-      
     },
     over: function (event, ui) {
     },
