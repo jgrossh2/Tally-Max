@@ -26,7 +26,7 @@ SO THAT I can satisfy my thirst for knowledge.
 * Materialize
 
 ## WEBSITE
-https://jgrossh2.github.io/word-generator/
+https://jgrossh2.github.io/Tally-Max/
 
 ### CONTRIBUTION
 Created by: 
