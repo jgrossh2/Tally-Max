@@ -14,7 +14,9 @@ SO THAT I can satisfy my thirst for knowledge.
 
 
 ## SCREENSHOT
-<img src=".png" alt="">
+![Screen Shot 2020-10-25 at 3 52 26 PM](https://user-images.githubusercontent.com/70237837/97118834-4a4a5880-16da-11eb-9334-295f3fb3abfc.png)
+
+![Screen Shot 2020-10-25 at 3 53 52 PM](https://user-images.githubusercontent.com/70237837/97118837-4f0f0c80-16da-11eb-8fe4-d5f25265e9ef.png)
 
 ## BUILT WITH
 * HTML
