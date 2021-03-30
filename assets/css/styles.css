@@ -154,6 +154,7 @@ a#pixabaytext:hover {
 .container {
     max-width: 1080px;
     min-width: 310px;
+    width: 100%
 }
 
 .space {
